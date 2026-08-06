@@ -21,6 +21,7 @@ if (nodeEnv !== 'test') {
 }
 
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'admin-panel')));
+app.use('/site', express.static(path.join(__dirname, '..', '..', 'frontend', 'user-panel')));
 
 app.use('/api', routes);
 

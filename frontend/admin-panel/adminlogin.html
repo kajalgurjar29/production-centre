@@ -401,7 +401,7 @@
     document.getElementById('admin-password').classList.add('border-destructive', 'focus:ring-destructive');
   }
 
-  function handleLoginSubmit(event) {
+  async function handleLoginSubmit(event) {
     event.preventDefault();
     clearValidationErrors();
 
@@ -432,12 +432,32 @@
     spinner.classList.remove('hidden');
     submitBtn.disabled = true;
 
-    // Simulate validation and transition to MFA
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json().catch(function () { return {}; });
+
       submitBtn.disabled = false;
       spinner.classList.add('hidden');
-      switchState('mfa');
-    }, 1200);
+
+      if (!response.ok) {
+        switchState('invalid');
+        return;
+      }
+
+      // Backend has no MFA yet, so a valid login goes straight to the dashboard
+      // instead of through the demo MFA panel below (which nothing verifies against).
+      localStorage.setItem('appcentre_admin_token', data.data.token);
+      localStorage.setItem('appcentre_admin', JSON.stringify(data.data.admin));
+      simulateSuccess();
+    } catch (err) {
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+      switchState('invalid');
+    }
   }
 
   function handleMfaSubmit(event) {

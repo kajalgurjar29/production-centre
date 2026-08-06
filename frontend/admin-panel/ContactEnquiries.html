@@ -274,35 +274,8 @@
                     <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-border">
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Priya Nair<br /><span class="font-normal text-muted-foreground">priya.nair@appcentre.local</span></td>
-                    <td class="px-4 py-3">Question about advert pricing</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-primary"><span class="h-2 w-2 rounded-full bg-primary" aria-hidden="true"></span><span>New</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">11 Jul 2026</td>
-                    <td class="px-4 py-3"><button type="button" data-reply="0" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Callum Reid<br /><span class="font-normal text-muted-foreground">callum.reid@appcentre.local</span></td>
-                    <td class="px-4 py-3">Unable to upload advert image</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>In Progress</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">10 Jul 2026</td>
-                    <td class="px-4 py-3"><button type="button" data-reply="1" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Harriet Voss<br /><span class="font-normal text-muted-foreground">harriet.voss@appcentre.local</span></td>
-                    <td class="px-4 py-3">Refund request for AC-2011</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Resolved</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">07 Jul 2026</td>
-                    <td class="px-4 py-3"><button type="button" data-reply="2" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Marcus Webb<br /><span class="font-normal text-muted-foreground">marcus.webb@appcentre.local</span></td>
-                    <td class="px-4 py-3">How do I change my listing region?</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-primary"><span class="h-2 w-2 rounded-full bg-primary" aria-hidden="true"></span><span>New</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">06 Jul 2026</td>
-                    <td class="px-4 py-3"><button type="button" data-reply="3" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>
-                  </tr>
+                <tbody id="enquiriesBody" class="text-sm divide-y divide-border">
+                  <tr><td class="px-4 py-3 text-muted-foreground" colspan="5">Loading enquiries…</td></tr>
                 </tbody>
               </table>
             </div>
@@ -456,7 +429,9 @@
     const replyModal = document.getElementById('replyModal');
     function openModal() { modalOverlay.classList.remove('hidden'); replyModal.classList.remove('hidden'); body.classList.add('overflow-hidden'); }
     function closeModal() { modalOverlay.classList.add('hidden'); replyModal.classList.add('hidden'); body.classList.remove('overflow-hidden'); }
-    document.querySelectorAll('.reply-button').forEach(function (b) { b.addEventListener('click', openModal); });
+    function bindReplyButtons() {
+      document.querySelectorAll('.reply-button').forEach(function (b) { b.addEventListener('click', openModal); });
+    }
     modalOverlay.addEventListener('click', closeModal);
     document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
     document.getElementById('sendReply').addEventListener('click', function () {
@@ -464,6 +439,75 @@
       document.getElementById('replyText').value = '';
       showToast('Reply sent to the advertiser.');
     });
+
+    // Real data below - everything above this point is existing page chrome (nav, modal shell, etc).
+    const STATUS_BADGE = {
+      NEW: { label: 'New', dot: 'bg-primary', text: 'text-primary' },
+      IN_PROGRESS: { label: 'In Progress', dot: 'bg-foreground', text: 'text-foreground' },
+      RESOLVED: { label: 'Resolved', dot: 'bg-tertiary', text: 'text-tertiary' },
+    };
+
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function formatDate(isoString) {
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function renderEnquiries(items) {
+      const tbody = document.getElementById('enquiriesBody');
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="5">No enquiries yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = items.map(function (enquiry) {
+        const badge = STATUS_BADGE[enquiry.status] || STATUS_BADGE.NEW;
+        return '<tr>'
+          + '<td class="px-4 py-3 font-medium">' + escapeHtml(enquiry.name) + '<br /><span class="font-normal text-muted-foreground">' + escapeHtml(enquiry.email) + '</span></td>'
+          + '<td class="px-4 py-3">' + escapeHtml(enquiry.subject) + '</td>'
+          + '<td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium ' + badge.text + '"><span class="h-2 w-2 rounded-full ' + badge.dot + '" aria-hidden="true"></span><span>' + badge.label + '</span></span></td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + formatDate(enquiry.createdAt) + '</td>'
+          + '<td class="px-4 py-3"><button type="button" data-id="' + enquiry.id + '" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>'
+          + '</tr>';
+      }).join('');
+      bindReplyButtons();
+    }
+
+    async function loadEnquiries() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) {
+        window.location.href = 'adminlogin.html';
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/enquiries', { headers: { Authorization: 'Bearer ' + token } });
+        if (response.status === 401) {
+          localStorage.removeItem('appcentre_admin_token');
+          localStorage.removeItem('appcentre_admin');
+          window.location.href = 'adminlogin.html';
+          return;
+        }
+        if (!response.ok) throw new Error('Failed to load enquiries');
+        const data = await response.json();
+        renderEnquiries(data.data.items);
+      } catch (err) {
+        document.getElementById('enquiriesBody').innerHTML =
+          '<tr><td class="px-4 py-3 text-destructive" colspan="5">Could not load enquiries. Please refresh the page.</td></tr>';
+      }
+    }
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadEnquiries();
   </script>
 </div>
 </body></html>

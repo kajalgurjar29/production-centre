@@ -258,7 +258,7 @@
   </div>
 
   <script>
-    const CHAT_API_URL = 'http://localhost:4000/api/chat';
+    const CHAT_API_URL = '/api/chat';
     const SESSION_STORAGE_KEY = 'aitp-help-session-id';
     const HISTORY_STORAGE_KEY = 'aitp-help-history';
     const MAX_HISTORY_MESSAGES = 10;
@@ -352,7 +352,7 @@
       const data = await response.json().catch(function() { return {}; });
 
       if (!response.ok) {
-        throw new Error(data.error || 'The assistant could not process that request.');
+        throw new Error(data.message || data.error || 'The assistant could not process that request.');
       }
 
       return data.reply;

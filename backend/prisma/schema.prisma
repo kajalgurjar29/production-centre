@@ -55,6 +55,18 @@ enum EnquiryStatus {
   RESOLVED
 }
 
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  INACTIVE
+}
+
+enum QuestionStatus {
+  NEW
+  REVIEWED
+  RESOLVED
+}
+
 model AdminUser {
   id           String      @id @default(cuid())
   name         String
@@ -171,4 +183,33 @@ model AuditLog {
   actor   AdminUser? @relation(fields: [actorId], references: [id])
 
   @@map("appcentre_audit_log")
+}
+
+model KnowledgeArticle {
+  id        String        @id @default(cuid())
+  title     String
+  category  String
+  answer    String
+  keywords  String        @default("")
+  status    ArticleStatus @default(DRAFT)
+  updatedBy String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  questions UnansweredQuestion[]
+
+  @@map("appcentre_knowledge_articles")
+}
+
+model UnansweredQuestion {
+  id        String         @id @default(cuid())
+  question  String
+  sessionId String
+  status    QuestionStatus @default(NEW)
+  createdAt DateTime       @default(now())
+
+  articleId String?
+  article   KnowledgeArticle? @relation(fields: [articleId], references: [id])
+
+  @@map("appcentre_unanswered_questions")
 }

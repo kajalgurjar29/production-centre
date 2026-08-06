@@ -18,4 +18,9 @@ module.exports = {
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '8h',
   allowedOrigins,
+  // Optional: the Help Assistant chat endpoint degrades to a 500 (not a boot
+  // crash) when this is unset, so a missing/rotated OpenAI key never takes
+  // down the rest of the admin API with it.
+  openaiApiKey: process.env.OPENAI_API_KEY || '',
+  openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
 };
