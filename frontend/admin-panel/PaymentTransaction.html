@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppCentre Admin – Payments</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/app.css" />
+    <style>
+      :root { --background: #f3f4f6;
+        --foreground: #1f2937;
+        --primary: #0d9488;
+        --primary-foreground: #ffffff;
+        --secondary: #f8fafc;
+        --secondary-foreground: #1f2937;
+        --tertiary: #16a34a;
+        --muted: #f9fafb;
+        --muted-foreground: #6b7280;
+        --accent: #f0fdfa;
+        --accent-foreground: #0F172A;
+        --card: #ffffff;
+        --card-foreground: #1f2937;
+        --destructive: #991b1b;
+        --border: #e5e7eb;
+        --input: #d1d5db;
+        --ring: #0d9488;
+        --radius: 0.75rem;
+        --font-sans: Inter,sans-serif;
+        --font-heading: Inter,sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body>
+<div class="min-h-screen w-full bg-background flex flex-col relative font-sans text-foreground">
+  <div class="flex w-full">
+    <aside class="hidden lg:flex h-screen w-64 shrink-0 flex-col border-r border-border bg-card sticky top-0 self-start">
+      <div class="shrink-0 border-b border-border px-5 py-5 bg-card">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+          </div>
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Single-site administration</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-3 py-4">
+        <nav aria-label="Primary navigation" class="space-y-5 text-sm">
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+            <div class="space-y-1">
+              <a href="dashboard3.html" class="relative flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium hover:bg-muted">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg>
+                <span>Dashboard</span>
+              </a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+            <div class="space-y-1">
+              <a href="Users.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Users</span></a>
+              <a href="AdvertMgt.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M7 3h10l1 4H6l1-4Z"/><path d="M5 7h14l-1 12H6L5 7Z"/></svg><span>Adverts</span></a>
+              <a href="PaymentTransaction.html" aria-current="page" class="relative flex min-h-11 items-center gap-3 rounded-xl bg-accent px-3 py-3 text-sm font-medium text-foreground border border-border">
+                <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-lg bg-primary" aria-hidden="true"></span>
+                <svg viewBox="0 0 24 24" class="ml-2 h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+                <span>Payments</span>
+              </a>
+              <a href="ReviewsMgt.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg><span>Reviews</span></a>
+              <a href="ContactEnquiries.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact Enquiries</span></a>
+              <a href="Notifications.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg><span>Notifications</span></a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+            <div class="space-y-1">
+              <a href="HomepageContent.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Homepage Content</span></a>
+              <a href="NewsCarousel.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/></svg><span>News and Carousel</span></a>
+              <a href="HelpKnowledgeBase.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"/><path d="M12 17h.01"/></svg><span>Help Knowledge Base</span></a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+            <div class="space-y-1">
+              <a href="ReferenceData.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span>Reference Data</span></a>
+              <a href="AdvertConfiguration.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 16h10"/></svg><span>Advert Configuration</span></a>
+              <a href="AdminUsers.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Admin Users</span></a>
+              <a href="RolesPermissions.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>Roles and Permissions</span></a>
+              <a href="AuditLog.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span>Audit Log</span></a>
+              <a href="SystemSettings.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"/></svg><span>System Settings</span></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="shrink-0 border-t border-border px-3 py-4 bg-card">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+        <div class="space-y-1 text-sm">
+          <a href="MyProfile.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+          <a href="adminlogin.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg><span>Log out</span></a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="relative flex min-w-0 flex-1 flex-col">
+      <div id="mobileOverlay" class="hidden fixed inset-0 z-40 bg-foreground/50"></div>
+      <aside id="mobileDrawer" class="fixed inset-y-0 left-0 z-50 hidden w-72 max-w-[85%] flex-col border-r border-border bg-card shadow-md">
+        <div class="flex items-center justify-between border-b border-border px-4 py-4">
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Navigation</p>
+          </div>
+          <button id="drawerClose" type="button" aria-label="Close navigation menu" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-3 py-4">
+          <nav aria-label="Mobile navigation" class="space-y-5 text-sm">
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+              <div class="space-y-1">
+                <a href="dashboard3.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg><span>Dashboard</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+              <div class="space-y-1">
+                <a href="Users.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Users</span></a>
+                <a href="AdvertMgt.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M7 3h10l1 4H6l1-4Z"/><path d="M5 7h14l-1 12H6L5 7Z"/></svg><span>Adverts</span></a>
+                <a href="PaymentTransaction.html" aria-current="page" class="mobile-nav-link relative flex min-h-11 items-center gap-3 rounded-xl bg-accent px-3 py-3 font-medium border border-border"><span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-lg bg-primary" aria-hidden="true"></span><svg viewBox="0 0 24 24" class="ml-2 h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><span>Payments</span></a>
+                <a href="ReviewsMgt.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg><span>Reviews</span></a>
+                <a href="ContactEnquiries.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact Enquiries</span></a>
+                <a href="Notifications.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg><span>Notifications</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+              <div class="space-y-1">
+                <a href="HomepageContent.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Homepage Content</span></a>
+                <a href="NewsCarousel.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/></svg><span>News and Carousel</span></a>
+                <a href="HelpKnowledgeBase.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"/><path d="M12 17h.01"/></svg><span>Help Knowledge Base</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+              <div class="space-y-1">
+                <a href="ReferenceData.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span>Reference Data</span></a>
+                <a href="AdvertConfiguration.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 16h10"/></svg><span>Advert Configuration</span></a>
+                <a href="AdminUsers.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Admin Users</span></a>
+                <a href="RolesPermissions.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>Roles and Permissions</span></a>
+                <a href="AuditLog.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span>Audit Log</span></a>
+                <a href="SystemSettings.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"/></svg><span>System Settings</span></a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="border-t border-border px-3 py-4 bg-card">
+          <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+          <div class="space-y-1">
+            <a href="MyProfile.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+            <a href="adminlogin.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg><span>Log out</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <header class="sticky top-0 z-30 border-b border-border bg-card shadow-sm">
+        <div class="flex items-center gap-3 px-4 py-3 lg:px-6">
+          <div class="flex min-w-0 items-center gap-2 lg:hidden">
+            <button id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+            </button>
+            <div class="min-w-0">
+              <p class="truncate text-base font-heading font-semibold">AppCentre Admin</p>
+            </div>
+          </div>
+          <button id="sidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" class="hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:flex">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path></svg>
+          </button>
+          <div class="hidden lg:flex flex-1 items-center">
+            <label for="desktopSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+            <div class="flex w-full max-w-xl items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="desktopSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+            </div>
+          </div>
+          <div class="ml-auto flex items-center gap-2">
+            <button id="mobileSearchButton" type="button" aria-label="Open search" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:hidden">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </button>
+            <div class="relative">
+              <button id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background relative">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg>
+                <span class="absolute right-2 top-2 inline-flex h-2.5 w-2.5 rounded-full bg-destructive" aria-hidden="true"></span>
+              </button>
+              <div id="notificationPanel" class="hidden absolute right-0 top-full mt-2 w-[20rem] max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
+                <div class="flex items-center justify-between border-b border-border pb-3">
+                  <h2 class="text-sm font-heading font-semibold">Notifications</h2>
+                  <button type="button" class="min-h-11 text-sm font-medium text-primary">Mark all as read</button>
+                </div>
+                <div class="space-y-3 py-3 text-sm max-h-80 overflow-y-auto">
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Failed payment requires review</p><p class="text-muted-foreground">PAY-2011-3304 · 6 minutes ago</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Refund completed</p><p class="text-muted-foreground">PAY-1990-1182 · 21 minutes ago</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Payment pending confirmation</p><p class="text-muted-foreground">PAY-2071-4402 · 1 hour ago</p></div>
+                </div>
+                <a href="Notifications.html" class="flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium">View notifications</a>
+              </div>
+            </div>
+            <div class="relative">
+              <button id="profileButton" type="button" aria-label="Open administrator profile menu" aria-expanded="false" class="flex min-h-11 items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">AO</div>
+                <div class="hidden text-left lg:block">
+                  <p class="text-sm font-medium">Ava Owen</p>
+                  <p class="text-xs text-muted-foreground">Administrator</p>
+                </div>
+                <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-muted-foreground lg:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div id="profilePanel" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
+                <a href="MyProfile.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">My Profile</a>
+                <a href="SystemSettings.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">Security Settings</a>
+                <a href="adminlogin.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm text-destructive hover:bg-muted">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mobileSearchPanel" class="hidden border-t border-border px-4 py-3 lg:hidden bg-card">
+          <label for="mobileSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+          <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="mobileSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+          </div>
+        </div>
+      </header>
+
+      <div id="filtersOverlay" class="hidden fixed inset-0 z-40 bg-foreground/50 lg:hidden"></div>
+      <aside id="filtersDrawer" class="hidden fixed inset-y-0 right-0 z-50 w-80 max-w-[85%] flex-col border-l border-border bg-card shadow-md lg:hidden">
+        <div class="flex items-center justify-between border-b border-border px-4 py-4">
+          <div>
+            <h2 class="text-base font-heading font-semibold">Filters</h2>
+            <p class="text-xs text-muted-foreground">Search refinements</p>
+          </div>
+          <button id="filtersClose" type="button" aria-label="Close filters" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-4 py-4">
+          <div class="space-y-5">
+            <div>
+              <label for="statusFilterMobile" class="mb-2 block text-sm font-medium">Status</label>
+              <select id="statusFilterMobile" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                <option value="all">All statuses</option>
+                <option value="Paid">Paid</option>
+                <option value="Pending">Pending</option>
+                <option value="Failed">Failed</option>
+                <option value="Refunded">Refunded</option>
+              </select>
+            </div>
+            <div>
+              <label for="providerFilterMobile" class="mb-2 block text-sm font-medium">Payment provider</label>
+              <select id="providerFilterMobile" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                <option value="all">All providers</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Paystack">Paystack</option>
+              </select>
+            </div>
+            <div>
+              <label for="dateFilterMobile" class="mb-2 block text-sm font-medium">Date</label>
+              <select id="dateFilterMobile" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                <option value="all">All dates</option>
+                <option value="Today">Today</option>
+                <option value="Last 7 days">Last 7 days</option>
+                <option value="Last 30 days">Last 30 days</option>
+                <option value="Custom range">Custom range</option>
+              </select>
+            </div>
+            <div id="mobileCustomDateFields" class="hidden grid grid-cols-1 gap-3">
+              <div>
+                <label for="dateFromMobile" class="mb-2 block text-sm font-medium">Date from</label>
+                <input id="dateFromMobile" type="date" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm" />
+              </div>
+              <div>
+                <label for="dateToMobile" class="mb-2 block text-sm font-medium">Date to</label>
+                <input id="dateToMobile" type="date" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm" />
+              </div>
+            </div>
+            <div>
+              <label for="sortFilterMobile" class="mb-2 block text-sm font-medium">Sort</label>
+              <select id="sortFilterMobile" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                <option value="Newest first">Newest first</option>
+                <option value="Oldest first">Oldest first</option>
+                <option value="Amount high to low">Amount high to low</option>
+                <option value="Amount low to high">Amount low to high</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-border px-4 py-4 space-y-3">
+          <button id="applyFiltersMobile" type="button" class="min-h-11 w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Apply filters</button>
+          <button id="resetFiltersMobile" type="button" class="min-h-11 w-full rounded-lg border border-border px-4 py-3 text-sm font-medium">Reset</button>
+        </div>
+      </aside>
+
+      <main class="flex-1 px-4 py-4 lg:px-6 lg:py-4">
+        <div class="mx-auto space-y-4">
+          <section class="space-y-2 pt-1">
+            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">AppCentre administration</p>
+            <div>
+              <h1 class="text-2xl font-heading font-bold">Payment Transactions</h1>
+              <p class="mt-1 text-sm text-muted-foreground">View and manage payments made through AppCentre.</p>
+            </div>
+          </section>
+
+          <div id="paymentsStatus" class="sr-only" aria-live="polite">Showing 8 payment transactions.</div>
+
+          <section id="summaryCards" class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <button type="button" data-summary-filter="all" class="summary-card flex min-h-[116px] flex-col justify-between rounded-xl border border-border border-l-4 border-l-primary bg-card p-4 text-left shadow-sm transition hover:shadow-md">
+              <div class="flex items-start gap-3">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-primary">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-foreground">All Transactions</p>
+                  <p id="summaryAll" class="mt-1 text-2xl font-heading font-bold leading-none">486</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted-foreground">All payment records</p>
+            </button>
+            <button type="button" data-summary-filter="Paid" class="summary-card flex min-h-[116px] flex-col justify-between rounded-xl border border-border border-l-4 border-l-tertiary bg-card p-4 text-left shadow-sm transition hover:shadow-md">
+              <div class="flex items-start gap-3">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-tertiary">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-foreground">Paid</p>
+                  <p id="summaryPaid" class="mt-1 text-2xl font-heading font-bold leading-none">452</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted-foreground">Successfully completed</p>
+            </button>
+            <button type="button" data-summary-filter="Failed" class="summary-card flex min-h-[116px] flex-col justify-between rounded-xl border border-border border-l-4 border-l-destructive bg-card p-4 text-left shadow-sm transition hover:shadow-md">
+              <div class="flex items-start gap-3">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-destructive">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.2 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z"/></svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm font-medium text-foreground">Failed</p>
+                  <p id="summaryFailed" class="mt-1 text-2xl font-heading font-bold leading-none">18</p>
+                </div>
+              </div>
+              <p class="text-sm text-muted-foreground">Requires attention</p>
+            </button>
+          </section>
+
+          <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <div id="desktopFilters" class="hidden lg:grid lg:grid-cols-12 lg:items-end lg:gap-3">
+              <div class="col-span-4">
+                <label for="searchInputDesktop" class="mb-2 block text-sm font-medium">Search payments</label>
+                <div class="flex min-h-11 items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <input id="searchInputDesktop" type="search" placeholder="Search by transaction, advert, user or email" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+                </div>
+              </div>
+              <div class="col-span-2">
+                <label for="statusFilterDesktop" class="mb-2 block text-sm font-medium">Status</label>
+                <select id="statusFilterDesktop" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                  <option value="all">All statuses</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Failed">Failed</option>
+                  <option value="Refunded">Refunded</option>
+                </select>
+              </div>
+              <div class="col-span-2">
+                <label for="providerFilterDesktop" class="mb-2 block text-sm font-medium">Payment provider</label>
+                <select id="providerFilterDesktop" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                  <option value="all">All providers</option>
+                  <option value="Stripe">Stripe</option>
+                  <option value="Paystack">Paystack</option>
+                </select>
+              </div>
+              <div class="col-span-1">
+                <label for="dateFilterDesktop" class="mb-2 block text-sm font-medium">Date</label>
+                <select id="dateFilterDesktop" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                  <option value="all">All dates</option>
+                  <option value="Today">Today</option>
+                  <option value="Last 7 days">Last 7 days</option>
+                  <option value="Last 30 days">Last 30 days</option>
+                  <option value="Custom range">Custom range</option>
+                </select>
+              </div>
+              <div class="col-span-1">
+                <label for="sortFilterDesktop" class="mb-2 block text-sm font-medium">Sort</label>
+                <select id="sortFilterDesktop" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm">
+                  <option value="Newest first">Newest first</option>
+                  <option value="Oldest first">Oldest first</option>
+                  <option value="Amount high to low">Amount high to low</option>
+                  <option value="Amount low to high">Amount low to high</option>
+                </select>
+              </div>
+              <div class="col-span-2 flex gap-3">
+                <button id="applyFiltersDesktop" type="button" class="min-h-11 flex-1 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Apply filters</button>
+                <button id="resetFiltersDesktop" type="button" class="min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium">Reset</button>
+              </div>
+              <div id="desktopCustomDateFields" class="hidden col-span-12 grid grid-cols-2 gap-3 pt-1 xl:max-w-lg">
+                <div>
+                  <label for="dateFromDesktop" class="mb-2 block text-sm font-medium">Date from</label>
+                  <input id="dateFromDesktop" type="date" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm" />
+                </div>
+                <div>
+                  <label for="dateToDesktop" class="mb-2 block text-sm font-medium">Date to</label>
+                  <input id="dateToDesktop" type="date" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm" />
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-3 lg:hidden">
+              <div>
+                <label for="searchInputMobile" class="mb-2 block text-sm font-medium">Search payments</label>
+                <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <input id="searchInputMobile" type="search" placeholder="Search by transaction, advert, user or email" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button id="openFiltersButton" type="button" aria-expanded="false" class="min-h-11 flex-1 rounded-lg border border-border px-4 py-3 text-sm font-medium">Filters</button>
+                <button id="resetFiltersMobileCompact" type="button" class="hidden min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium">Reset</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="space-y-3">
+            <div class="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+              <p id="resultsSummary" class="text-sm font-medium">Showing 1 to 8 of 486 transactions</p>
+              <div id="filterSummary" class="hidden flex flex-wrap items-center gap-2 text-sm text-muted-foreground lg:justify-end">
+                <span id="filterSummaryText"></span>
+                <button id="clearFiltersButton" type="button" class="min-h-11 rounded-lg border border-border px-3 py-2 text-sm font-medium text-primary">Clear filters</button>
+              </div>
+            </div>
+
+            <div id="loadingState" class="hidden rounded-xl border border-border bg-card p-4 shadow-sm">
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div class="rounded-xl border border-border bg-background p-4"><div class="h-4 w-2/5 rounded bg-muted"></div><div class="mt-3 h-8 w-3/5 rounded bg-muted"></div><div class="mt-3 h-4 w-4/5 rounded bg-muted"></div></div>
+                <div class="rounded-xl border border-border bg-background p-4"><div class="h-4 w-2/5 rounded bg-muted"></div><div class="mt-3 h-8 w-3/5 rounded bg-muted"></div><div class="mt-3 h-4 w-4/5 rounded bg-muted"></div></div>
+                <div class="rounded-xl border border-border bg-background p-4"><div class="h-4 w-2/5 rounded bg-muted"></div><div class="mt-3 h-8 w-3/5 rounded bg-muted"></div><div class="mt-3 h-4 w-4/5 rounded bg-muted"></div></div>
+              </div>
+              <div class="mt-4 space-y-3">
+                <div class="h-14 rounded-xl bg-muted"></div>
+                <div class="h-14 rounded-xl bg-muted"></div>
+                <div class="h-14 rounded-xl bg-muted"></div>
+              </div>
+            </div>
+
+            <div id="emptyState" class="hidden rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+              <p class="text-lg font-heading font-semibold">No payment transactions found</p>
+              <p class="mt-2 text-sm text-muted-foreground">There are currently no payment records available.</p>
+            </div>
+
+            <div id="noResultsState" class="hidden rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+              <p class="text-lg font-heading font-semibold">No payments match these filters</p>
+              <p class="mt-2 text-sm text-muted-foreground">Adjust or reset the filters to view other transactions.</p>
+              <button id="resetNoResults" type="button" class="mt-4 min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium">Reset filters</button>
+            </div>
+
+            <div id="errorState" class="hidden rounded-xl border border-border bg-card p-6 text-center shadow-sm">
+              <p class="text-lg font-heading font-semibold">Payment transactions could not be loaded</p>
+              <p class="mt-2 text-sm text-muted-foreground">Check your connection and try again.</p>
+              <div class="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
+                <button id="retryButton" type="button" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Retry</button>
+                <button type="button" class="min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium">Contact support</button>
+              </div>
+            </div>
+
+            <section id="paymentsTableSection" class="hidden rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+              <div class="hidden lg:block">
+                <div class="overflow-x-auto">
+                  <table class="min-w-full table-fixed border-collapse">
+                    <thead class="bg-muted">
+                      <tr class="text-left text-sm text-muted-foreground">
+                        <th class="px-4 py-3 font-medium w-[18%]">Transaction</th>
+                        <th class="px-4 py-3 font-medium w-[18%]">User</th>
+                        <th class="px-4 py-3 font-medium w-[12%]">Advert</th>
+                        <th class="px-4 py-3 font-medium w-[12%]">Amount</th>
+                        <th class="px-4 py-3 font-medium w-[10%]">Provider</th>
+                        <th class="px-4 py-3 font-medium w-[10%]">Status</th>
+                        <th class="px-4 py-3 font-medium w-[12%]">Date</th>
+                        <th class="px-4 py-3 font-medium w-[16%]">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="paymentsTableBody" class="divide-y divide-border text-sm"></tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section id="paymentsCardsSection" class="grid grid-cols-1 gap-4 lg:hidden"></section>
+
+            <div id="pagination" class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+              <button id="prevPage" type="button" class="min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50">Previous</button>
+              <p id="pageIndicator" class="text-sm font-medium">Page 1 of 1</p>
+              <button id="nextPage" type="button" class="min-h-11 rounded-lg border border-border px-4 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50">Next</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="moreActionsMenu" class="hidden fixed z-50 w-56 rounded-xl border border-border bg-card p-2 shadow-md">
+    <button type="button" data-menu-action="payment" class="menu-action flex min-h-11 w-full items-center rounded-lg px-3 py-3 text-left text-sm hover:bg-muted">View payment</button>
+    <button type="button" data-menu-action="advert" class="menu-action flex min-h-11 w-full items-center rounded-lg px-3 py-3 text-left text-sm hover:bg-muted">View advert</button>
+    <button type="button" data-menu-action="user" class="menu-action flex min-h-11 w-full items-center rounded-lg px-3 py-3 text-left text-sm hover:bg-muted">View user</button>
+  </div>
+
+  <script>
+    document.title = 'AppCentre Admin Payments';
+
+    const body = document.body;
+    const menuButton = document.getElementById('menuButton');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const desktopAside = document.querySelector('aside:not(#mobileDrawer)');
+    function applySidebarState(collapsed) {
+      if (!desktopAside || !sidebarToggle) return;
+      desktopAside.style.display = collapsed ? 'none' : '';
+      sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+    }
+    applySidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', function () {
+        const collapsed = desktopAside.style.display !== 'none';
+        applySidebarState(collapsed);
+        localStorage.setItem('sidebarCollapsed', String(collapsed));
+      });
+    }
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const drawerClose = document.getElementById('drawerClose');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const notificationButton = document.getElementById('notificationButton');
+    const notificationPanel = document.getElementById('notificationPanel');
+    const profileButton = document.getElementById('profileButton');
+    const profilePanel = document.getElementById('profilePanel');
+    const mobileSearchButton = document.getElementById('mobileSearchButton');
+    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
+    const openFiltersButton = document.getElementById('openFiltersButton');
+    const filtersDrawer = document.getElementById('filtersDrawer');
+    const filtersOverlay = document.getElementById('filtersOverlay');
+    const filtersClose = document.getElementById('filtersClose');
+    const paymentsStatus = document.getElementById('paymentsStatus');
+    const summaryCards = document.querySelectorAll('.summary-card');
+    const searchInputDesktop = document.getElementById('searchInputDesktop');
+    const searchInputMobile = document.getElementById('searchInputMobile');
+    const statusFilterDesktop = document.getElementById('statusFilterDesktop');
+    const providerFilterDesktop = document.getElementById('providerFilterDesktop');
+    const dateFilterDesktop = document.getElementById('dateFilterDesktop');
+    const sortFilterDesktop = document.getElementById('sortFilterDesktop');
+    const dateFromDesktop = document.getElementById('dateFromDesktop');
+    const dateToDesktop = document.getElementById('dateToDesktop');
+    const desktopCustomDateFields = document.getElementById('desktopCustomDateFields');
+    const statusFilterMobile = document.getElementById('statusFilterMobile');
+    const providerFilterMobile = document.getElementById('providerFilterMobile');
+    const dateFilterMobile = document.getElementById('dateFilterMobile');
+    const sortFilterMobile = document.getElementById('sortFilterMobile');
+    const dateFromMobile = document.getElementById('dateFromMobile');
+    const dateToMobile = document.getElementById('dateToMobile');
+    const mobileCustomDateFields = document.getElementById('mobileCustomDateFields');
+    const applyFiltersDesktop = document.getElementById('applyFiltersDesktop');
+    const resetFiltersDesktop = document.getElementById('resetFiltersDesktop');
+    const applyFiltersMobile = document.getElementById('applyFiltersMobile');
+    const resetFiltersMobile = document.getElementById('resetFiltersMobile');
+    const resetFiltersMobileCompact = document.getElementById('resetFiltersMobileCompact');
+    const clearFiltersButton = document.getElementById('clearFiltersButton');
+    const filterSummary = document.getElementById('filterSummary');
+    const filterSummaryText = document.getElementById('filterSummaryText');
+    const resultsSummary = document.getElementById('resultsSummary');
+    const loadingState = document.getElementById('loadingState');
+    const emptyState = document.getElementById('emptyState');
+    const noResultsState = document.getElementById('noResultsState');
+    const errorState = document.getElementById('errorState');
+    const retryButton = document.getElementById('retryButton');
+    const resetNoResults = document.getElementById('resetNoResults');
+    const paymentsTableSection = document.getElementById('paymentsTableSection');
+    const paymentsCardsSection = document.getElementById('paymentsCardsSection');
+    const paymentsTableBody = document.getElementById('paymentsTableBody');
+    const pagination = document.getElementById('pagination');
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
+    const pageIndicator = document.getElementById('pageIndicator');
+    const summaryAll = document.getElementById('summaryAll');
+    const summaryPaid = document.getElementById('summaryPaid');
+    const summaryFailed = document.getElementById('summaryFailed');
+    const moreActionsMenu = document.getElementById('moreActionsMenu');
+
+    const baseTransactions = [
+      { reference: 'PAY-2048-7781', advertReference: 'AC-2048', userName: 'Daniel Moore', userReference: 'USR-1048', email: 'daniel.moore@example.com', amount: 180, currency: 'GBP', amountLabel: '£180.00 GBP', provider: 'Stripe', status: 'Paid', date: '2026-07-10T09:05:00', dateLabel: '10 Jul 2026, 09:05' },
+      { reference: 'PAY-2011-3304', advertReference: 'AC-2011', userName: 'Fatima Bello', userReference: 'USR-1053', email: 'fatima.bello@example.com', amount: 25000, currency: 'NGN', amountLabel: '₦25,000 NGN', provider: 'Paystack', status: 'Failed', date: '2026-07-09T18:42:00', dateLabel: '9 Jul 2026, 18:42' },
+      { reference: 'PAY-2071-4402', advertReference: 'AC-2071', userName: 'Aisha Ibrahim', userReference: 'USR-1071', email: 'aisha.ibrahim@example.com', amount: 12000, currency: 'NGN', amountLabel: '₦12,000 NGN', provider: 'Paystack', status: 'Pending', date: '2026-07-10T11:18:00', dateLabel: '10 Jul 2026, 11:18' },
+      { reference: 'PAY-1990-1182', advertReference: 'AC-1990', userName: 'Samuel Reed', userReference: 'USR-1024', email: 'samuel.reed@example.com', amount: 95, currency: 'GBP', amountLabel: '£95.00 GBP', provider: 'Stripe', status: 'Refunded', date: '2026-07-08T15:10:00', dateLabel: '8 Jul 2026, 15:10' },
+      { reference: 'PAY-2088-7814', advertReference: 'AC-2088', userName: 'Grace Okoro', userReference: 'USR-1088', email: 'grace.okoro@example.com', amount: 35000, currency: 'NGN', amountLabel: '₦35,000 NGN', provider: 'Paystack', status: 'Paid', date: '2026-07-11T08:12:00', dateLabel: '11 Jul 2026, 08:12' },
+      { reference: 'PAY-2059-5540', advertReference: 'AC-2059', userName: 'Michael Hart', userReference: 'USR-1062', email: 'michael.hart@example.com', amount: 240, currency: 'GBP', amountLabel: '£240.00 GBP', provider: 'Stripe', status: 'Paid', date: '2026-07-07T13:36:00', dateLabel: '7 Jul 2026, 13:36' },
+      { reference: 'PAY-2064-9921', advertReference: 'AC-2064', userName: 'Chioma Nwosu', userReference: 'USR-1067', email: 'chioma.nwosu@example.com', amount: 15000, currency: 'NGN', amountLabel: '₦15,000 NGN', provider: 'Paystack', status: 'Paid', date: '2026-07-06T10:22:00', dateLabel: '6 Jul 2026, 10:22' },
+      { reference: 'PAY-2033-6647', advertReference: 'AC-2033', userName: 'Emily Clark', userReference: 'USR-1041', email: 'emily.clark@example.com', amount: 125, currency: 'GBP', amountLabel: '£125.00 GBP', provider: 'Stripe', status: 'Pending', date: '2026-07-05T17:55:00', dateLabel: '5 Jul 2026, 17:55' }
+    ];
+
+    const state = {
+      search: '',
+      status: 'all',
+      provider: 'all',
+      date: 'all',
+      dateFrom: '',
+      dateTo: '',
+      sort: 'Newest first',
+      page: 1,
+      pageSize: 8,
+      currentMenuReference: null,
+      routeContext: 'payments',
+      loadingMode: 'normal'
+    };
+
+    function closeDrawer() {
+      mobileDrawer.classList.add('hidden');
+      mobileOverlay.classList.add('hidden');
+      body.classList.remove('overflow-hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+
+    function openDrawer() {
+      mobileDrawer.classList.remove('hidden');
+      mobileOverlay.classList.remove('hidden');
+      body.classList.add('overflow-hidden');
+      menuButton.setAttribute('aria-expanded', 'true');
+    }
+
+    function closePanel(button, panel) {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.add('hidden');
+    }
+
+    function openPanel(button, panel) {
+      button.setAttribute('aria-expanded', 'true');
+      panel.classList.remove('hidden');
+    }
+
+    function togglePanel(button, panel, otherButton, otherPanel) {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      closePanel(otherButton, otherPanel);
+      if (isOpen) {
+        closePanel(button, panel);
+      } else {
+        openPanel(button, panel);
+      }
+    }
+
+    function closeMobileSearch() {
+      mobileSearchButton.setAttribute('aria-expanded', 'false');
+      mobileSearchPanel.classList.add('hidden');
+    }
+
+    function openFiltersDrawer() {
+      filtersDrawer.classList.remove('hidden');
+      filtersOverlay.classList.remove('hidden');
+      body.classList.add('overflow-hidden');
+      openFiltersButton.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeFiltersDrawer() {
+      filtersDrawer.classList.add('hidden');
+      filtersOverlay.classList.add('hidden');
+      body.classList.remove('overflow-hidden');
+      openFiltersButton.setAttribute('aria-expanded', 'false');
+    }
+
+    function statusBadge(status) {
+      if (status === 'Paid') return 'bg-muted text-tertiary';
+      if (status === 'Pending') return 'bg-muted text-foreground';
+      if (status === 'Failed') return 'bg-muted text-destructive';
+      return 'bg-muted text-muted-foreground';
+    }
+
+    function updateCustomDateVisibility() {
+      if (dateFilterDesktop.value === 'Custom range') {
+        desktopCustomDateFields.classList.remove('hidden');
+      } else {
+        desktopCustomDateFields.classList.add('hidden');
+      }
+      if (dateFilterMobile.value === 'Custom range') {
+        mobileCustomDateFields.classList.remove('hidden');
+      } else {
+        mobileCustomDateFields.classList.add('hidden');
+      }
+    }
+
+    function syncFiltersToMobile() {
+      searchInputMobile.value = state.search;
+      statusFilterMobile.value = state.status;
+      providerFilterMobile.value = state.provider;
+      dateFilterMobile.value = state.date;
+      dateFromMobile.value = state.dateFrom;
+      dateToMobile.value = state.dateTo;
+      sortFilterMobile.value = state.sort;
+      updateCustomDateVisibility();
+    }
+
+    function syncFiltersToDesktop() {
+      searchInputDesktop.value = state.search;
+      statusFilterDesktop.value = state.status;
+      providerFilterDesktop.value = state.provider;
+      dateFilterDesktop.value = state.date;
+      dateFromDesktop.value = state.dateFrom;
+      dateToDesktop.value = state.dateTo;
+      sortFilterDesktop.value = state.sort;
+      updateCustomDateVisibility();
+    }
+
+    function applyDesktopFilters() {
+      state.search = searchInputDesktop.value.trim();
+      state.status = statusFilterDesktop.value;
+      state.provider = providerFilterDesktop.value;
+      state.date = dateFilterDesktop.value;
+      state.dateFrom = dateFromDesktop.value;
+      state.dateTo = dateToDesktop.value;
+      state.sort = sortFilterDesktop.value;
+      state.page = 1;
+      syncFiltersToMobile();
+      render();
+    }
+
+    function applyMobileFilters() {
+      state.search = searchInputMobile.value.trim();
+      state.status = statusFilterMobile.value;
+      state.provider = providerFilterMobile.value;
+      state.date = dateFilterMobile.value;
+      state.dateFrom = dateFromMobile.value;
+      state.dateTo = dateToMobile.value;
+      state.sort = sortFilterMobile.value;
+      state.page = 1;
+      syncFiltersToDesktop();
+      closeFiltersDrawer();
+      render();
+    }
+
+    function hasActiveFilters() {
+      return state.search || state.status !== 'all' || state.provider !== 'all' || state.date !== 'all' || state.dateFrom || state.dateTo || state.sort !== 'Newest first';
+    }
+
+    function resetFilters() {
+      state.search = '';
+      state.status = 'all';
+      state.provider = 'all';
+      state.date = 'all';
+      state.dateFrom = '';
+      state.dateTo = '';
+      state.sort = 'Newest first';
+      state.page = 1;
+      syncFiltersToDesktop();
+      syncFiltersToMobile();
+      render();
+    }
+
+    function getFilteredTransactions() {
+      let items = baseTransactions.slice();
+      if (state.search) {
+        const term = state.search.toLowerCase();
+        items = items.filter(function (item) {
+          return item.reference.toLowerCase().includes(term) || item.advertReference.toLowerCase().includes(term) || item.userReference.toLowerCase().includes(term) || item.userName.toLowerCase().includes(term) || item.email.toLowerCase().includes(term);
+        });
+      }
+      if (state.status !== 'all') {
+        items = items.filter(function (item) { return item.status === state.status; });
+      }
+      if (state.provider !== 'all') {
+        items = items.filter(function (item) { return item.provider === state.provider; });
+      }
+      const now = new Date('2026-07-11T12:00:00');
+      if (state.date === 'Today') {
+        items = items.filter(function (item) { return item.date.startsWith('2026-07-11'); });
+      }
+      if (state.date === 'Last 7 days') {
+        items = items.filter(function (item) {
+          const itemDate = new Date(item.date);
+          return now - itemDate <= 7 * 24 * 60 * 60 * 1000;
+        });
+      }
+      if (state.date === 'Last 30 days') {
+        items = items.filter(function (item) {
+          const itemDate = new Date(item.date);
+          return now - itemDate <= 30 * 24 * 60 * 60 * 1000;
+        });
+      }
+      if (state.date === 'Custom range') {
+        items = items.filter(function (item) {
+          const dateOnly = item.date.slice(0, 10);
+          const afterFrom = !state.dateFrom || dateOnly >= state.dateFrom;
+          const beforeTo = !state.dateTo || dateOnly <= state.dateTo;
+          return afterFrom && beforeTo;
+        });
+      }
+      if (state.sort === 'Newest first') {
+        items.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+      }
+      if (state.sort === 'Oldest first') {
+        items.sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+      }
+      if (state.sort === 'Amount high to low') {
+        items.sort(function (a, b) { return b.amount - a.amount; });
+      }
+      if (state.sort === 'Amount low to high') {
+        items.sort(function (a, b) { return a.amount - b.amount; });
+      }
+      return items;
+    }
+
+    function renderSummaryCards() {
+      summaryAll.textContent = '486';
+      summaryPaid.textContent = String(452);
+      summaryFailed.textContent = String(18);
+      summaryCards.forEach(function (card) {
+        const filter = card.getAttribute('data-summary-filter');
+        const active = (filter === 'all' && state.status === 'all') || filter === state.status;
+        if (active) {
+          card.classList.add('ring-2', 'ring-primary', 'border-primary');
+        } else {
+          card.classList.remove('ring-2', 'ring-primary', 'border-primary');
+        }
+      });
+    }
+
+    function renderFilterSummary() {
+      const parts = [];
+      if (state.status !== 'all') parts.push('Status: ' + state.status);
+      if (state.provider !== 'all') parts.push('Provider: ' + state.provider);
+      if (state.search) parts.push('Search: ' + state.search);
+      if (state.date !== 'all') parts.push('Date: ' + state.date);
+      if (parts.length) {
+        filterSummary.classList.remove('hidden');
+        filterSummaryText.textContent = parts.join(' · ');
+      } else {
+        filterSummary.classList.add('hidden');
+        filterSummaryText.textContent = '';
+      }
+      if (hasActiveFilters()) {
+        resetFiltersMobileCompact.classList.remove('hidden');
+      } else {
+        resetFiltersMobileCompact.classList.add('hidden');
+      }
+    }
+
+    function renderTableRows(items) {
+      paymentsTableBody.innerHTML = items.map(function (item) {
+        return '<tr>' +
+          '<td class="px-4 py-3 align-top"><div class="space-y-1"><p class="font-medium leading-5">' + item.reference + '</p><p class="text-xs text-muted-foreground">View payment record</p></div></td>' +
+          '<td class="px-4 py-3 align-top"><div class="space-y-1"><p class="font-medium leading-5 break-words">' + item.userName + '</p><p class="text-xs text-muted-foreground break-words">' + item.userReference + '</p></div></td>' +
+          '<td class="px-4 py-3 align-top"><p class="font-medium leading-5">' + item.advertReference + '</p></td>' +
+          '<td class="px-4 py-3 align-top"><p class="font-medium leading-5">' + item.amountLabel + '</p></td>' +
+          '<td class="px-4 py-3 align-top"><p class="leading-5">' + item.provider + '</p></td>' +
+          '<td class="px-4 py-3 align-top"><span class="inline-flex rounded-full px-2 py-1 text-xs font-medium ' + statusBadge(item.status) + '">' + item.status + '</span></td>' +
+          '<td class="px-4 py-3 align-top"><p class="leading-5">' + item.dateLabel + '</p></td>' +
+          '<td class="px-4 py-3 align-top"><div class="flex flex-col gap-2"><button type="button" data-action="view-payment" data-reference="' + item.reference + '" class="min-h-11 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">View payment</button><button type="button" data-menu-trigger="' + item.reference + '" class="more-actions-trigger min-h-11 rounded-lg border border-border px-3 py-2 text-sm font-medium">More actions</button></div></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function renderCards(items) {
+      paymentsCardsSection.innerHTML = items.map(function (item) {
+        return '<article class="rounded-xl border border-border bg-card p-4 shadow-sm">' +
+          '<div class="flex items-start justify-between gap-3"><div><p class="text-base font-heading font-semibold">' + item.reference + '</p><p class="mt-1 text-sm text-muted-foreground">' + item.userName + ' · ' + item.userReference + '</p></div><span class="inline-flex rounded-full px-2 py-1 text-xs font-medium ' + statusBadge(item.status) + '">' + item.status + '</span></div>' +
+          '<div class="mt-4 space-y-2 text-sm"><p><span class="text-muted-foreground">Advert:</span> ' + item.advertReference + '</p><p><span class="text-muted-foreground">Amount:</span> ' + item.amountLabel + '</p><p><span class="text-muted-foreground">Provider:</span> ' + item.provider + '</p><p><span class="text-muted-foreground">Date:</span> ' + item.dateLabel + '</p></div>' +
+          '<div class="mt-4 space-y-3"><button type="button" data-action="view-payment" data-reference="' + item.reference + '" class="min-h-11 w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">View payment</button><button type="button" data-menu-trigger="' + item.reference + '" class="more-actions-trigger min-h-11 w-full rounded-lg border border-border px-4 py-3 text-sm font-medium">More actions</button></div>' +
+        '</article>';
+      }).join('');
+    }
+
+    function renderPagination(total) {
+      const totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      if (state.page > totalPages) state.page = totalPages;
+      pageIndicator.textContent = 'Page ' + state.page + ' of ' + totalPages;
+      prevPage.disabled = state.page === 1;
+      nextPage.disabled = state.page === totalPages;
+    }
+
+    function render() {
+      renderSummaryCards();
+      renderFilterSummary();
+      closeMoreActionsMenu();
+      if (state.loadingMode === 'loading') {
+        loadingState.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        noResultsState.classList.add('hidden');
+        errorState.classList.add('hidden');
+        paymentsTableSection.classList.add('hidden');
+        paymentsCardsSection.classList.add('hidden');
+        pagination.classList.add('hidden');
+        paymentsStatus.textContent = 'Loading payment transactions.';
+        return;
+      }
+      if (state.loadingMode === 'error') {
+        loadingState.classList.add('hidden');
+        emptyState.classList.add('hidden');
+        noResultsState.classList.add('hidden');
+        errorState.classList.remove('hidden');
+        paymentsTableSection.classList.add('hidden');
+        paymentsCardsSection.classList.add('hidden');
+        pagination.classList.add('hidden');
+        paymentsStatus.textContent = 'Payment transactions could not be loaded.';
+        return;
+      }
+      const filtered = getFilteredTransactions();
+      loadingState.classList.add('hidden');
+      errorState.classList.add('hidden');
+      if (!baseTransactions.length) {
+        emptyState.classList.remove('hidden');
+        noResultsState.classList.add('hidden');
+        paymentsTableSection.classList.add('hidden');
+        paymentsCardsSection.classList.add('hidden');
+        pagination.classList.add('hidden');
+        resultsSummary.textContent = 'Showing 0 transactions';
+        paymentsStatus.textContent = 'No payment transactions found.';
+        return;
+      }
+      emptyState.classList.add('hidden');
+      if (!filtered.length) {
+        noResultsState.classList.remove('hidden');
+        paymentsTableSection.classList.add('hidden');
+        paymentsCardsSection.classList.add('hidden');
+        pagination.classList.add('hidden');
+        resultsSummary.textContent = 'Showing 0 of 486 transactions';
+        paymentsStatus.textContent = 'No payments match these filters.';
+        return;
+      }
+      noResultsState.classList.add('hidden');
+      paymentsTableSection.classList.remove('hidden');
+      paymentsCardsSection.classList.remove('hidden');
+      pagination.classList.remove('hidden');
+      const start = (state.page - 1) * state.pageSize;
+      const paginated = filtered.slice(start, start + state.pageSize);
+      renderTableRows(paginated);
+      renderCards(paginated);
+      resultsSummary.textContent = 'Showing ' + (start + 1) + ' to ' + (start + paginated.length) + ' of 486 transactions';
+      renderPagination(filtered.length);
+      paymentsStatus.textContent = 'Showing ' + paginated.length + ' payment transactions.';
+    }
+
+    function closeMoreActionsMenu() {
+      moreActionsMenu.classList.add('hidden');
+      state.currentMenuReference = null;
+    }
+
+    function openMoreActionsMenu(reference, trigger) {
+      const rect = trigger.getBoundingClientRect();
+      state.currentMenuReference = reference;
+      moreActionsMenu.classList.remove('hidden');
+      moreActionsMenu.style.left = Math.max(16, rect.right - 224) + 'px';
+      moreActionsMenu.style.top = Math.min(window.innerHeight - 180, rect.bottom + 8) + 'px';
+    }
+
+    function toggleMoreActionsMenu(reference, trigger) {
+      if (!moreActionsMenu.classList.contains('hidden') && state.currentMenuReference === reference) {
+        closeMoreActionsMenu();
+      } else {
+        closeMoreActionsMenu();
+        openMoreActionsMenu(reference, trigger);
+      }
+    }
+
+    function handleAction(type, reference) {
+      const item = baseTransactions.find(function (transaction) { return transaction.reference === reference; });
+      if (!item) return;
+      if (type === 'payment') {
+        paymentsStatus.textContent = 'Opening payment record ' + item.reference + '.';
+      }
+      if (type === 'advert') {
+        paymentsStatus.textContent = 'Opening advert record ' + item.advertReference + '.';
+      }
+      if (type === 'user') {
+        paymentsStatus.textContent = 'Opening user record ' + item.userReference + '.';
+      }
+      closeMoreActionsMenu();
+    }
+
+    menuButton.addEventListener('click', function () {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeDrawer(); else openDrawer();
+    });
+    drawerClose.addEventListener('click', closeDrawer);
+    mobileOverlay.addEventListener('click', closeDrawer);
+    mobileNavLinks.forEach(function (link) { link.addEventListener('click', closeDrawer); });
+
+    notificationButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(notificationButton, notificationPanel, profileButton, profilePanel);
+    });
+    profileButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(profileButton, profilePanel, notificationButton, notificationPanel);
+    });
+    notificationPanel.addEventListener('click', function (event) { event.stopPropagation(); });
+    profilePanel.addEventListener('click', function (event) { event.stopPropagation(); });
+
+    mobileSearchButton.addEventListener('click', function () {
+      const isOpen = mobileSearchButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMobileSearch();
+      } else {
+        mobileSearchButton.setAttribute('aria-expanded', 'true');
+        mobileSearchPanel.classList.remove('hidden');
+      }
+    });
+
+    openFiltersButton.addEventListener('click', openFiltersDrawer);
+    filtersClose.addEventListener('click', closeFiltersDrawer);
+    filtersOverlay.addEventListener('click', closeFiltersDrawer);
+
+    dateFilterDesktop.addEventListener('change', updateCustomDateVisibility);
+    dateFilterMobile.addEventListener('change', updateCustomDateVisibility);
+    applyFiltersDesktop.addEventListener('click', applyDesktopFilters);
+    applyFiltersMobile.addEventListener('click', applyMobileFilters);
+    resetFiltersDesktop.addEventListener('click', resetFilters);
+    resetFiltersMobile.addEventListener('click', function () { resetFilters(); closeFiltersDrawer(); });
+    resetFiltersMobileCompact.addEventListener('click', resetFilters);
+    clearFiltersButton.addEventListener('click', resetFilters);
+    resetNoResults.addEventListener('click', resetFilters);
+    retryButton.addEventListener('click', function () { state.loadingMode = 'normal'; render(); });
+
+    summaryCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        const filter = card.getAttribute('data-summary-filter');
+        state.status = filter === 'all' ? 'all' : filter;
+        state.page = 1;
+        syncFiltersToDesktop();
+        syncFiltersToMobile();
+        render();
+      });
+    });
+
+    prevPage.addEventListener('click', function () {
+      if (state.page > 1) {
+        state.page -= 1;
+        render();
+      }
+    });
+    nextPage.addEventListener('click', function () {
+      const totalPages = Math.max(1, Math.ceil(getFilteredTransactions().length / state.pageSize));
+      if (state.page < totalPages) {
+        state.page += 1;
+        render();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
+        closePanel(notificationButton, notificationPanel);
+      }
+      if (!profilePanel.contains(event.target) && !profileButton.contains(event.target)) {
+        closePanel(profileButton, profilePanel);
+      }
+      if (!moreActionsMenu.contains(event.target)) {
+        const trigger = event.target.closest('[data-menu-trigger]');
+        if (!trigger) closeMoreActionsMenu();
+      }
+      const menuTrigger = event.target.closest('[data-menu-trigger]');
+      if (menuTrigger) {
+        event.stopPropagation();
+        toggleMoreActionsMenu(menuTrigger.getAttribute('data-menu-trigger'), menuTrigger);
+      }
+      const viewPaymentButton = event.target.closest('[data-action="view-payment"]');
+      if (viewPaymentButton) {
+        paymentsStatus.textContent = 'Opening payment record ' + viewPaymentButton.getAttribute('data-reference') + '.';
+      }
+      const menuAction = event.target.closest('.menu-action');
+      if (menuAction && state.currentMenuReference) {
+        handleAction(menuAction.getAttribute('data-menu-action'), state.currentMenuReference);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closePanel(notificationButton, notificationPanel);
+        closePanel(profileButton, profilePanel);
+        closeMobileSearch();
+        closeDrawer();
+        closeFiltersDrawer();
+        closeMoreActionsMenu();
+      }
+    });
+
+    syncFiltersToDesktop();
+    syncFiltersToMobile();
+    render();
+  </script>
+</div>
+</body></html>

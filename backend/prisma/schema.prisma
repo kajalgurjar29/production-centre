@@ -1,0 +1,174 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminRole {
+  ADMINISTRATOR
+  MODERATOR
+  SUPPORT
+  FINANCE
+}
+
+enum AdminStatus {
+  ACTIVE
+  DEACTIVATED
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum AdvertStatus {
+  DRAFT
+  PAYMENT_REQUIRED
+  PENDING_REVIEW
+  AMENDMENTS_REQUIRED
+  APPROVED
+  ACTIVE
+  PAUSED
+  EXPIRED
+  REMOVED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum ReviewStatus {
+  PUBLISHED
+  REPORTED
+  REMOVED
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+}
+
+model AdminUser {
+  id           String      @id @default(cuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  role         AdminRole   @default(SUPPORT)
+  status       AdminStatus @default(ACTIVE)
+  lastActiveAt DateTime?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  auditLogs AuditLog[]
+
+  @@map("appcentre_admin_users")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  name      String
+  email     String     @unique
+  status    UserStatus @default(ACTIVE)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  adverts Advert[]
+
+  @@map("appcentre_users")
+}
+
+model Advert {
+  id            String       @id @default(cuid())
+  reference     String       @unique
+  title         String
+  description   String?
+  type          String
+  placement     String
+  status        AdvertStatus @default(DRAFT)
+  paymentStatus PaymentStatus @default(PENDING)
+  sponsored     Boolean      @default(false)
+  country       String?
+  region        String?
+  city          String?
+  startDate     DateTime?
+  endDate       DateTime?
+  views         Int          @default(0)
+  clicks        Int          @default(0)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  advertiserId String
+  advertiser   User      @relation(fields: [advertiserId], references: [id])
+  payments     Payment[]
+
+  @@map("appcentre_adverts")
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  transactionRef  String        @unique
+  amount          Decimal       @db.Decimal(10, 2)
+  currency        String        @default("GBP")
+  provider        String
+  status          PaymentStatus @default(PENDING)
+  paidAt          DateTime?
+  createdAt       DateTime      @default(now())
+
+  advertId String
+  advert   Advert @relation(fields: [advertId], references: [id])
+
+  @@map("appcentre_payments")
+}
+
+model Review {
+  id        String       @id @default(cuid())
+  name      String
+  rating    Int
+  topic     String?
+  details   String?
+  country   String?
+  city      String?
+  status    ReviewStatus @default(PUBLISHED)
+  createdAt DateTime     @default(now())
+
+  @@map("appcentre_reviews")
+}
+
+model ContactEnquiry {
+  id          String        @id @default(cuid())
+  title       String?
+  firstName   String?
+  lastName    String?
+  name        String
+  email       String
+  country     String?
+  city        String?
+  enquiryType String?
+  subject     String
+  message     String
+  source      String?
+  status      EnquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+
+  @@map("appcentre_contact_enquiries")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  target    String?
+  reason    String?
+  createdAt DateTime @default(now())
+
+  actorId String?
+  actor   AdminUser? @relation(fields: [actorId], references: [id])
+
+  @@map("appcentre_audit_log")
+}

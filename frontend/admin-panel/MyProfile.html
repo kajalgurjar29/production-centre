@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppCentre Admin – My Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/app.css" />
+    <style>
+      :root { --background: #f3f4f6;
+        --foreground: #1f2937;
+        --primary: #0d9488;
+        --primary-foreground: #ffffff;
+        --secondary: #f8fafc;
+        --secondary-foreground: #1f2937;
+        --tertiary: #16a34a;
+        --muted: #f9fafb;
+        --muted-foreground: #6b7280;
+        --accent: #f0fdfa;
+        --accent-foreground: #0F172A;
+        --card: #ffffff;
+        --card-foreground: #1f2937;
+        --destructive: #991b1b;
+        --border: #e5e7eb;
+        --input: #d1d5db;
+        --ring: #0d9488;
+        --radius: 0.75rem;
+        --font-sans: Inter,sans-serif;
+        --font-heading: Inter,sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body>
+<div class="min-h-screen w-full bg-background flex flex-col relative font-sans text-foreground">
+  <div class="flex w-full">
+    <aside class="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-card sticky top-0 self-start h-screen max-h-none">
+      <div class="shrink-0 border-b border-border px-5 py-5 bg-card">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+          </div>
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Single-site administration</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-3 py-4">
+        <nav aria-label="Primary navigation" class="space-y-5 text-sm">
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+              <div class="space-y-1">
+              <a href="dashboard3.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg><span>Dashboard</span></a>
+              <a href="ActionCentre.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg><span>Action Centre</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+              <div class="space-y-1">
+              <a href="Users.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Users</span></a>
+              <a href="AdvertMgt.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M7 3h10l1 4H6l1-4Z"/><path d="M5 7h14l-1 12H6L5 7Z"/></svg><span>Adverts</span></a>
+              <a href="PaymentTransaction.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><span>Payments</span></a>
+              <a href="ReviewsMgt.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg><span>Reviews</span></a>
+              <a href="ContactEnquiries.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact Enquiries</span></a>
+              <a href="Notifications.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg><span>Notifications</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+              <div class="space-y-1">
+              <a href="HomepageContent.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Homepage Content</span></a>
+              <a href="NewsCarousel.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/></svg><span>News and Carousel</span></a>
+              <a href="HelpKnowledgeBase.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"/><path d="M12 17h.01"/></svg><span>Help Knowledge Base</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+              <div class="space-y-1">
+              <a href="ReferenceData.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span>Reference Data</span></a>
+              <a href="AdvertConfiguration.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 16h10"/></svg><span>Advert Configuration</span></a>
+              <a href="AdminUsers.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Admin Users</span></a>
+              <a href="RolesPermissions.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>Roles and Permissions</span></a>
+              <a href="AuditLog.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span>Audit Log</span></a>
+              <a href="SystemSettings.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"/></svg><span>System Settings</span></a>
+              </div>
+            </div>
+        </nav>
+      </div>
+      <div class="shrink-0 border-t border-border px-3 py-4 bg-card">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+        <div class="space-y-1 text-sm">
+          <a href="MyProfile.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+          <a href="adminlogin.html" class=" flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg><span>Log out</span></a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="relative flex min-w-0 flex-1 flex-col">
+      <div id="mobileOverlay" class="hidden fixed inset-0 z-40 bg-foreground/50"></div>
+      <aside id="mobileDrawer" class="fixed inset-y-0 left-0 z-50 hidden w-72 max-w-[85%] flex-col border-r border-border bg-card shadow-md">
+        <div class="flex items-center justify-between border-b border-border px-4 py-4">
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Navigation</p>
+          </div>
+          <button id="drawerClose" type="button" aria-label="Close navigation menu" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-3 py-4">
+          <nav aria-label="Mobile navigation" class="space-y-5 text-sm">
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+              <div class="space-y-1">
+              <a href="dashboard3.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg><span>Dashboard</span></a>
+              <a href="ActionCentre.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg><span>Action Centre</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+              <div class="space-y-1">
+              <a href="Users.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Users</span></a>
+              <a href="AdvertMgt.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M7 3h10l1 4H6l1-4Z"/><path d="M5 7h14l-1 12H6L5 7Z"/></svg><span>Adverts</span></a>
+              <a href="PaymentTransaction.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><span>Payments</span></a>
+              <a href="ReviewsMgt.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg><span>Reviews</span></a>
+              <a href="ContactEnquiries.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg><span>Contact Enquiries</span></a>
+              <a href="Notifications.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg><span>Notifications</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+              <div class="space-y-1">
+              <a href="HomepageContent.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg><span>Homepage Content</span></a>
+              <a href="NewsCarousel.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/></svg><span>News and Carousel</span></a>
+              <a href="HelpKnowledgeBase.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"/><path d="M12 17h.01"/></svg><span>Help Knowledge Base</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+              <div class="space-y-1">
+              <a href="ReferenceData.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span>Reference Data</span></a>
+              <a href="AdvertConfiguration.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 8h10"/><path d="M7 16h10"/></svg><span>Advert Configuration</span></a>
+              <a href="AdminUsers.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Admin Users</span></a>
+              <a href="RolesPermissions.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg><span>Roles and Permissions</span></a>
+              <a href="AuditLog.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span>Audit Log</span></a>
+              <a href="SystemSettings.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"/></svg><span>System Settings</span></a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="border-t border-border px-3 py-4">
+          <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+          <div class="space-y-1">
+          <a href="MyProfile.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>My Profile</span></a>
+          <a href="adminlogin.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg><span>Log out</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <header class="sticky top-0 z-30 border-b border-border bg-card shadow-sm">
+        <div class="flex items-center gap-3 px-4 py-3 lg:px-6">
+          <div class="flex min-w-0 items-center gap-2 lg:hidden">
+            <button id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+            </button>
+            <div class="min-w-0">
+              <p class="truncate text-base font-heading font-semibold">AppCentre Admin</p>
+            </div>
+          </div>
+          <button id="sidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" class="hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:flex">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path></svg>
+          </button>
+          <div class="hidden lg:flex flex-1 items-center">
+            <label for="desktopSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+            <div class="flex w-full max-w-xl items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="desktopSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+            </div>
+          </div>
+          <div class="ml-auto flex items-center gap-2">
+            <button id="mobileSearchButton" type="button" aria-label="Open search" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:hidden">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            </button>
+            <div class="relative">
+              <button id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background relative">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg>
+                <span class="absolute right-2 top-2 inline-flex h-2.5 w-2.5 rounded-full bg-destructive" aria-hidden="true"></span>
+              </button>
+              <div id="notificationPanel" class="hidden absolute right-0 top-full mt-2 w-[20rem] max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
+                <div class="flex items-center justify-between border-b border-border pb-3">
+                  <h2 class="text-sm font-heading font-semibold">Notifications</h2>
+                  <button type="button" class="min-h-11 text-sm font-medium text-primary">Mark all as read</button>
+                </div>
+                <div class="space-y-3 py-3 text-sm">
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">New advert awaiting review</p><p class="text-muted-foreground">Submitted 12 minutes ago</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Payment verification failed</p><p class="text-muted-foreground">Requires payment status review</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Contact enquiry overdue</p><p class="text-muted-foreground">Response target exceeded</p></div>
+                </div>
+                <a href="Notifications.html" class="flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium">View notifications</a>
+              </div>
+            </div>
+            <div class="relative">
+              <button id="profileButton" type="button" aria-label="Open administrator profile menu" aria-expanded="false" class="flex min-h-11 items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">AM</div>
+                <div class="hidden text-left lg:block">
+                  <p class="text-sm font-medium">Alex Morgan</p>
+                  <p class="text-xs text-muted-foreground">Administrator</p>
+                </div>
+                <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-muted-foreground lg:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div id="profilePanel" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
+                <a href="MyProfile.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">My Profile</a>
+                <a href="SystemSettings.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">Security Settings</a>
+                <a href="adminlogin.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm text-destructive hover:bg-muted">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mobileSearchPanel" class="hidden border-t border-border px-4 py-3 lg:hidden">
+          <label for="mobileSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+          <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="mobileSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-1 px-4 py-5 lg:px-6 lg:py-6">
+        <div class="mx-auto space-y-6">
+          <section class="space-y-3">
+            <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">AppCentre administration</p>
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h1 class="text-2xl font-heading font-bold">My Profile</h1>
+                <p class="mt-1 text-sm text-muted-foreground">Manage your administrator profile, password and notification preferences.</p>
+              </div>
+              
+            </div>
+          </section>
+          <div id="pageStatus" class="sr-only" aria-live="polite"></div>
+          <section class="grid grid-cols-1 gap-6 xl:grid-cols-2">
+            <div class="rounded-xl border border-border bg-card p-4 shadow-sm space-y-4">
+              <h2 class="text-lg font-heading font-semibold">Profile details</h2>
+              <div class="flex items-center gap-3">
+                <div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-lg font-semibold text-primary-foreground">AM</div>
+                <div><p class="text-sm font-medium">Alex Morgan</p><p class="text-xs text-muted-foreground">Administrator</p></div>
+              </div>
+              <div><label class="mb-2 block text-sm font-medium" for="profileName">Full name</label><input id="profileName" type="text" value="Alex Morgan" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+              <div><label class="mb-2 block text-sm font-medium" for="profileEmail">Email address</label><input id="profileEmail" type="email" value="alex.morgan@appcentre.local" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+              <button type="button" id="saveProfile" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save profile</button>
+            </div>
+            <div class="space-y-6">
+              <div class="rounded-xl border border-border bg-card p-4 shadow-sm space-y-4">
+                <h2 class="text-lg font-heading font-semibold">Change password</h2>
+                <div><label class="mb-2 block text-sm font-medium" for="currentPassword">Current password</label><input id="currentPassword" type="password" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+                <div><label class="mb-2 block text-sm font-medium" for="newPassword">New password</label><input id="newPassword" type="password" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+                <button type="button" id="updatePassword" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Update password</button>
+              </div>
+              <div class="rounded-xl border border-border bg-card p-4 shadow-sm space-y-3">
+                <h2 class="text-lg font-heading font-semibold">Notification preferences</h2>
+                <div class="flex items-center justify-between gap-4 rounded-xl bg-muted p-3">
+                  <div><p class="text-sm font-medium">Email notifications</p><p class="mt-1 text-xs text-muted-foreground">Receive email alerts for moderation and payment events.</p></div>
+                  <button type="button" id="emailNotifyToggle" data-checked="true" class="toggle-switch relative h-7 w-12 shrink-0 rounded-full bg-primary" role="switch" aria-checked="true">
+                    <span class="absolute top-1 left-6 h-5 w-5 rounded-full bg-white transition-all"></span>
+                  </button>
+                </div>
+                <div class="flex items-center justify-between gap-4 rounded-xl bg-muted p-3">
+                  <div><p class="text-sm font-medium">SMS notifications</p><p class="mt-1 text-xs text-muted-foreground">Receive text alerts for urgent enquiries.</p></div>
+                  <button type="button" id="smsNotifyToggle" data-checked="false" class="toggle-switch relative h-7 w-12 shrink-0 rounded-full bg-border" role="switch" aria-checked="false">
+                    <span class="absolute top-1 left-1 h-5 w-5 rounded-full bg-white transition-all"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden fixed bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm rounded-xl border border-border bg-card p-4 shadow-lg">
+    <p id="toastText" class="text-sm font-medium">Changes saved successfully.</p>
+  </div>
+  <script>
+    document.title = 'AppCentre Admin My Profile';
+    const body = document.body;
+    const menuButton = document.getElementById('menuButton');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const desktopAside = document.querySelector('aside:not(#mobileDrawer)');
+    function applySidebarState(collapsed) {
+      if (!desktopAside || !sidebarToggle) return;
+      desktopAside.style.display = collapsed ? 'none' : '';
+      sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+    }
+    applySidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', function () {
+        const collapsed = desktopAside.style.display !== 'none';
+        applySidebarState(collapsed);
+        localStorage.setItem('sidebarCollapsed', String(collapsed));
+      });
+    }
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const drawerClose = document.getElementById('drawerClose');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const notificationButton = document.getElementById('notificationButton');
+    const notificationPanel = document.getElementById('notificationPanel');
+    const profileButton = document.getElementById('profileButton');
+    const profilePanel = document.getElementById('profilePanel');
+    const mobileSearchButton = document.getElementById('mobileSearchButton');
+    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
+
+    function closeDrawer() {
+      mobileDrawer.classList.add('hidden');
+      mobileOverlay.classList.add('hidden');
+      body.classList.remove('overflow-hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+
+    function openDrawer() {
+      mobileDrawer.classList.remove('hidden');
+      mobileOverlay.classList.remove('hidden');
+      body.classList.add('overflow-hidden');
+      menuButton.setAttribute('aria-expanded', 'true');
+    }
+
+    function closePanel(button, panel) {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.add('hidden');
+    }
+
+    function openPanel(button, panel) {
+      button.setAttribute('aria-expanded', 'true');
+      panel.classList.remove('hidden');
+    }
+
+    function togglePanel(button, panel, otherButton, otherPanel) {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      closePanel(otherButton, otherPanel);
+      if (isOpen) {
+        closePanel(button, panel);
+      } else {
+        openPanel(button, panel);
+      }
+    }
+
+    function closeMobileSearch() {
+      mobileSearchButton.setAttribute('aria-expanded', 'false');
+      mobileSearchPanel.classList.add('hidden');
+    }
+
+    menuButton.addEventListener('click', function () {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeDrawer(); else openDrawer();
+    });
+    drawerClose.addEventListener('click', closeDrawer);
+    mobileOverlay.addEventListener('click', closeDrawer);
+    mobileNavLinks.forEach(function (link) { link.addEventListener('click', closeDrawer); });
+
+    notificationButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(notificationButton, notificationPanel, profileButton, profilePanel);
+    });
+    profileButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(profileButton, profilePanel, notificationButton, notificationPanel);
+    });
+    notificationPanel.addEventListener('click', function (event) { event.stopPropagation(); });
+    profilePanel.addEventListener('click', function (event) { event.stopPropagation(); });
+
+    mobileSearchButton.addEventListener('click', function () {
+      const isOpen = mobileSearchButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) { closeMobileSearch(); } else {
+        mobileSearchButton.setAttribute('aria-expanded', 'true');
+        mobileSearchPanel.classList.remove('hidden');
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
+        closePanel(notificationButton, notificationPanel);
+      }
+      if (!profilePanel.contains(event.target) && !profileButton.contains(event.target)) {
+        closePanel(profileButton, profilePanel);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closePanel(notificationButton, notificationPanel);
+        closePanel(profileButton, profilePanel);
+        closeMobileSearch();
+        closeDrawer();
+      }
+    });
+
+    const toast = document.getElementById('toast');
+    const pageStatus = document.getElementById('pageStatus');
+    function showToast(message) {
+      document.getElementById('toastText').textContent = message;
+      toast.classList.remove('hidden');
+      if (pageStatus) pageStatus.textContent = message;
+      setTimeout(function () { toast.classList.add('hidden'); }, 2500);
+    }
+
+    document.querySelectorAll('.toggle-switch').forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        const on = toggle.dataset.checked === 'true';
+        toggle.dataset.checked = on ? 'false' : 'true';
+        toggle.setAttribute('aria-checked', String(!on));
+        toggle.classList.toggle('bg-primary', !on);
+        toggle.classList.toggle('bg-border', on);
+        toggle.querySelector('span').classList.toggle('left-6', !on);
+        toggle.querySelector('span').classList.toggle('left-1', on);
+      });
+    });
+    document.getElementById('saveProfile').addEventListener('click', function () { showToast('Profile updated successfully.'); });
+    document.getElementById('updatePassword').addEventListener('click', function () {
+      const current = document.getElementById('currentPassword').value;
+      const next = document.getElementById('newPassword').value;
+      if (!current || !next) { showToast('Enter your current and new password.'); return; }
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      showToast('Password updated successfully.');
+    });
+  </script>
+</div>
+</body></html>

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppCentre Admin – Advert Moderation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Fira+Code:wght@300..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/app.css" />
+    <style>
+     :root {
+  --background: #f3f4f6;
+  --foreground: #1f2937;
+
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f8fafc;
+  --secondary-foreground: #1f2937;
+
+  --tertiary: #16a34a;
+
+  --muted: #f9fafb;
+  --muted-foreground: #6b7280;
+
+  --accent: #f0fdfa;
+  --accent-foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+
+  --destructive: #991b1b;
+
+  --border: #e5e7eb;
+  --input: #d1d5db;
+  --ring: #0d9488;
+
+  --radius: 0.75rem;
+
+  --font-sans: Inter, sans-serif;
+  --font-heading: Inter, sans-serif;
+  --font-mono: "Fira Code", monospace;
+
+  --shadow-offset-x: 0;
+  --shadow-offset-y: 10;
+  --shadow-blur: 30;
+  --shadow-spread: -8;
+  --shadow-color: rgba(15, 23, 42, 0.12);
+}
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body>
+<div class="min-h-screen w-full bg-background flex flex-col relative font-sans text-foreground">
+  <div class="flex w-full">
+    <aside class="hidden lg:flex w-64 shrink-0 flex-col border-r border-border bg-card sticky top-0 self-start h-screen max-h-none">
+      <div class="shrink-0 border-b border-border px-5 py-5 bg-card">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-muted" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h10"></path></svg>
+          </div>
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Single-site administration</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-3 py-4">
+        <nav aria-label="Primary navigation" class="space-y-5 text-sm">
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+            <div class="space-y-1">
+              <a href="dashboard3.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg>
+                <span>Dashboard</span>
+              </a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+            <div class="space-y-1">
+              <a href="Users.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Users</span></a>
+              <a href="AdvertMgt.html" aria-current="page" class="relative flex min-h-11 items-center gap-3 rounded-xl bg-accent px-3 py-3 text-sm font-medium text-foreground border border-border">
+                <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-lg bg-primary" aria-hidden="true"></span>
+                <svg viewBox="0 0 24 24" class="ml-2 h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"></path><path d="M7 3h10l1 4H6l1-4Z"></path><path d="M5 7h14l-1 12H6L5 7Z"></path></svg>
+                <span>Adverts</span>
+              </a>
+              <a href="PaymentTransaction.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg><span>Payments</span></a>
+              <a href="ReviewsMgt.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"></path><path d="M7 14h6"></path><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path></svg><span>Reviews</span></a>
+              <a href="ContactEnquiries.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"></path><path d="m4 7 8 6 8-6"></path></svg><span>Contact Enquiries</span></a>
+              <a href="Notifications.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"></path><path d="M10 17a2 2 0 0 0 4 0"></path></svg><span>Notifications</span></a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+            <div class="space-y-1">
+              <a href="HomepageContent.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"></path><path d="M8 9h8"></path><path d="M8 13h5"></path></svg><span>Homepage Content</span></a>
+              <a href="NewsCarousel.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10"></path><path d="M7 12h10"></path></svg><span>News and Carousel</span></a>
+              <a href="HelpKnowledgeBase.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"></path><path d="M12 17h.01"></path></svg><span>Help Knowledge Base</span></a>
+            </div>
+          </div>
+          <div>
+            <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+            <div class="space-y-1">
+              <a href="ReferenceData.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M8 8h8"></path><path d="M8 12h8"></path><path d="M8 16h5"></path></svg><span>Reference Data</span></a>
+              <a href="AdvertConfiguration.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M7 8h10"></path><path d="M7 16h10"></path></svg><span>Advert Configuration</span></a>
+              <a href="AdminUsers.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg><span>Admin Users</span></a>
+              <a href="RolesPermissions.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path><path d="M9 12l2 2 4-4"></path></svg><span>Roles and Permissions</span></a>
+              <a href="AuditLog.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle></svg><span>Audit Log</span></a>
+              <a href="SystemSettings.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"></path></svg><span>System Settings</span></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="shrink-0 border-t border-border px-3 py-4 bg-card">
+        <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+        <div class="space-y-1 text-sm">
+          <a href="MyProfile.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg><span>My Profile</span></a>
+          <a href="adminlogin.html" class="flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg><span>Log out</span></a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="relative flex min-w-0 flex-1 flex-col">
+      <div id="mobileOverlay" class="hidden fixed inset-0 z-40 bg-foreground/50"></div>
+      <aside id="mobileDrawer" class="fixed inset-y-0 left-0 z-50 hidden w-72 max-w-[85%] flex-col border-r border-border bg-card shadow-md">
+        <div class="flex items-center justify-between border-b border-border px-4 py-4">
+          <div>
+            <p class="text-base font-heading font-semibold">AppCentre Admin</p>
+            <p class="text-xs text-muted-foreground">Navigation</p>
+          </div>
+          <button id="drawerClose" type="button" aria-label="Close navigation menu" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-3 py-4">
+          <nav aria-label="Mobile navigation" class="space-y-5 text-sm">
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Main</p>
+              <div class="space-y-1">
+                <a href="dashboard3.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5 10.5V20h14v-9.5"></path></svg><span>Dashboard</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Management</p>
+              <div class="space-y-1">
+                <a href="Users.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><span>Users</span></a>
+                <a href="AdvertMgt.html" aria-current="page" class="mobile-nav-link relative flex min-h-11 items-center gap-3 rounded-xl bg-accent px-3 py-3 font-medium border border-border">
+                  <span class="absolute left-0 top-2 bottom-2 w-1 rounded-r-lg bg-primary" aria-hidden="true"></span>
+                  <svg viewBox="0 0 24 24" class="ml-2 h-5 w-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"></path><path d="M7 3h10l1 4H6l1-4Z"></path><path d="M5 7h14l-1 12H6L5 7Z"></path></svg>
+                  <span>Adverts</span>
+                </a>
+                <a href="PaymentTransaction.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg><span>Payments</span></a>
+                <a href="ReviewsMgt.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"></path><path d="M7 14h6"></path><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path></svg><span>Reviews</span></a>
+                <a href="ContactEnquiries.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"></path><path d="m4 7 8 6 8-6"></path></svg><span>Contact Enquiries</span></a>
+                <a href="Notifications.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"></path><path d="M10 17a2 2 0 0 0 4 0"></path></svg><span>Notifications</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Content</p>
+              <div class="space-y-1">
+                <a href="HomepageContent.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"></path><path d="M8 9h8"></path><path d="M8 13h5"></path></svg><span>Homepage Content</span></a>
+                <a href="NewsCarousel.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10"></path><path d="M7 12h10"></path></svg><span>News and Carousel</span></a>
+                <a href="HelpKnowledgeBase.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a3 3 0 1 1 5 2.2c-.9.6-1.5 1.1-1.5 2.3"></path><path d="M12 17h.01"></path></svg><span>Help Knowledge Base</span></a>
+              </div>
+            </div>
+            <div>
+              <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Administration</p>
+              <div class="space-y-1">
+                <a href="ReferenceData.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M8 8h8"></path><path d="M8 12h8"></path><path d="M8 16h5"></path></svg><span>Reference Data</span></a>
+                <a href="AdvertConfiguration.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M7 8h10"></path><path d="M7 16h10"></path></svg><span>Advert Configuration</span></a>
+                <a href="AdminUsers.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg><span>Admin Users</span></a>
+                <a href="RolesPermissions.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path><path d="M9 12l2 2 4-4"></path></svg><span>Roles and Permissions</span></a>
+                <a href="AuditLog.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="9"></circle></svg><span>Audit Log</span></a>
+                <a href="SystemSettings.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.7 1.7 0 0 0 1 1.5h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 1 1 0 4h-.2a1.7 1.7 0 0 0-1.4 1Z"></path></svg><span>System Settings</span></a>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="border-t border-border px-3 py-4">
+          <p class="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Account</p>
+          <div class="space-y-1">
+            <a href="MyProfile.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg><span>My Profile</span></a>
+            <a href="adminlogin.html" class="mobile-nav-link flex min-h-11 items-center gap-3 rounded-xl px-3 py-3 text-destructive hover:bg-muted"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path></svg><span>Log out</span></a>
+          </div>
+        </div>
+      </aside>
+
+      <header class="sticky top-0 z-30 border-b border-border bg-card shadow-sm">
+        <div class="flex items-center gap-3 px-4 py-3 lg:px-6">
+          <div class="flex min-w-0 items-center gap-2 lg:hidden">
+            <button id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+            </button>
+            <div class="min-w-0">
+              <p class="truncate text-base font-heading font-semibold">AppCentre Admin</p>
+            </div>
+          </div>
+          <button id="sidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" class="hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:flex">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path></svg>
+          </button>
+          <div class="hidden lg:flex flex-1 items-center">
+            <label for="desktopSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+            <div class="flex w-full max-w-xl items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+              <input id="desktopSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+            </div>
+          </div>
+          <div class="ml-auto flex items-center gap-2">
+            <button id="mobileSearchButton" type="button" aria-label="Open search" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:hidden">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            </button>
+            <div class="relative">
+              <button id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background relative">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"></path><path d="M10 17a2 2 0 0 0 4 0"></path></svg>
+                <span class="absolute right-2 top-2 inline-flex h-2.5 w-2.5 rounded-full bg-destructive" aria-hidden="true"></span>
+              </button>
+              <div id="notificationPanel" class="hidden absolute right-0 top-full mt-2 w-[20rem] max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
+                <div class="flex items-center justify-between border-b border-border pb-3">
+                  <h2 class="text-sm font-heading font-semibold">Notifications</h2>
+                  <button type="button" class="min-h-11 text-sm font-medium text-primary">Mark all as read</button>
+                </div>
+                <div class="space-y-3 py-3 text-sm">
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">New advert awaiting review</p><p class="text-muted-foreground">Garden Studio · submitted 12 minutes ago</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Advert approved</p><p class="text-muted-foreground">Local Plumbing Services · scheduled to go live</p></div>
+                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Payment verification failed</p><p class="text-muted-foreground">AC-2024 · requires payment status review</p></div>
+                </div>
+                <a href="Notifications.html" class="flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium">View notifications</a>
+              </div>
+            </div>
+            <div class="relative">
+              <button id="profileButton" type="button" aria-label="Open administrator profile menu" aria-expanded="false" class="flex min-h-11 items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">AM</div>
+                <div class="hidden text-left lg:block">
+                  <p class="text-sm font-medium">Alex Morgan</p>
+                  <p class="text-xs text-muted-foreground">Administrator</p>
+                </div>
+                <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-muted-foreground lg:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+              </button>
+              <div id="profilePanel" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
+                <a href="MyProfile.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">My Profile</a>
+                <a href="SystemSettings.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">Security Settings</a>
+                <a href="adminlogin.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm text-destructive hover:bg-muted">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mobileSearchPanel" class="hidden border-t border-border px-4 py-3 lg:hidden">
+          <label for="mobileSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
+          <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input id="mobileSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-1 px-4 py-5 lg:px-6 lg:py-6">
+        <div class="mx-auto space-y-6">
+          <section id="pageContent" class="space-y-6">
+            <div class="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-start sm:justify-between">
+              <div class="space-y-3">
+                <a href="AdvertMgt.html" class="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+                  <span>Back to Adverts</span>
+                </a>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Advert moderation record</p>
+                  <div class="mt-2 flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
+                    <div>
+                      <h1 id="advertTitleHeader" class="text-2xl font-heading font-bold">Garden Studio</h1>
+                      <p id="advertReferenceHeader" class="mt-1 text-sm text-muted-foreground">AC-2048</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      <span id="statusBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-secondary px-3 py-1 text-xs font-medium text-foreground">Pending Review</span>
+                      <span id="paymentBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium text-foreground">Paid</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="liveRegion" class="sr-only" aria-live="polite">Viewing advert Garden Studio in Pending Review status.</div>
+
+            <div id="loadingState" class="hidden grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.95fr)]">
+              <div class="space-y-6">
+                <div class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="h-56 rounded-xl bg-muted"></div><div class="mt-4 h-6 w-1/2 rounded bg-muted"></div><div class="mt-3 h-4 w-full rounded bg-muted"></div><div class="mt-2 h-4 w-5/6 rounded bg-muted"></div></div>
+                <div class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="h-5 w-1/3 rounded bg-muted"></div><div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2"><div class="h-16 rounded-xl bg-muted"></div><div class="h-16 rounded-xl bg-muted"></div><div class="h-16 rounded-xl bg-muted"></div><div class="h-16 rounded-xl bg-muted"></div></div></div>
+              </div>
+              <div class="space-y-6"><div class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="h-5 w-2/5 rounded bg-muted"></div><div class="mt-4 space-y-3"><div class="h-14 rounded-xl bg-muted"></div><div class="h-14 rounded-xl bg-muted"></div><div class="h-14 rounded-xl bg-muted"></div></div></div><div class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="h-5 w-1/2 rounded bg-muted"></div><div class="mt-4 space-y-3"><div class="h-12 rounded-xl bg-muted"></div><div class="h-12 rounded-xl bg-muted"></div></div></div></div>
+            </div>
+
+            <div id="errorState" class="hidden rounded-xl border border-border bg-card px-4 py-10 text-center shadow-sm">
+              <h2 class="text-lg font-heading font-semibold">Advert information could not be loaded</h2>
+              <div class="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
+                <button id="retryButton" type="button" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Retry</button>
+                <a href="AdvertMgt.html" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Back to Adverts</a>
+              </div>
+            </div>
+
+            <div id="missingState" class="hidden rounded-xl border border-border bg-card px-4 py-10 text-center shadow-sm">
+              <h2 class="text-lg font-heading font-semibold">Advert record not found</h2>
+              <a href="AdvertMgt.html" class="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Back to Adverts</a>
+            </div>
+
+            <div id="mainLayout" class="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.95fr)]">
+              <div class="space-y-6">
+                <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div class="rounded-xl border border-border bg-muted p-4">
+                    <div class="flex aspect-[16/9] items-center justify-center rounded-xl border border-border bg-background">
+                      <svg viewBox="0 0 24 24" class="h-12 w-12 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 14 10 11l4 4 3-3 3 3"></path></svg>
+                    </div>
+                  </div>
+                  <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h2 id="previewTitle" class="text-lg font-heading font-semibold">Garden Studio</h2>
+                      <p id="previewDescription" class="mt-2 text-sm text-muted-foreground">Premium local garden studio installation advert with a clear call to action, service coverage details and booking messaging for homeowners.</p>
+                    </div>
+                    <span id="sponsoredBadge" class="inline-flex min-h-8 items-center rounded-lg border border-border bg-background px-3 py-1 text-xs font-medium">Sponsored</span>
+                  </div>
+                  <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="rounded-xl bg-muted p-3">
+                      <p class="text-xs uppercase tracking-wide text-muted-foreground">Advert type</p>
+                      <p id="previewType" class="pt-1 text-sm font-medium">Banner</p>
+                    </div>
+                    <div class="rounded-xl bg-muted p-3">
+                      <p class="text-xs uppercase tracking-wide text-muted-foreground">Placement</p>
+                      <p id="previewPlacement" class="pt-1 text-sm font-medium">Homepage banner</p>
+                    </div>
+                    <div class="rounded-xl bg-muted p-3">
+                      <p class="text-xs uppercase tracking-wide text-muted-foreground">Status</p>
+                      <p id="previewStatus" class="pt-1 text-sm font-medium">Pending Review</p>
+                    </div>
+                    <div class="rounded-xl bg-muted p-3">
+                      <p class="text-xs uppercase tracking-wide text-muted-foreground">Payment</p>
+                      <p id="previewPayment" class="pt-1 text-sm font-medium">Paid</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div class="flex items-center justify-between gap-3">
+                    <div>
+                      <h2 class="text-lg font-heading font-semibold">Advert details</h2>
+                      <p class="mt-1 text-sm text-muted-foreground">Advertiser, location and schedule information</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      <a href="#" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">View user</a>
+                      <a href="#" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Contact advertiser</a>
+                    </div>
+                  </div>
+                  <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Advertiser name</p><p id="detailAdvertiser" class="pt-1 text-sm font-medium">Daniel Moore</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Advertiser email</p><p id="detailEmail" class="pt-1 text-sm font-medium">daniel.moore@appcentre.local</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Advert type</p><p id="detailType" class="pt-1 text-sm font-medium">Banner</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Placement</p><p id="detailPlacement" class="pt-1 text-sm font-medium">Homepage banner</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Country</p><p id="detailCountry" class="pt-1 text-sm font-medium">United Kingdom</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">State or region</p><p id="detailRegion" class="pt-1 text-sm font-medium">Greater Manchester</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">City</p><p id="detailCity" class="pt-1 text-sm font-medium">Manchester</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Date submitted</p><p id="detailSubmitted" class="pt-1 text-sm font-medium">10 July 2026, 09:12</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Start date</p><p id="detailStart" class="pt-1 text-sm font-medium">14 July 2026</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">End date</p><p id="detailEnd" class="pt-1 text-sm font-medium">14 October 2026</p></div>
+                    <div class="rounded-xl bg-muted p-3 sm:col-span-2"><p class="text-xs uppercase tracking-wide text-muted-foreground">Duration</p><p id="detailDuration" class="pt-1 text-sm font-medium">92 days</p></div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="space-y-6">
+                <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div class="flex items-center justify-between gap-3">
+                    <div>
+                      <h2 class="text-lg font-heading font-semibold">Payment</h2>
+                      <p class="mt-1 text-sm text-muted-foreground">Payment summary for this advert</p>
+                    </div>
+                    <a href="#" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">View payment details</a>
+                  </div>
+                  <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Payment status</p><p id="paymentStatus" class="pt-1 text-sm font-medium">Paid</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Amount</p><p id="paymentAmount" class="pt-1 text-sm font-medium">£180.00</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Currency</p><p id="paymentCurrency" class="pt-1 text-sm font-medium">GBP</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Payment provider</p><p id="paymentProvider" class="pt-1 text-sm font-medium">Stripe</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Transaction reference</p><p id="paymentReference" class="pt-1 text-sm font-medium">PAY-2048-7781</p></div>
+                    <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Payment date</p><p id="paymentDate" class="pt-1 text-sm font-medium">10 July 2026, 09:05</p></div>
+                  </div>
+                </section>
+
+                <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div>
+                    <h2 class="text-lg font-heading font-semibold">Moderation actions</h2>
+                    <p id="statusMessage" class="mt-1 text-sm text-muted-foreground">Approve this advert or request changes before publication.</p>
+                  </div>
+                  <div id="actionsWrap" class="mt-4 space-y-3">
+                    <button type="button" id="approveButton" class="min-h-11 w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Approve advert</button>
+                    <button type="button" id="amendButton" class="min-h-11 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Request amendments</button>
+                    <button type="button" id="pauseButton" class="hidden min-h-11 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Pause advert</button>
+                    <button type="button" id="resumeButton" class="hidden min-h-11 w-full rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Resume advert</button>
+                    <div id="viewOnlyMessage" class="hidden rounded-xl border border-border bg-muted p-3 text-sm text-muted-foreground"></div>
+                  </div>
+                  <button type="button" id="internalNoteButton" class="mt-4 min-h-11 w-full rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Add internal note</button>
+                </section>
+
+                <section class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div class="flex items-center justify-between gap-3">
+                    <div>
+                      <h2 class="text-lg font-heading font-semibold">Advert history</h2>
+                      <p class="mt-1 text-sm text-muted-foreground">Recent moderation and system updates</p>
+                    </div>
+                  </div>
+                  <div id="historyList" class="mt-4 space-y-3 text-sm">
+                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">10 July 2026, 09:12</p><p class="mt-1 text-muted-foreground">Draft to Pending Review · Alex Morgan</p><p class="mt-1 text-muted-foreground">Reason: Submitted after payment confirmation</p></div>
+                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">10 July 2026, 09:05</p><p class="mt-1 text-muted-foreground">Payment Required to Paid · System</p><p class="mt-1 text-muted-foreground">Reason: Payment provider confirmed successful transaction</p></div>
+                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">08 July 2026, 16:41</p><p class="mt-1 text-muted-foreground">Created to Draft · Daniel Moore</p><p class="mt-1 text-muted-foreground">Reason: Advert started in draft before checkout</p></div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
+
+  <section id="approveModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+      <div class="border-b border-border px-4 py-4">
+        <h2 class="text-lg font-heading font-semibold">Approve advert</h2>
+        <p class="pt-1 text-sm text-muted-foreground"><span id="approveTitle">Garden Studio</span> · <span id="approveReference">AC-2048</span></p>
+      </div>
+      <div class="space-y-4 p-4">
+        <div class="rounded-xl border border-border bg-muted p-3 text-sm">
+          <p class="font-medium">New status</p>
+          <p class="mt-1 text-muted-foreground">Approved</p>
+          <p class="mt-2 text-muted-foreground">The advert will activate on the configured start date and the advertiser will be notified.</p>
+        </div>
+        <div>
+          <label for="approveNote" class="mb-2 block text-sm font-medium">Internal note (optional)</label>
+          <textarea id="approveNote" rows="4" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Add an internal note for administrators"></textarea>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" data-close-modal="approveModal" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+          <button type="button" id="confirmApprove" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="amendModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl rounded-xl border border-border bg-card shadow-lg">
+      <div class="border-b border-border px-4 py-4">
+        <h2 class="text-lg font-heading font-semibold">Request amendments</h2>
+        <p class="pt-1 text-sm text-muted-foreground"><span id="amendTitle">Garden Studio</span> · <span id="amendReference">AC-2048</span></p>
+      </div>
+      <div class="space-y-4 p-4 max-h-[75vh] overflow-y-auto">
+        <div>
+          <label for="amendReason" class="mb-2 block text-sm font-medium">Amendment reason</label>
+          <select id="amendReason" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none">
+            <option value="">Select a reason</option>
+            <option>Image quality</option>
+            <option>Inappropriate content</option>
+            <option>Misleading wording</option>
+            <option>Missing information</option>
+            <option>Incorrect location</option>
+            <option>Policy issue</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="amendInstructions" class="mb-2 block text-sm font-medium">Instructions to the advertiser</label>
+          <textarea id="amendInstructions" rows="5" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Explain what needs to be changed"></textarea>
+        </div>
+        <div>
+          <label for="amendNote" class="mb-2 block text-sm font-medium">Internal note (optional)</label>
+          <textarea id="amendNote" rows="4" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Add an internal note for administrators"></textarea>
+        </div>
+        <p id="amendValidation" class="hidden text-sm text-destructive">Reason and instructions are required before sending the amendment request.</p>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" data-close-modal="amendModal" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+          <button type="button" id="confirmAmend" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Send request</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pauseModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+      <div class="border-b border-border px-4 py-4">
+        <h2 id="pauseHeading" class="text-lg font-heading font-semibold">Pause advert</h2>
+        <p class="pt-1 text-sm text-muted-foreground"><span id="pauseTitle">Garden Studio</span> · <span id="pauseReference">AC-2048</span></p>
+      </div>
+      <div class="space-y-4 p-4">
+        <p id="pauseExplanation" class="text-sm text-muted-foreground">This advert will be paused and the update will be recorded in Advert History.</p>
+        <div>
+          <label for="pauseNote" class="mb-2 block text-sm font-medium">Internal note (optional)</label>
+          <textarea id="pauseNote" rows="4" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Add an internal note for administrators"></textarea>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" data-close-modal="pauseModal" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+          <button type="button" id="confirmPause" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="noteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+      <div class="border-b border-border px-4 py-4">
+        <h2 class="text-lg font-heading font-semibold">Add internal note</h2>
+        <p class="pt-1 text-sm text-muted-foreground">Internal notes are visible only to administrators.</p>
+      </div>
+      <div class="space-y-4 p-4">
+        <div>
+          <label for="internalAdminNote" class="mb-2 block text-sm font-medium">Note</label>
+          <textarea id="internalAdminNote" rows="5" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Add an internal note"></textarea>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" data-close-modal="noteModal" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+          <button type="button" id="saveNote" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast" class="hidden fixed bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm rounded-xl border border-border bg-card p-4 shadow-lg">
+    <p id="toastText" class="text-sm font-medium">Advert updated successfully.</p>
+  </div>
+
+  <script>
+    document.title = 'AppCentre Admin Advert Details';
+
+    const body = document.body;
+    const advert = {
+      title: 'Garden Studio',
+      reference: 'AC-2048',
+      description: 'Premium local garden studio installation advert with a clear call to action, service coverage details and booking messaging for homeowners.',
+      type: 'Banner',
+      placement: 'Homepage banner',
+      sponsored: true,
+      advertiser: 'Daniel Moore',
+      email: 'daniel.moore@appcentre.local',
+      country: 'United Kingdom',
+      region: 'Greater Manchester',
+      city: 'Manchester',
+      submitted: '10 July 2026, 09:12',
+      start: '14 July 2026',
+      end: '14 October 2026',
+      duration: '92 days',
+      paymentStatus: 'Paid',
+      amount: '£180.00',
+      currency: 'GBP',
+      provider: 'Stripe',
+      transaction: 'PAY-2048-7781',
+      paymentDate: '10 July 2026, 09:05'
+    };
+
+    let currentStatus = 'Pending Review';
+    let pauseMode = 'Pause advert';
+
+    const historyList = document.getElementById('historyList');
+    const liveRegion = document.getElementById('liveRegion');
+    const loadingState = document.getElementById('loadingState');
+    const errorState = document.getElementById('errorState');
+    const missingState = document.getElementById('missingState');
+    const mainLayout = document.getElementById('mainLayout');
+    const pageContent = document.getElementById('pageContent');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const toast = document.getElementById('toast');
+    const notificationButton = document.getElementById('notificationButton');
+    const notificationPanel = document.getElementById('notificationPanel');
+    const profileButton = document.getElementById('profileButton');
+    const profilePanel = document.getElementById('profilePanel');
+    const mobileSearchButton = document.getElementById('mobileSearchButton');
+    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
+    const menuButton = document.getElementById('menuButton');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const desktopAside = document.querySelector('aside:not(#mobileDrawer)');
+    function applySidebarState(collapsed) {
+      if (!desktopAside || !sidebarToggle) return;
+      desktopAside.style.display = collapsed ? 'none' : '';
+      sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
+    }
+    applySidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', function () {
+        const collapsed = desktopAside.style.display !== 'none';
+        applySidebarState(collapsed);
+        localStorage.setItem('sidebarCollapsed', String(collapsed));
+      });
+    }
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function lockBody() {
+      body.classList.add('overflow-hidden');
+    }
+
+    function unlockBodyIfClear() {
+      const modalOpen = !document.getElementById('approveModal').classList.contains('hidden') || !document.getElementById('amendModal').classList.contains('hidden') || !document.getElementById('pauseModal').classList.contains('hidden') || !document.getElementById('noteModal').classList.contains('hidden');
+      const drawerOpen = !mobileDrawer.classList.contains('hidden');
+      if (!modalOpen && !drawerOpen) {
+        body.classList.remove('overflow-hidden');
+      }
+    }
+
+    function closeDrawer() {
+      mobileDrawer.classList.add('hidden');
+      mobileOverlay.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+      unlockBodyIfClear();
+    }
+
+    function openDrawer() {
+      mobileDrawer.classList.remove('hidden');
+      mobileOverlay.classList.remove('hidden');
+      menuButton.setAttribute('aria-expanded', 'true');
+      lockBody();
+    }
+
+    function closePanel(button, panel) {
+      button.setAttribute('aria-expanded', 'false');
+      panel.classList.add('hidden');
+    }
+
+    function openPanel(button, panel) {
+      button.setAttribute('aria-expanded', 'true');
+      panel.classList.remove('hidden');
+    }
+
+    function togglePanel(button, panel, otherButton, otherPanel) {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+      closePanel(otherButton, otherPanel);
+      if (isOpen) {
+        closePanel(button, panel);
+      } else {
+        openPanel(button, panel);
+      }
+    }
+
+    function closeMobileSearch() {
+      mobileSearchButton.setAttribute('aria-expanded', 'false');
+      mobileSearchPanel.classList.add('hidden');
+    }
+
+    function openModal(id) {
+      modalOverlay.classList.remove('hidden');
+      document.getElementById(id).classList.remove('hidden');
+      lockBody();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+      const anyModalOpen = ['approveModal','amendModal','pauseModal','noteModal'].some(function(modalId) {
+        return !document.getElementById(modalId).classList.contains('hidden');
+      });
+      if (!anyModalOpen) {
+        modalOverlay.classList.add('hidden');
+      }
+      unlockBodyIfClear();
+    }
+
+    function closeAllModals() {
+      ['approveModal','amendModal','pauseModal','noteModal'].forEach(function(id) {
+        document.getElementById(id).classList.add('hidden');
+      });
+      modalOverlay.classList.add('hidden');
+      unlockBodyIfClear();
+    }
+
+    function showToast(message) {
+      document.getElementById('toastText').textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(function() { toast.classList.add('hidden'); }, 2500);
+    }
+
+    function badgeClass(status) {
+      if (status === 'Active') return 'bg-muted text-foreground';
+      if (status === 'Pending Review' || status === 'Amendments Required' || status === 'Payment Required') return 'bg-secondary text-foreground';
+      if (status === 'Removed') return 'bg-destructive text-primary-foreground';
+      return 'bg-muted text-foreground';
+    }
+
+    function prependHistory(previousStatus, newStatus, actor, reason) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'rounded-xl border border-border bg-background p-3';
+      wrapper.innerHTML = '<p class="font-medium">Now</p><p class="mt-1 text-muted-foreground">' + previousStatus + ' to ' + newStatus + ' · ' + actor + '</p><p class="mt-1 text-muted-foreground">Reason: ' + reason + '</p>';
+      historyList.prepend(wrapper);
+    }
+
+    function applyStatus(status) {
+      currentStatus = status;
+      document.getElementById('advertTitleHeader').textContent = advert.title;
+      document.getElementById('advertReferenceHeader').textContent = advert.reference;
+      document.getElementById('statusBadgeHeader').textContent = status;
+      document.getElementById('statusBadgeHeader').className = 'inline-flex min-h-8 items-center rounded-lg px-3 py-1 text-xs font-medium ' + badgeClass(status);
+      document.getElementById('paymentBadgeHeader').textContent = advert.paymentStatus;
+      document.getElementById('paymentBadgeHeader').className = 'inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium text-foreground';
+      document.getElementById('previewTitle').textContent = advert.title;
+      document.getElementById('previewDescription').textContent = advert.description;
+      document.getElementById('previewType').textContent = advert.type;
+      document.getElementById('previewPlacement').textContent = advert.placement;
+      document.getElementById('previewStatus').textContent = status;
+      document.getElementById('previewPayment').textContent = advert.paymentStatus;
+      document.getElementById('detailAdvertiser').textContent = advert.advertiser;
+      document.getElementById('detailEmail').textContent = advert.email;
+      document.getElementById('detailType').textContent = advert.type;
+      document.getElementById('detailPlacement').textContent = advert.placement;
+      document.getElementById('detailCountry').textContent = advert.country;
+      document.getElementById('detailRegion').textContent = advert.region;
+      document.getElementById('detailCity').textContent = advert.city;
+      document.getElementById('detailSubmitted').textContent = advert.submitted;
+      document.getElementById('detailStart').textContent = advert.start;
+      document.getElementById('detailEnd').textContent = advert.end;
+      document.getElementById('detailDuration').textContent = advert.duration;
+      document.getElementById('paymentStatus').textContent = advert.paymentStatus;
+      document.getElementById('paymentAmount').textContent = advert.amount;
+      document.getElementById('paymentCurrency').textContent = advert.currency;
+      document.getElementById('paymentProvider').textContent = advert.provider;
+      document.getElementById('paymentReference').textContent = advert.transaction;
+      document.getElementById('paymentDate').textContent = advert.paymentDate;
+      document.getElementById('approveTitle').textContent = advert.title;
+      document.getElementById('approveReference').textContent = advert.reference;
+      document.getElementById('amendTitle').textContent = advert.title;
+      document.getElementById('amendReference').textContent = advert.reference;
+      document.getElementById('pauseTitle').textContent = advert.title;
+      document.getElementById('pauseReference').textContent = advert.reference;
+      document.getElementById('sponsoredBadge').classList.toggle('hidden', !advert.sponsored);
+
+      const approveButton = document.getElementById('approveButton');
+      const amendButton = document.getElementById('amendButton');
+      const pauseButton = document.getElementById('pauseButton');
+      const resumeButton = document.getElementById('resumeButton');
+      const viewOnlyMessage = document.getElementById('viewOnlyMessage');
+      const statusMessage = document.getElementById('statusMessage');
+
+      [approveButton, amendButton, pauseButton, resumeButton, viewOnlyMessage].forEach(function(el) { el.classList.add('hidden'); });
+
+      if (status === 'Pending Review') {
+        approveButton.classList.remove('hidden');
+        amendButton.classList.remove('hidden');
+        amendButton.textContent = 'Request amendments';
+        statusMessage.textContent = 'Approve this advert or request changes before publication.';
+      } else if (status === 'Amendments Required') {
+        approveButton.classList.remove('hidden');
+        amendButton.classList.remove('hidden');
+        amendButton.textContent = 'Request further amendments';
+        statusMessage.textContent = 'Review the revised advert and decide whether more changes are needed.';
+      } else if (status === 'Active') {
+        pauseButton.classList.remove('hidden');
+        statusMessage.textContent = 'This advert is live. Pause it if it should no longer be displayed.';
+      } else if (status === 'Paused') {
+        resumeButton.classList.remove('hidden');
+        statusMessage.textContent = 'This advert is paused. Resume it when it can be shown again.';
+      } else if (status === 'Expired') {
+        viewOnlyMessage.classList.remove('hidden');
+        viewOnlyMessage.textContent = 'This advert has expired and is now view-only for the MVP.';
+        statusMessage.textContent = 'No moderation action is required for expired adverts.';
+      } else if (status === 'Removed') {
+        viewOnlyMessage.classList.remove('hidden');
+        viewOnlyMessage.textContent = 'This advert has been removed. Review history and record details only.';
+        statusMessage.textContent = 'No further moderation action is available in this MVP state.';
+      } else if (status === 'Payment Required') {
+        viewOnlyMessage.classList.remove('hidden');
+        viewOnlyMessage.textContent = 'Payment confirmation is still required before this advert can move through moderation.';
+        statusMessage.textContent = 'View-only until payment is resolved.';
+      }
+
+      liveRegion.textContent = 'Viewing advert ' + advert.title + ' in ' + status + ' status.';
+    }
+
+    document.getElementById('approveButton').addEventListener('click', function() {
+      openModal('approveModal');
+    });
+
+    document.getElementById('amendButton').addEventListener('click', function() {
+      openModal('amendModal');
+    });
+
+    document.getElementById('pauseButton').addEventListener('click', function() {
+      pauseMode = 'Pause advert';
+      document.getElementById('pauseHeading').textContent = 'Pause advert';
+      document.getElementById('pauseExplanation').textContent = 'This advert will be paused and the update will be recorded in Advert History.';
+      document.getElementById('confirmPause').textContent = 'Confirm';
+      openModal('pauseModal');
+    });
+
+    document.getElementById('resumeButton').addEventListener('click', function() {
+      pauseMode = 'Resume advert';
+      document.getElementById('pauseHeading').textContent = 'Resume advert';
+      document.getElementById('pauseExplanation').textContent = 'This advert will resume and the update will be recorded in Advert History.';
+      document.getElementById('confirmPause').textContent = 'Confirm';
+      openModal('pauseModal');
+    });
+
+    document.getElementById('internalNoteButton').addEventListener('click', function() {
+      openModal('noteModal');
+    });
+
+    document.getElementById('confirmApprove').addEventListener('click', function() {
+      const previous = currentStatus;
+      applyStatus('Active');
+      prependHistory(previous, 'Approved', 'Alex Morgan', 'Advert approved for activation on the configured start date.');
+      closeAllModals();
+      showToast('Advert approved successfully.');
+      liveRegion.textContent = 'Advert approved. The advertiser will be notified and activation will follow the configured start date.';
+    });
+
+    document.getElementById('confirmAmend').addEventListener('click', function() {
+      const reason = document.getElementById('amendReason').value;
+      const instructions = document.getElementById('amendInstructions').value.trim();
+      const validation = document.getElementById('amendValidation');
+      if (!reason || !instructions) {
+        validation.classList.remove('hidden');
+        liveRegion.textContent = 'Reason and instructions are required before sending the amendment request.';
+        return;
+      }
+      validation.classList.add('hidden');
+      const previous = currentStatus;
+      applyStatus('Amendments Required');
+      prependHistory(previous, 'Amendments Required', 'Alex Morgan', reason + ': ' + instructions);
+      closeAllModals();
+      document.getElementById('amendReason').value = '';
+      document.getElementById('amendInstructions').value = '';
+      document.getElementById('amendNote').value = '';
+      showToast('Amendment request sent.');
+      liveRegion.textContent = 'Amendment request sent to the advertiser.';
+    });
+
+    document.getElementById('confirmPause').addEventListener('click', function() {
+      const previous = currentStatus;
+      const nextStatus = pauseMode === 'Pause advert' ? 'Paused' : 'Active';
+      applyStatus(nextStatus);
+      prependHistory(previous, nextStatus, 'Alex Morgan', pauseMode === 'Pause advert' ? 'Advert paused by administrator.' : 'Advert resumed by administrator.');
+      closeAllModals();
+      document.getElementById('pauseNote').value = '';
+      showToast(pauseMode === 'Pause advert' ? 'Advert paused successfully.' : 'Advert resumed successfully.');
+      liveRegion.textContent = pauseMode === 'Pause advert' ? 'Advert paused successfully.' : 'Advert resumed successfully.';
+    });
+
+    document.getElementById('saveNote').addEventListener('click', function() {
+      const note = document.getElementById('internalAdminNote').value.trim();
+      if (note) {
+        prependHistory(currentStatus, currentStatus, 'Alex Morgan', 'Internal note added: ' + note);
+        showToast('Internal note saved.');
+        liveRegion.textContent = 'Internal note saved.';
+      }
+      document.getElementById('internalAdminNote').value = '';
+      closeAllModals();
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach(function(button) {
+      button.addEventListener('click', function() {
+        closeModal(button.getAttribute('data-close-modal'));
+      });
+    });
+
+    modalOverlay.addEventListener('click', closeAllModals);
+    document.getElementById('retryButton').addEventListener('click', function() {
+      loadingState.classList.add('hidden');
+      errorState.classList.add('hidden');
+      missingState.classList.add('hidden');
+      mainLayout.classList.remove('hidden');
+      liveRegion.textContent = 'Advert information reloaded.';
+    });
+
+    menuButton.addEventListener('click', function () {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeDrawer(); else openDrawer();
+    });
+    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    mobileOverlay.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.mobile-nav-link').forEach(function (link) { link.addEventListener('click', closeDrawer); });
+
+    notificationButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(notificationButton, notificationPanel, profileButton, profilePanel);
+    });
+
+    profileButton.addEventListener('click', function (event) {
+      event.stopPropagation();
+      togglePanel(profileButton, profilePanel, notificationButton, notificationPanel);
+    });
+
+    notificationPanel.addEventListener('click', function (event) { event.stopPropagation(); });
+    profilePanel.addEventListener('click', function (event) { event.stopPropagation(); });
+
+    mobileSearchButton.addEventListener('click', function () {
+      const isOpen = mobileSearchButton.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMobileSearch();
+      } else {
+        mobileSearchButton.setAttribute('aria-expanded', 'true');
+        mobileSearchPanel.classList.remove('hidden');
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
+        closePanel(notificationButton, notificationPanel);
+      }
+      if (!profilePanel.contains(event.target) && !profileButton.contains(event.target)) {
+        closePanel(profileButton, profilePanel);
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closePanel(notificationButton, notificationPanel);
+        closePanel(profileButton, profilePanel);
+        closeMobileSearch();
+        closeDrawer();
+        closeAllModals();
+      }
+    });
+
+    applyStatus('Pending Review');
+  </script>
+</div>
+</body></html>

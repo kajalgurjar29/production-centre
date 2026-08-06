@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training | AI Transformation Professionals</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Fira+Code:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=optional" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=optional" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/tailwind.css" />
+    <style>
+      :root { --background: #FFFFFF;
+        --foreground: #0F172A;
+        --primary: #1E3A8A;
+        --primary-foreground: #FFFFFF;
+        --secondary: #2E9BF0;
+        --secondary-foreground: #FFFFFF;
+        --tertiary: #1E3A8A;
+        --muted: #F5F7FA;
+        --muted-foreground: #6B7280;
+        --accent: #E6F0FA;
+        --accent-foreground: #0F172A;
+        --card: #FFFFFF;
+        --card-foreground: #0F172A;
+        --destructive: #EF4444;
+        --border: #E5E7EB;
+        --input: #E5E7EB;
+        --ring: #2E9BF0;
+        --radius: 0.75rem;
+        --font-sans: Inter, sans-serif;
+        --font-heading: Inter, sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--secondary)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+<div class="min-h-screen w-full bg-background flex flex-col relative font-sans text-foreground" style="">
+  <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-24 flex items-center justify-between gap-3 lg:gap-6">
+        <a href="TransformHomepage.html" class="hidden md:flex items-center shrink-0">
+          <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 lg:h-[88px] object-contain" />
+        </a>
+        <div class="flex md:hidden items-center flex-1 min-w-0 gap-2">
+          <a href="TransformHomepage.html" class="flex items-center shrink-0">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619482-2e87f7d8-icon.png" alt="AI Transformation Professionals icon" class="h-14 w-14 object-contain" />
+          </a>
+          <span class="text-sm xs:text-base sm:text-lg font-heading font-semibold text-primary leading-tight min-w-0">AI Transformation<br />Professionals</span>
+        </div>
+
+        <nav class="hidden xl:flex items-center justify-center gap-4 2xl:gap-6 flex-1 min-w-0">
+          <a href="TransformHomepage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Home</a>
+          <a href="TransformAboutus.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">About Us</a>
+          <a href="TransformService.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Services</a>
+          <a href="TransformTrainingPage.html" class="text-sm font-medium text-primary hover:text-secondary transition-colors whitespace-nowrap">Training</a>
+          <a href="TransformPublication.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Publications</a>
+          <a href="TransformReviews.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Reviews</a>
+          <a href="TransformContact.html?enquiryType=General%20Enquiry" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Contact Us</a>
+          <a href="TransformHelp.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Help</a>
+        </nav>
+
+        <div class="hidden xl:flex items-center shrink-0">
+          <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="inline-flex items-center justify-center px-4 lg:px-5 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm hover:bg-secondary/90 transition-all whitespace-nowrap min-h-11">
+            Request an AI Readiness Assessment
+            <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+          </a>
+        </div>
+
+        <button id="mobile-menu-toggle" class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg text-primary hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <iconify-icon id="mobile-menu-open-icon" icon="lucide:menu" class="text-2xl"></iconify-icon>
+          <iconify-icon id="mobile-menu-close-icon" icon="lucide:x" class="text-2xl hidden"></iconify-icon>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden border-t border-border bg-background">
+      <div class="px-4 py-4 space-y-1">
+        <a href="TransformHomepage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Home</a>
+        <a href="TransformAboutus.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">About Us</a>
+        <a href="TransformService.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Services</a>
+        <a href="TransformTrainingPage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-primary hover:bg-muted">Training</a>
+        <a href="TransformPublication.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Publications</a>
+        <a href="TransformReviews.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Reviews</a>
+        <a href="TransformContact.html?enquiryType=General%20Enquiry" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Contact Us</a>
+        <a href="TransformHelp.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Help</a>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="mobile-menu-link w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm min-h-11">
+          Request an AI Readiness Assessment
+          <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-gradient-to-b from-secondary to-background py-12 md:py-20 border-b border-border" style="">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center" style="">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent text-primary text-xs font-semibold tracking-wider uppercase mb-6" style="">
+        Professional Development
+      </span>
+      <h1 class="text-3xl md:text-5xl font-heading font-bold text-foreground tracking-tight mb-6" style="">
+        Training and Certification Preparation
+      </h1>
+      <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-4 leading-relaxed" style="">
+        Build practical capability in Microsoft Copilot, Agentic AI, digital business change and workforce transformation through live instructor-led training.
+      </p>
+      <p class="text-sm text-muted-foreground font-medium max-w-2xl mx-auto mb-8" style="">
+        Select a question below to learn more about our programmes or contact us for current dates and availability.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4" style="">
+        <a href="TransformHelp.html" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-lg font-semibold transition-all shadow-md min-h-11" style="">
+          <iconify-icon icon="lucide:message-circle" class="text-lg" aria-label="Explore training" style=""></iconify-icon>
+          Explore Training
+        </a>
+        <a href="https://wa.me/447822013052?text=Hello%2C%20I%20am%20interested%20in%20training%20from%20AI%20Transformation%20Professionals.%20Please%20send%20me%20information%20about%20the%20available%20programmes%20and%20dates." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-card text-foreground border border-border px-6 py-3.5 rounded-lg font-semibold transition-all shadow-sm min-h-11" style="">
+          <iconify-icon icon="lucide:message-circle" class="text-xl text-primary" aria-label="Chat on WhatsApp" style=""></iconify-icon>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="chatbot-section" class="py-12 md:py-16 px-4 max-w-5xl mx-auto w-full" style="">
+    <div class="bg-card border border-border rounded-xl shadow-lg overflow-hidden flex flex-col max-w-4xl mx-auto" style="">
+      <div class="bg-foreground text-primary-foreground p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border" style="">
+        <div class="flex items-center gap-4" style="">
+          <div class="relative" style="">
+            <div class="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-md" style="">
+              <iconify-icon icon="lucide:message-square" class="text-2xl" aria-label="Training assistant icon" style=""></iconify-icon>
+            </div>
+          </div>
+          <div style="">
+            <h2 class="text-lg font-heading font-bold text-primary-foreground tracking-tight flex items-center gap-2" style="">
+              Training Assistant
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-accent text-primary text-xs font-semibold" style="visibility: visible;">
+                Guided FAQ
+              </span>
+            </h2>
+            <p class="text-xs text-muted" style="">Choose a question to get started</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-muted" style="">
+          <iconify-icon icon="lucide:info" class="text-base text-primary" aria-label="Information status" style=""></iconify-icon>
+          <span style="">Training Information Assistant</span>
+        </div>
+      </div>
+
+      <div id="chat-conversation-log" class="px-3 py-5 md:p-8 space-y-6 bg-muted overflow-y-auto max-h-[500px] min-h-[350px]" style="">
+        <div class="flex flex-col items-start gap-2 w-full md:max-w-[85%]" style="">
+          <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground flex-shrink-0" style="">
+            <iconify-icon icon="lucide:message-square" class="text-sm" aria-label="Assistant" style=""></iconify-icon>
+          </div>
+          <div class="w-[92%] md:w-auto bg-card border border-border text-card-foreground p-4 rounded-xl rounded-tl-none shadow-sm space-y-2" style="">
+            <p class="text-sm leading-relaxed" style="">
+              Welcome to the AI Transformation Professionals Training Assistant. I can help you explore our programmes, fees, delivery options and certification preparation. Select one of the questions below.
+            </p>
+            <span class="block text-[10px] text-muted-foreground text-right" style="">Just now</span>
+          </div>
+        </div>
+        <div id="dynamic-chat-messages" class="space-y-6"></div>
+        <div id="chat-typing-indicator" class="hidden flex flex-col items-start gap-2 w-full md:max-w-[80%]">
+          <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground flex-shrink-0">
+            <iconify-icon icon="lucide:message-square" class="text-sm" aria-label="Assistant typing"></iconify-icon>
+          </div>
+          <div class="w-[92%] md:w-auto bg-card border border-border text-card-foreground px-4 py-3 rounded-xl rounded-tl-none shadow-sm">
+            <div class="flex items-center gap-1">
+              <span class="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></span>
+              <span class="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></span>
+              <span class="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="question-grid-container" class="p-5 md:p-6 border-t border-border bg-card" style="">
+        <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4" style="">Select a question to ask</p>
+        <div id="questions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" style="">
+          <button onclick="selectQuestion(1)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:book-open" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Programmes" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">View available programmes</h3></div>
+          </button>
+          <button onclick="selectQuestion(2)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:users" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Audience" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Who is the training for?</h3></div>
+          </button>
+          <button onclick="selectQuestion(3)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:clock-3" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Duration" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">How long does training take?</h3></div>
+          </button>
+          <button onclick="selectQuestion(4)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:credit-card" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Fees" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">How much does training cost?</h3></div>
+          </button>
+          <button onclick="selectQuestion(5)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:calendar" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Dates" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">When are the next available dates?</h3></div>
+          </button>
+          <button onclick="selectQuestion(6)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:circle-alert" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Exam fees" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Is the examination fee included?</h3></div>
+          </button>
+          <button onclick="selectQuestion(7)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:building-2" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Group training" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Do you offer group training?</h3></div>
+          </button>
+          <button onclick="selectQuestion(8)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:sliders-horizontal" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Custom training" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Can training be customised?</h3></div>
+          </button>
+          <button onclick="selectQuestion(9)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:globe" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="International training" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Is training available outside the UK?</h3></div>
+          </button>
+          <button onclick="selectQuestion(10)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:laptop" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Equipment" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">What equipment do I need?</h3></div>
+          </button>
+          <button onclick="selectQuestion(11)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:funnel" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Programme fit" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Which programme is right for me?</h3></div>
+          </button>
+          <button onclick="selectQuestion(12)" class="flex items-start gap-3 p-4 rounded-xl border border-border bg-card text-left transition-all min-h-[80px] focus:outline-none focus:ring-2 focus:ring-ring" style="">
+            <iconify-icon icon="lucide:message-circle" class="text-primary text-xl flex-shrink-0 mt-0.5" aria-label="Representative" style=""></iconify-icon>
+            <div style=""><h3 class="text-sm font-semibold text-foreground" style="">Chat with a representative</h3></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="border-t border-border bg-muted p-4 flex flex-col sm:flex-row items-center justify-between gap-3" style="">
+        <button onclick="resetToAllQuestions()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card text-xs font-semibold text-foreground min-h-11 focus:outline-none focus:ring-2 focus:ring-ring" style="">
+          <iconify-icon icon="lucide:refresh-cw" class="text-primary text-sm" aria-label="View all questions"></iconify-icon>
+          View all questions
+        </button>
+        <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto" style="">
+          <a href="TransformContact.html?enquiry=training" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold min-h-11" style="">
+            <iconify-icon icon="lucide:mail" class="text-sm" aria-label="Contact us"></iconify-icon>
+            Contact us
+          </a>
+          <a href="https://wa.me/447822013052?text=Hello%2C%20I%20am%20interested%20in%20training%20from%20AI%20Transformation%20Professionals.%20Please%20send%20me%20information%20about%20the%20available%20programmes%20and%20dates." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold min-h-11" style="">
+            <iconify-icon icon="lucide:message-circle" class="text-sm" aria-label="WhatsApp"></iconify-icon>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 pb-12 md:pb-16 max-w-5xl mx-auto w-full" style="">
+    <div class="max-w-4xl mx-auto bg-card border border-border rounded-xl shadow-md p-6 md:p-8 text-center" style="">
+      <h2 class="text-lg md:text-2xl font-heading font-semibold text-foreground mb-3" style="">Ready to discuss your training requirements?</h2>
+      <p class="text-sm md:text-base text-muted-foreground mb-6" style="">Contact us for current programmes, available dates, group options and delivery arrangements.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3" style="">
+        <a href="TransformContact.html?enquiry=training" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-lg font-semibold min-h-11" style="">
+          <iconify-icon icon="lucide:mail" class="text-base" aria-label="Contact us"></iconify-icon>
+          Contact Us
+        </a>
+        <a href="https://wa.me/447822013052?text=Hello%2C%20I%20am%20interested%20in%20training%20from%20AI%20Transformation%20Professionals.%20Please%20send%20me%20information%20about%20the%20available%20programmes%20and%20dates." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-card text-foreground border border-border px-5 py-3 rounded-lg font-semibold min-h-11" style="">
+          <iconify-icon icon="lucide:message-circle" class="text-base text-primary" aria-label="WhatsApp"></iconify-icon>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const whatsappUrl = "https://wa.me/447822013052?text=Hello%2C%20I%20am%20interested%20in%20training%20from%20AI%20Transformation%20Professionals.%20Please%20send%20me%20information%20about%20the%20available%20programmes%20and%20dates.";
+
+    const contactUrls = {
+      general: "TransformContact.html?enquiryType=General%20Enquiry",
+      group: "TransformContact.html?enquiryType=Group%20Training%20Enquiry",
+      onsite: "TransformContact.html?enquiryType=Onsite%20Training%20Enquiry",
+      "ab-900": "TransformContact.html?enquiryType=AB-900%20Training",
+      "ab-730": "TransformContact.html?enquiryType=AB-730%20Training",
+      "ab-731": "TransformContact.html?enquiryType=AB-731%20Training",
+      "bcs-digital-change": "TransformContact.html?enquiryType=BCS%20Digital%20Business%20Change",
+      "citizen-agentic-ai": "TransformContact.html?enquiryType=Agentic%20AI%20Fluency",
+      bespoke: "TransformContact.html?enquiryType=Bespoke%20Training%20Enquiry"
+    };
+
+    const chatData = {
+      1: {
+        question: "View available programmes",
+        answer: "Our current training portfolio includes:<br><br><ul class='list-disc pl-5 space-y-2 text-sm text-foreground'><li><strong>Microsoft AB-900:</strong> Microsoft 365 Copilot and Agent Administration Fundamentals</li><li><strong>Microsoft AB-730:</strong> AI Business Professional</li><li><strong>Microsoft AB-731:</strong> AI Transformation Leader</li><li><strong>BCS Foundation Certificate in Digital Business Change</strong> examination preparation</li><li><strong>Citizen Agentic AI Fluency</strong> workshops</li><li><strong>Bespoke Microsoft Copilot, Agentic AI and workforce transformation</strong> training</li></ul><br>Programme availability is reviewed regularly. Contact us for the latest programme information and available dates.",
+        followups: [
+          { text: "Ask about dates", action: "ask_dates" },
+          { text: "Ask about fees", action: "ask_fees" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      2: {
+        question: "Who is the training for?",
+        answer: "Our programmes are designed for leaders, employees, consultants, transformation professionals and organisations seeking practical capability in artificial intelligence, Microsoft Copilot, Agentic AI and digital business change.<br><br>Most programmes do not require software development or advanced technical experience.",
+        followups: [
+          { text: "Help me choose a programme", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      3: {
+        question: "How long does training take?",
+        answer: "Most programmes are completed within two weeks.<br><br>The timetable may be customised to suit the needs, availability and preferred pace of the cohort. Delivery may be arranged as intensive sessions or spread across several days.",
+        followups: [
+          { text: "Ask about available dates", action: "ask_dates" },
+          { text: "Ask about group training", action: "group_training" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      4: {
+        question: "How much does training cost?",
+        answer: "Standard programme fees are usually between <strong>£250 and £350 per delegate</strong>.<br><br>Group and organisational discounts may be available. The applicable fee will depend on cohort size and delivery requirements.<br><br>Eligible charitable organisations may qualify for discounted professional fees, subject to confirmation.<br><br>Fees may be higher for onsite delivery where travel, accommodation, facilities or additional preparation are required. The applicable fee will be confirmed before registration.",
+        followups: [
+          { text: "Ask about group discounts", action: "group_discounts" },
+          { text: "Ask about onsite training", action: "onsite_training" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      5: {
+        question: "When are the next available dates?",
+        answer: "Training dates are arranged according to programme availability and cohort scheduling.<br><br>Please contact us and identify the programme you are interested in. We will provide the latest available dates, delivery options and registration information.",
+        followups: [
+          { text: "Contact us", action: "open_enquiry", extra: "general" },
+          { text: "Chat on WhatsApp", action: "whatsapp" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      6: {
+        question: "Is the examination fee included?",
+        answer: "No. Examination and certification fees are not included in the training fee.<br><br>Each candidate is responsible for registering directly with the relevant examination body and paying the applicable examination fees.",
+        followups: [
+          { text: "View programmes", action: "view_programmes" },
+          { text: "Ask about learning materials", action: "learning_materials" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      7: {
+        question: "Do you offer group training?",
+        answer: "Yes. Group, organisational and private cohort arrangements may be available.<br><br>Training can be delivered for leadership teams, employees, project teams and professional communities. Group discounts may be available depending on the number of delegates and delivery requirements.",
+        followups: [
+          { text: "Ask about customisation", action: "customisation" },
+          { text: "Ask about onsite delivery", action: "onsite_training" },
+          { text: "Contact us", action: "open_enquiry", extra: "group" }
+        ]
+      },
+      8: {
+        question: "Can training be customised?",
+        answer: "Yes. Training may be adapted to suit the requirements and availability of a cohort.<br><br>Customisation may include:<br><ul class='list-disc pl-5 mt-2 space-y-1 text-sm text-foreground'><li>Delivery timetable</li><li>Organisational examples</li><li>Workforce roles</li><li>Microsoft Copilot use cases</li><li>AI governance requirements</li><li>Digital change priorities</li><li>Sector-specific scenarios</li></ul><br>The agreed scope and fee will be confirmed before delivery.",
+        followups: [
+          { text: "Group training", action: "group_training" },
+          { text: "Onsite training", action: "onsite_training" },
+          { text: "Contact us", action: "open_enquiry", extra: "bespoke" }
+        ]
+      },
+      9: {
+        question: "Is training available outside the UK?",
+        answer: "Yes. Online and organisational training may be delivered to participants outside the United Kingdom, subject to availability, time zones and suitable delivery arrangements.<br><br>Where applicable, training materials are aligned with the official skills measured, syllabus or examination requirements published by the relevant certification body.",
+        followups: [
+          { text: "Ask about delivery format", action: "delivery_format" },
+          { text: "Ask about fees", action: "ask_fees" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      10: {
+        question: "What equipment do I need?",
+        answer: "Delegates will normally need:<br><ul class='list-disc pl-5 mt-2 space-y-1 text-sm text-foreground'><li>A suitable computer or tablet</li><li>A reliable internet connection</li><li>A working microphone</li><li>Access to the agreed online meeting platform</li><li>Any required Microsoft or examination body account</li></ul><br>Programme-specific requirements will be confirmed before training begins.",
+        followups: [
+          { text: "Ask about delivery format", action: "delivery_format" },
+          { text: "View programmes", action: "view_programmes" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      11: {
+        question: "Which programme is right for me?",
+        answer: "The most suitable programme depends on your role, experience and learning objectives.<br><br>Please select one of these options:",
+        followups: [
+          { text: "Business professional", action: "profile_business" },
+          { text: "Transformation leader", action: "profile_leader" },
+          { text: "Microsoft Copilot administrator", action: "profile_admin" },
+          { text: "Digital change professional", action: "profile_change" },
+          { text: "Citizen or general AI learner", action: "profile_citizen" },
+          { text: "Organisation seeking bespoke training", action: "profile_bespoke" }
+        ]
+      },
+      12: {
+        question: "Chat with a representative",
+        answer: "You can continue the conversation on WhatsApp or open the Contact Us page for a training enquiry.",
+        followups: [
+          { text: "Chat on WhatsApp", action: "whatsapp" },
+          { text: "Send a Training Enquiry", action: "open_enquiry", extra: "general" }
+        ]
+      }
+    };
+
+    const subActions = {
+      ask_dates: {
+        label: "Ask about dates",
+        answer: "Training dates are arranged according to programme availability and cohort scheduling. Contact us for the latest available dates.",
+        followups: [
+          { text: "View programmes", action: "view_programmes" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      ask_fees: {
+        label: "Ask about fees",
+        answer: "Standard programme fees are usually between <strong>£250 and £350 per delegate</strong>.<br><br>Group and organisational discounts may be available. The applicable fee will depend on cohort size and delivery requirements.<br><br>Eligible charitable organisations may qualify for discounted professional fees, subject to confirmation.",
+        followups: [
+          { text: "Ask about group discounts", action: "group_discounts" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      help_choose: {
+        label: "Help me choose a programme",
+        answer: "Select the option that best describes you, and I will suggest the most relevant programme. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Business professional", action: "profile_business" },
+          { text: "Transformation leader", action: "profile_leader" },
+          { text: "Microsoft Copilot administrator", action: "profile_admin" },
+          { text: "Digital change professional", action: "profile_change" },
+          { text: "Citizen or general AI learner", action: "profile_citizen" },
+          { text: "Organisation seeking bespoke training", action: "profile_bespoke" }
+        ]
+      },
+      view_programmes: {
+        label: "View programmes",
+        answer: "Our current training portfolio includes Microsoft AB-900, Microsoft AB-730, Microsoft AB-731, BCS Foundation Certificate in Digital Business Change examination preparation, Citizen Agentic AI Fluency workshops, and bespoke Microsoft Copilot, Agentic AI and workforce transformation training.",
+        followups: [
+          { text: "Help me choose a programme", action: "help_choose" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      group_training: {
+        label: "Ask about group training",
+        answer: "Group, organisational and private cohort arrangements may be available. Group and organisational discounts may be available. The applicable fee will depend on cohort size and delivery requirements.",
+        followups: [
+          { text: "Ask about customisation", action: "customisation" },
+          { text: "Contact us", action: "open_enquiry", extra: "group" }
+        ]
+      },
+      group_discounts: {
+        label: "Ask about group discounts",
+        answer: "Group and organisational discounts may be available. The applicable fee will depend on cohort size and delivery requirements.",
+        followups: [
+          { text: "Contact us", action: "open_enquiry", extra: "group" },
+          { text: "Chat on WhatsApp", action: "whatsapp" }
+        ]
+      },
+      onsite_training: {
+        label: "Ask about onsite training",
+        answer: "Onsite delivery may be available depending on location, cohort requirements and trainer availability. Additional costs may apply.",
+        followups: [
+          { text: "Ask about group training", action: "group_training" },
+          { text: "Contact us", action: "open_enquiry", extra: "onsite" }
+        ]
+      },
+      learning_materials: {
+        label: "Ask about learning materials",
+        answer: "Learning materials vary by programme and will be confirmed before registration. Delegates who complete the required training sessions will receive a certificate of completion from AI Transformation Professionals.<br><br>The certificate of completion confirms participation and completion of the training programme. It is separate from the official certification examination, does not replace certification awarded by Microsoft, BCS or another examination body, and does not confirm that the delegate has passed the external examination.",
+        followups: [
+          { text: "View programmes", action: "view_programmes" },
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      customisation: {
+        label: "Ask about customisation",
+        answer: "Training may be adapted to suit the requirements and availability of a cohort. The agreed scope and fee will be confirmed before delivery.",
+        followups: [
+          { text: "Contact us", action: "open_enquiry", extra: "bespoke" }
+        ]
+      },
+      delivery_format: {
+        label: "Ask about delivery format",
+        answer: "Training is normally delivered through live, interactive online sessions. Alternative arrangements may be available for organisations.",
+        followups: [
+          { text: "Contact us", action: "open_enquiry", extra: "general" }
+        ]
+      },
+      profile_business: {
+        label: "Business professional",
+        answer: "The most relevant programme is <strong>Microsoft AB-730: AI Business Professional</strong>. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about AB-730", action: "open_enquiry", extra: "ab-730" },
+          { text: "View other profiles", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      profile_leader: {
+        label: "Transformation leader",
+        answer: "The most relevant programme is <strong>Microsoft AB-731: AI Transformation Leader</strong>. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about AB-731", action: "open_enquiry", extra: "ab-731" },
+          { text: "View other profiles", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      profile_admin: {
+        label: "Microsoft Copilot administrator",
+        answer: "The most relevant programme is <strong>Microsoft AB-900: Microsoft 365 Copilot and Agent Administration Fundamentals</strong>. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about AB-900", action: "open_enquiry", extra: "ab-900" },
+          { text: "View other profiles", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      profile_change: {
+        label: "Digital change professional",
+        answer: "The most relevant programme is <strong>BCS Foundation Certificate in Digital Business Change</strong> examination preparation. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about BCS", action: "open_enquiry", extra: "bcs-digital-change" },
+          { text: "View other profiles", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      profile_citizen: {
+        label: "Citizen or general AI learner",
+        answer: "The most relevant programme is <strong>Citizen Agentic AI Fluency workshops</strong>. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about workshops", action: "open_enquiry", extra: "citizen-agentic-ai" },
+          { text: "View other profiles", action: "help_choose" },
+          { text: "View programmes", action: "view_programmes" }
+        ]
+      },
+      profile_bespoke: {
+        label: "Organisation seeking bespoke training",
+        answer: "The most relevant option is <strong>bespoke Microsoft Copilot, Agentic AI and workforce transformation training</strong>. Final suitability will be confirmed through an enquiry.",
+        followups: [
+          { text: "Contact us about bespoke training", action: "open_enquiry", extra: "bespoke" },
+          { text: "View other profiles", action: "help_choose" }
+        ]
+      }
+    };
+
+    function selectQuestion(id) {
+      const questionObj = chatData[id];
+      if (!questionObj) return;
+      appendUserMessage(questionObj.question);
+      document.getElementById("questions-grid").classList.add("hidden");
+      const indicator = document.getElementById("chat-typing-indicator");
+      indicator.classList.remove("hidden");
+      scrollChatToBottom();
+      setTimeout(() => {
+        indicator.classList.add("hidden");
+        appendAssistantMessage(questionObj.answer, questionObj.followups);
+        scrollChatToBottom();
+      }, 500);
+    }
+
+    function handleFollowup(action, extra, label) {
+      if (label) appendUserMessage(label);
+      if (action === "whatsapp") {
+        window.open(whatsappUrl, "_blank");
+        return;
+      }
+      if (action === "open_enquiry") {
+        const targetUrl = contactUrls[extra] || contactUrls.general;
+        window.location.href = targetUrl;
+        return;
+      }
+      const actionObj = subActions[action];
+      if (!actionObj) return;
+      const indicator = document.getElementById("chat-typing-indicator");
+      indicator.classList.remove("hidden");
+      scrollChatToBottom();
+      setTimeout(() => {
+        indicator.classList.add("hidden");
+        appendAssistantMessage(actionObj.answer, actionObj.followups);
+        scrollChatToBottom();
+      }, 500);
+    }
+
+    function resetToAllQuestions() {
+      document.getElementById("questions-grid").classList.remove("hidden");
+      document.getElementById("dynamic-chat-messages").innerHTML = "";
+      scrollChatToBottom();
+    }
+
+    function appendUserMessage(text) {
+      const parent = document.getElementById("dynamic-chat-messages");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "flex flex-col items-end gap-2 w-full md:max-w-[85%] md:ml-auto";
+      msgDiv.innerHTML = "<div class='h-8 w-8 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground flex-shrink-0'><iconify-icon icon='lucide:user' class='text-sm' aria-label='User'></iconify-icon></div><div class='w-[92%] md:w-auto bg-primary text-primary-foreground p-4 rounded-xl rounded-tr-none shadow-sm space-y-1'><p class='text-sm leading-relaxed'>" + text + "</p><span class='block text-[10px] text-primary-foreground text-right'>Just now</span></div>";
+      parent.appendChild(msgDiv);
+    }
+
+    function appendAssistantMessage(htmlText, followups) {
+      const parent = document.getElementById("dynamic-chat-messages");
+      const container = document.createElement("div");
+      container.className = "space-y-4";
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "flex flex-col items-start gap-2 w-full md:max-w-[85%]";
+      msgDiv.innerHTML = "<div class='h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground flex-shrink-0'><iconify-icon icon='lucide:message-square' class='text-sm' aria-label='Assistant'></iconify-icon></div><div class='w-[92%] md:w-auto bg-card border border-border text-card-foreground p-4 rounded-xl rounded-tl-none shadow-sm space-y-2'><div class='text-sm leading-relaxed'>" + htmlText + "</div><span class='block text-[10px] text-muted-foreground text-right'>Just now</span></div>";
+      container.appendChild(msgDiv);
+      if (followups && followups.length > 0) {
+        const followUpDiv = document.createElement("div");
+        followUpDiv.className = "pl-0 md:pl-11 flex flex-wrap gap-2 w-[92%] md:w-auto";
+        followups.forEach(btn => {
+          const button = document.createElement("button");
+          button.className = "px-3 py-2 bg-secondary text-secondary-foreground text-xs font-semibold rounded-lg border border-border min-h-11 focus:outline-none focus:ring-2 focus:ring-ring";
+          button.textContent = btn.text;
+          button.onclick = function() { handleFollowup(btn.action, btn.extra, btn.text); };
+          followUpDiv.appendChild(button);
+        });
+        container.appendChild(followUpDiv);
+      }
+      parent.appendChild(container);
+    }
+
+    function scrollChatToBottom() {
+      const log = document.getElementById("chat-conversation-log");
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
+  <footer class="bg-primary text-primary-foreground border-t border-border/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <div class="inline-block bg-white rounded-xl p-3 shadow-sm">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 object-contain" />
+          </div>
+          <p class="text-xs tracking-[0.2em] uppercase font-bold text-secondary">Assess. Train. Transform.</p>
+          <p class="text-sm text-primary-foreground/80 leading-relaxed max-w-sm">AI Transformation Professionals helps organisations assess AI readiness, train their workforce and implement responsible Microsoft Copilot Agentic AI transformation.</p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="https://example.com/facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:facebook" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/x" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:x" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:youtube" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:instagram" class="text-xl"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-3 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-2 text-sm text-primary-foreground/80">
+            <li><a href="TransformHomepage.html" class="hover:text-primary-foreground transition-colors">Home</a></li>
+            <li><a href="TransformAboutus.html" class="hover:text-primary-foreground transition-colors">About Us</a></li>
+            <li><a href="TransformService.html" class="hover:text-primary-foreground transition-colors">Services</a></li>
+            <li><a href="TransformTrainingPage.html" class="hover:text-primary-foreground transition-colors">Training</a></li>
+            <li><a href="TransformPublication.html" class="hover:text-primary-foreground transition-colors">Publications</a></li>
+            <li><a href="TransformReviews.html" class="hover:text-primary-foreground transition-colors">Reviews</a></li>
+            <li><a href="TransformContact.html?enquiryType=General%20Enquiry" class="hover:text-primary-foreground transition-colors">Contact Us</a></li>
+            <li><a href="TransformHelp.html" class="hover:text-primary-foreground transition-colors">Help</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Contact Details</h4>
+          <ul class="space-y-3 text-sm text-primary-foreground/80">
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITransformationProfessionals.com</span></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITransformationProfessionals.com" class="hover:text-primary-foreground transition-colors">Connect@AITransformationProfessionals.com</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:phone" class="text-secondary"></iconify-icon><a href="tel:+447939883637" class="hover:text-primary-foreground transition-colors">+44 7939 88 3637</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-border/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-primary-foreground/70">
+        <div class="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start">
+          <a href="TransformTerms.html" class="hover:text-primary-foreground transition-colors">Terms and Conditions</a>
+          <a href="TransformPrivacy.html" class="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+          <a href="TransformAIPolicy.html" class="hover:text-primary-foreground transition-colors">AI Policy</a>
+          <a href="TRansformCookie.html" class="hover:text-primary-foreground transition-colors">Cookie Policy</a>
+        </div>
+        <p class="text-center md:text-right">© 2026 AI Transformation Professionals. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var button = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var openIcon = document.getElementById('mobile-menu-open-icon');
+      var closeIcon = document.getElementById('mobile-menu-close-icon');
+      var links = document.querySelectorAll('.mobile-menu-link');
+      if (!button || !menu || !openIcon || !closeIcon) return;
+
+      function setMenuState(isOpen) {
+        menu.classList.toggle('hidden', !isOpen);
+        openIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      }
+
+      setMenuState(false);
+
+      button.addEventListener('click', function() {
+        setMenuState(menu.classList.contains('hidden'));
+      });
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          setMenuState(false);
+        });
+      });
+    })();
+  </script>
+
+
+<a id="ai-help-fab" href="TransformHelp.html" aria-label="Open AI Help Assistant" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+  <iconify-icon icon="lucide:bot" class="text-2xl"></iconify-icon>
+</a>
+<script>
+  (function () {
+    var fab = document.getElementById("ai-help-fab");
+    var footer = document.querySelector("footer");
+    if (!fab || !footer || !("IntersectionObserver" in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        fab.style.opacity = entry.isIntersecting ? "0" : "1";
+        fab.style.pointerEvents = entry.isIntersecting ? "none" : "auto";
+      });
+    });
+    observer.observe(footer);
+  })();
+</script>
+</div></body></html>

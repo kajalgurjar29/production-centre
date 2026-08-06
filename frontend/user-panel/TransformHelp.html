@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help | AI Transformation Professionals</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Fira+Code:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=optional" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=optional" rel="stylesheet" />
+
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/tailwind.css" />
+    <style>
+      :root { --background: #FFFFFF;
+        --foreground: #0F172A;
+        --primary: #1E3A8A;
+        --primary-foreground: #FFFFFF;
+        --secondary: #2E9BF0;
+        --secondary-foreground: #FFFFFF;
+        --tertiary: #1E3A8A;
+        --muted: #F5F7FA;
+        --muted-foreground: #6B7280;
+        --accent: #E6F0FA;
+        --accent-foreground: #0F172A;
+        --card: #FFFFFF;
+        --card-foreground: #0F172A;
+        --destructive: #EF4444;
+        --border: #E5E7EB;
+        --input: #E5E7EB;
+        --ring: #2E9BF0;
+        --radius: 1rem;
+        --font-sans: Inter, sans-serif;
+        --font-heading: Inter, sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+
+      /* The new Help-assistant design's own colour system, scoped to the
+         sidebar+chat content only so the site-wide header and footer keep
+         the standard brand navy above, instead of inheriting this page's
+         local theme. */
+      #help-chat-panel {
+        --background: #FFFFFF;
+        --foreground: #092B5A;
+        --primary: #0066CC;
+        --primary-foreground: #FFFFFF;
+        --secondary: #E6F0FA;
+        --secondary-foreground: #092B5A;
+        --tertiary: #D6E7F7;
+        --tertiary-foreground: #092B5A;
+        --muted: #F8FAFC;
+        --muted-foreground: #475569;
+        --accent: #D6E7F7;
+        --accent-foreground: #092B5A;
+        --card: #FFFFFF;
+        --card-foreground: #092B5A;
+        --destructive: #B42318;
+        --destructive-foreground: #B2DBFF;
+        --destructive-text: #B42318;
+        --border: #E6F0FA;
+        --input: #D6E7F7;
+        --ring: #0066CC;
+        --radius: 0.9rem;
+      }
+
+      /* Every filled surface carries its own text colour, so bg-* utilities
+         never inherit a foreground chosen to contrast the page instead of
+         the fill. Scoped to the chat panel only, and kept in @layer base
+         so an explicit text-* utility (in Tailwind's utilities layer)
+         still wins over this default. */
+      @layer base {
+        #help-chat-panel .bg-card { color: var(--card-foreground); }
+        #help-chat-panel .bg-primary { color: var(--primary-foreground); }
+        #help-chat-panel .bg-secondary { color: var(--secondary-foreground); }
+        #help-chat-panel .bg-accent { color: var(--accent-foreground, var(--foreground)); }
+        #help-chat-panel .bg-tertiary { color: var(--tertiary-foreground, var(--primary-foreground)); }
+        #help-chat-panel .bg-destructive { color: var(--destructive-foreground, var(--primary-foreground)); }
+      }
+      #help-chat-panel .text-destructive { color: var(--destructive-text, var(--destructive)); }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+<div class="min-h-screen w-full bg-background flex flex-col relative text-foreground font-sans">
+  <header class="hidden lg:block sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-24 flex items-center justify-between gap-3 lg:gap-6">
+        <a href="TransformHomepage.html" class="hidden md:flex items-center shrink-0">
+          <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 lg:h-[88px] object-contain" />
+        </a>
+        <div class="flex md:hidden items-center flex-1 min-w-0 gap-2">
+          <a href="TransformHomepage.html" class="flex items-center shrink-0">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619482-2e87f7d8-icon.png" alt="AI Transformation Professionals icon" class="h-14 w-14 object-contain" />
+          </a>
+          <span class="text-sm xs:text-base sm:text-lg font-heading font-semibold text-primary leading-tight min-w-0">AI Transformation<br />Professionals</span>
+        </div>
+
+        <nav class="hidden xl:flex items-center justify-center gap-4 2xl:gap-6 flex-1 min-w-0">
+          <a href="TransformHomepage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Home</a>
+          <a href="TransformAboutus.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">About Us</a>
+          <a href="TransformService.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Services</a>
+          <a href="TransformTrainingPage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Training</a>
+          <a href="TransformPublication.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Publications</a>
+          <a href="TransformReviews.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Reviews</a>
+          <a href="TransformContact.html?enquiryType=General%20Enquiry" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Contact Us</a>
+          <a href="TransformHelp.html" class="text-sm font-medium text-primary hover:text-secondary transition-colors whitespace-nowrap">Help</a>
+        </nav>
+
+        <div class="hidden xl:flex items-center shrink-0">
+          <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="inline-flex items-center justify-center px-4 lg:px-5 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm hover:bg-secondary/90 transition-all whitespace-nowrap min-h-11">
+            Request an AI Readiness Assessment
+            <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+          </a>
+        </div>
+
+        <button id="mobile-menu-toggle" class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg text-primary hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <iconify-icon id="mobile-menu-open-icon" icon="lucide:menu" class="text-2xl"></iconify-icon>
+          <iconify-icon id="mobile-menu-close-icon" icon="lucide:x" class="text-2xl hidden"></iconify-icon>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden border-t border-border bg-background">
+      <div class="px-4 py-4 space-y-1">
+        <a href="TransformHomepage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Home</a>
+        <a href="TransformAboutus.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">About Us</a>
+        <a href="TransformService.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Services</a>
+        <a href="TransformTrainingPage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Training</a>
+        <a href="TransformPublication.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Publications</a>
+        <a href="TransformReviews.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Reviews</a>
+        <a href="TransformContact.html?enquiryType=General%20Enquiry" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Contact Us</a>
+        <a href="TransformHelp.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-primary hover:bg-muted">Help</a>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="mobile-menu-link w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm min-h-11">
+          Request an AI Readiness Assessment
+          <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div id="help-chat-panel" style="visibility:hidden">
+    <header class="lg:hidden px-4 pt-5 pb-4 flex items-center gap-3">
+      <a href="TransformHomepage.html" aria-label="Go to Home" class="h-10 w-10 rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+        <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619482-2e87f7d8-icon.png" alt="AI Transformation Professionals" class="h-full w-full object-contain" />
+      </a>
+      <div>
+        <p class="text-xs text-muted-foreground">AI Transformation Professionals</p>
+        <h1 class="text-lg font-heading font-semibold text-foreground">AI Assistant</h1>
+      </div>
+    </header>
+
+    <main class="flex-1 w-full px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-12 pb-28 lg:pb-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <aside class="hidden lg:block lg:col-span-4 xl:col-span-3">
+          <div class="rounded-xl bg-muted p-6">
+            <div class="h-11 w-11 rounded-xl bg-tertiary flex items-center justify-center">
+              <iconify-icon icon="lucide:sparkles" class="text-primary text-xl"></iconify-icon>
+            </div>
+            <h2 class="mt-5 text-2xl font-heading font-bold text-foreground">Find the right next step</h2>
+            <p class="mt-3 text-sm leading-6 text-muted-foreground">Guidance for leaders, teams, and practitioners navigating AI transformation.</p>
+            <div class="mt-7">
+              <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Common topics</p>
+              <nav class="mt-3 flex flex-col gap-2">
+                <button type="button" onclick="sendPrompt('How do I book training?')" class="min-h-11 rounded-lg bg-card px-4 text-left text-sm font-medium text-foreground shadow-sm">Training <span class="float-right text-primary">&rarr;</span></button>
+                <button type="button" onclick="sendPrompt('What services do you offer?')" class="min-h-11 rounded-lg bg-card px-4 text-left text-sm font-medium text-foreground shadow-sm">Services <span class="float-right text-primary">&rarr;</span></button>
+                <button type="button" onclick="sendPrompt('What is the Consultant Network?')" class="min-h-11 rounded-lg bg-card px-4 text-left text-sm font-medium text-foreground shadow-sm">Consultant Network <span class="float-right text-primary">&rarr;</span></button>
+                <button type="button" onclick="sendPrompt('What publications do you offer?')" class="min-h-11 rounded-lg bg-card px-4 text-left text-sm font-medium text-foreground shadow-sm">Publications <span class="float-right text-primary">&rarr;</span></button>
+                <button type="button" onclick="sendPrompt('What is your AI Policy?')" class="min-h-11 rounded-lg bg-card px-4 text-left text-sm font-medium text-foreground shadow-sm">Policies <span class="float-right text-primary">&rarr;</span></button>
+              </nav>
+            </div>
+            <button type="button" onclick="document.getElementById('chat-input').focus()" class="mt-6 min-h-11 w-full rounded-lg bg-secondary px-4 text-sm font-medium text-secondary-foreground">Ask your own question</button>
+          </div>
+        </aside>
+
+        <section class="lg:col-span-8 xl:col-span-9">
+          <div class="max-w-4xl">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 sm:gap-6">
+              <div>
+                <p class="text-sm font-medium text-primary">Guided support</p>
+                <h1 class="mt-1 text-2xl font-heading font-bold text-foreground">How can we help today?</h1>
+                <p class="mt-2 text-sm leading-6 text-muted-foreground">Choose a topic or continue the conversation for focused guidance.</p>
+              </div>
+              <button type="button" onclick="clearChat()" class="min-h-11 rounded-lg bg-secondary px-4 inline-flex items-center gap-2 text-sm font-medium text-secondary-foreground shrink-0">
+                <iconify-icon icon="lucide:refresh-cw" class="text-lg"></iconify-icon>Start again
+              </button>
+            </div>
+
+            <div id="chat-messages" class="mt-8 space-y-7">
+              <div class="flex flex-col items-start">
+                <div class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center">
+                  <iconify-icon icon="lucide:sparkles" class="text-primary text-xl"></iconify-icon>
+                </div>
+                <div class="mt-2 w-11/12 rounded-xl bg-muted p-5 shadow-sm">
+                  <p class="text-base leading-7 text-foreground">Hello, I am the AI Transformation Help Assistant. Ask me anything about our services.</p>
+                  <p class="mt-3 text-xs text-muted-foreground">AI Assistant</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+              <button type="button" onclick="sendPrompt('How do I book training?')" class="min-h-11 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground">Training</button>
+              <button type="button" onclick="sendPrompt('What services do you offer?')" class="min-h-11 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground">Services</button>
+              <button type="button" onclick="sendPrompt('What is the Consultant Network?')" class="min-h-11 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground">Consultant Network</button>
+              <button type="button" onclick="sendPrompt('What publications do you offer?')" class="min-h-11 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground">Publications</button>
+              <button type="button" onclick="sendPrompt('What is your AI Policy?')" class="min-h-11 rounded-full bg-secondary px-4 text-sm font-medium text-secondary-foreground">Policies</button>
+              <a href="TransformContact.html?enquiryType=General%20Enquiry" class="min-h-11 rounded-full bg-primary px-4 inline-flex items-center text-sm font-medium text-primary-foreground">Contact us</a>
+            </div>
+
+            <div class="lg:hidden mt-6 rounded-xl bg-tertiary p-4">
+              <div class="flex items-start gap-3">
+                <iconify-icon icon="lucide:message-circle" class="text-primary text-xl"></iconify-icon>
+                <div>
+                  <h2 class="text-lg font-heading font-semibold text-foreground">Need a direct answer?</h2>
+                  <p class="mt-1 text-sm leading-5 text-foreground">Choose Contact or WhatsApp below and our team will help you find the right next step.</p>
+                </div>
+              </div>
+            </div>
+
+            <form onsubmit="handleChatSubmit(event)" class="mt-6 lg:mt-8 flex items-center gap-3 rounded-xl border border-input bg-card p-2 shadow-sm" aria-label="Message AI Assistant">
+              <input id="chat-input" aria-label="Message AI Assistant" placeholder="Type your message" class="min-h-11 min-w-0 flex-1 rounded-lg bg-background px-4 text-base text-foreground outline-none placeholder:text-muted-foreground" />
+              <button id="chat-submit-btn" type="submit" class="min-h-11 rounded-lg bg-primary px-5 inline-flex shrink-0 items-center gap-2 text-sm font-medium text-primary-foreground disabled:opacity-60 disabled:cursor-not-allowed">
+                <iconify-icon icon="lucide:send" class="text-lg"></iconify-icon>Send
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-background border-t border-border px-3 py-3">
+      <div class="grid grid-cols-4 gap-1">
+        <a href="TransformHomepage.html" class="min-h-11 flex flex-col items-center justify-center gap-1 text-muted-foreground">
+          <iconify-icon icon="lucide:house" class="text-xl"></iconify-icon>
+          <span class="text-xs">Home</span>
+        </a>
+        <button type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="min-h-11 flex flex-col items-center justify-center gap-1 text-primary">
+          <iconify-icon icon="lucide:layers" class="text-xl"></iconify-icon>
+          <span class="text-xs font-medium">Topics</span>
+        </button>
+        <a href="TransformContact.html?enquiryType=General%20Enquiry" class="min-h-11 flex flex-col items-center justify-center gap-1 text-muted-foreground">
+          <iconify-icon icon="lucide:mail" class="text-xl"></iconify-icon>
+          <span class="text-xs">Contact</span>
+        </a>
+        <a href="https://wa.me/447939883637" target="_blank" rel="noopener noreferrer" class="min-h-11 flex flex-col items-center justify-center gap-1 text-muted-foreground">
+          <iconify-icon icon="lucide:message-circle" class="text-xl"></iconify-icon>
+          <span class="text-xs">WhatsApp</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    const CHAT_API_URL = 'http://localhost:4000/api/chat';
+    const SESSION_STORAGE_KEY = 'aitp-help-session-id';
+    const HISTORY_STORAGE_KEY = 'aitp-help-history';
+    const MAX_HISTORY_MESSAGES = 10;
+
+    const DEFAULT_GREETING = 'Hello, I am the AI Transformation Help Assistant. Ask me anything about our services.';
+    const NETWORK_ERROR_MESSAGE = "Sorry, I'm having trouble reaching the assistant right now. Please check your connection and try again, or visit our Contact Us page.";
+
+    let conversationHistory = [];
+    let isSending = false;
+
+    function getSessionId() {
+      let sessionId = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      if (!sessionId) {
+        sessionId = (window.crypto && window.crypto.randomUUID)
+          ? window.crypto.randomUUID()
+          : 'session-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+        sessionStorage.setItem(SESSION_STORAGE_KEY, sessionId);
+      }
+      return sessionId;
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>\"']/g, function(tag) {
+        const chars = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '\"': '&quot;',
+          "'": '&#39;'
+        };
+        return chars[tag] || tag;
+      });
+    }
+
+    function timeLabel() {
+      return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function appendUserMessage(text) {
+      const container = document.getElementById('chat-messages');
+      const msg = document.createElement('div');
+      msg.className = 'flex flex-col items-end';
+      msg.innerHTML = '<div class="h-10 w-10 rounded-full bg-tertiary flex items-center justify-center"><iconify-icon icon="lucide:user" class="text-foreground text-xl"></iconify-icon></div><div class="mt-2 w-9/12 rounded-xl bg-primary p-5 shadow-sm"><p class="text-base leading-7 text-primary-foreground">' + escapeHTML(text) + '</p><p class="mt-3 text-right text-xs text-primary-foreground">You &middot; ' + timeLabel() + '</p></div>';
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendAssistantMessage(text) {
+      const container = document.getElementById('chat-messages');
+      const msg = document.createElement('div');
+      msg.className = 'flex flex-col items-start';
+      msg.innerHTML = '<div class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center"><iconify-icon icon="lucide:sparkles" class="text-primary text-xl"></iconify-icon></div><div class="mt-2 w-11/12 rounded-xl bg-muted p-5 shadow-sm"><p class="text-base leading-7 text-foreground">' + escapeHTML(text) + '</p><p class="mt-3 text-xs text-muted-foreground">AI Assistant &middot; ' + timeLabel() + '</p></div>';
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function appendTypingIndicator() {
+      const container = document.getElementById('chat-messages');
+      const msg = document.createElement('div');
+      msg.id = 'chat-typing-indicator';
+      msg.className = 'flex flex-col items-start';
+      msg.innerHTML = '<div class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center"><iconify-icon icon="lucide:sparkles" class="text-primary text-xl"></iconify-icon></div><div class="mt-2 w-11/12 rounded-xl bg-muted p-5 shadow-sm"><p class="text-base leading-7 text-muted-foreground animate-pulse">Typing…</p></div>';
+      container.appendChild(msg);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const indicator = document.getElementById('chat-typing-indicator');
+      if (indicator) indicator.remove();
+    }
+
+    function setSending(sending) {
+      isSending = sending;
+      const input = document.getElementById('chat-input');
+      const button = document.getElementById('chat-submit-btn');
+      if (input) input.disabled = sending;
+      if (button) button.disabled = sending;
+    }
+
+    async function requestAssistantReply(message) {
+      const response = await fetch(CHAT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: message,
+          history: conversationHistory.slice(-MAX_HISTORY_MESSAGES),
+          sessionId: getSessionId(),
+        }),
+      });
+
+      const data = await response.json().catch(function() { return {}; });
+
+      if (!response.ok) {
+        throw new Error(data.error || 'The assistant could not process that request.');
+      }
+
+      return data.reply;
+    }
+
+    async function sendUserMessage(text) {
+      if (isSending) return;
+      const cleanText = text.trim();
+      if (!cleanText) return;
+
+      appendUserMessage(cleanText);
+      conversationHistory.push({ role: 'user', content: cleanText });
+      persistHistory();
+
+      setSending(true);
+      appendTypingIndicator();
+
+      try {
+        const reply = await requestAssistantReply(cleanText);
+        removeTypingIndicator();
+        appendAssistantMessage(reply);
+        conversationHistory.push({ role: 'assistant', content: reply });
+        persistHistory();
+      } catch (err) {
+        removeTypingIndicator();
+        appendAssistantMessage(err.message || NETWORK_ERROR_MESSAGE);
+      } finally {
+        setSending(false);
+      }
+    }
+
+    function persistHistory() {
+      try {
+        sessionStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(conversationHistory.slice(-MAX_HISTORY_MESSAGES)));
+      } catch (err) {
+        // sessionStorage unavailable (e.g. private browsing) - conversation still works, just won't persist on reload
+      }
+    }
+
+    function restoreHistory() {
+      try {
+        const stored = sessionStorage.getItem(HISTORY_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed)) {
+            conversationHistory = parsed;
+            parsed.forEach(function(entry) {
+              if (entry.role === 'user') appendUserMessage(entry.content);
+              else if (entry.role === 'assistant') appendAssistantMessage(entry.content);
+            });
+          }
+        }
+      } catch (err) {
+        conversationHistory = [];
+      } finally {
+        const container = document.getElementById('chat-messages');
+        if (container) container.scrollTop = container.scrollHeight;
+        const panel = document.getElementById('help-chat-panel');
+        if (panel) panel.style.visibility = '';
+      }
+    }
+
+    function sendPrompt(promptText) {
+      sendUserMessage(promptText);
+    }
+
+    function handleChatSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById('chat-input');
+      if (!input) return;
+      const text = input.value;
+      input.value = '';
+      sendUserMessage(text);
+    }
+
+    function clearChat() {
+      const container = document.getElementById('chat-messages');
+      if (!container) return;
+      conversationHistory = [];
+      persistHistory();
+      container.innerHTML = '<div class="flex flex-col items-start"><div class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center"><iconify-icon icon="lucide:sparkles" class="text-primary text-xl"></iconify-icon></div><div class="mt-2 w-11/12 rounded-xl bg-muted p-5 shadow-sm"><p class="text-base leading-7 text-foreground">' + escapeHTML(DEFAULT_GREETING) + '</p><p class="mt-3 text-xs text-muted-foreground">AI Assistant</p></div></div>';
+    }
+
+    restoreHistory();
+  </script>
+
+  <footer class="hidden lg:block bg-primary text-primary-foreground border-t border-border/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <div class="inline-block bg-white rounded-xl p-3 shadow-sm">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 object-contain" />
+          </div>
+          <p class="text-xs tracking-[0.2em] uppercase font-bold text-secondary">Assess. Train. Transform.</p>
+          <p class="text-sm text-primary-foreground/80 leading-relaxed max-w-sm">AI Transformation Professionals helps organisations assess AI readiness, train their workforce and implement responsible Microsoft Copilot Agentic AI transformation.</p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="https://example.com/facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:facebook" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/x" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:x" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:youtube" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:instagram" class="text-xl"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-3 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-2 text-sm text-primary-foreground/80">
+            <li><a href="TransformHomepage.html" class="hover:text-primary-foreground transition-colors">Home</a></li>
+            <li><a href="TransformAboutus.html" class="hover:text-primary-foreground transition-colors">About Us</a></li>
+            <li><a href="TransformService.html" class="hover:text-primary-foreground transition-colors">Services</a></li>
+            <li><a href="TransformTrainingPage.html" class="hover:text-primary-foreground transition-colors">Training</a></li>
+            <li><a href="TransformPublication.html" class="hover:text-primary-foreground transition-colors">Publications</a></li>
+            <li><a href="TransformReviews.html" class="hover:text-primary-foreground transition-colors">Reviews</a></li>
+            <li><a href="TransformContact.html?enquiryType=General%20Enquiry" class="hover:text-primary-foreground transition-colors">Contact Us</a></li>
+            <li><a href="TransformHelp.html" class="hover:text-primary-foreground transition-colors">Help</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Contact Details</h4>
+          <ul class="space-y-3 text-sm text-primary-foreground/80">
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITransformationProfessionals.com</span></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITransformationProfessionals.com" class="hover:text-primary-foreground transition-colors">Connect@AITransformationProfessionals.com</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:phone" class="text-secondary"></iconify-icon><a href="tel:+447939883637" class="hover:text-primary-foreground transition-colors">+44 7939 88 3637</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-border/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-primary-foreground/70">
+        <div class="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start">
+          <a href="TransformTerms.html" class="hover:text-primary-foreground transition-colors">Terms and Conditions</a>
+          <a href="TransformPrivacy.html" class="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+          <a href="TransformAIPolicy.html" class="hover:text-primary-foreground transition-colors">AI Policy</a>
+          <a href="TRansformCookie.html" class="hover:text-primary-foreground transition-colors">Cookie Policy</a>
+        </div>
+        <p class="text-center md:text-right">© 2026 AI Transformation Professionals. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var button = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var openIcon = document.getElementById('mobile-menu-open-icon');
+      var closeIcon = document.getElementById('mobile-menu-close-icon');
+      var links = document.querySelectorAll('.mobile-menu-link');
+      if (!button || !menu || !openIcon || !closeIcon) return;
+
+      function setMenuState(isOpen) {
+        menu.classList.toggle('hidden', !isOpen);
+        openIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      }
+
+      setMenuState(false);
+
+      button.addEventListener('click', function() {
+        setMenuState(menu.classList.contains('hidden'));
+      });
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          setMenuState(false);
+        });
+      });
+    })();
+  </script>
+</div>
+</body></html>

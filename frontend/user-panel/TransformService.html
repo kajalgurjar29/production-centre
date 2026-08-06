@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | AI Transformation Professionals</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Fira+Code:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=optional" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/tailwind.css" />
+    <style>
+      :root {
+        --background: #FFFFFF;
+        --foreground: #0F172A;
+        --primary: #1E3A8A;
+        --primary-foreground: #FFFFFF;
+        --secondary: #2E9BF0;
+        --secondary-foreground: #FFFFFF;
+        --tertiary: #1E3A8A;
+        --muted: #F5F7FA;
+        --muted-foreground: #6B7280;
+        --accent: #E6F0FA;
+        --accent-foreground: #0F172A;
+        --card: #FFFFFF;
+        --card-foreground: #0F172A;
+        --destructive: #ef4444;
+        --border: #E5E7EB;
+        --input: #E5E7EB;
+        --ring: #2E9BF0;
+        --radius: 0.9rem;
+        --font-sans: Inter,sans-serif;
+        --font-heading: Inter,sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12);
+        }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--secondary)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+<div class="min-h-screen w-full bg-background flex flex-col relative font-sans text-foreground">
+  <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-24 flex items-center justify-between gap-3 lg:gap-6">
+        <a href="TransformHomepage.html" class="hidden md:flex items-center shrink-0">
+          <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 lg:h-[88px] object-contain" />
+        </a>
+        <div class="flex md:hidden items-center flex-1 min-w-0 gap-2">
+          <a href="TransformHomepage.html" class="flex items-center shrink-0">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619482-2e87f7d8-icon.png" alt="AI Transformation Professionals icon" class="h-14 w-14 object-contain" />
+          </a>
+          <span class="text-sm xs:text-base sm:text-lg font-heading font-semibold text-primary leading-tight min-w-0">AI Transformation<br />Professionals</span>
+        </div>
+
+        <nav class="hidden xl:flex items-center justify-center gap-4 2xl:gap-6 flex-1 min-w-0">
+          <a href="TransformHomepage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Home</a>
+          <a href="TransformAboutus.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">About Us</a>
+          <a href="TransformService.html" class="text-sm font-medium text-primary hover:text-secondary transition-colors whitespace-nowrap">Services</a>
+          <a href="TransformTrainingPage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Training</a>
+          <a href="TransformPublication.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Publications</a>
+          <a href="TransformReviews.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Reviews</a>
+          <a href="TransformContact.html?enquiryType=General%20Enquiry" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Contact Us</a>
+          <a href="TransformHelp.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Help</a>
+        </nav>
+
+        <div class="hidden xl:flex items-center shrink-0">
+          <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="inline-flex items-center justify-center px-4 lg:px-5 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm hover:bg-secondary/90 transition-all whitespace-nowrap min-h-11">
+            Request an AI Readiness Assessment
+            <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+          </a>
+        </div>
+
+        <button id="mobile-menu-toggle" class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg text-primary hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <iconify-icon id="mobile-menu-open-icon" icon="lucide:menu" class="text-2xl"></iconify-icon>
+          <iconify-icon id="mobile-menu-close-icon" icon="lucide:x" class="text-2xl hidden"></iconify-icon>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden border-t border-border bg-background">
+      <div class="px-4 py-4 space-y-1">
+        <a href="TransformHomepage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Home</a>
+        <a href="TransformAboutus.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">About Us</a>
+        <a href="TransformService.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-primary hover:bg-muted">Services</a>
+        <a href="TransformTrainingPage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Training</a>
+        <a href="TransformPublication.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Publications</a>
+        <a href="TransformReviews.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Reviews</a>
+        <a href="TransformContact.html?enquiryType=General%20Enquiry" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Contact Us</a>
+        <a href="TransformHelp.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Help</a>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="mobile-menu-link w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm min-h-11">
+          Request an AI Readiness Assessment
+          <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+    <section class="max-w-3xl mb-10 md:mb-14">
+      <h1 class="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">Services</h1>
+      <p class="text-base md:text-lg text-muted-foreground leading-relaxed mb-3">We help organisations assess readiness, build capability and plan responsible Microsoft Copilot Agentic AI transformation.</p>
+      <p class="text-base md:text-lg text-muted-foreground leading-relaxed">Our services are focused on readiness assessment, training and tailored Microsoft Copilot Agentic AI transformation assignments.</p>
+    </section>
+
+    <section class="mb-12 md:mb-16 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      <div class="h-1 w-full bg-tertiary"></div>
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="md:col-span-5 p-6 md:p-8 lg:p-10 bg-card">
+          <div class="flex items-start gap-4 mb-6">
+            <div class="h-12 w-12 rounded-xl bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+              <iconify-icon icon="lucide:clipboard-check" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h2 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">Microsoft Copilot Agentic AI Readiness Assessment with Roadmap</h2>
+              <p class="text-base md:text-lg text-muted-foreground leading-relaxed">Assess organisational readiness and identify the priorities needed for Microsoft Copilot Agentic AI adoption.</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="rounded-xl border border-border bg-muted p-4 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Starting from</p>
+              <p class="text-2xl font-heading font-bold text-foreground">£12,500</p>
+            </div>
+            <div class="rounded-xl border border-border bg-muted p-4 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Typical duration</p>
+              <p class="text-lg font-heading font-semibold text-foreground">10 working days</p>
+            </div>
+          </div>
+
+          <a href="TransformContact.html?enquiryType=Microsoft%20Copilot%20Agentic%20AI%20Readiness%20Assessment" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Request a Readiness Assessment</a>
+        </div>
+
+        <div class="md:col-span-7 border-t border-border bg-muted p-6 md:p-8 lg:border-l lg:border-t-0 lg:p-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="rounded-xl border border-border bg-card p-5 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="h-10 w-10 rounded-lg bg-muted border border-border flex items-center justify-center text-tertiary flex-shrink-0">
+                  <iconify-icon icon="lucide:list-checks" class="text-lg"></iconify-icon>
+                </div>
+                <h3 class="text-lg font-heading font-semibold text-foreground">Covers</h3>
+              </div>
+              <ul class="space-y-2 text-sm md:text-base text-muted-foreground">
+                <li>Leadership readiness</li>
+                <li>Workforce readiness</li>
+                <li>Microsoft Copilot readiness</li>
+                <li>Data and technology readiness</li>
+                <li>Responsible AI and governance</li>
+                <li>Training requirements</li>
+                <li>Business change readiness</li>
+                <li>Priority use cases</li>
+              </ul>
+            </div>
+
+            <div class="rounded-xl border border-border bg-card p-5 shadow-sm">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="h-10 w-10 rounded-lg bg-muted border border-border flex items-center justify-center text-tertiary flex-shrink-0">
+                  <iconify-icon icon="lucide:file-text" class="text-lg"></iconify-icon>
+                </div>
+                <h3 class="text-lg font-heading font-semibold text-foreground">Outputs</h3>
+              </div>
+              <ul class="space-y-2 text-sm md:text-base text-muted-foreground">
+                <li>Maturity score</li>
+                <li>Readiness findings</li>
+                <li>Capability gaps</li>
+                <li>Prioritised recommendations</li>
+                <li>Transformation roadmap</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-12 md:mb-16">
+      <div class="max-w-3xl mb-6 md:mb-8">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="h-px w-10 bg-tertiary"></div>
+          <span class="text-sm font-semibold text-muted-foreground">Training Programmes</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">Training Programmes</h2>
+        <p class="text-base md:text-lg text-muted-foreground leading-relaxed">We provide interactive online training for Microsoft and BCS certification programmes, together with a free Citizen Agentic AI Fluency session.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article class="rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="h-11 w-11 rounded-xl bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+              <iconify-icon icon="lucide:book-open-check" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-foreground mb-2">Microsoft Certification AB-730 AI Business Professional</h3>
+              <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">Build practical knowledge for using Microsoft AI and Copilot effectively in business roles and organisational workflows.</p>
+              <p class="text-sm text-muted-foreground leading-relaxed">Our interactive online training prepares candidates with the skills and knowledge required for the relevant certification examination.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm md:text-base">
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Delivery</p>
+              <p class="font-medium text-foreground">Interactive online</p>
+            </div>
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Price</p>
+              <p class="font-medium text-foreground">£250 per participant</p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <a href="TransformContact.html?enquiryType=AB-730%20Training" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Enquire About AB-730</a>
+          </div>
+        </article>
+
+        <article class="rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="h-11 w-11 rounded-xl bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+              <iconify-icon icon="lucide:briefcase-business" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-foreground mb-2">Microsoft Certification AB-731 AI Transformation Leader</h3>
+              <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">Prepare leaders to guide responsible Microsoft Copilot Agentic AI adoption, align transformation with business priorities and support organisational change.</p>
+              <p class="text-sm text-muted-foreground leading-relaxed">Our interactive online training prepares candidates with the skills and knowledge required for the relevant certification examination.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm md:text-base">
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Delivery</p>
+              <p class="font-medium text-foreground">Interactive online</p>
+            </div>
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Price</p>
+              <p class="font-medium text-foreground">£350 per participant</p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <a href="TransformContact.html?enquiryType=AB-731%20Training" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Enquire About AB-731</a>
+          </div>
+        </article>
+
+        <article class="rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="h-11 w-11 rounded-xl bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+              <iconify-icon icon="lucide:monitor-cog" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-foreground mb-2">Microsoft Certification AB-900 Microsoft 365 Copilot and Agent Administration Fundamentals</h3>
+              <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">Develop foundational knowledge of Microsoft 365 Copilot, agents, administration and responsible organisational use.</p>
+              <p class="text-sm text-muted-foreground leading-relaxed">Our interactive online training prepares candidates with the skills and knowledge required for the relevant certification examination.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm md:text-base">
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Delivery</p>
+              <p class="font-medium text-foreground">Interactive online</p>
+            </div>
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Price</p>
+              <p class="font-medium text-foreground">£250 per participant</p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <a href="TransformContact.html?enquiryType=AB-900%20Training" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Enquire About AB-900</a>
+          </div>
+        </article>
+
+        <article class="rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="h-11 w-11 rounded-xl bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+              <iconify-icon icon="lucide:graduation-cap" class="text-xl"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-foreground mb-2">BCS Foundation Certificate in Digital Change Management</h3>
+              <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">Build an understanding of digital change, organisational readiness and the people and process factors needed for successful transformation.</p>
+              <p class="text-sm text-muted-foreground leading-relaxed">Our interactive online training prepares candidates with the skills and knowledge required for the relevant certification examination.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-sm md:text-base">
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Delivery</p>
+              <p class="font-medium text-foreground">Interactive online</p>
+            </div>
+            <div class="rounded-lg border border-border bg-muted px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Price</p>
+              <p class="font-medium text-foreground">£250 per participant</p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <a href="TransformContact.html?enquiryType=BCS%20Digital%20Change%20Management" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Enquire About BCS Digital Change</a>
+          </div>
+        </article>
+
+        <article class="md:col-span-2 rounded-xl border border-border bg-card p-6 shadow-sm flex flex-col">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            <div class="md:col-span-7">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="h-px w-10 bg-tertiary"></div>
+                <span class="text-sm font-semibold text-muted-foreground">Fluency Session</span>
+              </div>
+              <div class="flex items-start gap-3 mb-4">
+                <div class="h-11 w-11 rounded-xl bg-muted border border-border flex items-center justify-center text-tertiary flex-shrink-0">
+                  <iconify-icon icon="lucide:users" class="text-xl"></iconify-icon>
+                </div>
+                <div>
+                  <h3 class="text-xl font-heading font-bold text-foreground mb-2">Free Citizen Agentic AI Fluency</h3>
+                  <p class="text-sm md:text-base text-muted-foreground leading-relaxed">An accessible introductory session helping citizens and professionals understand AI agents, Microsoft Copilot and the changing relationship between people and intelligent systems.</p>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-5 rounded-xl border border-border bg-muted p-5">
+              <div class="space-y-3 text-sm md:text-base">
+                <p><span class="font-semibold text-foreground">Delivery:</span> <span class="text-muted-foreground">Interactive online</span></p>
+                <p><span class="font-semibold text-foreground">Schedule:</span> <span class="text-muted-foreground">First Sunday evening of every month</span></p>
+                <p><span class="font-semibold text-foreground">Price:</span> <span class="text-muted-foreground">Free</span></p>
+                <p><span class="font-semibold text-foreground">Availability:</span> <span class="text-muted-foreground">Limited spaces, available on request</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 max-w-sm">
+            <a href="TransformContact.html?enquiryType=Citizen%20Agentic%20AI%20Fluency" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-border bg-card px-6 py-3 text-center font-heading font-semibold text-foreground shadow-sm">Request a Place</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mb-12 md:mb-16 rounded-xl border border-border bg-muted p-6 md:p-8 lg:p-10 shadow-sm">
+      <div class="max-w-3xl mb-6">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="h-px w-10 bg-tertiary"></div>
+          <span class="text-sm font-semibold text-muted-foreground">Tailored Assignments</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-foreground mb-3">Tailored Microsoft Copilot Agentic AI Transformation Assignments</h2>
+        <p class="text-base md:text-lg text-muted-foreground leading-relaxed">We can shape assignments around an organisation’s specific Microsoft Copilot Agentic AI transformation requirements.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        <div class="md:col-span-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:layers" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Microsoft Copilot adoption</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:lightbulb" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Microsoft Copilot Agentic AI use cases</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:shield-check" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Responsible AI governance</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:users-round" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Workforce readiness</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:refresh-cw" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Business change</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:clipboard-list" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Programme delivery</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:network" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Operating model development</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card px-5 py-4 shadow-sm flex items-center gap-3">
+              <div class="h-9 w-9 rounded-lg bg-muted border border-border flex items-center justify-center text-primary flex-shrink-0">
+                <iconify-icon icon="lucide:map" class="text-lg"></iconify-icon>
+              </div>
+              <p class="text-sm md:text-base text-foreground">Implementation planning</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-4 rounded-xl border border-border bg-card p-6 shadow-sm">
+          <div class="flex items-start gap-3 mb-4">
+            <div class="h-10 w-10 rounded-lg bg-muted border border-border flex items-center justify-center text-tertiary flex-shrink-0">
+              <iconify-icon icon="lucide:arrow-right-left" class="text-lg"></iconify-icon>
+            </div>
+            <h3 class="text-lg font-heading font-semibold text-foreground">Assignment scope</h3>
+          </div>
+          <p class="text-sm md:text-base text-muted-foreground leading-relaxed mb-5">The scope, duration and outputs should be agreed before work begins.</p>
+          <a href="TransformContact.html?enquiryType=Microsoft%20Copilot%20Agentic%20AI%20Transformation%20Advisory" class="inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-center font-heading font-semibold text-primary-foreground shadow-sm">Discuss Your Requirements</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="rounded-xl border border-border bg-muted p-5 md:p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div class="h-10 w-10 rounded-xl bg-card border border-border flex items-center justify-center text-tertiary flex-shrink-0">
+            <iconify-icon icon="lucide:heart-handshake" class="text-lg"></iconify-icon>
+          </div>
+          <p class="text-sm md:text-base text-muted-foreground leading-relaxed">Registered charitable organisations may qualify for a 50% discount on eligible readiness, training and Microsoft Copilot Agentic AI transformation assignments.</p>
+        </div>
+        <div class="w-full md:w-auto">
+          <a href="TransformContact.html?enquiryType=Charity%20Organisation%20Discount" class="inline-flex min-h-11 w-full md:w-auto items-center justify-center rounded-lg border border-border bg-card px-6 py-3 text-center font-heading font-semibold text-foreground shadow-sm">Check Charity Eligibility</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-primary text-primary-foreground border-t border-border/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <div class="inline-block bg-white rounded-xl p-3 shadow-sm">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 object-contain" />
+          </div>
+          <p class="text-xs tracking-[0.2em] uppercase font-bold text-secondary">Assess. Train. Transform.</p>
+          <p class="text-sm text-primary-foreground/80 leading-relaxed max-w-sm">AI Transformation Professionals helps organisations assess AI readiness, train their workforce and implement responsible Microsoft Copilot Agentic AI transformation.</p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="https://example.com/facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:facebook" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/x" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:x" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:youtube" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:instagram" class="text-xl"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-3 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-2 text-sm text-primary-foreground/80">
+            <li><a href="TransformHomepage.html" class="hover:text-primary-foreground transition-colors">Home</a></li>
+            <li><a href="TransformAboutus.html" class="hover:text-primary-foreground transition-colors">About Us</a></li>
+            <li><a href="TransformService.html" class="hover:text-primary-foreground transition-colors">Services</a></li>
+            <li><a href="TransformTrainingPage.html" class="hover:text-primary-foreground transition-colors">Training</a></li>
+            <li><a href="TransformPublication.html" class="hover:text-primary-foreground transition-colors">Publications</a></li>
+            <li><a href="TransformReviews.html" class="hover:text-primary-foreground transition-colors">Reviews</a></li>
+            <li><a href="TransformContact.html?enquiryType=General%20Enquiry" class="hover:text-primary-foreground transition-colors">Contact Us</a></li>
+            <li><a href="TransformHelp.html" class="hover:text-primary-foreground transition-colors">Help</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Contact Details</h4>
+          <ul class="space-y-3 text-sm text-primary-foreground/80">
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITransformationProfessionals.com</span></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITransformationProfessionals.com" class="hover:text-primary-foreground transition-colors">Connect@AITransformationProfessionals.com</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:phone" class="text-secondary"></iconify-icon><a href="tel:+447939883637" class="hover:text-primary-foreground transition-colors">+44 7939 88 3637</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-border/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-primary-foreground/70">
+        <div class="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start">
+          <a href="TransformTerms.html" class="hover:text-primary-foreground transition-colors">Terms and Conditions</a>
+          <a href="TransformPrivacy.html" class="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+          <a href="TransformAIPolicy.html" class="hover:text-primary-foreground transition-colors">AI Policy</a>
+          <a href="TRansformCookie.html" class="hover:text-primary-foreground transition-colors">Cookie Policy</a>
+        </div>
+        <p class="text-center md:text-right">© 2026 AI Transformation Professionals. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var button = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var openIcon = document.getElementById('mobile-menu-open-icon');
+      var closeIcon = document.getElementById('mobile-menu-close-icon');
+      var links = document.querySelectorAll('.mobile-menu-link');
+      if (!button || !menu || !openIcon || !closeIcon) return;
+
+      function setMenuState(isOpen) {
+        menu.classList.toggle('hidden', !isOpen);
+        openIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      }
+
+      setMenuState(false);
+
+      button.addEventListener('click', function() {
+        setMenuState(menu.classList.contains('hidden'));
+      });
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          setMenuState(false);
+        });
+      });
+    })();
+  </script>
+
+
+<a id="ai-help-fab" href="TransformHelp.html" aria-label="Open AI Help Assistant" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+  <iconify-icon icon="lucide:bot" class="text-2xl"></iconify-icon>
+</a>
+<script>
+  (function () {
+    var fab = document.getElementById("ai-help-fab");
+    var footer = document.querySelector("footer");
+    if (!fab || !footer || !("IntersectionObserver" in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        fab.style.opacity = entry.isIntersecting ? "0" : "1";
+        fab.style.pointerEvents = entry.isIntersecting ? "none" : "auto";
+      });
+    });
+    observer.observe(footer);
+  })();
+</script>
+</div></body></html>

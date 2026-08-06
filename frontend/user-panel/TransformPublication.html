@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publications | AI Transformation Professionals</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&family=Fira+Code:wght@300..700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=optional" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=optional" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="assets/tailwind.css" />
+    <style>
+      :root { --background: #FFFFFF;
+        --foreground: #0F172A;
+        --primary: #1E3A8A;
+        --primary-foreground: #FFFFFF;
+        --secondary: #2E9BF0;
+        --secondary-foreground: #FFFFFF;
+        --tertiary: #1E3A8A;
+        --muted: #F5F7FA;
+        --muted-foreground: #6B7280;
+        --accent: #E6F0FA;
+        --accent-foreground: #0F172A;
+        --card: #FFFFFF;
+        --card-foreground: #0F172A;
+        --destructive: #ef4444;
+        --border: #E5E7EB;
+        --input: #E5E7EB;
+        --ring: #2E9BF0;
+        --radius: 0.9rem;
+        --font-sans: Inter,sans-serif;
+        --font-heading: Inter,sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--secondary)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+<div class="min-h-screen w-full bg-background flex flex-col relative">
+  <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="h-24 flex items-center justify-between gap-3 lg:gap-6">
+        <a href="TransformHomepage.html" class="hidden md:flex items-center shrink-0">
+          <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 lg:h-[88px] object-contain" />
+        </a>
+        <div class="flex md:hidden items-center flex-1 min-w-0 gap-2">
+          <a href="TransformHomepage.html" class="flex items-center shrink-0">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619482-2e87f7d8-icon.png" alt="AI Transformation Professionals icon" class="h-14 w-14 object-contain" />
+          </a>
+          <span class="text-sm xs:text-base sm:text-lg font-heading font-semibold text-primary leading-tight min-w-0">AI Transformation<br />Professionals</span>
+        </div>
+
+        <nav class="hidden xl:flex items-center justify-center gap-4 2xl:gap-6 flex-1 min-w-0">
+          <a href="TransformHomepage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Home</a>
+          <a href="TransformAboutus.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">About Us</a>
+          <a href="TransformService.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Services</a>
+          <a href="TransformTrainingPage.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Training</a>
+          <a href="TransformPublication.html" class="text-sm font-medium text-primary hover:text-secondary transition-colors whitespace-nowrap">Publications</a>
+          <a href="TransformReviews.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Reviews</a>
+          <a href="TransformContact.html?enquiryType=General%20Enquiry" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Contact Us</a>
+          <a href="TransformHelp.html" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">Help</a>
+        </nav>
+
+        <div class="hidden xl:flex items-center shrink-0">
+          <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="inline-flex items-center justify-center px-4 lg:px-5 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm hover:bg-secondary/90 transition-all whitespace-nowrap min-h-11">
+            Request an AI Readiness Assessment
+            <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+          </a>
+        </div>
+
+        <button id="mobile-menu-toggle" class="xl:hidden inline-flex items-center justify-center p-2 rounded-lg text-primary hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <iconify-icon id="mobile-menu-open-icon" icon="lucide:menu" class="text-2xl"></iconify-icon>
+          <iconify-icon id="mobile-menu-close-icon" icon="lucide:x" class="text-2xl hidden"></iconify-icon>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden xl:hidden border-t border-border bg-background">
+      <div class="px-4 py-4 space-y-1">
+        <a href="TransformHomepage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Home</a>
+        <a href="TransformAboutus.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">About Us</a>
+        <a href="TransformService.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Services</a>
+        <a href="TransformTrainingPage.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Training</a>
+        <a href="TransformPublication.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-primary hover:bg-muted">Publications</a>
+        <a href="TransformReviews.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Reviews</a>
+        <a href="TransformContact.html?enquiryType=General%20Enquiry" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Contact Us</a>
+        <a href="TransformHelp.html" class="mobile-menu-link block px-3 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted">Help</a>
+      </div>
+      <div class="px-4 pb-4">
+        <a href="TransformContact.html?enquiryType=AI%20Readiness%20Assessment" class="mobile-menu-link w-full inline-flex items-center justify-center px-4 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold text-sm shadow-sm min-h-11">
+          Request an AI Readiness Assessment
+          <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full">
+    <section class="border-b border-border bg-background">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div class="max-w-3xl space-y-4">
+          <h1 class="text-2xl sm:text-3xl font-heading font-bold text-foreground">Publications</h1>
+          <p class="text-sm sm:text-base font-sans text-muted-foreground leading-7">Explore books and exam preparation guides covering Microsoft Copilot Agentic AI transformation, workforce capability and professional certification.</p>
+          <p class="text-sm sm:text-base font-sans text-muted-foreground leading-7">All publications are available on Amazon.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-background">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1784281753925-26c32467-Citizen%20Agentic%20AI.png" alt="Citizen Agentic AI book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">Agentic AI</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">Citizens' Agentic AI</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">An accessible introduction to Agentic AI, Microsoft Copilot and the changing relationship between people and intelligent systems.</p>
+              <div class="mt-5 flex flex-col gap-3">
+                <a href="[Insert Amazon URL during integration]" class="w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+                <button type="button" id="openFreeDownloadModal" class="w-full inline-flex items-center justify-center min-h-11 rounded-lg border border-border bg-background text-foreground px-4 py-3 text-sm font-sans font-medium">Apply for Free Download</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1783972545799-b782dc52-Agenti%20AI%20Workforce%20Transform.png" alt="Agentic AI Workforce Transformation book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">Workforce Transformation</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">Agentic AI Workforce Transformation</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">A practical guide to preparing leaders, managers and employees for responsible Agentic AI adoption and new ways of working.</p>
+              <a href="[Insert Amazon URL during integration]" class="mt-5 w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+            </div>
+          </article>
+
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1783972545772-63c35ea5-AB-900.png" alt="AB-900 Exam Preparation book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">Microsoft Certification Exam Preparation</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">AB-900 Exam Preparation</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">An exam preparation guide supporting candidates studying for the Microsoft AB-900 certification examination.</p>
+              <a href="[Insert Amazon URL during integration]" class="mt-5 w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+            </div>
+          </article>
+
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1783972545788-bc6d63a5-AB-730.png" alt="AB-730 Exam Preparation book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">Microsoft Certification Exam Preparation</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">AB-730 Exam Preparation</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">An exam preparation guide supporting candidates studying for the Microsoft AB-730 AI Business Professional certification examination.</p>
+              <a href="[Insert Amazon URL during integration]" class="mt-5 w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+            </div>
+          </article>
+
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1783972545855-d0e8ea12-AB-731.png" alt="AB-731 Exam Preparation book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">Microsoft Certification Exam Preparation</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">AB-731 Exam Preparation</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">An exam preparation guide supporting candidates studying for the Microsoft AB-731 AI Transformation Leader certification examination.</p>
+              <a href="[Insert Amazon URL during integration]" class="mt-5 w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+            </div>
+          </article>
+
+          <article class="bg-card border border-border rounded-xl shadow-md p-5 sm:p-6 flex flex-col h-full">
+            <div class="rounded-xl border border-input bg-muted aspect-[3/4] flex items-center justify-center p-4 overflow-hidden">
+              <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a550cb3d6de58563f7c503d/1783972545931-68d9a35b-BCS%20Digital%20Business%20Change.png" alt="BCS Digital Change Management Exam Preparation book cover" class="w-full h-full object-contain rounded-lg" />
+            </div>
+            <div class="mt-5 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 self-start rounded-lg bg-accent px-3 py-1 border border-border">
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-sans font-medium text-foreground">BCS Certification Exam Preparation</span>
+              </div>
+              <h2 class="mt-4 text-lg font-heading font-semibold text-foreground leading-7">BCS Digital Change Management Exam Preparation</h2>
+              <p class="mt-3 text-sm font-sans text-muted-foreground leading-7 flex-1">An exam preparation guide supporting candidates studying for the BCS Digital Change Management certification examination.</p>
+              <a href="[Insert Amazon URL during integration]" class="mt-5 w-full inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-4 py-3 text-sm font-sans font-medium shadow-md">View on Amazon</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="freeDownloadModal" class="hidden absolute inset-0 z-20 bg-foreground/30 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+    <div class="min-h-full flex items-start sm:items-center justify-center">
+      <div class="w-full max-w-4xl bg-card text-card-foreground border border-border rounded-xl shadow-md overflow-hidden">
+        <div class="flex items-start justify-between gap-4 px-5 sm:px-6 py-5 border-b border-border bg-background">
+          <div class="space-y-2 pr-4">
+            <h2 class="text-lg sm:text-2xl font-heading font-semibold text-foreground">Apply for a Free Citizens' Agentic AI Download</h2>
+            <p class="text-sm font-sans text-muted-foreground leading-6">Complete the short application form below. The free downloadable version is available on application.</p>
+          </div>
+          <button type="button" id="closeFreeDownloadModal" aria-label="Close" class="inline-flex items-center justify-center rounded-lg border border-border bg-background text-foreground p-3">
+            <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+          </button>
+        </div>
+
+        <div id="freeDownloadFormState" class="px-5 sm:px-6 py-5 sm:py-6">
+          <form id="freeDownloadForm" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="downloadTitle" class="text-sm font-sans font-medium text-foreground">Title</label>
+                <select id="downloadTitle" name="title" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground">
+                  <option value="">Select title</option>
+                  <option>Alahaja</option>
+                  <option>Alahaji</option>
+                  <option>Dr</option>
+                  <option>Engr</option>
+                  <option>Mallam</option>
+                  <option>Miss</option>
+                  <option>Mr</option>
+                  <option>Mrs</option>
+                  <option>Ms</option>
+                  <option>Other</option>
+                  <option>Prof</option>
+                  <option>Pst</option>
+                  <option>Rev</option>
+                </select>
+                <p id="error-title" class="hidden text-sm font-sans text-destructive">Please select your title.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadGender" class="text-sm font-sans font-medium text-foreground">Gender</label>
+                <select id="downloadGender" name="gender" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground">
+                  <option value="">Select gender</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Other</option>
+                  <option>Prefer not to say</option>
+                </select>
+                <p id="error-gender" class="hidden text-sm font-sans text-destructive">Please select your gender.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadFirstName" class="text-sm font-sans font-medium text-foreground">First name</label>
+                <input id="downloadFirstName" name="firstName" type="text" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="Enter your first name" />
+                <p id="error-firstName" class="hidden text-sm font-sans text-destructive">Please enter your first name.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadSurname" class="text-sm font-sans font-medium text-foreground">Surname</label>
+                <input id="downloadSurname" name="surname" type="text" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="Enter your surname" />
+                <p id="error-surname" class="hidden text-sm font-sans text-destructive">Please enter your surname.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadAgeGroup" class="text-sm font-sans font-medium text-foreground">Age group</label>
+                <select id="downloadAgeGroup" name="ageGroup" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground">
+                  <option value="">Select age group</option>
+                  <option>Under 30</option>
+                  <option>31 to 50</option>
+                  <option>Over 51</option>
+                </select>
+                <p id="error-ageGroup" class="hidden text-sm font-sans text-destructive">Please select your age group.</p>
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="downloadCountrySearch" class="text-sm font-sans font-medium text-foreground">Country of residence</label>
+                <div class="space-y-3 rounded-xl border border-border bg-muted p-4">
+                  <input id="downloadCountrySearch" type="text" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="Search country" />
+                  <select id="downloadCountry" name="country" size="7" class="w-full rounded-lg border border-input bg-background px-3 py-2 text-base font-sans text-foreground">
+                    <option>Afghanistan</option>
+                    <option>Albania</option>
+                    <option>Algeria</option>
+                    <option>Andorra</option>
+                    <option>Angola</option>
+                    <option>Antigua and Barbuda</option>
+                    <option>Argentina</option>
+                    <option>Armenia</option>
+                    <option>Australia</option>
+                    <option>Austria</option>
+                    <option>Azerbaijan</option>
+                    <option>Bahamas</option>
+                    <option>Bahrain</option>
+                    <option>Bangladesh</option>
+                    <option>Barbados</option>
+                    <option>Belarus</option>
+                    <option>Belgium</option>
+                    <option>Belize</option>
+                    <option>Benin</option>
+                    <option>Bhutan</option>
+                    <option>Bolivia</option>
+                    <option>Bosnia and Herzegovina</option>
+                    <option>Botswana</option>
+                    <option>Brazil</option>
+                    <option>Brunei</option>
+                    <option>Bulgaria</option>
+                    <option>Burkina Faso</option>
+                    <option>Burundi</option>
+                    <option>Cabo Verde</option>
+                    <option>Cambodia</option>
+                    <option>Cameroon</option>
+                    <option>Canada</option>
+                    <option>Central African Republic</option>
+                    <option>Chad</option>
+                    <option>Chile</option>
+                    <option>China</option>
+                    <option>Colombia</option>
+                    <option>Comoros</option>
+                    <option>Congo</option>
+                    <option>Costa Rica</option>
+                    <option>Croatia</option>
+                    <option>Cuba</option>
+                    <option>Cyprus</option>
+                    <option>Czech Republic</option>
+                    <option>Democratic Republic of the Congo</option>
+                    <option>Denmark</option>
+                    <option>Djibouti</option>
+                    <option>Dominica</option>
+                    <option>Dominican Republic</option>
+                    <option>East Timor</option>
+                    <option>Ecuador</option>
+                    <option>Egypt</option>
+                    <option>El Salvador</option>
+                    <option>Equatorial Guinea</option>
+                    <option>Eritrea</option>
+                    <option>Estonia</option>
+                    <option>Eswatini</option>
+                    <option>Ethiopia</option>
+                    <option>Fiji</option>
+                    <option>Finland</option>
+                    <option>France</option>
+                    <option>Gabon</option>
+                    <option>Gambia</option>
+                    <option>Georgia</option>
+                    <option>Germany</option>
+                    <option>Ghana</option>
+                    <option>Greece</option>
+                    <option>Grenada</option>
+                    <option>Guatemala</option>
+                    <option>Guinea</option>
+                    <option>Guinea-Bissau</option>
+                    <option>Guyana</option>
+                    <option>Haiti</option>
+                    <option>Honduras</option>
+                    <option>Hungary</option>
+                    <option>Iceland</option>
+                    <option>India</option>
+                    <option>Indonesia</option>
+                    <option>Iran</option>
+                    <option>Iraq</option>
+                    <option>Ireland</option>
+                    <option>Israel</option>
+                    <option>Italy</option>
+                    <option>Ivory Coast</option>
+                    <option>Jamaica</option>
+                    <option>Japan</option>
+                    <option>Jordan</option>
+                    <option>Kazakhstan</option>
+                    <option>Kenya</option>
+                    <option>Kiribati</option>
+                    <option>Kosovo</option>
+                    <option>Kuwait</option>
+                    <option>Kyrgyzstan</option>
+                    <option>Laos</option>
+                    <option>Latvia</option>
+                    <option>Lebanon</option>
+                    <option>Lesotho</option>
+                    <option>Liberia</option>
+                    <option>Libya</option>
+                    <option>Liechtenstein</option>
+                    <option>Lithuania</option>
+                    <option>Luxembourg</option>
+                    <option>Madagascar</option>
+                    <option>Malawi</option>
+                    <option>Malaysia</option>
+                    <option>Maldives</option>
+                    <option>Mali</option>
+                    <option>Malta</option>
+                    <option>Marshall Islands</option>
+                    <option>Mauritania</option>
+                    <option>Mauritius</option>
+                    <option>Mexico</option>
+                    <option>Micronesia</option>
+                    <option>Moldova</option>
+                    <option>Monaco</option>
+                    <option>Mongolia</option>
+                    <option>Montenegro</option>
+                    <option>Morocco</option>
+                    <option>Mozambique</option>
+                    <option>Myanmar</option>
+                    <option>Namibia</option>
+                    <option>Nauru</option>
+                    <option>Nepal</option>
+                    <option>Netherlands</option>
+                    <option>New Zealand</option>
+                    <option>Nicaragua</option>
+                    <option>Niger</option>
+                    <option>Nigeria</option>
+                    <option>North Korea</option>
+                    <option>North Macedonia</option>
+                    <option>Norway</option>
+                    <option>Oman</option>
+                    <option>Pakistan</option>
+                    <option>Palau</option>
+                    <option>Panama</option>
+                    <option>Papua New Guinea</option>
+                    <option>Paraguay</option>
+                    <option>Peru</option>
+                    <option>Philippines</option>
+                    <option>Poland</option>
+                    <option>Portugal</option>
+                    <option>Qatar</option>
+                    <option>Romania</option>
+                    <option>Russia</option>
+                    <option>Rwanda</option>
+                    <option>Saint Kitts and Nevis</option>
+                    <option>Saint Lucia</option>
+                    <option>Saint Vincent and the Grenadines</option>
+                    <option>Samoa</option>
+                    <option>San Marino</option>
+                    <option>Sao Tome and Principe</option>
+                    <option>Saudi Arabia</option>
+                    <option>Senegal</option>
+                    <option>Serbia</option>
+                    <option>Seychelles</option>
+                    <option>Sierra Leone</option>
+                    <option>Singapore</option>
+                    <option>Slovakia</option>
+                    <option>Slovenia</option>
+                    <option>Solomon Islands</option>
+                    <option>Somalia</option>
+                    <option>South Africa</option>
+                    <option>South Korea</option>
+                    <option>South Sudan</option>
+                    <option>Spain</option>
+                    <option>Sri Lanka</option>
+                    <option>Sudan</option>
+                    <option>Suriname</option>
+                    <option>Sweden</option>
+                    <option>Switzerland</option>
+                    <option>Syria</option>
+                    <option>Taiwan</option>
+                    <option>Tajikistan</option>
+                    <option>Tanzania</option>
+                    <option>Thailand</option>
+                    <option>Togo</option>
+                    <option>Tonga</option>
+                    <option>Trinidad and Tobago</option>
+                    <option>Tunisia</option>
+                    <option>Turkey</option>
+                    <option>Turkmenistan</option>
+                    <option>Tuvalu</option>
+                    <option>Uganda</option>
+                    <option>Ukraine</option>
+                    <option>United Arab Emirates</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                    <option>Uruguay</option>
+                    <option>Uzbekistan</option>
+                    <option>Vanuatu</option>
+                    <option>Vatican City</option>
+                    <option>Venezuela</option>
+                    <option>Vietnam</option>
+                    <option>Yemen</option>
+                    <option>Zambia</option>
+                    <option>Zimbabwe</option>
+                  </select>
+                </div>
+                <p id="countrySelectedText" class="text-sm font-sans text-muted-foreground">No country selected.</p>
+                <p id="error-country" class="hidden text-sm font-sans text-destructive">Please select your country of residence.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadEmail" class="text-sm font-sans font-medium text-foreground">Email</label>
+                <input id="downloadEmail" name="email" type="email" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="name@example.com" />
+                <p id="error-email" class="hidden text-sm font-sans text-destructive">Please enter a valid email address.</p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="downloadConfirmEmail" class="text-sm font-sans font-medium text-foreground">Confirm email</label>
+                <input id="downloadConfirmEmail" name="confirmEmail" type="email" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="Re-enter your email" />
+                <p id="error-confirmEmail" class="hidden text-sm font-sans text-destructive">Email addresses must exactly match.</p>
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="downloadOccupation" class="text-sm font-sans font-medium text-foreground">Occupation</label>
+                <select id="downloadOccupation" name="occupation" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground">
+                  <option value="">Select occupation</option>
+                  <option>Charity Worker</option>
+                  <option>Educator</option>
+                  <option>Employed</option>
+                  <option>Job Seeker</option>
+                  <option>Retired</option>
+                  <option>Self-employed</option>
+                  <option>Student</option>
+                </select>
+                <p id="error-occupation" class="hidden text-sm font-sans text-destructive">Please select your occupation.</p>
+              </div>
+            </div>
+
+            <div class="space-y-4 rounded-xl border border-border bg-muted p-4 sm:p-5">
+              <label class="flex items-start gap-3">
+                <input id="downloadHuman" name="human" type="checkbox" class="mt-1 h-4 w-4 rounded border border-input text-primary" />
+                <span class="text-sm font-sans text-foreground">I am human</span>
+              </label>
+              <p id="error-human" class="hidden text-sm font-sans text-destructive">Please confirm that you are human.</p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3 items-end">
+                <div class="space-y-2">
+                  <label for="downloadSecurityAnswer" class="text-sm font-sans font-medium text-foreground">Security question</label>
+                  <p id="securityQuestionText" class="text-sm font-sans text-foreground">4 + 3 = ?</p>
+                </div>
+                <div class="space-y-2 sm:w-32">
+                  <label for="downloadSecurityAnswer" class="text-sm font-sans font-medium text-foreground">Answer</label>
+                  <input id="downloadSecurityAnswer" name="securityAnswer" inputmode="numeric" type="number" class="w-full min-h-11 rounded-lg border border-input bg-background px-4 py-3 text-base font-sans text-foreground" placeholder="0" />
+                </div>
+              </div>
+              <p id="error-security" class="hidden text-sm font-sans text-destructive">Please enter the correct answer to the security question.</p>
+            </div>
+
+            <div class="space-y-4 border-t border-border pt-5">
+              <p class="text-sm font-sans text-muted-foreground leading-6">Your information will be used to process your application and communicate with you about the requested publication. Please review our <a href="TransformPrivacy.html" class="text-primary font-medium">Privacy Policy</a>.</p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
+                <button type="button" id="cancelFreeDownload" class="w-full sm:w-auto inline-flex items-center justify-center min-h-11 rounded-lg border border-border bg-background text-foreground px-4 py-3 text-sm font-sans font-medium">Cancel</button>
+                <button type="submit" id="submitFreeDownload" class="w-full sm:w-auto inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-5 py-3 text-sm font-sans font-medium shadow-md">Submit Application</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="freeDownloadSuccessState" class="hidden px-5 sm:px-6 py-8 sm:py-10">
+          <div class="max-w-2xl mx-auto text-center space-y-4">
+            <div class="mx-auto h-14 w-14 rounded-full bg-accent border border-border flex items-center justify-center">
+              <iconify-icon icon="lucide:circle-check" class="text-2xl text-primary"></iconify-icon>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-heading font-semibold text-foreground">Application received</h3>
+            <p class="text-sm sm:text-base font-sans text-muted-foreground leading-7">Thank you. Your application for the free Citizens' Agentic AI download has been received. Download access will be provided after your application is processed.</p>
+            <div class="pt-2">
+              <button type="button" id="closeSuccessModal" class="w-full sm:w-auto inline-flex items-center justify-center min-h-11 rounded-lg bg-primary text-primary-foreground px-5 py-3 text-sm font-sans font-medium shadow-md">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const modal = document.getElementById('freeDownloadModal');
+      const openBtn = document.getElementById('openFreeDownloadModal');
+      const closeBtn = document.getElementById('closeFreeDownloadModal');
+      const cancelBtn = document.getElementById('cancelFreeDownload');
+      const closeSuccessBtn = document.getElementById('closeSuccessModal');
+      const form = document.getElementById('freeDownloadForm');
+      const formState = document.getElementById('freeDownloadFormState');
+      const successState = document.getElementById('freeDownloadSuccessState');
+      const submitBtn = document.getElementById('submitFreeDownload');
+      const countrySearch = document.getElementById('downloadCountrySearch');
+      const countrySelect = document.getElementById('downloadCountry');
+      const countrySelectedText = document.getElementById('countrySelectedText');
+      const emailInput = document.getElementById('downloadEmail');
+      const confirmEmailInput = document.getElementById('downloadConfirmEmail');
+      const humanCheckbox = document.getElementById('downloadHuman');
+      const securityQuestionText = document.getElementById('securityQuestionText');
+      const securityAnswerInput = document.getElementById('downloadSecurityAnswer');
+      const requiredFields = [
+        { id: 'downloadTitle', error: 'error-title', type: 'select' },
+        { id: 'downloadFirstName', error: 'error-firstName', type: 'text' },
+        { id: 'downloadSurname', error: 'error-surname', type: 'text' },
+        { id: 'downloadGender', error: 'error-gender', type: 'select' },
+        { id: 'downloadAgeGroup', error: 'error-ageGroup', type: 'select' },
+        { id: 'downloadOccupation', error: 'error-occupation', type: 'select' }
+      ];
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let securityAnswer = 0;
+      let isSubmitting = false;
+
+      function toggleError(errorId, show) {
+        const errorEl = document.getElementById(errorId);
+        if (!errorEl) return;
+        if (show) {
+          errorEl.classList.remove('hidden');
+        } else {
+          errorEl.classList.add('hidden');
+        }
+      }
+
+      function resetFieldErrors() {
+        ['error-title','error-firstName','error-surname','error-gender','error-ageGroup','error-country','error-email','error-confirmEmail','error-occupation','error-human','error-security'].forEach(function(id) {
+          toggleError(id, false);
+        });
+      }
+
+      function resetInputBorders() {
+        ['downloadTitle','downloadFirstName','downloadSurname','downloadGender','downloadAgeGroup','downloadCountry','downloadEmail','downloadConfirmEmail','downloadOccupation','downloadSecurityAnswer'].forEach(function(id) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.classList.remove('border-destructive');
+          el.classList.add('border-input');
+        });
+      }
+
+      function setFieldInvalid(id, errorId, invalid) {
+        const el = document.getElementById(id);
+        if (el) {
+          if (invalid) {
+            el.classList.remove('border-input');
+            el.classList.add('border-destructive');
+          } else {
+            el.classList.remove('border-destructive');
+            el.classList.add('border-input');
+          }
+        }
+        toggleError(errorId, invalid);
+      }
+
+      function generateSecurityQuestion() {
+        const isAddition = Math.random() > 0.5;
+        let first = Math.floor(Math.random() * 9) + 1;
+        let second = Math.floor(Math.random() * 9) + 1;
+        if (!isAddition && second > first) {
+          const temp = first;
+          first = second;
+          second = temp;
+        }
+        securityAnswer = isAddition ? first + second : first - second;
+        securityQuestionText.textContent = first + (isAddition ? ' + ' : ' - ') + second + ' = ?';
+        securityAnswerInput.value = '';
+        setFieldInvalid('downloadSecurityAnswer', 'error-security', false);
+      }
+
+      function resetFormState() {
+        form.reset();
+        resetFieldErrors();
+        resetInputBorders();
+        countrySearch.value = '';
+        Array.from(countrySelect.options).forEach(function(option) {
+          option.hidden = false;
+        });
+        countrySelect.selectedIndex = -1;
+        countrySelectedText.textContent = 'No country selected.';
+        formState.classList.remove('hidden');
+        successState.classList.add('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+        submitBtn.classList.remove('opacity-70');
+        isSubmitting = false;
+        generateSecurityQuestion();
+      }
+
+      function openModal() {
+        resetFormState();
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+
+      function validateForm() {
+        let isValid = true;
+        resetFieldErrors();
+        resetInputBorders();
+
+        requiredFields.forEach(function(field) {
+          const el = document.getElementById(field.id);
+          const value = el.value.trim();
+          const invalid = value === '';
+          if (invalid) {
+            isValid = false;
+          }
+          setFieldInvalid(field.id, field.error, invalid);
+        });
+
+        const emailValue = emailInput.value.trim();
+        const confirmEmailValue = confirmEmailInput.value.trim();
+        const emailInvalid = !emailPattern.test(emailValue);
+        if (emailInvalid) {
+          isValid = false;
+        }
+        setFieldInvalid('downloadEmail', 'error-email', emailInvalid);
+
+        const confirmInvalid = confirmEmailValue === '' || confirmEmailValue !== emailValue;
+        if (confirmInvalid) {
+          isValid = false;
+        }
+        setFieldInvalid('downloadConfirmEmail', 'error-confirmEmail', confirmInvalid);
+
+        const countryInvalid = !countrySelect.value;
+        if (countryInvalid) {
+          isValid = false;
+        }
+        setFieldInvalid('downloadCountry', 'error-country', countryInvalid);
+
+        const humanInvalid = !humanCheckbox.checked;
+        if (humanInvalid) {
+          isValid = false;
+        }
+        toggleError('error-human', humanInvalid);
+
+        const securityInvalid = securityAnswerInput.value === '' || Number(securityAnswerInput.value) !== securityAnswer;
+        if (securityInvalid) {
+          isValid = false;
+        }
+        setFieldInvalid('downloadSecurityAnswer', 'error-security', securityInvalid);
+
+        return isValid;
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+      closeSuccessBtn.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      countrySearch.addEventListener('input', function() {
+        const query = countrySearch.value.trim().toLowerCase();
+        let visibleCount = 0;
+        Array.from(countrySelect.options).forEach(function(option) {
+          const match = option.text.toLowerCase().indexOf(query) > -1;
+          option.hidden = !match;
+          if (match) {
+            visibleCount += 1;
+          }
+        });
+        if (visibleCount > 0) {
+          const firstVisible = Array.from(countrySelect.options).find(function(option) { return !option.hidden; });
+          if (firstVisible && !countrySelect.value) {
+            firstVisible.selected = true;
+            countrySelectedText.textContent = 'Selected country: ' + firstVisible.text;
+          }
+        } else {
+          countrySelectedText.textContent = 'No matching country found.';
+        }
+      });
+
+      countrySelect.addEventListener('change', function() {
+        countrySelectedText.textContent = countrySelect.value ? 'Selected country: ' + countrySelect.value : 'No country selected.';
+        setFieldInvalid('downloadCountry', 'error-country', !countrySelect.value);
+      });
+
+      emailInput.addEventListener('input', function() {
+        const emailValue = emailInput.value.trim();
+        setFieldInvalid('downloadEmail', 'error-email', emailValue !== '' && !emailPattern.test(emailValue));
+        const confirmValue = confirmEmailInput.value.trim();
+        setFieldInvalid('downloadConfirmEmail', 'error-confirmEmail', confirmValue !== '' && confirmValue !== emailValue);
+      });
+
+      confirmEmailInput.addEventListener('input', function() {
+        const confirmValue = confirmEmailInput.value.trim();
+        setFieldInvalid('downloadConfirmEmail', 'error-confirmEmail', confirmValue !== '' && confirmValue !== emailInput.value.trim());
+      });
+
+      securityAnswerInput.addEventListener('input', function() {
+        const hasValue = securityAnswerInput.value !== '';
+        setFieldInvalid('downloadSecurityAnswer', 'error-security', hasValue && Number(securityAnswerInput.value) !== securityAnswer);
+      });
+
+      humanCheckbox.addEventListener('change', function() {
+        toggleError('error-human', !humanCheckbox.checked);
+      });
+
+      requiredFields.forEach(function(field) {
+        const el = document.getElementById(field.id);
+        const eventName = field.type === 'text' ? 'input' : 'change';
+        el.addEventListener(eventName, function() {
+          setFieldInvalid(field.id, field.error, el.value.trim() === '');
+        });
+      });
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (isSubmitting) {
+          return;
+        }
+        if (!validateForm()) {
+          return;
+        }
+        isSubmitting = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.classList.add('opacity-70');
+
+        window.setTimeout(function() {
+          formState.classList.add('hidden');
+          successState.classList.remove('hidden');
+          isSubmitting = false;
+        }, 900);
+      });
+    })();
+  </script>
+  <footer class="bg-primary text-primary-foreground border-t border-border/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div class="md:col-span-5 space-y-4">
+          <div class="inline-block bg-white rounded-xl p-3 shadow-sm">
+            <img src="https://uxmagic.blob.core.windows.net/public/project-documents/69b184e390545df913c92c04/6a54b251d6de58563f77062d/1783935619506-62d4cce2-full%20logo.png" alt="AI Transformation Professionals logo" class="h-20 object-contain" />
+          </div>
+          <p class="text-xs tracking-[0.2em] uppercase font-bold text-secondary">Assess. Train. Transform.</p>
+          <p class="text-sm text-primary-foreground/80 leading-relaxed max-w-sm">AI Transformation Professionals helps organisations assess AI readiness, train their workforce and implement responsible Microsoft Copilot Agentic AI transformation.</p>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="https://example.com/facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:facebook" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/x" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:x" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:youtube" class="text-xl"></iconify-icon>
+            </a>
+            <a href="https://example.com/instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-11 h-11 rounded-full border border-primary-foreground/20 bg-background/10 text-primary-foreground inline-flex items-center justify-center transition-colors hover:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary shrink-0">
+              <iconify-icon icon="simple-icons:instagram" class="text-xl"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-3 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-2 text-sm text-primary-foreground/80">
+            <li><a href="TransformHomepage.html" class="hover:text-primary-foreground transition-colors">Home</a></li>
+            <li><a href="TransformAboutus.html" class="hover:text-primary-foreground transition-colors">About Us</a></li>
+            <li><a href="TransformService.html" class="hover:text-primary-foreground transition-colors">Services</a></li>
+            <li><a href="TransformTrainingPage.html" class="hover:text-primary-foreground transition-colors">Training</a></li>
+            <li><a href="TransformPublication.html" class="hover:text-primary-foreground transition-colors">Publications</a></li>
+            <li><a href="TransformReviews.html" class="hover:text-primary-foreground transition-colors">Reviews</a></li>
+            <li><a href="TransformContact.html?enquiryType=General%20Enquiry" class="hover:text-primary-foreground transition-colors">Contact Us</a></li>
+            <li><a href="TransformHelp.html" class="hover:text-primary-foreground transition-colors">Help</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4 space-y-4">
+          <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Contact Details</h4>
+          <ul class="space-y-3 text-sm text-primary-foreground/80">
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITransformationProfessionals.com</span></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITransformationProfessionals.com" class="hover:text-primary-foreground transition-colors">Connect@AITransformationProfessionals.com</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:phone" class="text-secondary"></iconify-icon><a href="tel:+447939883637" class="hover:text-primary-foreground transition-colors">+44 7939 88 3637</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-border/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-primary-foreground/70">
+        <div class="flex flex-wrap gap-4 sm:gap-6 justify-center md:justify-start">
+          <a href="TransformTerms.html" class="hover:text-primary-foreground transition-colors">Terms and Conditions</a>
+          <a href="TransformPrivacy.html" class="hover:text-primary-foreground transition-colors">Privacy Policy</a>
+          <a href="TransformAIPolicy.html" class="hover:text-primary-foreground transition-colors">AI Policy</a>
+          <a href="TRansformCookie.html" class="hover:text-primary-foreground transition-colors">Cookie Policy</a>
+        </div>
+        <p class="text-center md:text-right">© 2026 AI Transformation Professionals. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var button = document.getElementById('mobile-menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var openIcon = document.getElementById('mobile-menu-open-icon');
+      var closeIcon = document.getElementById('mobile-menu-close-icon');
+      var links = document.querySelectorAll('.mobile-menu-link');
+      if (!button || !menu || !openIcon || !closeIcon) return;
+
+      function setMenuState(isOpen) {
+        menu.classList.toggle('hidden', !isOpen);
+        openIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+        button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      }
+
+      setMenuState(false);
+
+      button.addEventListener('click', function() {
+        setMenuState(menu.classList.contains('hidden'));
+      });
+
+      links.forEach(function(link) {
+        link.addEventListener('click', function() {
+          setMenuState(false);
+        });
+      });
+    })();
+  </script>
+
+
+<a id="ai-help-fab" href="TransformHelp.html" aria-label="Open AI Help Assistant" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+  <iconify-icon icon="lucide:bot" class="text-2xl"></iconify-icon>
+</a>
+<script>
+  (function () {
+    var fab = document.getElementById("ai-help-fab");
+    var footer = document.querySelector("footer");
+    if (!fab || !footer || !("IntersectionObserver" in window)) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        fab.style.opacity = entry.isIntersecting ? "0" : "1";
+        fab.style.pointerEvents = entry.isIntersecting ? "none" : "auto";
+      });
+    });
+    observer.observe(footer);
+  })();
+</script>
+</div></body></html>

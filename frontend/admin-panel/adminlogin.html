@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AppCentre Admin – Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/app.css" />
+    <style>
+      :root { --background: #f3f4f6;
+        --foreground: #1f2937;
+        --primary: #0d9488;
+        --primary-foreground: #ffffff;
+        --secondary: #f8fafc;
+        --secondary-foreground: #1f2937;
+        --tertiary: #16a34a;
+        --muted: #f9fafb;
+        --muted-foreground: #6b7280;
+        --accent: #f0fdfa;
+        --accent-foreground: #0F172A;
+        --card: #ffffff;
+        --card-foreground: #1f2937;
+        --destructive: #991b1b;
+        --border: #e5e7eb;
+        --input: #d1d5db;
+        --ring: #0d9488;
+        --radius: 0.75rem;
+        --font-sans: Inter, sans-serif;
+        --font-heading: Inter, sans-serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12); }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+    </style>
+  </head>
+  <body>
+<div class="min-h-screen w-full bg-background flex flex-col justify-between p-4 md:p-8 font-sans text-foreground">
+  <!-- Central Login Card Container -->
+  <div class="flex-grow flex items-center justify-center py-6">
+    <div class="w-full max-w-[440px] bg-card border border-border rounded-xl shadow-lg p-6 md:p-8 transition-all duration-300">
+      
+      <!-- Brand & Header -->
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-3">
+          <svg viewBox="0 0 24 24" class="h-7.5 w-7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+        </div>
+        <h1 class="text-2xl font-heading font-bold tracking-tight text-foreground">AppCentre Admin</h1>
+        <p class="text-sm text-muted-foreground mt-1">Secure access to the central administration platform</p>
+      </div>
+
+      <!-- State: Standard Login / Form Validation / Invalid Login -->
+      <div id="panel-login" class="space-y-4">
+        <!-- Invalid Login Error Alert (Burgundy themed) -->
+        <div id="alert-invalid" class="hidden p-3.5 bg-rose-50 border border-destructive/30 rounded-lg flex items-start gap-3" role="alert">
+          <svg viewBox="0 0 24 24" class="text-destructive h-5 w-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <div>
+            <h4 class="text-sm font-semibold text-destructive">Login Attempt Failed</h4>
+            <p class="text-xs text-rose-950 mt-0.5">We could not verify those login details. Check your email address and password, then try again.</p>
+          </div>
+        </div>
+
+        <form id="form-login" onsubmit="handleLoginSubmit(event)" novalidate class="space-y-4">
+          <!-- Email Field -->
+          <div class="space-y-1.5">
+            <label for="admin-email" class="block text-sm font-medium text-foreground">Admin email address</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <input type="email" id="admin-email" name="email" placeholder="name@organisation.com" required
+                class="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-muted-foreground/60" />
+            </div>
+            <!-- Inline Error Messages -->
+            <p id="error-email" class="hidden text-xs font-medium text-destructive flex items-center gap-1 mt-1" role="alert">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+              <span>Enter a valid email address.</span>
+            </p>
+          </div>
+
+          <!-- Password Field -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between items-center">
+              <label for="admin-password" class="block text-sm font-medium text-foreground">Password</label>
+              <button type="button" onclick="togglePasswordVisibility('admin-password', 'eye-icon-login')" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1 py-1 px-1.5 rounded focus:outline-none focus:ring-1 focus:ring-primary" aria-label="Toggle password visibility">
+                <svg id="eye-icon-login" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Show</span>
+              </button>
+            </div>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </span>
+              <input type="password" id="admin-password" name="password" required
+                class="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+            </div>
+            <!-- Inline Error Messages -->
+            <p id="error-password" class="hidden text-xs font-medium text-destructive flex items-center gap-1 mt-1" role="alert">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+              <span>Enter your password.</span>
+            </p>
+          </div>
+
+          <!-- Remember Device & Forgot Password link -->
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex items-center gap-2.5 cursor-pointer select-none">
+              <input type="checkbox" name="remember" class="w-4.5 h-4.5 rounded border-border text-primary focus:ring-primary focus:ring-offset-0 bg-background transition-colors" />
+              <span class="text-xs font-medium text-muted-foreground">Remember this device for 30 days</span>
+            </label>
+            <button type="button" onclick="switchState('forgot')" class="text-xs font-semibold text-primary hover:underline py-1 rounded focus:outline-none focus:ring-1 focus:ring-primary">
+              Forgot password?
+            </button>
+          </div>
+
+          <!-- Submit Button with Spinner -->
+          <button type="submit" id="btn-login-submit" class="w-full min-h-11 py-3 px-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center gap-2 transition-all">
+            <svg id="spinner-login" viewBox="0 0 24 24" class="hidden h-4.5 w-4.5 animate-spin" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+            <span>Log in securely</span>
+          </button>
+        </form>
+
+        <!-- Security Information Panel -->
+        <div class="p-3.5 bg-muted rounded-lg border border-border/60 flex items-start gap-3 mt-4">
+          <svg viewBox="0 0 24 24" class="text-primary h-5 w-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <div>
+            <h5 class="text-xs font-semibold text-foreground">Authorised administrators only</h5>
+            <p class="text-[11px] leading-relaxed text-muted-foreground mt-0.5">Administrative activity is monitored and recorded for security and audit purposes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- State: Account Locked -->
+      <div id="panel-locked" class="hidden space-y-5">
+        <div class="p-4 bg-rose-50 border border-destructive/30 rounded-lg flex items-start gap-3">
+          <svg viewBox="0 0 24 24" class="text-destructive h-6 w-6 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+          <div>
+            <h3 class="text-base font-bold text-destructive">Access temporarily restricted</h3>
+            <p class="text-xs text-rose-950 mt-1.5 leading-relaxed">This login has been temporarily restricted following repeated unsuccessful attempts. Try again later or contact an authorised system administrator.</p>
+          </div>
+        </div>
+        <div class="space-y-3 pt-2">
+          <button onclick="switchState('standard')" class="w-full min-h-11 py-3 px-4 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:bg-border transition-all flex items-center justify-center gap-2">
+            <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span>Return to login</span>
+          </button>
+          <a href="#" onclick="event.preventDefault(); showToast('Support console routing initiated.')" class="block w-full min-h-11 py-3 px-4 bg-background border border-border text-foreground text-center font-semibold rounded-lg hover:bg-muted transition-all">
+            Contact support
+          </a>
+        </div>
+      </div>
+
+      <!-- State: Multi-factor Authentication (MFA) -->
+      <div id="panel-mfa" class="hidden space-y-5">
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary mb-2">
+            <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h2 class="text-lg font-heading font-bold text-foreground">Verify your identity</h2>
+          <p class="text-xs text-muted-foreground mt-1">Enter the six-digit security code sent to your registered authentication method.</p>
+        </div>
+
+        <div id="alert-mfa-invalid" class="hidden p-3 bg-rose-50 border border-destructive/30 rounded-lg flex items-start gap-2.5" role="alert">
+          <svg viewBox="0 0 24 24" class="text-destructive h-4.5 w-4.5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+          <p class="text-xs text-rose-950">The security code is incorrect or has expired. Request a new code and try again.</p>
+        </div>
+
+        <form id="form-mfa" onsubmit="handleMfaSubmit(event)" novalidate class="space-y-4">
+          <div class="space-y-1.5">
+            <label for="mfa-code" class="block text-sm font-medium text-foreground">Six-digit security code</label>
+            <input type="text" id="mfa-code" name="mfa_code" pattern="[0-9]*" inputmode="numeric" maxlength="6" placeholder="000 000" required
+              class="w-full py-3 px-4 bg-background border border-border rounded-lg text-center text-xl font-mono tracking-widest focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" />
+            <p id="error-mfa" class="hidden text-xs font-medium text-destructive flex items-center gap-1 mt-1" role="alert">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+              <span>Please enter a 6-digit code.</span>
+            </p>
+          </div>
+
+          <button type="submit" id="btn-mfa-submit" class="w-full min-h-11 py-3 px-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center gap-2 transition-all">
+            <svg id="spinner-mfa" viewBox="0 0 24 24" class="hidden h-4.5 w-4.5 animate-spin" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+            <span>Verify and continue</span>
+          </button>
+        </form>
+
+        <div class="space-y-2.5 pt-2 border-t border-border/60 text-center text-xs">
+          <div class="flex items-center justify-between text-muted-foreground">
+            <span>Resend code in: <strong id="mfa-timer">59s</strong></span>
+            <button id="btn-resend-code" disabled onclick="resendMfaCode()" class="font-semibold text-muted-foreground cursor-not-allowed hover:underline">Resend code</button>
+          </div>
+          <button type="button" onclick="showToast('Alternative verification options requested.')" class="block w-full text-primary font-semibold hover:underline text-center py-1">Use another verification method</button>
+          <button onclick="switchState('standard')" class="block w-full text-muted-foreground hover:text-foreground font-medium text-center py-1 flex items-center justify-center gap-1">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span>Return to login</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- State: Forgot Password Panel -->
+      <div id="panel-forgot" class="hidden space-y-5">
+        <div class="text-center">
+          <h2 class="text-lg font-heading font-bold text-foreground">Reset admin password</h2>
+          <p class="text-xs text-muted-foreground mt-1">Enter your admin email address. If the account is recognised, password reset instructions will be sent to the registered address.</p>
+        </div>
+
+        <form id="form-forgot" onsubmit="handleForgotSubmit(event)" novalidate class="space-y-4">
+          <div class="space-y-1.5">
+            <label for="forgot-email" class="block text-sm font-medium text-foreground">Admin email address</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-muted-foreground">
+                <svg viewBox="0 0 24 24" class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <input type="email" id="forgot-email" name="forgot_email" placeholder="name@organisation.com" required
+                class="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all placeholder:text-muted-foreground/60" />
+            </div>
+            <p id="error-forgot-email" class="hidden text-xs font-medium text-destructive flex items-center gap-1 mt-1" role="alert">
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+              <span>Enter a valid email address.</span>
+            </p>
+          </div>
+
+          <button type="submit" id="btn-forgot-submit" class="w-full min-h-11 py-3 px-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center gap-2 transition-all">
+            <svg id="spinner-forgot" viewBox="0 0 24 24" class="hidden h-4.5 w-4.5 animate-spin" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+            <span>Send reset instructions</span>
+          </button>
+        </form>
+
+        <div class="text-center pt-2 border-t border-border/60">
+          <button onclick="switchState('standard')" class="text-xs font-semibold text-primary hover:underline flex items-center justify-center gap-1 mx-auto py-1">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            <span>Return to login</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- State: Password Reset Confirmation -->
+      <div id="panel-confirmation" class="hidden space-y-5">
+        <div class="text-center py-4">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal-50 text-primary mb-3">
+            <svg viewBox="0 0 24 24" class="h-7.5 w-7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <h2 class="text-lg font-heading font-bold text-foreground">Check your email</h2>
+          <p class="text-xs text-muted-foreground mt-2 leading-relaxed">If the email address is linked to an administrator account, password reset instructions have been sent.</p>
+        </div>
+
+        <div class="space-y-3 pt-2 border-t border-border/60">
+          <button onclick="switchState('standard')" class="w-full min-h-11 py-3 px-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:opacity-95 transition-all text-center">
+            Return to login
+          </button>
+          <button type="button" onclick="showToast('Reset instructions resent.')" class="w-full min-h-11 py-3 px-4 bg-background border border-border text-foreground font-semibold rounded-lg hover:bg-muted transition-all text-center">
+            Resend instructions
+          </button>
+        </div>
+      </div>
+
+      <!-- Support & Platform Information Footer -->
+      <div class="mt-6 pt-5 border-t border-border/60 text-center">
+        <p class="text-xs text-muted-foreground">Need help accessing the admin platform?</p>
+        <button type="button" onclick="showToast('Routing to support workflow...')" class="text-xs font-semibold text-primary hover:underline mt-1.5 inline-block py-1 px-2 rounded focus:outline-none focus:ring-1 focus:ring-primary">
+          Contact authorised support
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Central Platform Associated Sites Footer -->
+  <div class="w-full max-w-lg mx-auto mt-6 pb-4">
+    <div class="text-center">
+      <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Central Admin Console Platform</p>
+      <div class="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground/80">
+        <span class="hover:text-foreground transition-colors cursor-default">HealthCentreApp</span>
+        <span class="text-border">•</span>
+        <span class="hover:text-foreground transition-colors cursor-default">BudgetCentreApp</span>
+        <span class="text-border">•</span>
+        <span class="hover:text-foreground transition-colors cursor-default">ProjectCentreApp</span>
+        <span class="text-border">•</span>
+        <span class="hover:text-foreground transition-colors cursor-default">TrustCentreApp</span>
+        <span class="text-border">•</span>
+        <span class="hover:text-foreground transition-colors cursor-default">TimesheetCentreApp</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-2rem)] rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background shadow-lg" role="status" aria-live="polite"></div>
+</div>
+
+<!-- Inline JavaScript for Prototype State Control and Event Handling -->
+<script>
+  let mfaInterval;
+  let toastTimeout;
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(function () {
+      toast.classList.add('hidden');
+    }, 4000);
+  }
+
+  function switchState(state) {
+    // Hide all panels
+    document.getElementById('panel-login').classList.add('hidden');
+    document.getElementById('panel-locked').classList.add('hidden');
+    document.getElementById('panel-mfa').classList.add('hidden');
+    document.getElementById('panel-forgot').classList.add('hidden');
+    document.getElementById('panel-confirmation').classList.add('hidden');
+
+    // Reset standard alerts/spinners
+    document.getElementById('alert-invalid').classList.add('hidden');
+    document.getElementById('alert-mfa-invalid').classList.add('hidden');
+    document.getElementById('spinner-login').classList.add('hidden');
+    document.getElementById('spinner-mfa').classList.add('hidden');
+    document.getElementById('spinner-forgot').classList.add('hidden');
+
+    // Update active state class in switcher buttons
+    const states = ['standard', 'validation', 'invalid', 'locked', 'mfa', 'forgot', 'confirmation'];
+    states.forEach(s => {
+      const btn = document.getElementById('btn-state-' + s);
+      if (btn) {
+        if (s === state) {
+          btn.classList.remove('bg-secondary', 'text-secondary-foreground');
+          btn.classList.add('bg-primary', 'text-primary-foreground');
+        } else {
+          btn.classList.remove('bg-primary', 'text-primary-foreground');
+          btn.classList.add('bg-secondary', 'text-secondary-foreground');
+        }
+      }
+    });
+
+    // Handle timer cleanup
+    if (mfaInterval) {
+      clearInterval(mfaInterval);
+    }
+
+    // Show selected panel or trigger validation visualization
+    if (state === 'standard') {
+      document.getElementById('panel-login').classList.remove('hidden');
+      clearValidationErrors();
+    } else if (state === 'validation') {
+      document.getElementById('panel-login').classList.remove('hidden');
+      triggerValidationErrors();
+    } else if (state === 'invalid') {
+      document.getElementById('panel-login').classList.remove('hidden');
+      clearValidationErrors();
+      document.getElementById('alert-invalid').classList.remove('hidden');
+      document.getElementById('admin-password').value = '';
+      document.getElementById('admin-password').focus();
+    } else if (state === 'locked') {
+      document.getElementById('panel-locked').classList.remove('hidden');
+    } else if (state === 'mfa') {
+      document.getElementById('panel-mfa').classList.remove('hidden');
+      startMfaTimer();
+      document.getElementById('mfa-code').focus();
+    } else if (state === 'forgot') {
+      document.getElementById('panel-forgot').classList.remove('hidden');
+      document.getElementById('forgot-email').focus();
+    } else if (state === 'confirmation') {
+      document.getElementById('panel-confirmation').classList.remove('hidden');
+    }
+  }
+
+  function togglePasswordVisibility(inputFieldId, iconId) {
+    const input = document.getElementById(inputFieldId);
+    const icon = document.getElementById(iconId);
+    const btnSpan = icon.nextElementSibling;
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.innerHTML = '<path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/>';
+      btnSpan.textContent = 'Hide';
+    } else {
+      input.type = 'password';
+      icon.innerHTML = '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>';
+      btnSpan.textContent = 'Show';
+    }
+  }
+
+  function clearValidationErrors() {
+    document.getElementById('error-email').classList.add('hidden');
+    document.getElementById('error-password').classList.add('hidden');
+    document.getElementById('admin-email').classList.remove('border-destructive', 'focus:ring-destructive');
+    document.getElementById('admin-password').classList.remove('border-destructive', 'focus:ring-destructive');
+  }
+
+  function triggerValidationErrors() {
+    document.getElementById('error-email').classList.remove('hidden');
+    document.getElementById('error-password').classList.remove('hidden');
+    document.getElementById('admin-email').classList.add('border-destructive', 'focus:ring-destructive');
+    document.getElementById('admin-password').classList.add('border-destructive', 'focus:ring-destructive');
+  }
+
+  function handleLoginSubmit(event) {
+    event.preventDefault();
+    clearValidationErrors();
+
+    const email = document.getElementById('admin-email').value.trim();
+    const password = document.getElementById('admin-password').value;
+    let hasError = false;
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('error-email').classList.remove('hidden');
+      document.getElementById('admin-email').classList.add('border-destructive', 'focus:ring-destructive');
+      hasError = true;
+    }
+    if (!password) {
+      document.getElementById('error-password').classList.remove('hidden');
+      document.getElementById('admin-password').classList.add('border-destructive', 'focus:ring-destructive');
+      hasError = true;
+    }
+
+    if (hasError) {
+      const firstInvalid = !email || !email.includes('@') ? 'admin-email' : 'admin-password';
+      document.getElementById(firstInvalid).focus();
+      return;
+    }
+
+    // Show loading spinner
+    const spinner = document.getElementById('spinner-login');
+    const submitBtn = document.getElementById('btn-login-submit');
+    spinner.classList.remove('hidden');
+    submitBtn.disabled = true;
+
+    // Simulate validation and transition to MFA
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+      switchState('mfa');
+    }, 1200);
+  }
+
+  function handleMfaSubmit(event) {
+    event.preventDefault();
+    const codeInput = document.getElementById('mfa-code');
+    const errorMfa = document.getElementById('error-mfa');
+    const alertMfaInvalid = document.getElementById('alert-mfa-invalid');
+    const code = codeInput.value.replace(/\s+/g, '');
+
+    errorMfa.classList.add('hidden');
+    alertMfaInvalid.classList.add('hidden');
+    codeInput.classList.remove('border-destructive', 'focus:ring-destructive');
+
+    if (code.length !== 6 || isNaN(code)) {
+      errorMfa.classList.remove('hidden');
+      codeInput.classList.add('border-destructive', 'focus:ring-destructive');
+      codeInput.focus();
+      return;
+    }
+
+    // Interactive Demo: Code "000000" triggers invalid state
+    if (code === '000000') {
+      alertMfaInvalid.classList.remove('hidden');
+      codeInput.value = '';
+      codeInput.focus();
+      return;
+    }
+
+    const spinner = document.getElementById('spinner-mfa');
+    const submitBtn = document.getElementById('btn-mfa-submit');
+    spinner.classList.remove('hidden');
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+      simulateSuccess();
+    }, 1200);
+  }
+
+  function handleForgotSubmit(event) {
+    event.preventDefault();
+    const emailInput = document.getElementById('forgot-email');
+    const errorForgot = document.getElementById('error-forgot-email');
+    const email = emailInput.value.trim();
+
+    errorForgot.classList.add('hidden');
+    emailInput.classList.remove('border-destructive', 'focus:ring-destructive');
+
+    if (!email || !email.includes('@')) {
+      errorForgot.classList.remove('hidden');
+      emailInput.classList.add('border-destructive', 'focus:ring-destructive');
+      emailInput.focus();
+      return;
+    }
+
+    const spinner = document.getElementById('spinner-forgot');
+    const submitBtn = document.getElementById('btn-forgot-submit');
+    spinner.classList.remove('hidden');
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+      switchState('confirmation');
+    }, 1200);
+  }
+
+  function startMfaTimer() {
+    let timeLeft = 59;
+    const timerSpan = document.getElementById('mfa-timer');
+    const resendBtn = document.getElementById('btn-resend-code');
+    timerSpan.textContent = timeLeft + 's';
+    resendBtn.disabled = true;
+    resendBtn.classList.add('text-muted-foreground', 'cursor-not-allowed');
+    resendBtn.classList.remove('text-primary', 'cursor-pointer');
+
+    mfaInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(mfaInterval);
+        timerSpan.textContent = 'Ready';
+        resendBtn.disabled = false;
+        resendBtn.classList.remove('text-muted-foreground', 'cursor-not-allowed');
+        resendBtn.classList.add('text-primary', 'cursor-pointer');
+      } else {
+        timerSpan.textContent = timeLeft + 's';
+      }
+    }, 1000);
+  }
+
+  function resendMfaCode() {
+    showToast('A new authentication code has been sent to your device.');
+    startMfaTimer();
+  }
+
+  function simulateSuccess() {
+    showToast('Authentication successful. Redirecting to the AppCentre Admin Dashboard…');
+    setTimeout(function () {
+      window.location.href = 'dashboard3.html';
+    }, 1200);
+  }
+
+  // Format MFA code inputs to remove spaces automatically
+  document.getElementById('mfa-code').addEventListener('input', function (e) {
+    this.value = this.value.replace(/\D/g, '');
+  });
+</script>
+</body></html>
