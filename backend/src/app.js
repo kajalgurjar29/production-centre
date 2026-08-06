@@ -20,8 +20,8 @@ if (nodeEnv !== 'test') {
   app.use(morgan(nodeEnv === 'production' ? 'combined' : 'dev'));
 }
 
-app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'admin-panel')));
-app.use('/site', express.static(path.join(__dirname, '..', '..', 'frontend', 'user-panel')));
+app.use(express.static(path.join(__dirname, '..', '..', 'Blueprint Admin Panel')));
+app.use('/site', express.static(path.join(__dirname, '..', '..', 'AITransformation')));
 
 app.use('/api', routes);
 
