@@ -158,25 +158,6 @@ const KNOWLEDGE_ARTICLES = [
 ];
 
 async function main() {
-  const passwordHash = await bcrypt.hash('ChangeMe123!', 10);
-
-  const admin = await prisma.adminUser.upsert({
-    where: { email: 'alex.morgan@appcentre.local' },
-    update: {},
-    create: {
-      name: 'Alex Morgan',
-      email: 'alex.morgan@appcentre.local',
-      passwordHash,
-      role: 'ADMINISTRATOR',
-    },
-  });
-
-  await prisma.adminUser.upsert({
-    where: { email: 'noah.bishop@appcentre.local' },
-    update: {},
-    create: { name: 'Noah Bishop', email: 'noah.bishop@appcentre.local', passwordHash, role: 'MODERATOR' },
-  });
-
   const users = await Promise.all(
     [
       { name: 'Daniel Moore', email: 'daniel.moore@appcentre.local', status: 'ACTIVE' },
@@ -263,7 +244,7 @@ async function main() {
     await prisma.knowledgeArticle.createMany({ data: KNOWLEDGE_ARTICLES.map((a) => ({ ...a, status: 'PUBLISHED', updatedBy: 'Seed Script' })) });
   }
 
-  console.log('Seed complete. Default admin login: alex.morgan@appcentre.local / ChangeMe123!');
+  console.log('Seed complete.');
 }
 
 main()
