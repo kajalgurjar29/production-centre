@@ -269,13 +269,14 @@
                   <tr class="border-b border-border bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
                     <th class="px-4 py-3 font-medium">Name</th>
                     <th class="px-4 py-3 font-medium">Subject</th>
+                    <th class="px-4 py-3 font-medium">Source</th>
                     <th class="px-4 py-3 font-medium">Status</th>
                     <th class="px-4 py-3 font-medium">Received</th>
                     <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="enquiriesBody" class="text-sm divide-y divide-border">
-                  <tr><td class="px-4 py-3 text-muted-foreground" colspan="5">Loading enquiries…</td></tr>
+                  <tr><td class="px-4 py-3 text-muted-foreground" colspan="6">Loading enquiries…</td></tr>
                 </tbody>
               </table>
             </div>
@@ -457,10 +458,14 @@
       return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     }
 
+    function formatSource(source) {
+      return source && source.trim() ? source : 'AppCentre';
+    }
+
     function renderEnquiries(items) {
       const tbody = document.getElementById('enquiriesBody');
       if (items.length === 0) {
-        tbody.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="5">No enquiries yet.</td></tr>';
+        tbody.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="6">No enquiries yet.</td></tr>';
         return;
       }
       tbody.innerHTML = items.map(function (enquiry) {
@@ -468,6 +473,7 @@
         return '<tr>'
           + '<td class="px-4 py-3 font-medium">' + escapeHtml(enquiry.name) + '<br /><span class="font-normal text-muted-foreground">' + escapeHtml(enquiry.email) + '</span></td>'
           + '<td class="px-4 py-3">' + escapeHtml(enquiry.subject) + '</td>'
+          + '<td class="px-4 py-3"><span class="inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground">' + escapeHtml(formatSource(enquiry.source)) + '</span></td>'
           + '<td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium ' + badge.text + '"><span class="h-2 w-2 rounded-full ' + badge.dot + '" aria-hidden="true"></span><span>' + badge.label + '</span></span></td>'
           + '<td class="px-4 py-3 text-muted-foreground">' + formatDate(enquiry.createdAt) + '</td>'
           + '<td class="px-4 py-3"><button type="button" data-id="' + enquiry.id + '" class="reply-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Reply</button></td>'
@@ -496,7 +502,7 @@
         renderEnquiries(data.data.items);
       } catch (err) {
         document.getElementById('enquiriesBody').innerHTML =
-          '<tr><td class="px-4 py-3 text-destructive" colspan="5">Could not load enquiries. Please refresh the page.</td></tr>';
+          '<tr><td class="px-4 py-3 text-destructive" colspan="6">Could not load enquiries. Please refresh the page.</td></tr>';
       }
     }
 
