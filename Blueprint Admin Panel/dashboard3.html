@@ -192,74 +192,8 @@
         </div>
       </aside>
 
-      <header class="sticky top-0 z-30 border-b border-border bg-card shadow-sm">
-        <div class="flex items-center gap-3 px-4 py-3 lg:px-6">
-          <div class="flex min-w-0 items-center gap-2 lg:hidden">
-            <button id="menuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
-            </button>
-            <div class="min-w-0">
-              <p class="truncate text-base font-heading font-semibold">AppCentre Admin</p>
-            </div>
-          </div>
-          <button id="sidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true" class="hidden min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:flex">
-            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16"></path></svg>
-          </button>
-          <div class="hidden lg:flex flex-1 items-center">
-            <label for="desktopSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
-            <div class="flex w-full max-w-xl items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
-              <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-              <input id="desktopSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
-            </div>
-          </div>
-          <div class="ml-auto flex items-center gap-2">
-            <button id="mobileSearchButton" type="button" aria-label="Open search" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:hidden">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            </button>
-            <div class="relative">
-              <button id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background relative">
-                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg>
-                <span class="absolute right-2 top-2 inline-flex h-2.5 w-2.5 rounded-full bg-destructive" aria-hidden="true"></span>
-              </button>
-              <div id="notificationPanel" class="hidden absolute right-0 top-full mt-2 w-[20rem] max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
-                <div class="flex items-center justify-between border-b border-border pb-3">
-                  <h2 class="text-sm font-heading font-semibold">Notifications</h2>
-                  <button type="button" class="min-h-11 text-sm font-medium text-primary">Mark all as read</button>
-                </div>
-                <div class="space-y-3 py-3 text-sm">
-                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">New advert awaiting review</p><p class="text-muted-foreground">Submitted 12 minutes ago</p></div>
-                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Payment verification failed</p><p class="text-muted-foreground">Requires payment status review</p></div>
-                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Contact enquiry overdue</p><p class="text-muted-foreground">Response target exceeded</p></div>
-                  <div class="rounded-lg border border-border bg-muted px-3 py-3"><p class="font-medium">Review reported</p><p class="text-muted-foreground">Awaiting moderation</p></div>
-                </div>
-                <a href="Notifications.html" class="flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium">View notifications</a>
-              </div>
-            </div>
-            <div class="relative">
-              <button id="profileButton" type="button" aria-label="Open administrator profile menu" aria-expanded="false" class="flex min-h-11 items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
-                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">AO</div>
-                <div class="hidden text-left lg:block">
-                  <p class="text-sm font-medium">Ava Owen</p>
-                  <p class="text-xs text-muted-foreground">Administrator</p>
-                </div>
-                <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-muted-foreground lg:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </button>
-              <div id="profilePanel" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
-                <a href="MyProfile.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">My Profile</a>
-                <a href="SystemSettings.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">Security Settings</a>
-                <a href="adminlogin.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm text-destructive hover:bg-muted">Log out</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="mobileSearchPanel" class="hidden border-t border-border px-4 py-3 lg:hidden">
-          <label for="mobileSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
-          <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
-            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="mobileSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
-          </div>
-        </div>
-      </header>
+      <header id="siteHeader" class="sticky top-0 z-30 border-b border-border bg-card shadow-sm"></header>
+      <script src="assets/header.js"></script>
 
       <main class="flex-1 px-4 py-5 lg:px-6 lg:py-6">
         <div class="mx-auto space-y-6">
@@ -379,7 +313,7 @@
                   <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Pending</span></span>
                 </div>
                 <p id="metric-reviews-sub" class="mt-3 text-sm text-muted-foreground">2 reported reviews</p>
-                <a href="#" class="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-primary">View reviews</a>
+                <a href="ReviewsMgt.html" class="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-primary">View reviews</a>
               </article>
             </section>
 
@@ -416,146 +350,14 @@
                   <h2 class="text-lg font-heading font-semibold">Needs Attention</h2>
                   <p class="mt-1 text-sm text-muted-foreground">Items requiring administrative action</p>
                 </div>
-                <div class="pt-4 space-y-3">
-                  <article class="rounded-xl border border-border bg-background px-4 py-4">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div class="flex min-w-0 gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
-                          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.2 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                          <div class="flex flex-wrap items-center gap-2">
-                            <h3 class="text-sm font-semibold">Adverts awaiting review</h3>
-                            <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Medium priority</span></span>
-                          </div>
-                          <p class="mt-1 text-sm text-muted-foreground">Oldest submitted 2 days ago</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-3 md:items-end">
-                        <p class="text-xl font-heading font-semibold">14</p>
-                        <a href="AdvertMgt.html" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium text-primary">Review adverts</a>
-                      </div>
-                    </div>
-                  </article>
-                  <article class="rounded-xl border border-border bg-background px-4 py-4">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div class="flex min-w-0 gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-destructive">
-                          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M12 13v.01"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                          <div class="flex flex-wrap items-center gap-2">
-                            <h3 class="text-sm font-semibold">Failed payment verification</h3>
-                            <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>High priority</span></span>
-                          </div>
-                          <p class="mt-1 text-sm text-muted-foreground">Requires payment status review</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-3 md:items-end">
-                        <p class="text-xl font-heading font-semibold">3</p>
-                        <a href="PaymentTransaction.html" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium text-primary">Review payments</a>
-                      </div>
-                    </div>
-                  </article>
-                  <article class="rounded-xl border border-border bg-background px-4 py-4">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div class="flex min-w-0 gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-destructive">
-                          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                          <div class="flex flex-wrap items-center gap-2">
-                            <h3 class="text-sm font-semibold">Overdue contact enquiries</h3>
-                            <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>High priority</span></span>
-                          </div>
-                          <p class="mt-1 text-sm text-muted-foreground">Response target exceeded</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-3 md:items-end">
-                        <p class="text-xl font-heading font-semibold">8</p>
-                        <a href="ContactEnquiries.html" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium text-primary">Open enquiries</a>
-                      </div>
-                    </div>
-                  </article>
-                  <article class="rounded-xl border border-border bg-background px-4 py-4">
-                    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div class="flex min-w-0 gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
-                          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                          <div class="flex flex-wrap items-center gap-2">
-                            <h3 class="text-sm font-semibold">Reported reviews</h3>
-                            <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Medium priority</span></span>
-                          </div>
-                          <p class="mt-1 text-sm text-muted-foreground">Requires moderation</p>
-                        </div>
-                      </div>
-                      <div class="flex flex-col gap-3 md:items-end">
-                        <p class="text-xl font-heading font-semibold">2</p>
-                        <a href="#" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium text-primary">Review reports</a>
-                      </div>
-                    </div>
-                  </article>
-                </div>
+                <div id="needsAttentionList" class="pt-4 space-y-3"></div>
               </section>
 
               <section class="rounded-xl border border-border bg-card p-4 shadow-sm lg:p-5">
                 <div class="border-b border-border pb-4">
                   <h2 class="text-lg font-heading font-semibold">Recent Activity</h2>
                 </div>
-                <div class="divide-y divide-border pt-2">
-                  <article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="flex min-w-0 gap-3">
-                      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">AO</div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium">Advert approved</p>
-                        <p class="text-sm text-muted-foreground">Advert #AC-2048 · Garden Studio</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-muted-foreground">Today, 10:24</p>
-                  </article>
-                  <article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="flex min-w-0 gap-3">
-                      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">MK</div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium">Payment verified</p>
-                        <p class="text-sm text-muted-foreground">Payment #PM-3920 · Featured advert</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-muted-foreground">Today, 09:40</p>
-                  </article>
-                  <article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="flex min-w-0 gap-3">
-                      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">JT</div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium">Contact enquiry assigned</p>
-                        <p class="text-sm text-muted-foreground">Enquiry #EN-8821 · Seller support</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-muted-foreground">Yesterday, 16:15</p>
-                  </article>
-                  <article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="flex min-w-0 gap-3">
-                      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">AO</div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium">Review published</p>
-                        <p class="text-sm text-muted-foreground">Review #RV-1170 · Verified trade service</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-muted-foreground">Yesterday, 14:08</p>
-                  </article>
-                  <article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="flex min-w-0 gap-3">
-                      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">LB</div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium">User account suspended</p>
-                        <p class="text-sm text-muted-foreground">User #US-7712 · Policy breach review</p>
-                      </div>
-                    </div>
-                    <p class="text-xs text-muted-foreground">Yesterday, 11:22</p>
-                  </article>
-                </div>
+                <div id="recentActivityList" class="divide-y divide-border pt-2"></div>
                 <a href="AuditLog.html" class="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-primary">View full audit log</a>
               </section>
             </section>
@@ -567,34 +369,10 @@
 
   <script>
     document.title = 'AppCentre Admin Dashboard';
-    const body = document.body;
-    const menuButton = document.getElementById('menuButton');
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const desktopAside = document.querySelector('aside:not(#mobileDrawer)');
-    function applySidebarState(collapsed) {
-      if (!desktopAside || !sidebarToggle) return;
-      desktopAside.style.display = collapsed ? 'none' : '';
-      sidebarToggle.setAttribute('aria-expanded', String(!collapsed));
-    }
-    applySidebarState(localStorage.getItem('sidebarCollapsed') === 'true');
-    if (sidebarToggle) {
-      sidebarToggle.addEventListener('click', function () {
-        const collapsed = desktopAside.style.display !== 'none';
-        applySidebarState(collapsed);
-        localStorage.setItem('sidebarCollapsed', String(collapsed));
-      });
-    }
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const drawerClose = document.getElementById('drawerClose');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    const notificationButton = document.getElementById('notificationButton');
-    const notificationPanel = document.getElementById('notificationPanel');
-    const profileButton = document.getElementById('profileButton');
-    const profilePanel = document.getElementById('profilePanel');
-    const mobileSearchButton = document.getElementById('mobileSearchButton');
-    const mobileSearchPanel = document.getElementById('mobileSearchPanel');
+    const siteSelect = document.getElementById('siteSelect');
     const period = document.getElementById('period');
+    const needsAttentionList = document.getElementById('needsAttentionList');
+    const recentActivityList = document.getElementById('recentActivityList');
     const dashboardStatus = document.getElementById('dashboardStatus');
     const dashboardContent = document.getElementById('dashboardContent');
     const summarySection = document.getElementById('summarySection');
@@ -618,92 +396,138 @@
     const metricReviews = document.getElementById('metric-reviews');
     const metricReviewsSub = document.getElementById('metric-reviews-sub');
 
-    const dashboardData = {
-      'Today': {
-        users: '12,518',
-        usersSub: '22 new during this period',
-        adverts: '64',
-        advertsSub: '6 awaiting review',
-        review: '6',
-        reviewSub: 'Oldest waiting 8 hours',
-        payments: '£1,260',
-        paymentsSub: '11 successful transactions',
-        enquiries: '9',
-        enquiriesSub: '2 overdue',
-        reviews: '5',
-        reviewsSub: '1 reported review'
-      },
-      'Last 7 days': {
-        users: '12,602',
-        usersSub: '76 new during this period',
-        adverts: '66',
-        advertsSub: '10 awaiting review',
-        review: '10',
-        reviewSub: 'Oldest waiting 1 day',
-        payments: '£6,920',
-        paymentsSub: '39 successful transactions',
-        enquiries: '21',
-        enquiriesSub: '4 overdue',
-        reviews: '9',
-        reviewsSub: '1 reported review'
-      },
-      'Last 30 days': {
-        users: '12,480',
-        usersSub: '184 new during this period',
-        adverts: '68',
-        advertsSub: '14 awaiting review',
-        review: '14',
-        reviewSub: 'Oldest waiting 2 days',
-        payments: '£18,420',
-        paymentsSub: '96 successful transactions',
-        enquiries: '42',
-        enquiriesSub: '8 overdue',
-        reviews: '17',
-        reviewsSub: '2 reported reviews'
-      },
-      'Empty': 'empty',
-      'Error': 'error',
-      'Loading': 'loading'
+    const ICONS = {
+      advert: '<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.2 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z"/></svg>',
+      payment: '<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M12 13v.01"/></svg>',
+      enquiry: '<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+      review: '<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>'
     };
 
-    function closeDrawer() {
-      mobileDrawer.classList.add('hidden');
-      mobileOverlay.classList.add('hidden');
-      body.classList.remove('overflow-hidden');
-      menuButton.setAttribute('aria-expanded', 'false');
-    }
-
-    function openDrawer() {
-      mobileDrawer.classList.remove('hidden');
-      mobileOverlay.classList.remove('hidden');
-      body.classList.add('overflow-hidden');
-      menuButton.setAttribute('aria-expanded', 'true');
-    }
-
-    function closePanel(button, panel) {
-      button.setAttribute('aria-expanded', 'false');
-      panel.classList.add('hidden');
-    }
-
-    function openPanel(button, panel) {
-      button.setAttribute('aria-expanded', 'true');
-      panel.classList.remove('hidden');
-    }
-
-    function togglePanel(button, panel, otherButton, otherPanel) {
-      const isOpen = button.getAttribute('aria-expanded') === 'true';
-      closePanel(otherButton, otherPanel);
-      if (isOpen) {
-        closePanel(button, panel);
-      } else {
-        openPanel(button, panel);
+    const dashboardData = {
+      'AI Transformation': {
+        'Today': {
+          users: '12,518', usersSub: '22 new during this period',
+          adverts: '64', advertsSub: '6 awaiting review',
+          review: '6', reviewSub: 'Oldest waiting 8 hours',
+          payments: '£1,260', paymentsSub: '11 successful transactions',
+          enquiries: '9', enquiriesSub: '2 overdue',
+          reviews: '5', reviewsSub: '1 reported review'
+        },
+        'Last 7 days': {
+          users: '12,602', usersSub: '76 new during this period',
+          adverts: '66', advertsSub: '10 awaiting review',
+          review: '10', reviewSub: 'Oldest waiting 1 day',
+          payments: '£6,920', paymentsSub: '39 successful transactions',
+          enquiries: '21', enquiriesSub: '4 overdue',
+          reviews: '9', reviewsSub: '1 reported review'
+        },
+        'Last 30 days': {
+          users: '12,480', usersSub: '184 new during this period',
+          adverts: '68', advertsSub: '14 awaiting review',
+          review: '14', reviewSub: 'Oldest waiting 2 days',
+          payments: '£18,420', paymentsSub: '96 successful transactions',
+          enquiries: '42', enquiriesSub: '8 overdue',
+          reviews: '17', reviewsSub: '2 reported reviews'
+        }
+      },
+      'Travel Harmony': {
+        'Today': {
+          users: '3,240', usersSub: '9 new during this period',
+          adverts: '21', advertsSub: '3 awaiting review',
+          review: '3', reviewSub: 'Oldest waiting 5 hours',
+          payments: '£410', paymentsSub: '4 successful transactions',
+          enquiries: '4', enquiriesSub: '1 overdue',
+          reviews: '2', reviewsSub: '0 reported reviews'
+        },
+        'Last 7 days': {
+          users: '3,295', usersSub: '31 new during this period',
+          adverts: '23', advertsSub: '5 awaiting review',
+          review: '5', reviewSub: 'Oldest waiting 1 day',
+          payments: '£2,180', paymentsSub: '14 successful transactions',
+          enquiries: '9', enquiriesSub: '2 overdue',
+          reviews: '4', reviewsSub: '1 reported review'
+        },
+        'Last 30 days': {
+          users: '3,412', usersSub: '92 new during this period',
+          adverts: '25', advertsSub: '7 awaiting review',
+          review: '7', reviewSub: 'Oldest waiting 3 days',
+          payments: '£6,050', paymentsSub: '33 successful transactions',
+          enquiries: '15', enquiriesSub: '3 overdue',
+          reviews: '6', reviewsSub: '1 reported review'
+        }
+      },
+      'Trust Centre': {
+        'Today': {
+          users: '7,860', usersSub: '14 new during this period',
+          adverts: '40', advertsSub: '4 awaiting review',
+          review: '4', reviewSub: 'Oldest waiting 6 hours',
+          payments: '£890', paymentsSub: '7 successful transactions',
+          enquiries: '6', enquiriesSub: '1 overdue',
+          reviews: '3', reviewsSub: '1 reported review'
+        },
+        'Last 7 days': {
+          users: '7,940', usersSub: '48 new during this period',
+          adverts: '42', advertsSub: '7 awaiting review',
+          review: '7', reviewSub: 'Oldest waiting 1 day',
+          payments: '£4,320', paymentsSub: '26 successful transactions',
+          enquiries: '13', enquiriesSub: '3 overdue',
+          reviews: '6', reviewsSub: '1 reported review'
+        },
+        'Last 30 days': {
+          users: '8,110', usersSub: '141 new during this period',
+          adverts: '45', advertsSub: '9 awaiting review',
+          review: '9', reviewSub: 'Oldest waiting 2 days',
+          payments: '£11,760', paymentsSub: '61 successful transactions',
+          enquiries: '27', enquiriesSub: '5 overdue',
+          reviews: '11', reviewsSub: '1 reported review'
+        }
       }
-    }
+    };
 
-    function closeMobileSearch() {
-      mobileSearchButton.setAttribute('aria-expanded', 'false');
-      mobileSearchPanel.classList.add('hidden');
-    }
+    const needsAttentionData = {
+      'AI Transformation': [
+        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 2 days ago', count: '14', linkText: 'Review adverts', href: 'AdvertMgt.html' },
+        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '3', linkText: 'Review payments', href: 'PaymentTransaction.html' },
+        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'High priority', sub: 'Response target exceeded', count: '8', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
+        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '2', linkText: 'Review reports', href: 'ReviewsMgt.html' }
+      ],
+      'Travel Harmony': [
+        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 1 day ago', count: '5', linkText: 'Review adverts', href: 'AdvertMgt.html' },
+        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '1', linkText: 'Review payments', href: 'PaymentTransaction.html' },
+        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'Medium priority', sub: 'Response target exceeded', count: '2', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
+        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '1', linkText: 'Review reports', href: 'ReviewsMgt.html' }
+      ],
+      'Trust Centre': [
+        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 1 day ago', count: '9', linkText: 'Review adverts', href: 'AdvertMgt.html' },
+        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '2', linkText: 'Review payments', href: 'PaymentTransaction.html' },
+        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'High priority', sub: 'Response target exceeded', count: '5', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
+        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '1', linkText: 'Review reports', href: 'ReviewsMgt.html' }
+      ]
+    };
+
+    const recentActivityData = {
+      'AI Transformation': [
+        { initials: 'AO', title: 'Advert approved', sub: 'Advert #AC-2048 · Garden Studio', time: 'Today, 10:24' },
+        { initials: 'MK', title: 'Payment verified', sub: 'Payment #PM-3920 · Featured advert', time: 'Today, 09:40' },
+        { initials: 'JT', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-8821 · Seller support', time: 'Yesterday, 16:15' },
+        { initials: 'AO', title: 'Review published', sub: 'Review #RV-1170 · Verified trade service', time: 'Yesterday, 14:08' },
+        { initials: 'LB', title: 'User account suspended', sub: 'User #US-7712 · Policy breach review', time: 'Yesterday, 11:22' }
+      ],
+      'Travel Harmony': [
+        { initials: 'RC', title: 'Advert approved', sub: 'Advert #AC-1032 · Weekend Market Stall', time: 'Today, 11:02' },
+        { initials: 'NP', title: 'Payment verified', sub: 'Payment #PM-1140 · Standard listing', time: 'Today, 08:15' },
+        { initials: 'SK', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-2210 · Buyer support', time: 'Yesterday, 17:48' },
+        { initials: 'RC', title: 'Review published', sub: 'Review #RV-330 · Verified seller', time: 'Yesterday, 13:02' },
+        { initials: 'TW', title: 'User account suspended', sub: 'User #US-1904 · Policy breach review', time: 'Two days ago, 09:10' }
+      ],
+      'Trust Centre': [
+        { initials: 'HB', title: 'Advert approved', sub: 'Advert #AC-3510 · Coastal Retreat Rentals', time: 'Today, 09:58' },
+        { initials: 'DP', title: 'Payment verified', sub: 'Payment #PM-2870 · Featured advert', time: 'Today, 07:32' },
+        { initials: 'EM', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-5502 · Seller support', time: 'Yesterday, 15:20' },
+        { initials: 'HB', title: 'Review published', sub: 'Review #RV-810 · Verified trade service', time: 'Yesterday, 12:45' },
+        { initials: 'QS', title: 'User account suspended', sub: 'User #US-4432 · Policy breach review', time: 'Yesterday, 08:05' }
+      ]
+    };
 
     function updateMetrics(data) {
       metricUsers.textContent = data.users;
@@ -718,6 +542,53 @@
       metricEnquiriesSub.textContent = data.enquiriesSub;
       metricReviews.textContent = data.reviews;
       metricReviewsSub.textContent = data.reviewsSub;
+    }
+
+    function renderNeedsAttention(items) {
+      needsAttentionList.innerHTML = items.map(function (item) {
+        const isHigh = item.priority === 'High priority';
+        const toneClass = isHigh ? 'text-destructive' : 'text-foreground';
+        const dotClass = isHigh ? 'bg-destructive' : 'bg-foreground';
+        return '<article class="rounded-xl border border-border bg-background px-4 py-4">' +
+          '<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">' +
+            '<div class="flex min-w-0 gap-3">' +
+              '<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted ' + toneClass + '">' + ICONS[item.icon] + '</div>' +
+              '<div class="min-w-0">' +
+                '<div class="flex flex-wrap items-center gap-2">' +
+                  '<h3 class="text-sm font-semibold">' + item.title + '</h3>' +
+                  '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium ' + toneClass + '"><span class="h-2 w-2 rounded-full ' + dotClass + '" aria-hidden="true"></span><span>' + item.priority + '</span></span>' +
+                '</div>' +
+                '<p class="mt-1 text-sm text-muted-foreground">' + item.sub + '</p>' +
+              '</div>' +
+            '</div>' +
+            '<div class="flex flex-col gap-3 md:items-end">' +
+              '<p class="text-xl font-heading font-semibold">' + item.count + '</p>' +
+              '<a href="' + item.href + '" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-border px-4 py-3 text-sm font-medium text-primary">' + item.linkText + '</a>' +
+            '</div>' +
+          '</div>' +
+        '</article>';
+      }).join('');
+    }
+
+    function renderRecentActivity(items) {
+      recentActivityList.innerHTML = items.map(function (item) {
+        return '<article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">' +
+          '<div class="flex min-w-0 gap-3">' +
+            '<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">' + item.initials + '</div>' +
+            '<div class="min-w-0">' +
+              '<p class="text-sm font-medium">' + item.title + '</p>' +
+              '<p class="text-sm text-muted-foreground">' + item.sub + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<p class="text-xs text-muted-foreground">' + item.time + '</p>' +
+        '</article>';
+      }).join('');
+    }
+
+    function renderDashboard(site, periodValue) {
+      updateMetrics(dashboardData[site][periodValue]);
+      renderNeedsAttention(needsAttentionData[site]);
+      renderRecentActivity(recentActivityData[site]);
     }
 
     function showNormal() {
@@ -741,52 +612,8 @@
       if (type === 'error') errorState.classList.remove('hidden');
     }
 
-    menuButton.addEventListener('click', function () {
-      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        closeDrawer();
-      } else {
-        openDrawer();
-      }
-    });
-
-    drawerClose.addEventListener('click', closeDrawer);
-    mobileOverlay.addEventListener('click', closeDrawer);
-    mobileNavLinks.forEach(function (link) {
-      link.addEventListener('click', closeDrawer);
-    });
-
-    notificationButton.addEventListener('click', function (event) {
-      event.stopPropagation();
-      togglePanel(notificationButton, notificationPanel, profileButton, profilePanel);
-    });
-
-    profileButton.addEventListener('click', function (event) {
-      event.stopPropagation();
-      togglePanel(profileButton, profilePanel, notificationButton, notificationPanel);
-    });
-
-    notificationPanel.addEventListener('click', function (event) {
-      event.stopPropagation();
-    });
-
-    profilePanel.addEventListener('click', function (event) {
-      event.stopPropagation();
-    });
-
-    mobileSearchButton.addEventListener('click', function () {
-      const isOpen = mobileSearchButton.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        closeMobileSearch();
-      } else {
-        mobileSearchButton.setAttribute('aria-expanded', 'true');
-        mobileSearchPanel.classList.remove('hidden');
-      }
-    });
-
     period.addEventListener('change', function () {
       const selected = period.value;
-      const value = dashboardData[selected];
       if (selected === 'Loading') {
         showState('loading');
         dashboardStatus.textContent = 'Dashboard is loading.';
@@ -802,42 +629,33 @@
         dashboardStatus.textContent = 'Dashboard information could not be loaded.';
         return;
       }
-      updateMetrics(value);
+      renderDashboard(siteSelect.value, selected);
       showNormal();
-      dashboardStatus.textContent = 'Dashboard values updated for ' + selected + '.';
+      dashboardStatus.textContent = 'Dashboard values updated for ' + siteSelect.value + ', ' + selected + '.';
+    });
+
+    siteSelect.addEventListener('change', function () {
+      period.value = 'Last 30 days';
+      renderDashboard(siteSelect.value, 'Last 30 days');
+      showNormal();
+      dashboardStatus.textContent = 'Dashboard values updated for ' + siteSelect.value + ', Last 30 days.';
     });
 
     resetPeriodButton.addEventListener('click', function () {
       period.value = 'Last 30 days';
-      updateMetrics(dashboardData['Last 30 days']);
+      renderDashboard(siteSelect.value, 'Last 30 days');
       showNormal();
       dashboardStatus.textContent = 'Dashboard values updated for Last 30 days.';
     });
 
     retryButton.addEventListener('click', function () {
       period.value = 'Last 30 days';
-      updateMetrics(dashboardData['Last 30 days']);
+      renderDashboard(siteSelect.value, 'Last 30 days');
       showNormal();
       dashboardStatus.textContent = 'Dashboard information reloaded successfully.';
     });
 
-    document.addEventListener('click', function (event) {
-      if (!notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
-        closePanel(notificationButton, notificationPanel);
-      }
-      if (!profilePanel.contains(event.target) && !profileButton.contains(event.target)) {
-        closePanel(profileButton, profilePanel);
-      }
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closePanel(notificationButton, notificationPanel);
-        closePanel(profileButton, profilePanel);
-        closeMobileSearch();
-        closeDrawer();
-      }
-    });
+    renderDashboard(siteSelect.value, period.value);
   </script>
 </div>
 </body></html>
