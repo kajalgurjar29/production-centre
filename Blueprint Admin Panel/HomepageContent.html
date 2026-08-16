@@ -197,47 +197,24 @@
             </div>
           </section>
           <div id="pageStatus" class="sr-only" aria-live="polite"></div>
-          <section class="space-y-4">
-            <article class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h2 class="text-base font-heading font-semibold">Hero Banner</h2>
-                  <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>
+          <section id="blockList" class="space-y-4"></section>
+
+          <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
+          <section id="editModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+              <div class="border-b border-border px-4 py-4"><h2 id="editModalTitle" class="text-lg font-heading font-semibold">Edit block</h2></div>
+              <div class="space-y-4 p-4">
+                <input type="hidden" id="editKey" value="" />
+                <div><label class="mb-2 block text-sm font-medium" for="editHeadline">Headline</label><input id="editHeadline" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+                <div><label class="mb-2 block text-sm font-medium" for="editSubtext">Subtext</label><textarea id="editSubtext" rows="3" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none"></textarea></div>
+                <div><label class="mb-2 block text-sm font-medium" for="editCtaLabel">Call-to-action label</label><input id="editCtaLabel" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
+                <label class="flex items-center gap-2 text-sm font-medium"><input id="editPublished" type="checkbox" class="h-4 w-4" /> Published</label>
+                <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                  <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+                  <button type="button" id="confirmEditBlock" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save</button>
                 </div>
-                <p class="mt-1 text-sm text-muted-foreground">Main welcome banner shown at the top of the homepage.</p>
               </div>
-              <button type="button" class="edit-block min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Edit</button>
-            </article>
-            <article class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h2 class="text-base font-heading font-semibold">Featured Categories</h2>
-                  <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>
-                </div>
-                <p class="mt-1 text-sm text-muted-foreground">Highlighted service categories shown below the hero.</p>
-              </div>
-              <button type="button" class="edit-block min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Edit</button>
-            </article>
-            <article class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h2 class="text-base font-heading font-semibold">Testimonials</h2>
-                  <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Draft</span></span>
-                </div>
-                <p class="mt-1 text-sm text-muted-foreground">Rotating customer testimonials section.</p>
-              </div>
-              <button type="button" class="edit-block min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Edit</button>
-            </article>
-            <article class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h2 class="text-base font-heading font-semibold">Call to Action</h2>
-                  <span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>
-                </div>
-                <p class="mt-1 text-sm text-muted-foreground">Sign-up prompt shown before the footer.</p>
-              </div>
-              <button type="button" class="edit-block min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Edit</button>
-            </article>
+            </div>
           </section>
         </div>
       </main>
@@ -249,6 +226,7 @@
   </div>
   <script>
     document.title = 'AppCentre Admin Homepage Content';
+    const body = document.body;
 
     const toast = document.getElementById('toast');
     const pageStatus = document.getElementById('pageStatus');
@@ -259,9 +237,124 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
-    document.querySelectorAll('.edit-block').forEach(function (button) {
-      button.addEventListener('click', function () { showToast('Content editing is not available in this MVP.'); });
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    const BLOCK_META = {
+      HERO: { name: 'Hero Banner', description: 'Main welcome banner shown at the top of the homepage.' },
+      FEATURED: { name: 'Featured Categories', description: 'Highlighted service categories shown below the hero.' },
+      TESTIMONIALS: { name: 'Testimonials', description: 'Rotating customer testimonials section.' },
+      CTA: { name: 'Call to Action', description: 'Sign-up prompt shown before the footer.' }
+    };
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    let blocks = [];
+    const blockList = document.getElementById('blockList');
+
+    function renderBlocks() {
+      blockList.innerHTML = blocks.map(function (block) {
+        const meta = BLOCK_META[block.key] || { name: block.key, description: '' };
+        const badge = block.published
+          ? '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>'
+          : '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Draft</span></span>';
+        return '<article class="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">'
+          + '<div>'
+          + '<div class="flex items-center gap-2"><h2 class="text-base font-heading font-semibold">' + escapeHtml(meta.name) + '</h2>' + badge + '</div>'
+          + '<p class="mt-1 text-sm text-muted-foreground">' + escapeHtml(block.headline || meta.description) + '</p>'
+          + '</div>'
+          + '<button type="button" data-key="' + block.key + '" class="edit-block min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Edit</button>'
+          + '</article>';
+      }).join('');
+
+      blockList.querySelectorAll('.edit-block').forEach(function (button) {
+        button.addEventListener('click', function () { openModal(button.getAttribute('data-key')); });
+      });
+    }
+
+    async function loadBlocks() {
+      const token = requireToken();
+      if (!token) return;
+      blockList.innerHTML = '<p class="text-sm text-muted-foreground">Loading homepage content…</p>';
+      try {
+        const response = await fetch('/api/homepage-content?siteKey=aitransformation', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load homepage content');
+        const data = await response.json();
+        blocks = data.data;
+        renderBlocks();
+        if (pageStatus) pageStatus.textContent = blocks.length + ' content block' + (blocks.length === 1 ? '' : 's') + ' loaded.';
+      } catch (err) {
+        blockList.innerHTML = '<p class="text-sm text-destructive">Could not load homepage content. Please refresh the page.</p>';
+      }
+    }
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const editModal = document.getElementById('editModal');
+    function openModal(key) {
+      const block = blocks.find(function (b) { return b.key === key; });
+      if (!block) return;
+      document.getElementById('editModalTitle').textContent = 'Edit ' + (BLOCK_META[key] ? BLOCK_META[key].name : key);
+      document.getElementById('editKey').value = key;
+      document.getElementById('editHeadline').value = block.headline || '';
+      document.getElementById('editSubtext').value = block.subtext || '';
+      document.getElementById('editCtaLabel').value = block.ctaLabel || '';
+      document.getElementById('editPublished').checked = !!block.published;
+      modalOverlay.classList.remove('hidden'); editModal.classList.remove('hidden'); body.classList.add('overflow-hidden');
+    }
+    function closeModal() { modalOverlay.classList.add('hidden'); editModal.classList.add('hidden'); body.classList.remove('overflow-hidden'); }
+    modalOverlay.addEventListener('click', closeModal);
+    document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
+
+    document.getElementById('confirmEditBlock').addEventListener('click', async function () {
+      const token = requireToken();
+      if (!token) return;
+      const key = document.getElementById('editKey').value;
+      const payload = {
+        headline: document.getElementById('editHeadline').value.trim(),
+        subtext: document.getElementById('editSubtext').value.trim(),
+        ctaLabel: document.getElementById('editCtaLabel').value.trim(),
+        published: document.getElementById('editPublished').checked
+      };
+      try {
+        const response = await fetch('/api/homepage-content/' + key + '?siteKey=aitransformation', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify(payload)
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to save block');
+        closeModal();
+        showToast((BLOCK_META[key] ? BLOCK_META[key].name : key) + ' updated.');
+        loadBlocks();
+      } catch (err) {
+        showToast('Could not save changes. Please try again.');
+      }
     });
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadBlocks();
   </script>
 </div>
 </body></html>

@@ -195,10 +195,7 @@
               </div>
               
               <div class="flex flex-wrap gap-2">
-                <select id="actorFilter" class="min-h-11 rounded-xl border border-input bg-card px-3 text-sm">
-                  <option value="">All actors</option>
-                  <option>Alex Morgan</option><option>Ava Owen</option><option>Noah Bishop</option><option>Ruth Palmer</option><option>Daniel Moore</option><option>System</option>
-                </select>
+                <input id="actorFilter" type="search" placeholder="Filter by actor name or email" class="min-h-11 rounded-xl border border-input bg-card px-3 text-sm" />
               </div>
             </div>
           </section>
@@ -214,44 +211,7 @@
                     <th class="px-4 py-3 font-medium">Target</th>
                   </tr>
                 </thead>
-                <tbody id="auditRows" class="text-sm divide-y divide-border">
-                  <tr data-actor="Alex Morgan">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">10 Jul 2026, 09:12</td>
-                    <td class="px-4 py-3 font-medium">Alex Morgan</td>
-                    <td class="px-4 py-3">Approved advert</td>
-                    <td class="px-4 py-3 text-muted-foreground">Garden Studio (AC-2048)</td>
-                  </tr>
-                  <tr data-actor="System">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">10 Jul 2026, 09:05</td>
-                    <td class="px-4 py-3 font-medium">System</td>
-                    <td class="px-4 py-3">Payment confirmed</td>
-                    <td class="px-4 py-3 text-muted-foreground">PAY-2048-7781</td>
-                  </tr>
-                  <tr data-actor="Ava Owen">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">09 Jul 2026, 17:40</td>
-                    <td class="px-4 py-3 font-medium">Ava Owen</td>
-                    <td class="px-4 py-3">Suspended user</td>
-                    <td class="px-4 py-3 text-muted-foreground">Callum Reid</td>
-                  </tr>
-                  <tr data-actor="Noah Bishop">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">09 Jul 2026, 14:02</td>
-                    <td class="px-4 py-3 font-medium">Noah Bishop</td>
-                    <td class="px-4 py-3">Requested amendments</td>
-                    <td class="px-4 py-3 text-muted-foreground">Local Plumbing Services (AC-2041)</td>
-                  </tr>
-                  <tr data-actor="Daniel Moore">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">08 Jul 2026, 16:41</td>
-                    <td class="px-4 py-3 font-medium">Daniel Moore</td>
-                    <td class="px-4 py-3">Created advert</td>
-                    <td class="px-4 py-3 text-muted-foreground">Garden Studio (AC-2048)</td>
-                  </tr>
-                  <tr data-actor="Ruth Palmer">
-                    <td class="px-4 py-3 font-mono text-xs text-muted-foreground">07 Jul 2026, 11:23</td>
-                    <td class="px-4 py-3 font-medium">Ruth Palmer</td>
-                    <td class="px-4 py-3">Replied to enquiry</td>
-                    <td class="px-4 py-3 text-muted-foreground">Contact form #C-3092</td>
-                  </tr>
-                </tbody>
+                <tbody id="auditRows" class="text-sm divide-y divide-border"></tbody>
               </table>
             </div>
           </section>
@@ -272,13 +232,80 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function formatDate(isoString) {
+      return new Date(isoString).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
     const actorFilter = document.getElementById('actorFilter');
-    const auditRows = document.querySelectorAll('#auditRows tr');
-    actorFilter.addEventListener('change', function () {
-      auditRows.forEach(function (row) {
-        row.classList.toggle('hidden', actorFilter.value && row.dataset.actor !== actorFilter.value);
+    const auditRows = document.getElementById('auditRows');
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    async function loadAuditLog() {
+      const token = requireToken();
+      if (!token) return;
+
+      auditRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="4">Loading audit log…</td></tr>';
+
+      try {
+        const params = new URLSearchParams({ pageSize: '100' });
+        if (actorFilter.value.trim()) params.set('actor', actorFilter.value.trim());
+        const response = await fetch('/api/audit-log?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load audit log');
+        const data = await response.json();
+        const items = data.data.items;
+        if (!items.length) {
+          auditRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="4">No audit log entries found.</td></tr>';
+        } else {
+          auditRows.innerHTML = items.map(function (entry) {
+            const actorName = entry.actor ? entry.actor.name : 'System';
+            return '<tr>'
+              + '<td class="px-4 py-3 font-mono text-xs text-muted-foreground">' + formatDate(entry.createdAt) + '</td>'
+              + '<td class="px-4 py-3 font-medium">' + escapeHtml(actorName) + '</td>'
+              + '<td class="px-4 py-3">' + escapeHtml(entry.action) + '</td>'
+              + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(entry.target || '-') + (entry.reason ? ' · ' + escapeHtml(entry.reason) : '') + '</td>'
+              + '</tr>';
+          }).join('');
+        }
+        if (pageStatus) pageStatus.textContent = items.length + ' audit log entr' + (items.length === 1 ? 'y' : 'ies') + ' found.';
+      } catch (err) {
+        auditRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="4">Could not load audit log. Please refresh the page.</td></tr>';
+      }
+    }
+
+    let searchTimer;
+    actorFilter.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(loadAuditLog, 300);
+    });
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
       });
     });
+
+    loadAuditLog();
   </script>
 </div>
 </body></html>
