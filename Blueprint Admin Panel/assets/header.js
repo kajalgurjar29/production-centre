@@ -17,6 +17,24 @@
     return;
   }
 
+  // Website selector: persist the choice across page loads (each admin page
+  // reinjects this header from scratch, so without this the selector would
+  // silently reset to "AI Transformation" every time you navigate).
+  var SITE_STORAGE_KEY = 'appcentre_selected_site';
+  var siteSelect = document.getElementById('siteSelect');
+  if (siteSelect) {
+    var savedSite = localStorage.getItem(SITE_STORAGE_KEY);
+    if (savedSite && Array.prototype.some.call(siteSelect.options, function (opt) { return opt.value === savedSite; })) {
+      siteSelect.value = savedSite;
+    } else {
+      localStorage.setItem(SITE_STORAGE_KEY, siteSelect.value);
+    }
+    siteSelect.addEventListener('change', function () {
+      localStorage.setItem(SITE_STORAGE_KEY, siteSelect.value);
+      window.dispatchEvent(new CustomEvent('appcentre:site-changed', { detail: { site: siteSelect.value } }));
+    });
+  }
+
   try {
     var raw = localStorage.getItem('appcentre_admin');
     if (raw) {
