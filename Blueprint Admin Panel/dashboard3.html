@@ -403,145 +403,60 @@
       review: '<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10h10"/><path d="M7 14h6"/><path d="M5 4h14a2 2 0 0 1 2 2v12l-4-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>'
     };
 
-    const dashboardData = {
-      'AI Transformation': {
-        'Today': {
-          users: '12,518', usersSub: '22 new during this period',
-          adverts: '64', advertsSub: '6 awaiting review',
-          review: '6', reviewSub: 'Oldest waiting 8 hours',
-          payments: '£1,260', paymentsSub: '11 successful transactions',
-          enquiries: '9', enquiriesSub: '2 overdue',
-          reviews: '5', reviewsSub: '1 reported review'
-        },
-        'Last 7 days': {
-          users: '12,602', usersSub: '76 new during this period',
-          adverts: '66', advertsSub: '10 awaiting review',
-          review: '10', reviewSub: 'Oldest waiting 1 day',
-          payments: '£6,920', paymentsSub: '39 successful transactions',
-          enquiries: '21', enquiriesSub: '4 overdue',
-          reviews: '9', reviewsSub: '1 reported review'
-        },
-        'Last 30 days': {
-          users: '12,480', usersSub: '184 new during this period',
-          adverts: '68', advertsSub: '14 awaiting review',
-          review: '14', reviewSub: 'Oldest waiting 2 days',
-          payments: '£18,420', paymentsSub: '96 successful transactions',
-          enquiries: '42', enquiriesSub: '8 overdue',
-          reviews: '17', reviewsSub: '2 reported reviews'
-        }
-      },
-      'Travel Harmony': {
-        'Today': {
-          users: '3,240', usersSub: '9 new during this period',
-          adverts: '21', advertsSub: '3 awaiting review',
-          review: '3', reviewSub: 'Oldest waiting 5 hours',
-          payments: '£410', paymentsSub: '4 successful transactions',
-          enquiries: '4', enquiriesSub: '1 overdue',
-          reviews: '2', reviewsSub: '0 reported reviews'
-        },
-        'Last 7 days': {
-          users: '3,295', usersSub: '31 new during this period',
-          adverts: '23', advertsSub: '5 awaiting review',
-          review: '5', reviewSub: 'Oldest waiting 1 day',
-          payments: '£2,180', paymentsSub: '14 successful transactions',
-          enquiries: '9', enquiriesSub: '2 overdue',
-          reviews: '4', reviewsSub: '1 reported review'
-        },
-        'Last 30 days': {
-          users: '3,412', usersSub: '92 new during this period',
-          adverts: '25', advertsSub: '7 awaiting review',
-          review: '7', reviewSub: 'Oldest waiting 3 days',
-          payments: '£6,050', paymentsSub: '33 successful transactions',
-          enquiries: '15', enquiriesSub: '3 overdue',
-          reviews: '6', reviewsSub: '1 reported review'
-        }
-      },
-      'Trust Centre': {
-        'Today': {
-          users: '7,860', usersSub: '14 new during this period',
-          adverts: '40', advertsSub: '4 awaiting review',
-          review: '4', reviewSub: 'Oldest waiting 6 hours',
-          payments: '£890', paymentsSub: '7 successful transactions',
-          enquiries: '6', enquiriesSub: '1 overdue',
-          reviews: '3', reviewsSub: '1 reported review'
-        },
-        'Last 7 days': {
-          users: '7,940', usersSub: '48 new during this period',
-          adverts: '42', advertsSub: '7 awaiting review',
-          review: '7', reviewSub: 'Oldest waiting 1 day',
-          payments: '£4,320', paymentsSub: '26 successful transactions',
-          enquiries: '13', enquiriesSub: '3 overdue',
-          reviews: '6', reviewsSub: '1 reported review'
-        },
-        'Last 30 days': {
-          users: '8,110', usersSub: '141 new during this period',
-          adverts: '45', advertsSub: '9 awaiting review',
-          review: '9', reviewSub: 'Oldest waiting 2 days',
-          payments: '£11,760', paymentsSub: '61 successful transactions',
-          enquiries: '27', enquiriesSub: '5 overdue',
-          reviews: '11', reviewsSub: '1 reported review'
-        }
+    const PERIOD_MAP = { 'Today': 'today', 'Last 7 days': '7d', 'Last 30 days': '30d' };
+
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function formatDateTime(isoString) {
+      return new Date(isoString).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function initials(name) {
+      const parts = (name || 'System').trim().split(/\s+/);
+      return ((parts[0] ? parts[0][0] : '') + (parts[1] ? parts[1][0] : '')).toUpperCase() || 'AD';
+    }
+
+    function updateMetrics(summary) {
+      metricUsers.textContent = summary.users.total.toLocaleString();
+      metricUsersSub.textContent = summary.users.newInPeriod + ' new during this period';
+      metricAdverts.textContent = summary.adverts.active.toLocaleString();
+      metricAdvertsSub.textContent = summary.adverts.pendingReview + ' awaiting review';
+      metricReview.textContent = String(summary.adverts.pendingReview);
+      metricReviewSub.textContent = summary.adverts.oldestPendingReviewDays == null
+        ? 'None awaiting review'
+        : 'Oldest waiting ' + summary.adverts.oldestPendingReviewDays + ' day' + (summary.adverts.oldestPendingReviewDays === 1 ? '' : 's');
+      metricPayments.textContent = String(summary.payments.successfulInPeriod);
+      metricPaymentsSub.textContent = summary.payments.failed + ' failed payment' + (summary.payments.failed === 1 ? '' : 's');
+      metricEnquiries.textContent = String(summary.enquiries.open);
+      metricEnquiriesSub.textContent = summary.enquiries.overdue + ' overdue';
+      metricReviews.textContent = String(summary.reviews.pending);
+      metricReviewsSub.textContent = summary.reviews.reported + ' reported review' + (summary.reviews.reported === 1 ? '' : 's');
+    }
+
+    function buildNeedsAttention(summary) {
+      const items = [];
+      if (summary.adverts.pendingReview > 0) {
+        items.push({ icon: 'advert', title: 'Adverts awaiting review', priority: summary.adverts.pendingReview >= 10 ? 'High priority' : 'Medium priority',
+          sub: summary.adverts.oldestPendingReviewDays == null ? '' : 'Oldest submitted ' + summary.adverts.oldestPendingReviewDays + ' day' + (summary.adverts.oldestPendingReviewDays === 1 ? '' : 's') + ' ago',
+          count: String(summary.adverts.pendingReview), linkText: 'Review adverts', href: 'AdvertMgt.html' });
       }
-    };
-
-    const needsAttentionData = {
-      'AI Transformation': [
-        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 2 days ago', count: '14', linkText: 'Review adverts', href: 'AdvertMgt.html' },
-        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '3', linkText: 'Review payments', href: 'PaymentTransaction.html' },
-        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'High priority', sub: 'Response target exceeded', count: '8', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
-        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '2', linkText: 'Review reports', href: 'ReviewsMgt.html' }
-      ],
-      'Travel Harmony': [
-        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 1 day ago', count: '5', linkText: 'Review adverts', href: 'AdvertMgt.html' },
-        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '1', linkText: 'Review payments', href: 'PaymentTransaction.html' },
-        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'Medium priority', sub: 'Response target exceeded', count: '2', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
-        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '1', linkText: 'Review reports', href: 'ReviewsMgt.html' }
-      ],
-      'Trust Centre': [
-        { icon: 'advert', title: 'Adverts awaiting review', priority: 'Medium priority', sub: 'Oldest submitted 1 day ago', count: '9', linkText: 'Review adverts', href: 'AdvertMgt.html' },
-        { icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review', count: '2', linkText: 'Review payments', href: 'PaymentTransaction.html' },
-        { icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'High priority', sub: 'Response target exceeded', count: '5', linkText: 'Open enquiries', href: 'ContactEnquiries.html' },
-        { icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation', count: '1', linkText: 'Review reports', href: 'ReviewsMgt.html' }
-      ]
-    };
-
-    const recentActivityData = {
-      'AI Transformation': [
-        { initials: 'AO', title: 'Advert approved', sub: 'Advert #AC-2048 · Garden Studio', time: 'Today, 10:24' },
-        { initials: 'MK', title: 'Payment verified', sub: 'Payment #PM-3920 · Featured advert', time: 'Today, 09:40' },
-        { initials: 'JT', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-8821 · Seller support', time: 'Yesterday, 16:15' },
-        { initials: 'AO', title: 'Review published', sub: 'Review #RV-1170 · Verified trade service', time: 'Yesterday, 14:08' },
-        { initials: 'LB', title: 'User account suspended', sub: 'User #US-7712 · Policy breach review', time: 'Yesterday, 11:22' }
-      ],
-      'Travel Harmony': [
-        { initials: 'RC', title: 'Advert approved', sub: 'Advert #AC-1032 · Weekend Market Stall', time: 'Today, 11:02' },
-        { initials: 'NP', title: 'Payment verified', sub: 'Payment #PM-1140 · Standard listing', time: 'Today, 08:15' },
-        { initials: 'SK', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-2210 · Buyer support', time: 'Yesterday, 17:48' },
-        { initials: 'RC', title: 'Review published', sub: 'Review #RV-330 · Verified seller', time: 'Yesterday, 13:02' },
-        { initials: 'TW', title: 'User account suspended', sub: 'User #US-1904 · Policy breach review', time: 'Two days ago, 09:10' }
-      ],
-      'Trust Centre': [
-        { initials: 'HB', title: 'Advert approved', sub: 'Advert #AC-3510 · Coastal Retreat Rentals', time: 'Today, 09:58' },
-        { initials: 'DP', title: 'Payment verified', sub: 'Payment #PM-2870 · Featured advert', time: 'Today, 07:32' },
-        { initials: 'EM', title: 'Contact enquiry assigned', sub: 'Enquiry #EN-5502 · Seller support', time: 'Yesterday, 15:20' },
-        { initials: 'HB', title: 'Review published', sub: 'Review #RV-810 · Verified trade service', time: 'Yesterday, 12:45' },
-        { initials: 'QS', title: 'User account suspended', sub: 'User #US-4432 · Policy breach review', time: 'Yesterday, 08:05' }
-      ]
-    };
-
-    function updateMetrics(data) {
-      metricUsers.textContent = data.users;
-      metricUsersSub.textContent = data.usersSub;
-      metricAdverts.textContent = data.adverts;
-      metricAdvertsSub.textContent = data.advertsSub;
-      metricReview.textContent = data.review;
-      metricReviewSub.textContent = data.reviewSub;
-      metricPayments.textContent = data.payments;
-      metricPaymentsSub.textContent = data.paymentsSub;
-      metricEnquiries.textContent = data.enquiries;
-      metricEnquiriesSub.textContent = data.enquiriesSub;
-      metricReviews.textContent = data.reviews;
-      metricReviewsSub.textContent = data.reviewsSub;
+      if (summary.payments.failed > 0) {
+        items.push({ icon: 'payment', title: 'Failed payment verification', priority: 'High priority', sub: 'Requires payment status review',
+          count: String(summary.payments.failed), linkText: 'Review payments', href: 'PaymentTransaction.html' });
+      }
+      if (summary.enquiries.overdue > 0) {
+        items.push({ icon: 'enquiry', title: 'Overdue contact enquiries', priority: 'High priority', sub: 'Response target exceeded',
+          count: String(summary.enquiries.overdue), linkText: 'Open enquiries', href: 'ContactEnquiries.html' });
+      }
+      if (summary.reviews.reported > 0) {
+        items.push({ icon: 'review', title: 'Reported reviews', priority: 'Medium priority', sub: 'Requires moderation',
+          count: String(summary.reviews.reported), linkText: 'Review reports', href: 'ReviewsMgt.html' });
+      }
+      return items;
     }
 
     function renderNeedsAttention(items) {
@@ -571,24 +486,23 @@
     }
 
     function renderRecentActivity(items) {
+      if (!items.length) {
+        recentActivityList.innerHTML = '<p class="py-4 text-sm text-muted-foreground">No recent activity.</p>';
+        return;
+      }
       recentActivityList.innerHTML = items.map(function (item) {
+        const name = item.actor ? item.actor.name : 'System';
         return '<article class="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:justify-between">' +
           '<div class="flex min-w-0 gap-3">' +
-            '<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">' + item.initials + '</div>' +
+            '<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold">' + initials(name) + '</div>' +
             '<div class="min-w-0">' +
-              '<p class="text-sm font-medium">' + item.title + '</p>' +
-              '<p class="text-sm text-muted-foreground">' + item.sub + '</p>' +
+              '<p class="text-sm font-medium">' + escapeHtml(item.action) + '</p>' +
+              '<p class="text-sm text-muted-foreground">' + escapeHtml(name) + (item.target ? ' · ' + escapeHtml(item.target) : '') + '</p>' +
             '</div>' +
           '</div>' +
-          '<p class="text-xs text-muted-foreground">' + item.time + '</p>' +
+          '<p class="text-xs text-muted-foreground">' + formatDateTime(item.createdAt) + '</p>' +
         '</article>';
       }).join('');
-    }
-
-    function renderDashboard(site, periodValue) {
-      updateMetrics(dashboardData[site][periodValue]);
-      renderNeedsAttention(needsAttentionData[site]);
-      renderRecentActivity(recentActivityData[site]);
     }
 
     function showNormal() {
@@ -612,50 +526,66 @@
       if (type === 'error') errorState.classList.remove('hidden');
     }
 
-    period.addEventListener('change', function () {
-      const selected = period.value;
-      if (selected === 'Loading') {
-        showState('loading');
-        dashboardStatus.textContent = 'Dashboard is loading.';
+    async function loadDashboard() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) {
+        window.location.href = 'adminlogin.html';
         return;
       }
-      if (selected === 'Empty') {
-        showState('empty');
-        dashboardStatus.textContent = 'No activity found for the selected period.';
-        return;
-      }
-      if (selected === 'Error') {
+
+      showState('loading');
+      dashboardStatus.textContent = 'Dashboard is loading.';
+
+      try {
+        const periodValue = PERIOD_MAP[period.value] || '30d';
+        const [summaryRes, auditRes] = await Promise.all([
+          fetch('/api/dashboard/summary?period=' + periodValue, { headers: { Authorization: 'Bearer ' + token } }),
+          fetch('/api/audit-log?pageSize=5', { headers: { Authorization: 'Bearer ' + token } })
+        ]);
+
+        if (summaryRes.status === 401 || auditRes.status === 401) {
+          localStorage.removeItem('appcentre_admin_token');
+          localStorage.removeItem('appcentre_admin');
+          window.location.href = 'adminlogin.html';
+          return;
+        }
+        if (!summaryRes.ok || !auditRes.ok) throw new Error('Failed to load dashboard');
+
+        const summary = (await summaryRes.json()).data;
+        const audit = (await auditRes.json()).data;
+        const needsAttention = buildNeedsAttention(summary);
+
+        const isEmpty = summary.users.total === 0 && summary.adverts.active === 0 && needsAttention.length === 0 && audit.items.length === 0;
+        if (isEmpty) {
+          showState('empty');
+          dashboardStatus.textContent = 'No activity found for the selected period.';
+          return;
+        }
+
+        updateMetrics(summary);
+        renderNeedsAttention(needsAttention);
+        renderRecentActivity(audit.items);
+        showNormal();
+        dashboardStatus.textContent = 'Dashboard values updated for ' + period.value + '.';
+      } catch (err) {
         showState('error');
         dashboardStatus.textContent = 'Dashboard information could not be loaded.';
-        return;
       }
-      renderDashboard(siteSelect.value, selected);
-      showNormal();
-      dashboardStatus.textContent = 'Dashboard values updated for ' + siteSelect.value + ', ' + selected + '.';
+    }
+
+    period.addEventListener('change', loadDashboard);
+    siteSelect.addEventListener('change', loadDashboard);
+    resetPeriodButton.addEventListener('click', function () { period.value = 'Last 30 days'; loadDashboard(); });
+    retryButton.addEventListener('click', loadDashboard);
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
     });
 
-    siteSelect.addEventListener('change', function () {
-      period.value = 'Last 30 days';
-      renderDashboard(siteSelect.value, 'Last 30 days');
-      showNormal();
-      dashboardStatus.textContent = 'Dashboard values updated for ' + siteSelect.value + ', Last 30 days.';
-    });
-
-    resetPeriodButton.addEventListener('click', function () {
-      period.value = 'Last 30 days';
-      renderDashboard(siteSelect.value, 'Last 30 days');
-      showNormal();
-      dashboardStatus.textContent = 'Dashboard values updated for Last 30 days.';
-    });
-
-    retryButton.addEventListener('click', function () {
-      period.value = 'Last 30 days';
-      renderDashboard(siteSelect.value, 'Last 30 days');
-      showNormal();
-      dashboardStatus.textContent = 'Dashboard information reloaded successfully.';
-    });
-
-    renderDashboard(siteSelect.value, period.value);
+    loadDashboard();
   </script>
 </div>
 </body></html>
