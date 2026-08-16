@@ -8,10 +8,12 @@ datasource db {
 }
 
 enum AdminRole {
+  SUPER_ADMIN
   ADMINISTRATOR
+  CONTENT_ADMIN
   MODERATOR
-  SUPPORT
-  FINANCE
+  FINANCE_ADMIN
+  READONLY_AUDITOR
 }
 
 enum AdminStatus {
@@ -72,7 +74,7 @@ model AdminUser {
   name         String
   email        String      @unique
   passwordHash String
-  role         AdminRole   @default(SUPPORT)
+  role         AdminRole   @default(READONLY_AUDITOR)
   status       AdminStatus @default(ACTIVE)
   lastActiveAt DateTime?
   createdAt    DateTime    @default(now())
