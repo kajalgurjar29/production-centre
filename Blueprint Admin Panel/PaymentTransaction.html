@@ -513,16 +513,71 @@
     const summaryFailed = document.getElementById('summaryFailed');
     const moreActionsMenu = document.getElementById('moreActionsMenu');
 
-    const baseTransactions = [
-      { reference: 'PAY-2048-7781', advertReference: 'AC-2048', userName: 'Daniel Moore', userReference: 'USR-1048', email: 'daniel.moore@example.com', amount: 180, currency: 'GBP', amountLabel: '£180.00 GBP', provider: 'Stripe', status: 'Paid', date: '2026-07-10T09:05:00', dateLabel: '10 Jul 2026, 09:05' },
-      { reference: 'PAY-2011-3304', advertReference: 'AC-2011', userName: 'Fatima Bello', userReference: 'USR-1053', email: 'fatima.bello@example.com', amount: 25000, currency: 'NGN', amountLabel: '₦25,000 NGN', provider: 'Paystack', status: 'Failed', date: '2026-07-09T18:42:00', dateLabel: '9 Jul 2026, 18:42' },
-      { reference: 'PAY-2071-4402', advertReference: 'AC-2071', userName: 'Aisha Ibrahim', userReference: 'USR-1071', email: 'aisha.ibrahim@example.com', amount: 12000, currency: 'NGN', amountLabel: '₦12,000 NGN', provider: 'Paystack', status: 'Pending', date: '2026-07-10T11:18:00', dateLabel: '10 Jul 2026, 11:18' },
-      { reference: 'PAY-1990-1182', advertReference: 'AC-1990', userName: 'Samuel Reed', userReference: 'USR-1024', email: 'samuel.reed@example.com', amount: 95, currency: 'GBP', amountLabel: '£95.00 GBP', provider: 'Stripe', status: 'Refunded', date: '2026-07-08T15:10:00', dateLabel: '8 Jul 2026, 15:10' },
-      { reference: 'PAY-2088-7814', advertReference: 'AC-2088', userName: 'Grace Okoro', userReference: 'USR-1088', email: 'grace.okoro@example.com', amount: 35000, currency: 'NGN', amountLabel: '₦35,000 NGN', provider: 'Paystack', status: 'Paid', date: '2026-07-11T08:12:00', dateLabel: '11 Jul 2026, 08:12' },
-      { reference: 'PAY-2059-5540', advertReference: 'AC-2059', userName: 'Michael Hart', userReference: 'USR-1062', email: 'michael.hart@example.com', amount: 240, currency: 'GBP', amountLabel: '£240.00 GBP', provider: 'Stripe', status: 'Paid', date: '2026-07-07T13:36:00', dateLabel: '7 Jul 2026, 13:36' },
-      { reference: 'PAY-2064-9921', advertReference: 'AC-2064', userName: 'Chioma Nwosu', userReference: 'USR-1067', email: 'chioma.nwosu@example.com', amount: 15000, currency: 'NGN', amountLabel: '₦15,000 NGN', provider: 'Paystack', status: 'Paid', date: '2026-07-06T10:22:00', dateLabel: '6 Jul 2026, 10:22' },
-      { reference: 'PAY-2033-6647', advertReference: 'AC-2033', userName: 'Emily Clark', userReference: 'USR-1041', email: 'emily.clark@example.com', amount: 125, currency: 'GBP', amountLabel: '£125.00 GBP', provider: 'Stripe', status: 'Pending', date: '2026-07-05T17:55:00', dateLabel: '5 Jul 2026, 17:55' }
-    ];
+    const CURRENCY_SYMBOL = { GBP: '£', NGN: '₦', USD: '$', EUR: '€' };
+    function formatAmountLabel(amount, currency) {
+      const symbol = CURRENCY_SYMBOL[currency] || '';
+      const value = Number(amount).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return symbol + value + ' ' + currency;
+    }
+    function formatDateLabel(isoString) {
+      return new Date(isoString).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+    function titleCaseStatus(status) {
+      return status.charAt(0) + status.slice(1).toLowerCase();
+    }
+
+    let baseTransactions = [];
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    async function loadPayments() {
+      const token = requireToken();
+      if (!token) return;
+
+      state.loadingMode = 'loading';
+      render();
+
+      try {
+        const response = await fetch('/api/payments?pageSize=100', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load payments');
+        const data = await response.json();
+        baseTransactions = data.data.items.map(function (p) {
+          const date = p.paidAt || p.createdAt;
+          return {
+            reference: p.transactionRef,
+            advertReference: p.advert ? p.advert.reference : '-',
+            userName: p.advert && p.advert.advertiser ? p.advert.advertiser.name : 'Unknown',
+            userReference: p.advert && p.advert.advertiser ? p.advert.advertiser.id : '-',
+            email: p.advert && p.advert.advertiser ? p.advert.advertiser.email : '-',
+            amount: Number(p.amount),
+            currency: p.currency,
+            amountLabel: formatAmountLabel(p.amount, p.currency),
+            provider: p.provider,
+            status: titleCaseStatus(p.status),
+            date,
+            dateLabel: formatDateLabel(date)
+          };
+        });
+        state.loadingMode = 'normal';
+        render();
+      } catch (err) {
+        state.loadingMode = 'error';
+        render();
+      }
+    }
 
     const state = {
       search: '',
@@ -654,9 +709,10 @@
       if (state.provider !== 'all') {
         items = items.filter(function (item) { return item.provider === state.provider; });
       }
-      const now = new Date('2026-07-11T12:00:00');
+      const now = new Date();
       if (state.date === 'Today') {
-        items = items.filter(function (item) { return item.date.startsWith('2026-07-11'); });
+        const today = now.toISOString().slice(0, 10);
+        items = items.filter(function (item) { return item.date.startsWith(today); });
       }
       if (state.date === 'Last 7 days') {
         items = items.filter(function (item) {
@@ -694,9 +750,9 @@
     }
 
     function renderSummaryCards() {
-      summaryAll.textContent = '486';
-      summaryPaid.textContent = String(452);
-      summaryFailed.textContent = String(18);
+      summaryAll.textContent = String(baseTransactions.length);
+      summaryPaid.textContent = String(baseTransactions.filter(function (t) { return t.status === 'Paid'; }).length);
+      summaryFailed.textContent = String(baseTransactions.filter(function (t) { return t.status === 'Failed'; }).length);
       summaryCards.forEach(function (card) {
         const filter = card.getAttribute('data-summary-filter');
         const active = (filter === 'all' && state.status === 'all') || filter === state.status;
@@ -806,7 +862,7 @@
         paymentsTableSection.classList.add('hidden');
         paymentsCardsSection.classList.add('hidden');
         pagination.classList.add('hidden');
-        resultsSummary.textContent = 'Showing 0 of 486 transactions';
+        resultsSummary.textContent = 'Showing 0 of ' + baseTransactions.length + ' transactions';
         paymentsStatus.textContent = 'No payments match these filters.';
         return;
       }
@@ -818,7 +874,7 @@
       const paginated = filtered.slice(start, start + state.pageSize);
       renderTableRows(paginated);
       renderCards(paginated);
-      resultsSummary.textContent = 'Showing ' + (start + 1) + ' to ' + (start + paginated.length) + ' of 486 transactions';
+      resultsSummary.textContent = 'Showing ' + (start + 1) + ' to ' + (start + paginated.length) + ' of ' + filtered.length + ' transactions';
       renderPagination(filtered.length);
       paymentsStatus.textContent = 'Showing ' + paginated.length + ' payment transactions.';
     }
@@ -873,7 +929,7 @@
     resetFiltersMobileCompact.addEventListener('click', resetFilters);
     clearFiltersButton.addEventListener('click', resetFilters);
     resetNoResults.addEventListener('click', resetFilters);
-    retryButton.addEventListener('click', function () { state.loadingMode = 'normal'; render(); });
+    retryButton.addEventListener('click', loadPayments);
 
     summaryCards.forEach(function (card) {
       card.addEventListener('click', function () {
@@ -929,7 +985,15 @@
 
     syncFiltersToDesktop();
     syncFiltersToMobile();
-    render();
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadPayments();
   </script>
 </div>
 </body></html>

@@ -200,8 +200,10 @@
                 </div>
                 <select id="statusFilter" class="min-h-11 rounded-xl border border-input bg-card px-3 text-sm">
                   <option value="">All statuses</option>
-                  <option>Published</option>
-                  <option>Reported</option>
+                  <option value="PENDING">Pending</option>
+                  <option value="APPROVED">Approved</option>
+                  <option value="REJECTED">Rejected</option>
+                  <option value="HIDDEN">Hidden</option>
                 </select>
               </div>
             </div>
@@ -212,17 +214,17 @@
           <section class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <article class="rounded-xl border border-border bg-card p-4 shadow-sm border-l-4 border-l-primary">
               <p class="text-sm text-muted-foreground">Total Reviews</p>
-              <p class="mt-1 text-2xl font-heading font-bold">17</p>
+              <p id="stat-total" class="mt-1 text-2xl font-heading font-bold">-</p>
               <p class="mt-1 text-xs text-muted-foreground">All submitted reviews</p>
             </article>
             <article class="rounded-xl border border-border bg-card p-4 shadow-sm border-l-4 border-l-tertiary">
               <p class="text-sm text-muted-foreground">Average Rating</p>
-              <p class="mt-1 text-2xl font-heading font-bold">4.3<span class="text-base font-normal text-muted-foreground"> / 5</span></p>
-              <p class="mt-1 text-xs text-muted-foreground">Across all published reviews</p>
+              <p id="stat-average" class="mt-1 text-2xl font-heading font-bold">-<span class="text-base font-normal text-muted-foreground"> / 5</span></p>
+              <p class="mt-1 text-xs text-muted-foreground">Across loaded reviews</p>
             </article>
             <article class="rounded-xl border border-border bg-card p-4 shadow-sm border-l-4 border-l-destructive">
               <p class="text-sm text-muted-foreground">Reported Reviews</p>
-              <p class="mt-1 text-2xl font-heading font-bold">2</p>
+              <p id="stat-reported" class="mt-1 text-2xl font-heading font-bold">-</p>
               <p class="mt-1 text-xs text-muted-foreground">Awaiting moderation</p>
             </article>
           </section>
@@ -303,14 +305,17 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
-    const reviews = [
-      { name: 'Amina Bello', rating: 5, topic: 'Gratitude', text: 'It was easy to understand how to register and manage my advert.', location: 'Lagos, Nigeria', date: '08 Jul 2026', status: 'Published' },
-      { name: 'James Carter', rating: 5, topic: 'Endorsement', text: 'The service cards are clear and I like the idea of having different tools in one place.', location: 'London, United Kingdom', date: '08 Jul 2026', status: 'Published' },
-      { name: 'Sarah Mensah', rating: 5, topic: 'Goodwill Message', text: 'The advert workflow is simple and easy to follow.', location: 'Accra, Ghana', date: '07 Jul 2026', status: 'Published' },
-      { name: 'Daniel Okoro', rating: 2, topic: 'Concerns', text: 'Payment confirmation took longer than expected and support response was slow.', location: 'Abuja, Nigeria', date: '05 Jul 2026', status: 'Reported' },
-      { name: 'Fatima Bello', rating: 1, topic: 'Concerns', text: 'This review contains promotional content unrelated to the platform and should be checked.', location: 'Cairo, Egypt', date: '03 Jul 2026', status: 'Reported' },
-      { name: 'Michael Hart', rating: 4, topic: 'Improvement Areas', text: 'Would like to see more advert placement options in future updates.', location: 'Toronto, Canada', date: '01 Jul 2026', status: 'Published' },
-    ];
+    let reviews = [];
+
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function formatDate(isoString) {
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
 
     function initials(name) {
       const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -326,22 +331,35 @@
       return markup;
     }
 
+    const STATUS_BADGE = {
+      PENDING: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Pending</span></span>',
+      APPROVED: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Approved</span></span>',
+      REJECTED: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>Rejected</span></span>',
+      HIDDEN: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"><span class="h-2 w-2 rounded-full bg-muted-foreground" aria-hidden="true"></span><span>Hidden</span></span>'
+    };
+
     function statusBadge(status) {
-      return status === 'Published'
-        ? '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>'
-        : '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>Reported</span></span>';
+      return STATUS_BADGE[status] || STATUS_BADGE.PENDING;
     }
 
     const reviewRows = document.getElementById('reviewRows');
     function renderReviews() {
+      const statTotal = document.getElementById('stat-total');
+      const statAverage = document.getElementById('stat-average');
+      const statReported = document.getElementById('stat-reported');
+      statTotal.textContent = String(reviews.length);
+      statAverage.innerHTML = (reviews.length ? (reviews.reduce(function (sum, r) { return sum + r.rating; }, 0) / reviews.length).toFixed(1) : '-') + '<span class="text-base font-normal text-muted-foreground"> / 5</span>';
+      statReported.textContent = String(reviews.filter(function (r) { return r.reportCount > 0; }).length);
+
       reviewRows.innerHTML = reviews.map(function (r, i) {
-        return '<tr data-index="' + i + '" data-status="' + r.status + '" data-name="' + (r.name + ' ' + r.text).toLowerCase() + '">'
-          + '<td class="px-4 py-3"><div class="flex items-center gap-2"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">' + initials(r.name) + '</span><span class="font-medium">' + r.name + '</span></div></td>'
+        const location = [r.city, r.country].filter(Boolean).join(', ') || '-';
+        return '<tr data-index="' + i + '">'
+          + '<td class="px-4 py-3"><div class="flex items-center gap-2"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">' + initials(r.name) + '</span><span class="font-medium">' + escapeHtml(r.name) + '</span></div></td>'
           + '<td class="px-4 py-3"><div class="flex items-center gap-1">' + starsMarkup(r.rating) + '</div></td>'
-          + '<td class="px-4 py-3">' + r.topic + '</td>'
-          + '<td class="px-4 py-3 max-w-xs truncate text-muted-foreground">' + r.text + '</td>'
-          + '<td class="px-4 py-3 text-muted-foreground">' + r.location + '</td>'
-          + '<td class="px-4 py-3">' + statusBadge(r.status) + '</td>'
+          + '<td class="px-4 py-3">' + escapeHtml(r.topic || '-') + '</td>'
+          + '<td class="px-4 py-3 max-w-xs truncate text-muted-foreground">' + escapeHtml(r.details || '') + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(location) + '</td>'
+          + '<td class="px-4 py-3">' + statusBadge(r.status) + (r.reportCount > 0 ? ' <span class="ml-1 text-xs text-destructive">(' + r.reportCount + ' report' + (r.reportCount === 1 ? '' : 's') + ')</span>' : '') + '</td>'
           + '<td class="px-4 py-3"><div class="flex flex-wrap gap-2">'
           + '<button type="button" data-view="' + i + '" class="view-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">View</button>'
           + '<button type="button" data-remove="' + i + '" class="remove-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium text-destructive">Remove</button>'
@@ -370,11 +388,12 @@
       document.querySelectorAll('.view-button').forEach(function (b) {
         b.addEventListener('click', function () {
           const r = reviews[parseInt(b.getAttribute('data-view'), 10)];
-          document.getElementById('viewReviewer').textContent = r.name + ' · ' + r.location;
+          const location = [r.city, r.country].filter(Boolean).join(', ') || '-';
+          document.getElementById('viewReviewer').textContent = r.name + ' · ' + location;
           document.getElementById('viewStars').innerHTML = starsMarkup(r.rating);
-          document.getElementById('viewTopic').textContent = r.topic;
-          document.getElementById('viewText').textContent = r.text;
-          document.getElementById('viewLocation').textContent = r.location;
+          document.getElementById('viewTopic').textContent = r.topic || '-';
+          document.getElementById('viewText').textContent = r.details || '-';
+          document.getElementById('viewLocation').textContent = location;
           openModal(viewModal);
         });
       });
@@ -388,37 +407,82 @@
 
     modalOverlay.addEventListener('click', closeAllModals);
     document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeAllModals); });
-    document.getElementById('confirmRemove').addEventListener('click', function () {
-      if (pendingRemoveIndex !== null) {
-        const removed = reviews.splice(pendingRemoveIndex, 1)[0];
-        pendingRemoveIndex = null;
-        renderReviews();
-        applyFilters();
-        showToast('Review by ' + removed.name + ' removed.');
-      }
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    document.getElementById('confirmRemove').addEventListener('click', async function () {
+      if (pendingRemoveIndex === null) { closeAllModals(); return; }
+      const token = requireToken();
+      if (!token) return;
+      const removed = reviews[pendingRemoveIndex];
+      pendingRemoveIndex = null;
       closeAllModals();
+      try {
+        const response = await fetch('/api/reviews/' + removed.id, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to remove review');
+        showToast('Review by ' + removed.name + ' removed.');
+        loadReviews();
+      } catch (err) {
+        showToast('Could not remove review. Please try again.');
+      }
     });
 
     const reviewSearch = document.getElementById('reviewSearch');
     const statusFilter = document.getElementById('statusFilter');
     const noResults = document.getElementById('noResults');
-    function applyFilters() {
-      const term = reviewSearch.value.trim().toLowerCase();
-      const status = statusFilter.value;
-      let visible = 0;
-      document.querySelectorAll('#reviewRows tr').forEach(function (row) {
-        const matchesTerm = !term || row.dataset.name.includes(term);
-        const matchesStatus = !status || row.dataset.status === status;
-        const show = matchesTerm && matchesStatus;
-        row.classList.toggle('hidden', !show);
-        if (show) visible++;
-      });
-      noResults.classList.toggle('hidden', visible !== 0);
-    }
-    reviewSearch.addEventListener('input', applyFilters);
-    statusFilter.addEventListener('change', applyFilters);
 
-    renderReviews();
+    async function loadReviews() {
+      const token = requireToken();
+      if (!token) return;
+
+      reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="7">Loading reviews…</td></tr>';
+      noResults.classList.add('hidden');
+
+      try {
+        const params = new URLSearchParams({ pageSize: '100' });
+        if (reviewSearch.value.trim()) params.set('search', reviewSearch.value.trim());
+        if (statusFilter.value) params.set('status', statusFilter.value);
+        const response = await fetch('/api/reviews?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load reviews');
+        const data = await response.json();
+        reviews = data.data.items;
+        noResults.classList.toggle('hidden', reviews.length !== 0);
+        renderReviews();
+        if (pageStatus) pageStatus.textContent = reviews.length + ' review' + (reviews.length === 1 ? '' : 's') + ' found.';
+      } catch (err) {
+        reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="7">Could not load reviews. Please refresh the page.</td></tr>';
+      }
+    }
+
+    let searchTimer;
+    reviewSearch.addEventListener('input', function () {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(loadReviews, 300);
+    });
+    statusFilter.addEventListener('change', loadReviews);
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadReviews();
   </script>
 </div>
 </body></html>

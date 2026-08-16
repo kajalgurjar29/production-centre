@@ -10,7 +10,7 @@ async function listPayments({ status, page = 1, pageSize = 20 }) {
       orderBy: { createdAt: 'desc' },
       skip: (page - 1) * pageSize,
       take: pageSize,
-      include: { advert: { select: { id: true, title: true, reference: true } } },
+      include: { advert: { select: { id: true, title: true, reference: true, advertiser: { select: { id: true, name: true, email: true } } } } },
     }),
     prisma.payment.count({ where }),
   ]);

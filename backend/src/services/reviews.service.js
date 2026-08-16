@@ -20,7 +20,7 @@ async function listReviews({ status, search, page = 1, pageSize = 20 }) {
 async function removeReview(id) {
   const review = await prisma.review.findUnique({ where: { id } });
   if (!review) throw ApiError.notFound('Review not found');
-  return prisma.review.update({ where: { id }, data: { status: 'REMOVED' } });
+  return prisma.review.update({ where: { id }, data: { status: 'HIDDEN' } });
 }
 
 module.exports = { listReviews, removeReview };
