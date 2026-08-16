@@ -224,9 +224,9 @@ async function main() {
 
   await prisma.review.createMany({
     data: [
-      { name: 'Amina Bello', rating: 5, topic: 'Gratitude', details: 'It was easy to understand how to register and manage my advert.', country: 'Nigeria', city: 'Lagos', status: 'PUBLISHED' },
-      { name: 'James Carter', rating: 5, topic: 'Endorsement', details: 'The service cards are clear and easy to use.', country: 'United Kingdom', city: 'London', status: 'PUBLISHED' },
-      { name: 'Daniel Okoro', rating: 2, topic: 'Concerns', details: 'Payment confirmation took longer than expected.', country: 'Nigeria', city: 'Abuja', status: 'REPORTED' },
+      { name: 'Amina Bello', rating: 5, topic: 'Gratitude', details: 'It was easy to understand how to register and manage my advert.', country: 'Nigeria', city: 'Lagos', status: 'APPROVED' },
+      { name: 'James Carter', rating: 5, topic: 'Endorsement', details: 'The service cards are clear and easy to use.', country: 'United Kingdom', city: 'London', status: 'APPROVED' },
+      { name: 'Daniel Okoro', rating: 2, topic: 'Concerns', details: 'Payment confirmation took longer than expected.', country: 'Nigeria', city: 'Abuja', status: 'APPROVED', reportCount: 1 },
     ],
     skipDuplicates: true,
   });

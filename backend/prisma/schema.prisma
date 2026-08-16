@@ -46,15 +46,17 @@ enum PaymentStatus {
 }
 
 enum ReviewStatus {
-  PUBLISHED
-  REPORTED
-  REMOVED
+  PENDING
+  APPROVED
+  REJECTED
+  HIDDEN
 }
 
 enum EnquiryStatus {
   NEW
   IN_PROGRESS
   RESOLVED
+  CLOSED
 }
 
 enum ArticleStatus {
@@ -69,6 +71,49 @@ enum QuestionStatus {
   RESOLVED
 }
 
+enum UserTitle {
+  ALHAJA
+  ALHAJI
+  CHIEF
+  DR
+  ENGR
+  LADY
+  MALAM
+  MISS
+  MR
+  MRS
+  MS
+  PROF
+  PST
+  REV
+  SIR
+}
+
+enum NewsStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  ARCHIVED
+}
+
+enum HomepageBlockKey {
+  HERO
+  FEATURED
+  TESTIMONIALS
+  CTA
+}
+
+enum NotificationAudience {
+  ALL_USERS
+  ADVERTISERS
+  ADMINISTRATORS
+}
+
+enum NotificationStatus {
+  SENT
+  FAILED
+}
+
 model AdminUser {
   id           String      @id @default(cuid())
   name         String
@@ -80,47 +125,98 @@ model AdminUser {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
 
-  auditLogs AuditLog[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
 
   @@map("appcentre_admin_users")
 }
 
 model User {
-  id        String     @id @default(cuid())
-  name      String
-  email     String     @unique
-  status    UserStatus @default(ACTIVE)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id                String     @id @default(cuid())
+  name              String
+  email             String     @unique
+  status            UserStatus @default(ACTIVE)
+  title             UserTitle?
+  firstName         String?
+  surname           String?
+  sex               String?
+  city              String?
+  country            String?
+  displayPictureUrl String?
+  otpCodeHash       String?
+  otpExpiresAt      DateTime?
+  otpVerifiedAt     DateTime?
+  profileComplete   Boolean    @default(false)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 
   adverts Advert[]
 
   @@map("appcentre_users")
 }
 
+model Site {
+  id                    String   @id @default(cuid())
+  siteKey               String   @unique
+  siteName              String
+  supportEmail          String
+  logoUrl               String?
+  contactEnabled        Boolean  @default(true)
+  reviewsEnabled        Boolean  @default(true)
+  aiHelpEnabled         Boolean  @default(true)
+  advertsEnabled        Boolean  @default(false)
+  newsEnabled           Boolean  @default(false)
+  notificationsEnabled  Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  adverts             Advert[]
+  reviews             Review[]
+  enquiries           ContactEnquiry[]
+  knowledgeArticles   KnowledgeArticle[]
+  unansweredQuestions UnansweredQuestion[]
+  news                News[]
+  homepageBlocks      HomepageBlock[]
+  notifications       Notification[]
+
+  @@map("appcentre_sites")
+}
+
 model Advert {
-  id            String       @id @default(cuid())
-  reference     String       @unique
-  title         String
-  description   String?
-  type          String
-  placement     String
-  status        AdvertStatus @default(DRAFT)
-  paymentStatus PaymentStatus @default(PENDING)
-  sponsored     Boolean      @default(false)
-  country       String?
-  region        String?
-  city          String?
-  startDate     DateTime?
-  endDate       DateTime?
-  views         Int          @default(0)
-  clicks        Int          @default(0)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id              String       @id @default(cuid())
+  reference       String       @unique
+  sequenceNumber  Int          @default(autoincrement())
+  title           String
+  description     String?
+  type            String
+  placement       String
+  topic           String?
+  status          AdvertStatus @default(DRAFT)
+  paymentStatus   PaymentStatus @default(PENDING)
+  sponsored       Boolean      @default(false)
+  country         String?
+  region          String?
+  city            String?
+  imageUrl        String?
+  croppedImageUrl String?
+  aiReviewNote    String?
+  durationDays    Int?
+  totalCost       Decimal?     @db.Decimal(10, 2)
+  likeCount       Int          @default(0)
+  reportCount     Int          @default(0)
+  startDate       DateTime?
+  endDate         DateTime?
+  views           Int          @default(0)
+  clicks          Int          @default(0)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
   advertiserId String
   advertiser   User      @relation(fields: [advertiserId], references: [id])
   payments     Payment[]
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
 
   @@map("appcentre_adverts")
 }
@@ -142,34 +238,45 @@ model Payment {
 }
 
 model Review {
-  id        String       @id @default(cuid())
-  name      String
-  rating    Int
-  topic     String?
-  details   String?
-  country   String?
-  city      String?
-  status    ReviewStatus @default(PUBLISHED)
-  createdAt DateTime     @default(now())
+  id             String       @id @default(cuid())
+  sequenceNumber Int          @default(autoincrement())
+  name           String
+  rating         Int
+  topic          String?
+  details        String?
+  country        String?
+  city           String?
+  source         String       @default("AI Transformation")
+  likeCount      Int          @default(0)
+  reportCount    Int          @default(0)
+  status         ReviewStatus @default(PENDING)
+  createdAt      DateTime     @default(now())
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
 
   @@map("appcentre_reviews")
 }
 
 model ContactEnquiry {
-  id          String        @id @default(cuid())
-  title       String?
-  firstName   String?
-  lastName    String?
-  name        String
-  email       String
-  country     String?
-  city        String?
-  enquiryType String?
-  subject     String
-  message     String
-  source      String?
-  status      EnquiryStatus @default(NEW)
-  createdAt   DateTime      @default(now())
+  id             String        @id @default(cuid())
+  sequenceNumber Int           @default(autoincrement())
+  title          String?
+  firstName      String?
+  lastName       String?
+  name           String
+  email          String
+  country        String?
+  city           String?
+  enquiryType    String?
+  subject        String
+  message        String
+  source         String?
+  status         EnquiryStatus @default(NEW)
+  createdAt      DateTime      @default(now())
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
 
   @@map("appcentre_contact_enquiries")
 }
@@ -200,6 +307,9 @@ model KnowledgeArticle {
 
   questions UnansweredQuestion[]
 
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
   @@map("appcentre_knowledge_articles")
 }
 
@@ -213,5 +323,63 @@ model UnansweredQuestion {
   articleId String?
   article   KnowledgeArticle? @relation(fields: [articleId], references: [id])
 
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
   @@map("appcentre_unanswered_questions")
+}
+
+model News {
+  id         String     @id @default(cuid())
+  title      String
+  summary    String?
+  body       String
+  imageUrl   String?
+  status     NewsStatus @default(DRAFT)
+  featured   Boolean    @default(false)
+  publishAt  DateTime?
+  likeCount  Int        @default(0)
+  shareCount Int        @default(0)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  @@map("appcentre_news")
+}
+
+model HomepageBlock {
+  id        String           @id @default(cuid())
+  key       HomepageBlockKey
+  headline  String?
+  subtext   String?
+  ctaLabel  String?
+  published Boolean          @default(true)
+  updatedBy String?
+  updatedAt DateTime         @updatedAt
+
+  siteId String
+  site   Site   @relation(fields: [siteId], references: [id], onDelete: Cascade)
+
+  @@unique([siteId, key])
+  @@map("appcentre_homepage_blocks")
+}
+
+model Notification {
+  id             String                @id @default(cuid())
+  audience       NotificationAudience
+  title          String
+  message        String
+  status         NotificationStatus    @default(SENT)
+  recipientCount Int                   @default(0)
+  createdAt      DateTime              @default(now())
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  createdById String?
+  createdBy   AdminUser? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@map("appcentre_notifications")
 }
