@@ -203,6 +203,7 @@
             <div class="space-y-6">
               <div class="rounded-xl border border-border bg-card p-4 shadow-sm space-y-4">
                 <h2 class="text-lg font-heading font-semibold">Change password</h2>
+                <p id="passwordError" class="hidden rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"></p>
                 <div><label class="mb-2 block text-sm font-medium" for="currentPassword">Current password</label><input id="currentPassword" type="password" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
                 <div><label class="mb-2 block text-sm font-medium" for="newPassword">New password</label><input id="newPassword" type="password" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" /></div>
                 <button type="button" id="updatePassword" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Update password</button>
@@ -256,13 +257,47 @@
       });
     });
     document.getElementById('saveProfile').addEventListener('click', function () { showToast('Profile updated successfully.'); });
-    document.getElementById('updatePassword').addEventListener('click', function () {
-      const current = document.getElementById('currentPassword').value;
-      const next = document.getElementById('newPassword').value;
-      if (!current || !next) { showToast('Enter your current and new password.'); return; }
-      document.getElementById('currentPassword').value = '';
-      document.getElementById('newPassword').value = '';
-      showToast('Password updated successfully.');
+
+    document.getElementById('updatePassword').addEventListener('click', async function () {
+      const errorEl = document.getElementById('passwordError');
+      errorEl.classList.add('hidden');
+
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) { window.location.href = 'adminlogin.html'; return; }
+
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      if (!currentPassword || !newPassword) {
+        errorEl.textContent = 'Enter your current and new password.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const btn = this;
+      btn.disabled = true;
+      try {
+        const response = await fetch('/api/auth/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        if (response.status === 401) {
+          const data = await response.json().catch(function () { return {}; });
+          errorEl.textContent = data.message || 'Current password is incorrect.';
+          errorEl.classList.remove('hidden');
+          return;
+        }
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to update password');
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        showToast('Password updated successfully.');
+      } catch (err) {
+        errorEl.textContent = err.message || 'Could not update password. Please try again.';
+        errorEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+      }
     });
   </script>
 </div>

@@ -211,87 +211,51 @@
                     <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-border">
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Alex Morgan</td>
-                    <td class="px-4 py-3 text-muted-foreground">alex.morgan@appcentre.local</td>
-                    <td class="px-4 py-3">Administrator</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Active</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">2 hours ago</td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-2">
-                        <button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Ava Owen</td>
-                    <td class="px-4 py-3 text-muted-foreground">ava.owen@appcentre.local</td>
-                    <td class="px-4 py-3">Administrator</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Active</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">1 day ago</td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-2">
-                        <button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Noah Bishop</td>
-                    <td class="px-4 py-3 text-muted-foreground">noah.bishop@appcentre.local</td>
-                    <td class="px-4 py-3">Moderator</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Active</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">3 hours ago</td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-2">
-                        <button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Ruth Palmer</td>
-                    <td class="px-4 py-3 text-muted-foreground">ruth.palmer@appcentre.local</td>
-                    <td class="px-4 py-3">Support</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Active</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">5 days ago</td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-2">
-                        <button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Jonas Kerr</td>
-                    <td class="px-4 py-3 text-muted-foreground">jonas.kerr@appcentre.local</td>
-                    <td class="px-4 py-3">Finance</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>Deactivated</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">32 days ago</td>
-                    <td class="px-4 py-3">
-                      <div class="flex flex-wrap gap-2">
-                        <button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody id="adminRows" class="text-sm divide-y divide-border"></tbody>
               </table>
             </div>
+            <p id="noResults" class="hidden px-4 py-10 text-center text-sm text-muted-foreground">No admin users found.</p>
           </section>
 
           <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
           <section id="inviteAdminModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+            <div class="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
               <div class="border-b border-border px-4 py-4"><h2 class="text-lg font-heading font-semibold">Invite admin</h2></div>
               <div class="space-y-4 p-4">
+                <p id="inviteError" class="hidden rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"></p>
                 <div><label class="mb-2 block text-sm font-medium" for="inviteName">Full name</label><input id="inviteName" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="e.g. Jamie Lang" /></div>
                 <div><label class="mb-2 block text-sm font-medium" for="inviteEmail">Email address</label><input id="inviteEmail" type="email" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="name@appcentre.local" /></div>
                 <div><label class="mb-2 block text-sm font-medium" for="inviteRole">Role</label>
-                  <select id="inviteRole" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none">
-                    <option>Administrator</option><option>Moderator</option><option>Support</option><option>Finance</option>
-                  </select>
+                  <select id="inviteRole" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none"></select>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
                   <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
                   <button type="button" id="confirmInvite" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Send invite</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="editAdminModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
+              <div class="border-b border-border px-4 py-4">
+                <h2 class="text-lg font-heading font-semibold">Edit admin</h2>
+                <p id="editMeta" class="pt-1 text-sm text-muted-foreground"></p>
+              </div>
+              <div class="space-y-4 p-4">
+                <p id="editError" class="hidden rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"></p>
+                <div><label class="mb-2 block text-sm font-medium" for="editRole">Role</label>
+                  <select id="editRole" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none"></select>
+                </div>
+                <div><label class="mb-2 block text-sm font-medium" for="editStatus">Status</label>
+                  <select id="editStatus" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none">
+                    <option value="ACTIVE">Active</option>
+                    <option value="DEACTIVATED">Deactivated</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                  <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+                  <button type="button" id="confirmEdit" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save changes</button>
                 </div>
               </div>
             </div>
@@ -317,22 +281,205 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    const ROLES = [
+      { value: 'SUPER_ADMIN', label: 'Super Admin' },
+      { value: 'ADMINISTRATOR', label: 'Administrator' },
+      { value: 'CONTENT_ADMIN', label: 'Content Admin' },
+      { value: 'MODERATOR', label: 'Moderator' },
+      { value: 'FINANCE_ADMIN', label: 'Finance Admin' },
+      { value: 'READONLY_AUDITOR', label: 'Read-only Auditor' },
+    ];
+    const ROLE_LABEL = ROLES.reduce(function (map, r) { map[r.value] = r.label; return map; }, {});
+
+    const roleOptionsHtml = ROLES.map(function (r) { return '<option value="' + r.value + '">' + r.label + '</option>'; }).join('');
+    document.getElementById('inviteRole').innerHTML = roleOptionsHtml;
+    document.getElementById('editRole').innerHTML = roleOptionsHtml;
+
+    function formatLastActive(isoString) {
+      if (!isoString) return 'Never';
+      return new Date(isoString).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
     const modalOverlay = document.getElementById('modalOverlay');
-    const inviteAdminButton = document.getElementById('inviteAdminButton');
     const inviteAdminModal = document.getElementById('inviteAdminModal');
-    function openModal() { modalOverlay.classList.remove('hidden'); inviteAdminModal.classList.remove('hidden'); body.classList.add('overflow-hidden'); }
-    function closeModal() { modalOverlay.classList.add('hidden'); inviteAdminModal.classList.add('hidden'); body.classList.remove('overflow-hidden'); }
-    inviteAdminButton.addEventListener('click', openModal);
+    const editAdminModal = document.getElementById('editAdminModal');
+
+    function openModal(modal) { modalOverlay.classList.remove('hidden'); modal.classList.remove('hidden'); body.classList.add('overflow-hidden'); }
+    function closeModal() {
+      modalOverlay.classList.add('hidden');
+      inviteAdminModal.classList.add('hidden');
+      editAdminModal.classList.add('hidden');
+      body.classList.remove('overflow-hidden');
+      document.getElementById('inviteError').classList.add('hidden');
+      document.getElementById('editError').classList.add('hidden');
+    }
     modalOverlay.addEventListener('click', closeModal);
     document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
-    document.getElementById('confirmInvite').addEventListener('click', function () {
-      const name = document.getElementById('inviteName').value.trim();
-      if (!name) return;
-      closeModal();
-      showToast('Invitation sent to ' + name + '.');
+
+    document.getElementById('inviteAdminButton').addEventListener('click', function () {
       document.getElementById('inviteName').value = '';
       document.getElementById('inviteEmail').value = '';
+      document.getElementById('inviteRole').value = 'READONLY_AUDITOR';
+      openModal(inviteAdminModal);
     });
+
+    document.getElementById('confirmInvite').addEventListener('click', async function () {
+      const token = requireToken();
+      if (!token) return;
+      const errorEl = document.getElementById('inviteError');
+      errorEl.classList.add('hidden');
+
+      const name = document.getElementById('inviteName').value.trim();
+      const email = document.getElementById('inviteEmail').value.trim();
+      const role = document.getElementById('inviteRole').value;
+      if (!name || !email) {
+        errorEl.textContent = 'Full name and email address are required.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const btn = this;
+      btn.disabled = true;
+      try {
+        const response = await fetch('/api/admin-users/invite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ name, email, role }),
+        });
+        if (handleUnauthorized(response)) return;
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to send invite');
+        closeModal();
+        showToast(data.data.mailSent
+          ? 'Invitation sent to ' + name + '.'
+          : name + ' was added, but the invite email could not be sent — check the server log for the temporary password.');
+        loadAdmins();
+      } catch (err) {
+        errorEl.textContent = err.message || 'Could not send invite. Please try again.';
+        errorEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    let editingId = null;
+    function openEditModal(admin) {
+      editingId = admin.id;
+      document.getElementById('editMeta').textContent = admin.name + ' · ' + admin.email;
+      document.getElementById('editRole').value = admin.role;
+      document.getElementById('editStatus').value = admin.status;
+      openModal(editAdminModal);
+    }
+
+    document.getElementById('confirmEdit').addEventListener('click', async function () {
+      const token = requireToken();
+      if (!token) return;
+      const errorEl = document.getElementById('editError');
+      errorEl.classList.add('hidden');
+
+      const role = document.getElementById('editRole').value;
+      const status = document.getElementById('editStatus').value;
+
+      const btn = this;
+      btn.disabled = true;
+      try {
+        const response = await fetch('/api/admin-users/' + editingId, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ role, status }),
+        });
+        if (handleUnauthorized(response)) return;
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to update admin');
+        closeModal();
+        showToast('Admin account updated.');
+        loadAdmins();
+      } catch (err) {
+        errorEl.textContent = err.message || 'Could not update admin. Please try again.';
+        errorEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    const adminRows = document.getElementById('adminRows');
+    const noResults = document.getElementById('noResults');
+    let adminsById = {};
+
+    function renderRows(items) {
+      adminsById = items.reduce(function (map, a) { map[a.id] = a; return map; }, {});
+      noResults.classList.toggle('hidden', items.length !== 0);
+      adminRows.innerHTML = items.map(function (admin) {
+        const isActive = admin.status === 'ACTIVE';
+        const badge = isActive
+          ? '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Active</span></span>'
+          : '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-destructive"><span class="h-2 w-2 rounded-full bg-destructive" aria-hidden="true"></span><span>Deactivated</span></span>';
+        return '<tr>'
+          + '<td class="px-4 py-3 font-medium">' + escapeHtml(admin.name) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(admin.email) + '</td>'
+          + '<td class="px-4 py-3">' + escapeHtml(ROLE_LABEL[admin.role] || admin.role) + '</td>'
+          + '<td class="px-4 py-3">' + badge + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + formatLastActive(admin.lastActiveAt) + '</td>'
+          + '<td class="px-4 py-3">'
+            + '<div class="flex flex-wrap gap-2">'
+              + '<button type="button" class="edit-admin min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium" data-id="' + admin.id + '">Edit</button>'
+            + '</div>'
+          + '</td>'
+          + '</tr>';
+      }).join('');
+
+      adminRows.querySelectorAll('.edit-admin').forEach(function (button) {
+        button.addEventListener('click', function () { openEditModal(adminsById[button.dataset.id]); });
+      });
+    }
+
+    async function loadAdmins() {
+      const token = requireToken();
+      if (!token) return;
+
+      adminRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="6">Loading admin users…</td></tr>';
+      noResults.classList.add('hidden');
+
+      try {
+        const response = await fetch('/api/admin-users', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load admin users');
+        const data = await response.json();
+        renderRows(data.data.items);
+        if (pageStatus) pageStatus.textContent = data.data.items.length + ' admin user' + (data.data.items.length === 1 ? '' : 's') + ' found.';
+      } catch (err) {
+        adminRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="6">Could not load admin users. Please refresh the page.</td></tr>';
+      }
+    }
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadAdmins();
   </script>
 </div>
 </body></html>

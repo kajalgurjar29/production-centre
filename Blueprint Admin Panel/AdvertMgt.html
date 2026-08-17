@@ -190,7 +190,7 @@
               <div class="flex items-start justify-between gap-3">
                 <div class="space-y-2">
                   <p class="text-sm font-medium text-muted-foreground">All Adverts</p>
-                  <p class="text-2xl font-heading font-bold">126</p>
+                  <p id="statAllAdverts" class="text-2xl font-heading font-bold">-</p>
                   <p class="text-sm text-muted-foreground">All advert records</p>
                 </div>
                 <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-primary" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M3 10H21" stroke="currentColor" stroke-width="2"></path></svg>
@@ -200,7 +200,7 @@
               <div class="flex items-start justify-between gap-3">
                 <div class="space-y-2">
                   <p class="text-sm font-medium text-muted-foreground">Pending Review</p>
-                  <p class="text-2xl font-heading font-bold">14</p>
+                  <p id="statPendingReview" class="text-2xl font-heading font-bold">-</p>
                   <p class="text-sm text-muted-foreground">Requires moderation</p>
                 </div>
                 <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-foreground" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"></circle><path d="M12 7V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></svg>
@@ -210,7 +210,7 @@
               <div class="flex items-start justify-between gap-3">
                 <div class="space-y-2">
                   <p class="text-sm font-medium text-muted-foreground">Active Adverts</p>
-                  <p class="text-2xl font-heading font-bold">68</p>
+                  <p id="statActiveAdverts" class="text-2xl font-heading font-bold">-</p>
                   <p class="text-sm text-muted-foreground">Currently published</p>
                 </div>
                 <svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-tertiary" xmlns="http://www.w3.org/2000/svg"><path d="M5 12L10 17L19 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -227,7 +227,7 @@
               <div class="hidden lg:block lg:col-span-2">
                 <label for="statusFilter" class="mb-2 block text-sm font-medium">Status</label>
                 <select id="statusFilter" class="min-h-11 w-full rounded-lg border border-input bg-background px-3 text-sm outline-none">
-                  <option>All statuses</option><option>Draft</option><option>Payment Required</option><option>Pending Review</option><option>Amendments Required</option><option>Active</option><option>Paused</option><option>Expired</option><option>Removed</option>
+                  <option>All statuses</option><option>Draft</option><option>Payment Required</option><option>Pending Review</option><option>Amendments Required</option><option>Approved</option><option>Active</option><option>Paused</option><option>Expired</option><option>Removed</option>
                 </select>
               </div>
               <div class="hidden lg:block lg:col-span-2">
@@ -277,7 +277,7 @@
               <div class="flex-1 space-y-4 overflow-y-auto px-4 py-4">
                 <div>
                   <label for="statusFilterMobile" class="mb-2 block text-sm font-medium">Status</label>
-                  <select id="statusFilterMobile" class="min-h-11 w-full rounded-lg border border-input bg-background px-3 text-sm"><option>All statuses</option><option>Draft</option><option>Payment Required</option><option>Pending Review</option><option>Amendments Required</option><option>Active</option><option>Paused</option><option>Expired</option><option>Removed</option></select>
+                  <select id="statusFilterMobile" class="min-h-11 w-full rounded-lg border border-input bg-background px-3 text-sm"><option>All statuses</option><option>Draft</option><option>Payment Required</option><option>Pending Review</option><option>Amendments Required</option><option>Approved</option><option>Active</option><option>Paused</option><option>Expired</option><option>Removed</option></select>
                 </div>
                 <div>
                   <label for="paymentFilterMobile" class="mb-2 block text-sm font-medium">Payment</label>
@@ -376,8 +376,8 @@
     </div>
   </div>
 
-  <div id="previewOverlay" class="hidden absolute inset-0 z-50 bg-foreground/40"></div>
-  <section id="previewModal" class="hidden absolute left-1/2 top-20 z-50 w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 rounded-xl border border-border bg-card shadow-lg">
+  <div id="previewOverlay" class="hidden fixed inset-0 z-50 bg-foreground/40"></div>
+  <section id="previewModal" class="hidden fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl max-h-[85vh] overflow-y-auto -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-card shadow-lg">
     <div class="flex items-center justify-between border-b border-border px-4 py-4">
       <div>
         <h2 class="text-lg font-heading font-semibold">Advert preview</h2>
@@ -411,8 +411,8 @@
     </div>
   </section>
 
-  <div id="confirmOverlay" class="hidden absolute inset-0 z-50 bg-foreground/40"></div>
-  <section id="confirmModal" class="hidden absolute left-1/2 top-24 z-50 w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 rounded-xl border border-border bg-card shadow-lg">
+  <div id="confirmOverlay" class="hidden fixed inset-0 z-50 bg-foreground/40"></div>
+  <section id="confirmModal" class="hidden fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-lg max-h-[85vh] overflow-y-auto -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-card shadow-lg">
     <div class="border-b border-border px-4 py-4">
       <h2 id="confirmHeading" class="text-lg font-heading font-semibold">Pause advert</h2>
       <p id="confirmMeta" class="pt-1 text-sm text-muted-foreground">Garden Studio · AC-2048</p>
@@ -430,25 +430,29 @@
     </div>
   </section>
 
-  <div id="toast" class="hidden absolute bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm rounded-xl border border-border bg-card p-4 shadow-lg">
+  <div id="toast" class="hidden fixed bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm rounded-xl border border-border bg-card p-4 shadow-lg">
     <p id="toastText" class="text-sm font-medium">Advert paused successfully.</p>
   </div>
 
   <script>
     document.title = 'AppCentre Admin Adverts';
-    const adverts = [
-      {id:1,title:'Garden Studio',reference:'AC-2048',advertiser:'Daniel Moore',type:'Banner',status:'Pending Review',payment:'Paid',start:'Pending approval',end:'Pending approval',submitted:'2 days ago',views:0,clicks:0,primary:'Review advert',secondary:['View advert','Contact advertiser','View payment'],description:'Premium local garden studio installation advert with responsive call to action and booking details.',placement:'Homepage banner'},
-      {id:2,title:'Local Plumbing Services',reference:'AC-2036',advertiser:'Sarah Collins',type:'Side Card',status:'Active',payment:'Paid',start:'4 July 2026',end:'12 October 2026',submitted:'Published',views:2450,clicks:184,primary:'View advert',secondary:['Pause advert','View payment','Contact advertiser'],description:'Emergency and planned plumbing services with weekend availability across AppCentre locations.',placement:'Sidebar card'},
-      {id:3,title:'City Driving School',reference:'AC-2033',advertiser:'Michael Reed',type:'Banner',status:'Paused',payment:'Paid',start:'1 July 2026',end:'1 September 2026',submitted:'Paused yesterday',views:1340,clicks:92,primary:'View advert',secondary:['Resume advert','View payment','Contact advertiser'],description:'Driving school campaign promoting automatic and manual lessons for new drivers.',placement:'Homepage banner'},
-      {id:4,title:'Fresh Floral Design',reference:'AC-2029',advertiser:'Nina Patel',type:'Side Card',status:'Amendments Required',payment:'Paid',start:'Pending resubmission',end:'Pending resubmission',submitted:'Needs changes',views:0,clicks:0,primary:'View amendments',secondary:['View advert','Contact advertiser','View payment'],description:'Boutique florist promotion submitted with artwork changes requested by moderation.',placement:'Sidebar card'},
-      {id:5,title:'Trusted Roofing Co',reference:'AC-2024',advertiser:'Oliver Hughes',type:'Banner',status:'Payment Required',payment:'Payment Required',start:'Awaiting payment',end:'Awaiting payment',submitted:'1 day ago',views:0,clicks:0,primary:'View payment status',secondary:['View advert','Contact advertiser'],description:'Roofing and repair advert awaiting payment confirmation before moderation.',placement:'Homepage banner'},
-      {id:6,title:'Weekend Food Market',reference:'AC-2018',advertiser:'Maya Foster',type:'Banner',status:'Expired',payment:'Paid',start:'2 May 2026',end:'30 June 2026',submitted:'Expired 5 days ago',views:3260,clicks:211,primary:'View advert',secondary:['View payment','Contact advertiser'],description:'Seasonal market awareness advert that completed its booked schedule.',placement:'Homepage banner'},
-      {id:7,title:'Pet Care at Home',reference:'AC-2011',advertiser:'Liam Bennett',type:'Side Card',status:'Removed',payment:'Refunded',start:'12 June 2026',end:'18 August 2026',submitted:'Removed by admin',views:640,clicks:27,primary:'View record',secondary:['View payment','Contact advertiser'],description:'Advert record retained after removal decision in moderation workflow.',placement:'Sidebar card'},
-      {id:8,title:'Home Tutor Network',reference:'AC-2007',advertiser:'Priya Shah',type:'Banner',status:'Draft',payment:'Failed',start:'Draft only',end:'Draft only',submitted:'Saved 3 days ago',views:0,clicks:0,primary:'View details',secondary:['View payment','Contact advertiser'],description:'Draft advert for tutoring services awaiting completion and payment resolution.',placement:'Homepage banner'}
-    ];
+    let adverts = [];
+    const STATUS_LABEL = {
+      DRAFT: 'Draft',
+      PAYMENT_REQUIRED: 'Payment Required',
+      PENDING_REVIEW: 'Pending Review',
+      AMENDMENTS_REQUIRED: 'Amendments Required',
+      APPROVED: 'Approved',
+      ACTIVE: 'Active',
+      PAUSED: 'Paused',
+      EXPIRED: 'Expired',
+      REMOVED: 'Removed',
+    };
+    const PAYMENT_LABEL = { PENDING: 'Payment Required', PAID: 'Paid', FAILED: 'Failed', REFUNDED: 'Refunded' };
     const statusTone = {
       'Pending Review':'bg-secondary text-foreground',
       'Amendments Required':'bg-secondary text-foreground',
+      'Approved':'bg-muted text-foreground',
       'Active':'bg-muted text-foreground',
       'Paused':'bg-muted text-foreground',
       'Draft':'bg-muted text-foreground',
@@ -462,6 +466,113 @@
       'Refunded':'bg-muted text-foreground',
       'Payment Required':'bg-secondary text-foreground'
     };
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+    function formatDate(isoString) {
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+    function formatScheduleDate(isoString, statusCode) {
+      if (isoString) return formatDate(isoString);
+      if (statusCode === 'DRAFT') return 'Draft only';
+      if (statusCode === 'PAYMENT_REQUIRED') return 'Awaiting payment';
+      if (statusCode === 'AMENDMENTS_REQUIRED') return 'Pending resubmission';
+      if (statusCode === 'PENDING_REVIEW') return 'Pending approval';
+      return '—';
+    }
+    // Maps each real AdvertStatus to what an admin can actually do next. Every
+    // row's primary button always opens the read-only preview; status-changing
+    // actions live in "More actions" and PATCH /api/adverts/:id/status.
+    function getActionsForStatus(statusCode) {
+      switch (statusCode) {
+        case 'PENDING_REVIEW':
+        case 'AMENDMENTS_REQUIRED':
+          return { primary: 'Review advert', secondary: [
+            { label: 'Approve advert', target: 'APPROVED' },
+            { label: 'Request amendments', target: 'AMENDMENTS_REQUIRED' },
+            { label: 'Remove advert', target: 'REMOVED' },
+          ]};
+        case 'APPROVED':
+          return { primary: 'View advert', secondary: [
+            { label: 'Activate advert', target: 'ACTIVE' },
+            { label: 'Remove advert', target: 'REMOVED' },
+          ]};
+        case 'ACTIVE':
+          return { primary: 'View advert', secondary: [
+            { label: 'Pause advert', target: 'PAUSED' },
+            { label: 'Remove advert', target: 'REMOVED' },
+          ]};
+        case 'PAUSED':
+          return { primary: 'View advert', secondary: [
+            { label: 'Resume advert', target: 'ACTIVE' },
+            { label: 'Remove advert', target: 'REMOVED' },
+          ]};
+        case 'EXPIRED':
+          return { primary: 'View advert', secondary: [
+            { label: 'Remove advert', target: 'REMOVED' },
+          ]};
+        case 'PAYMENT_REQUIRED':
+          return { primary: 'View payment status', secondary: [] };
+        case 'REMOVED':
+          return { primary: 'View record', secondary: [] };
+        default:
+          return { primary: 'View details', secondary: [] };
+      }
+    }
+    function mapAdvert(a) {
+      const actions = getActionsForStatus(a.status);
+      return {
+        id: a.id,
+        title: a.title,
+        reference: a.reference,
+        advertiser: a.advertiser ? a.advertiser.name : '—',
+        type: a.type,
+        statusCode: a.status,
+        status: STATUS_LABEL[a.status] || a.status,
+        paymentCode: a.paymentStatus,
+        payment: PAYMENT_LABEL[a.paymentStatus] || a.paymentStatus,
+        start: formatScheduleDate(a.startDate, a.status),
+        end: formatScheduleDate(a.endDate, a.status),
+        views: a.views || 0,
+        clicks: a.clicks || 0,
+        description: a.description || 'No description provided.',
+        placement: a.placement || '—',
+        primary: actions.primary,
+        secondary: actions.secondary,
+      };
+    }
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+    async function loadAdverts() {
+      const token = requireToken();
+      if (!token) return;
+      state.mode = 'loading';
+      render();
+      try {
+        const response = await fetch('/api/adverts?pageSize=200', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load adverts');
+        const data = await response.json();
+        adverts = data.data.items.map(mapAdvert);
+        state.mode = 'normal';
+        render();
+      } catch (err) {
+        state.mode = 'error';
+        render();
+      }
+    }
     const state = {status:'All statuses',payment:'All payments',type:'All types',sort:'Newest first',search:'',page:1,mode:'normal'};
     const pageSize = 8;
     const desktopRows = document.getElementById('desktopAdvertRows');
@@ -545,6 +656,9 @@
         liveRegion.textContent = 'Adverts could not be loaded';
         return;
       }
+      document.getElementById('statAllAdverts').textContent = String(adverts.length);
+      document.getElementById('statPendingReview').textContent = String(adverts.filter(ad => ad.statusCode === 'PENDING_REVIEW').length);
+      document.getElementById('statActiveAdverts').textContent = String(adverts.filter(ad => ad.statusCode === 'ACTIVE').length);
       const filtered = state.mode === 'empty' ? [] : getFilteredAdverts();
       const hasFilters = state.search || state.status !== 'All statuses' || state.payment !== 'All payments' || state.type !== 'All types';
       filterSummary.classList.toggle('hidden', !hasFilters);
@@ -572,8 +686,8 @@
       resultsSummary.textContent = 'Showing ' + (startIndex + 1) + ' to ' + endIndex + ' of ' + filtered.length + ' adverts';
       liveRegion.textContent = resultsSummary.textContent;
       pageIndicator.textContent = 'Page ' + state.page;
-      desktopRows.innerHTML = pageItems.map(ad => '<tr class="border-b border-border align-top"><td class="px-4 py-4"><div class="flex gap-3"><div class="flex h-14 w-16 shrink-0 items-center justify-center rounded-lg border border-border bg-muted"><svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M7 14L10 11L14 15L17 12L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="min-w-0"><p class="font-medium">' + ad.title + '</p><p class="text-xs text-muted-foreground">' + ad.reference + '</p></div></div></td><td class="px-4 py-4">' + ad.advertiser + '</td><td class="px-4 py-4">' + ad.type + '</td><td class="px-4 py-4">' + createStatusBadge(ad.status, statusTone[ad.status]) + '</td><td class="px-4 py-4">' + createStatusBadge(ad.payment, paymentTone[ad.payment]) + '</td><td class="px-4 py-4 text-xs text-muted-foreground"><p>' + ad.start + '</p><p>' + ad.end + '</p></td><td class="px-4 py-4">' + ad.views.toLocaleString() + '</td><td class="px-4 py-4">' + ad.clicks.toLocaleString() + '</td><td class="px-4 py-4"><div class="flex flex-col gap-2"><button type="button" data-primary="' + ad.id + '" class="min-h-11 rounded-lg bg-primary px-3 text-xs font-medium text-primary-foreground">' + ad.primary + '</button><div class="relative"><button type="button" data-menu="' + ad.id + '" aria-expanded="false" class="min-h-11 rounded-lg border border-border bg-background px-3 text-xs font-medium">More actions</button><div id="menu-' + ad.id + '" class="hidden absolute right-0 top-12 z-10 w-44 rounded-lg border border-border bg-card p-2 shadow-lg">' + ad.secondary.map(item => '<button type="button" data-action="' + item + '" data-id="' + ad.id + '" class="flex min-h-11 w-full items-center rounded-lg px-3 text-left text-xs hover:bg-muted">' + item + '</button>').join('') + '</div></div></div></td></tr>').join('');
-      mobileCards.innerHTML = pageItems.map(ad => '<article class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="flex items-start gap-3"><div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-border bg-muted"><svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M7 14L10 11L14 15L17 12L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="min-w-0 flex-1"><div class="flex flex-wrap items-start justify-between gap-2"><div><h3 class="font-heading font-semibold">' + ad.title + '</h3><p class="text-xs text-muted-foreground">' + ad.reference + '</p></div><div class="flex flex-wrap gap-2">' + createStatusBadge(ad.status, statusTone[ad.status]) + createStatusBadge(ad.payment, paymentTone[ad.payment]) + '</div></div><div class="mt-3 grid grid-cols-1 gap-2 text-sm text-muted-foreground"><p><span class="font-medium text-foreground">Advertiser:</span> ' + ad.advertiser + '</p><p><span class="font-medium text-foreground">Type:</span> ' + ad.type + '</p><p><span class="font-medium text-foreground">Start:</span> ' + ad.start + '</p><p><span class="font-medium text-foreground">End:</span> ' + ad.end + '</p><p><span class="font-medium text-foreground">Views:</span> ' + ad.views.toLocaleString() + ' · <span class="font-medium text-foreground">Clicks:</span> ' + ad.clicks.toLocaleString() + '</p></div></div></div><div class="mt-4 flex flex-col gap-3"><button type="button" data-primary="' + ad.id + '" class="min-h-11 w-full rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground">' + ad.primary + '</button><div class="grid grid-cols-1 gap-2 sm:grid-cols-3">' + ad.secondary.slice(0,3).map(item => '<button type="button" data-action="' + item + '" data-id="' + ad.id + '" class="min-h-11 rounded-lg border border-border bg-background px-3 text-sm font-medium">' + item + '</button>').join('') + '</div></div></article>').join('');
+      desktopRows.innerHTML = pageItems.map(ad => '<tr class="border-b border-border align-top"><td class="px-4 py-4"><div class="flex gap-3"><div class="flex h-14 w-16 shrink-0 items-center justify-center rounded-lg border border-border bg-muted"><svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M7 14L10 11L14 15L17 12L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="min-w-0"><p class="font-medium">' + escapeHtml(ad.title) + '</p><p class="text-xs text-muted-foreground">' + escapeHtml(ad.reference) + '</p></div></div></td><td class="px-4 py-4">' + escapeHtml(ad.advertiser) + '</td><td class="px-4 py-4">' + escapeHtml(ad.type) + '</td><td class="px-4 py-4">' + createStatusBadge(ad.status, statusTone[ad.status]) + '</td><td class="px-4 py-4">' + createStatusBadge(ad.payment, paymentTone[ad.payment]) + '</td><td class="px-4 py-4 text-xs text-muted-foreground"><p>' + escapeHtml(ad.start) + '</p><p>' + escapeHtml(ad.end) + '</p></td><td class="px-4 py-4">' + ad.views.toLocaleString() + '</td><td class="px-4 py-4">' + ad.clicks.toLocaleString() + '</td><td class="px-4 py-4"><div class="flex flex-col gap-2"><button type="button" data-primary="' + ad.id + '" class="min-h-11 rounded-lg bg-primary px-3 text-xs font-medium text-primary-foreground">' + escapeHtml(ad.primary) + '</button>' + (ad.secondary.length ? '<div class="relative"><button type="button" data-menu="' + ad.id + '" aria-expanded="false" class="min-h-11 rounded-lg border border-border bg-background px-3 text-xs font-medium">More actions</button><div id="menu-' + ad.id + '" class="hidden absolute right-0 top-12 z-10 w-44 rounded-lg border border-border bg-card p-2 shadow-lg">' + ad.secondary.map(item => '<button type="button" data-action-target="' + item.target + '" data-id="' + ad.id + '" class="flex min-h-11 w-full items-center rounded-lg px-3 text-left text-xs hover:bg-muted">' + escapeHtml(item.label) + '</button>').join('') + '</div></div>' : '') + '</div></td></tr>').join('');
+      mobileCards.innerHTML = pageItems.map(ad => '<article class="rounded-xl border border-border bg-card p-4 shadow-sm"><div class="flex items-start gap-3"><div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-border bg-muted"><svg viewBox="0 0 24 24" fill="none" class="h-6 w-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M7 14L10 11L14 15L17 12L20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="min-w-0 flex-1"><div class="flex flex-wrap items-start justify-between gap-2"><div><h3 class="font-heading font-semibold">' + escapeHtml(ad.title) + '</h3><p class="text-xs text-muted-foreground">' + escapeHtml(ad.reference) + '</p></div><div class="flex flex-wrap gap-2">' + createStatusBadge(ad.status, statusTone[ad.status]) + createStatusBadge(ad.payment, paymentTone[ad.payment]) + '</div></div><div class="mt-3 grid grid-cols-1 gap-2 text-sm text-muted-foreground"><p><span class="font-medium text-foreground">Advertiser:</span> ' + escapeHtml(ad.advertiser) + '</p><p><span class="font-medium text-foreground">Type:</span> ' + escapeHtml(ad.type) + '</p><p><span class="font-medium text-foreground">Start:</span> ' + escapeHtml(ad.start) + '</p><p><span class="font-medium text-foreground">End:</span> ' + escapeHtml(ad.end) + '</p><p><span class="font-medium text-foreground">Views:</span> ' + ad.views.toLocaleString() + ' · <span class="font-medium text-foreground">Clicks:</span> ' + ad.clicks.toLocaleString() + '</p></div></div></div><div class="mt-4 flex flex-col gap-3"><button type="button" data-primary="' + ad.id + '" class="min-h-11 w-full rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground">' + escapeHtml(ad.primary) + '</button><div class="grid grid-cols-1 gap-2 sm:grid-cols-3">' + ad.secondary.slice(0,3).map(item => '<button type="button" data-action-target="' + item.target + '" data-id="' + ad.id + '" class="min-h-11 rounded-lg border border-border bg-background px-3 text-sm font-medium">' + escapeHtml(item.label) + '</button>').join('') + '</div></div></article>').join('');
       attachInteractiveButtons();
       attachClearFilterButtons();
     }
@@ -600,13 +714,13 @@
       document.getElementById('previewOverlay').classList.add('hidden');
       document.getElementById('previewModal').classList.add('hidden');
     }
-    function openConfirm(ad, action) {
-      document.getElementById('confirmHeading').textContent = action;
+    function openConfirm(ad, label, target) {
+      document.getElementById('confirmHeading').textContent = label;
       document.getElementById('confirmMeta').textContent = ad.title + ' · ' + ad.reference;
-      document.getElementById('confirmText').textContent = 'This action will ' + action.toLowerCase().replace(' advert','') + ' this advert and record the change in the audit log.';
-      document.getElementById('confirmAction').textContent = action;
+      document.getElementById('confirmText').textContent = 'This will change the advert status to "' + (STATUS_LABEL[target] || target) + '" and record the change in the audit log.';
+      document.getElementById('confirmAction').textContent = label;
       document.getElementById('confirmAction').dataset.record = ad.id;
-      document.getElementById('confirmAction').dataset.kind = action;
+      document.getElementById('confirmAction').dataset.target = target;
       document.getElementById('confirmOverlay').classList.remove('hidden');
       document.getElementById('confirmModal').classList.remove('hidden');
     }
@@ -623,7 +737,7 @@
     }
     function attachInteractiveButtons() {
       document.querySelectorAll('[data-primary]').forEach(btn => btn.onclick = () => {
-        const ad = adverts.find(item => item.id === Number(btn.dataset.primary));
+        const ad = adverts.find(item => item.id === btn.dataset.primary);
         openPreview(ad);
       });
       document.querySelectorAll('[data-menu]').forEach(btn => btn.onclick = (event) => {
@@ -637,24 +751,37 @@
           btn.setAttribute('aria-expanded','true');
         }
       });
-      document.querySelectorAll('[data-action]').forEach(btn => btn.onclick = () => {
-        const ad = adverts.find(item => item.id === Number(btn.dataset.id));
-        const action = btn.dataset.action;
+      document.querySelectorAll('[data-action-target]').forEach(btn => btn.onclick = () => {
+        const ad = adverts.find(item => item.id === btn.dataset.id);
         document.querySelectorAll('[id^="menu-"]').forEach(menu => menu.classList.add('hidden'));
-        if (action === 'Pause advert' || action === 'Resume advert') {
-          openConfirm(ad, action);
-        } else {
-          openPreview(ad);
-        }
+        openConfirm(ad, btn.textContent.trim(), btn.dataset.actionTarget);
       });
     }
-    document.getElementById('confirmAction').onclick = () => {
+    document.getElementById('confirmAction').onclick = async () => {
       const btn = document.getElementById('confirmAction');
-      const ad = adverts.find(item => item.id === Number(btn.dataset.record));
-      const action = btn.dataset.kind;
-      closeConfirm();
-      showToast(ad.title + ' ' + (action === 'Pause advert' ? 'paused' : 'resumed') + ' successfully.');
-      liveRegion.textContent = ad.title + ' ' + (action === 'Pause advert' ? 'paused' : 'resumed') + ' successfully';
+      const token = requireToken();
+      if (!token) return;
+      const ad = adverts.find(item => item.id === btn.dataset.record);
+      const target = btn.dataset.target;
+      const reason = document.getElementById('internalNote').value.trim() || undefined;
+      btn.disabled = true;
+      try {
+        const response = await fetch('/api/adverts/' + btn.dataset.record + '/status', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ status: target, reason }),
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to update advert');
+        closeConfirm();
+        showToast(ad.title + ' updated to ' + (STATUS_LABEL[target] || target) + '.');
+        liveRegion.textContent = ad.title + ' updated to ' + (STATUS_LABEL[target] || target);
+        loadAdverts();
+      } catch (err) {
+        showToast('Could not update advert. Please try again.');
+      } finally {
+        btn.disabled = false;
+      }
     };
     document.getElementById('closePreview').onclick = closePreview;
     document.getElementById('previewOverlay').onclick = closePreview;
@@ -665,7 +792,7 @@
     document.getElementById('mobileApplyFilters').onclick = syncFiltersToState;
     document.getElementById('applyDrawerFilters').onclick = () => { syncFiltersToState(); closeFiltersDrawer(); };
     document.getElementById('resetDrawerFilters').onclick = resetFilters;
-    document.getElementById('retryLoad').onclick = () => { state.mode = 'normal'; render(); };
+    document.getElementById('retryLoad').onclick = loadAdverts;
     document.querySelectorAll('[data-summary-filter]').forEach(btn => btn.onclick = () => {
       const filter = btn.dataset.summaryFilter;
       if (filter === 'all') {
@@ -750,7 +877,7 @@
         closeFiltersDrawer();
       }
     });
-    render();
+    loadAdverts();
   </script>
 </div>
 </body></html>

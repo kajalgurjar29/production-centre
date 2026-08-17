@@ -234,13 +234,12 @@
               <table class="w-full border-collapse">
                 <thead>
                   <tr class="border-b border-border bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
+                    <th class="px-4 py-3 font-medium">Reference</th>
                     <th class="px-4 py-3 font-medium">Reviewer</th>
                     <th class="px-4 py-3 font-medium">Rating</th>
-                    <th class="px-4 py-3 font-medium">Topic</th>
-                    <th class="px-4 py-3 font-medium">Review</th>
-                    <th class="px-4 py-3 font-medium">Location</th>
+                    <th class="px-4 py-3 font-medium">Site</th>
+                    <th class="px-4 py-3 font-medium">Date</th>
                     <th class="px-4 py-3 font-medium">Status</th>
-                    <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="reviewRows" class="text-sm divide-y divide-border"></tbody>
@@ -251,30 +250,33 @@
 
           <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
           <section id="viewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
-              <div class="border-b border-border px-4 py-4">
-                <h2 class="text-lg font-heading font-semibold">Review details</h2>
-                <p id="viewReviewer" class="mt-1 text-sm text-muted-foreground">Reviewer name</p>
+            <div class="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
+              <div class="flex items-start justify-between border-b border-border px-4 py-4">
+                <div>
+                  <h2 id="viewReference" class="text-lg font-heading font-semibold">REV-0</h2>
+                  <p id="viewSite" class="mt-1 text-sm text-muted-foreground">Site</p>
+                </div>
+                <span id="viewStatusBadge"></span>
               </div>
               <div class="space-y-3 p-4 text-sm">
-                <div id="viewStars" class="flex items-center gap-1 text-amber-400"></div>
-                <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Topic</p><p id="viewTopic" class="pt-1 font-medium">-</p></div>
-                <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Review</p><p id="viewText" class="pt-1">-</p></div>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Reviewer</p><p id="viewReviewer" class="pt-1 font-medium">-</p></div>
+                  <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Rating</p><div id="viewStars" class="flex items-center gap-1 pt-1 text-amber-400"></div></div>
+                  <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Topic</p><p id="viewTopic" class="pt-1 font-medium">-</p></div>
+                  <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Received</p><p id="viewReceived" class="pt-1 font-medium">-</p></div>
+                </div>
+                <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Review</p><p id="viewText" class="pt-1 whitespace-pre-wrap">-</p></div>
                 <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Location</p><p id="viewLocation" class="pt-1">-</p></div>
+                <div id="viewImageWrap" class="hidden rounded-xl bg-muted p-3">
+                  <p class="text-xs uppercase tracking-wide text-muted-foreground">Submitted image</p>
+                  <img id="viewImage" src="" alt="Submitted review photo" class="mt-2 max-h-64 rounded-lg border border-border object-contain" />
+                </div>
               </div>
-              <div class="flex justify-end gap-3 border-t border-border p-4">
-                <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Close</button>
-              </div>
-            </div>
-          </section>
-
-          <section id="removeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="w-full max-w-md rounded-xl border border-border bg-card shadow-lg">
-              <div class="border-b border-border px-4 py-4"><h2 class="text-lg font-heading font-semibold">Remove review</h2></div>
-              <div class="p-4 text-sm text-muted-foreground">This review will be permanently removed and will no longer be visible to visitors. This action cannot be undone.</div>
-              <div class="flex justify-end gap-3 border-t border-border p-4">
-                <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
-                <button type="button" id="confirmRemove" class="min-h-11 rounded-lg bg-destructive px-4 py-3 text-sm font-medium text-primary-foreground">Remove review</button>
+              <div class="flex flex-wrap items-center gap-2 border-t border-border p-4">
+                <button type="button" id="viewApprove" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-tertiary">Approve</button>
+                <button type="button" id="viewReject" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-destructive">Reject</button>
+                <button type="button" id="viewHide" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-muted-foreground">Hide</button>
+                <button type="button" data-close-modal class="ml-auto min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Close</button>
               </div>
             </div>
           </section>
@@ -317,6 +319,18 @@
       return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     }
 
+    function formatDateTime(isoString) {
+      return new Date(isoString).toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
+    function reference(review) {
+      return 'REV-' + review.sequenceNumber;
+    }
+
+    function siteName(review) {
+      return review.site ? review.site.siteName : (review.source || 'AppCentre');
+    }
+
     function initials(name) {
       const parts = name.trim().split(/\s+/).filter(Boolean);
       return ((parts[0] ? parts[0][0] : '') + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
@@ -343,6 +357,8 @@
     }
 
     const reviewRows = document.getElementById('reviewRows');
+    let reviewsById = {};
+
     function renderReviews() {
       const statTotal = document.getElementById('stat-total');
       const statAverage = document.getElementById('stat-average');
@@ -351,30 +367,29 @@
       statAverage.innerHTML = (reviews.length ? (reviews.reduce(function (sum, r) { return sum + r.rating; }, 0) / reviews.length).toFixed(1) : '-') + '<span class="text-base font-normal text-muted-foreground"> / 5</span>';
       statReported.textContent = String(reviews.filter(function (r) { return r.reportCount > 0; }).length);
 
-      reviewRows.innerHTML = reviews.map(function (r, i) {
-        const location = [r.city, r.country].filter(Boolean).join(', ') || '-';
-        return '<tr data-index="' + i + '">'
+      reviewsById = reviews.reduce(function (map, r) { map[r.id] = r; return map; }, {});
+
+      reviewRows.innerHTML = reviews.map(function (r) {
+        return '<tr class="cursor-pointer hover:bg-muted/40" data-id="' + r.id + '">'
+          + '<td class="px-4 py-3 font-medium">' + escapeHtml(reference(r)) + '</td>'
           + '<td class="px-4 py-3"><div class="flex items-center gap-2"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">' + initials(r.name) + '</span><span class="font-medium">' + escapeHtml(r.name) + '</span></div></td>'
           + '<td class="px-4 py-3"><div class="flex items-center gap-1">' + starsMarkup(r.rating) + '</div></td>'
-          + '<td class="px-4 py-3">' + escapeHtml(r.topic || '-') + '</td>'
-          + '<td class="px-4 py-3 max-w-xs truncate text-muted-foreground">' + escapeHtml(r.details || '') + '</td>'
-          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(location) + '</td>'
+          + '<td class="px-4 py-3"><span class="inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground">' + escapeHtml(siteName(r)) + '</span></td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + formatDate(r.createdAt) + '</td>'
           + '<td class="px-4 py-3">' + statusBadge(r.status) + (r.reportCount > 0 ? ' <span class="ml-1 text-xs text-destructive">(' + r.reportCount + ' report' + (r.reportCount === 1 ? '' : 's') + ')</span>' : '') + '</td>'
-          + '<td class="px-4 py-3"><div class="flex flex-wrap gap-2">'
-          + '<button type="button" data-view="' + i + '" class="view-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">View</button>'
-          + '<button type="button" data-remove="' + i + '" class="remove-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium text-destructive">Remove</button>'
-          + '</div></td></tr>';
+          + '</tr>';
       }).join('');
-      attachRowHandlers();
+
+      reviewRows.querySelectorAll('tr[data-id]').forEach(function (row) {
+        row.addEventListener('click', function () { openDetail(reviewsById[row.dataset.id]); });
+      });
     }
 
     const modalOverlay = document.getElementById('modalOverlay');
     const viewModal = document.getElementById('viewModal');
-    const removeModal = document.getElementById('removeModal');
     function closeAllModals() {
       modalOverlay.classList.add('hidden');
       viewModal.classList.add('hidden');
-      removeModal.classList.add('hidden');
       body.classList.remove('overflow-hidden');
     }
     function openModal(section) {
@@ -383,27 +398,59 @@
       body.classList.add('overflow-hidden');
     }
 
-    let pendingRemoveIndex = null;
-    function attachRowHandlers() {
-      document.querySelectorAll('.view-button').forEach(function (b) {
-        b.addEventListener('click', function () {
-          const r = reviews[parseInt(b.getAttribute('data-view'), 10)];
-          const location = [r.city, r.country].filter(Boolean).join(', ') || '-';
-          document.getElementById('viewReviewer').textContent = r.name + ' · ' + location;
-          document.getElementById('viewStars').innerHTML = starsMarkup(r.rating);
-          document.getElementById('viewTopic').textContent = r.topic || '-';
-          document.getElementById('viewText').textContent = r.details || '-';
-          document.getElementById('viewLocation').textContent = location;
-          openModal(viewModal);
-        });
-      });
-      document.querySelectorAll('.remove-button').forEach(function (b) {
-        b.addEventListener('click', function () {
-          pendingRemoveIndex = parseInt(b.getAttribute('data-remove'), 10);
-          openModal(removeModal);
-        });
-      });
+    let openReviewId = null;
+
+    function openDetail(r) {
+      openReviewId = r.id;
+      const location = [r.city, r.country].filter(Boolean).join(', ') || '-';
+      document.getElementById('viewReference').textContent = reference(r);
+      document.getElementById('viewSite').textContent = siteName(r);
+      document.getElementById('viewStatusBadge').innerHTML = statusBadge(r.status);
+      document.getElementById('viewReviewer').textContent = r.name;
+      document.getElementById('viewStars').innerHTML = starsMarkup(r.rating);
+      document.getElementById('viewTopic').textContent = r.topic || '-';
+      document.getElementById('viewReceived').textContent = formatDateTime(r.createdAt);
+      document.getElementById('viewText').textContent = r.details || '-';
+      document.getElementById('viewLocation').textContent = location;
+
+      const imageWrap = document.getElementById('viewImageWrap');
+      if (r.imageUrl) {
+        document.getElementById('viewImage').src = r.imageUrl;
+        imageWrap.classList.remove('hidden');
+      } else {
+        imageWrap.classList.add('hidden');
+      }
+
+      document.getElementById('viewApprove').classList.toggle('hidden', r.status === 'APPROVED');
+      document.getElementById('viewReject').classList.toggle('hidden', r.status === 'REJECTED');
+      document.getElementById('viewHide').classList.toggle('hidden', r.status === 'HIDDEN');
+
+      openModal(viewModal);
     }
+
+    async function updateReviewStatus(target) {
+      const token = requireToken();
+      if (!token) return;
+      const review = reviewsById[openReviewId];
+      try {
+        const response = await fetch('/api/reviews/' + openReviewId + '/status', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ status: target }),
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to update review');
+        closeAllModals();
+        showToast('Review by ' + review.name + ' set to ' + target.toLowerCase() + '.');
+        loadReviews();
+      } catch (err) {
+        showToast('Could not update review. Please try again.');
+      }
+    }
+
+    document.getElementById('viewApprove').addEventListener('click', function () { updateReviewStatus('APPROVED'); });
+    document.getElementById('viewReject').addEventListener('click', function () { updateReviewStatus('REJECTED'); });
+    document.getElementById('viewHide').addEventListener('click', function () { updateReviewStatus('HIDDEN'); });
 
     modalOverlay.addEventListener('click', closeAllModals);
     document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeAllModals); });
@@ -422,24 +469,6 @@
       return true;
     }
 
-    document.getElementById('confirmRemove').addEventListener('click', async function () {
-      if (pendingRemoveIndex === null) { closeAllModals(); return; }
-      const token = requireToken();
-      if (!token) return;
-      const removed = reviews[pendingRemoveIndex];
-      pendingRemoveIndex = null;
-      closeAllModals();
-      try {
-        const response = await fetch('/api/reviews/' + removed.id, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } });
-        if (handleUnauthorized(response)) return;
-        if (!response.ok) throw new Error('Failed to remove review');
-        showToast('Review by ' + removed.name + ' removed.');
-        loadReviews();
-      } catch (err) {
-        showToast('Could not remove review. Please try again.');
-      }
-    });
-
     const reviewSearch = document.getElementById('reviewSearch');
     const statusFilter = document.getElementById('statusFilter');
     const noResults = document.getElementById('noResults');
@@ -448,7 +477,7 @@
       const token = requireToken();
       if (!token) return;
 
-      reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="7">Loading reviews…</td></tr>';
+      reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="6">Loading reviews…</td></tr>';
       noResults.classList.add('hidden');
 
       try {
@@ -464,7 +493,7 @@
         renderReviews();
         if (pageStatus) pageStatus.textContent = reviews.length + ' review' + (reviews.length === 1 ? '' : 's') + ' found.';
       } catch (err) {
-        reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="7">Could not load reviews. Please refresh the page.</td></tr>';
+        reviewRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="6">Could not load reviews. Please refresh the page.</td></tr>';
       }
     }
 

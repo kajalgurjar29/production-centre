@@ -199,11 +199,16 @@
           </section>
           <div id="pageStatus" class="sr-only" aria-live="polite"></div>
           <section class="flex flex-wrap gap-2">
-            <span class="inline-flex min-h-8 items-center rounded-lg bg-accent border border-border px-3 py-1 text-xs font-medium">All</span>
-            <span class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium">Getting Started</span>
-            <span class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium">Adverts</span>
-            <span class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium">Payments</span>
-            <span class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium">Account</span>
+            <div class="flex min-w-0 flex-1 items-center gap-3 rounded-xl border border-input bg-card px-4 py-3 sm:max-w-xs">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="articleSearch" type="search" placeholder="Search by title, category or keyword" class="w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+            </div>
+            <select id="articleStatusFilter" class="min-h-11 rounded-xl border border-input bg-card px-3 text-sm">
+              <option value="">All statuses</option>
+              <option value="DRAFT">Draft</option>
+              <option value="PUBLISHED">Published</option>
+              <option value="INACTIVE">Inactive</option>
+            </select>
           </section>
           <section class="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
@@ -212,49 +217,90 @@
                   <tr class="border-b border-border bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
                     <th class="px-4 py-3 font-medium">Title</th>
                     <th class="px-4 py-3 font-medium">Category</th>
+                    <th class="px-4 py-3 font-medium">Site</th>
                     <th class="px-4 py-3 font-medium">Status</th>
                     <th class="px-4 py-3 font-medium">Updated</th>
                     <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-border">
-                  <tr>
-                    <td class="px-4 py-3 font-medium">How to create your first advert</td>
-                    <td class="px-4 py-3 text-muted-foreground">Adverts</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">02 Jul 2026</td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Understanding advert moderation statuses</td>
-                    <td class="px-4 py-3 text-muted-foreground">Adverts</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">28 Jun 2026</td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Managing your payment methods</td>
-                    <td class="px-4 py-3 text-muted-foreground">Payments</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">20 Jun 2026</td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Resetting your password</td>
-                    <td class="px-4 py-3 text-muted-foreground">Account</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Draft</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">15 Jun 2026</td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">AppCentre onboarding checklist</td>
-                    <td class="px-4 py-3 text-muted-foreground">Getting Started</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span></td>
-                    <td class="px-4 py-3 text-muted-foreground">10 Jun 2026</td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                </tbody>
+                <tbody id="articleRows" class="text-sm divide-y divide-border"></tbody>
               </table>
+            </div>
+            <p id="articlesNoResults" class="hidden px-4 py-10 text-center text-sm text-muted-foreground">No articles match your search.</p>
+          </section>
+
+          <section class="space-y-3">
+            <div>
+              <h2 class="text-lg font-heading font-semibold">Unanswered Questions</h2>
+              <p class="mt-1 text-sm text-muted-foreground">Questions the AI Help assistant couldn't answer from approved knowledge. Write and publish an article to resolve one.</p>
+            </div>
+            <div class="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr class="border-b border-border bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
+                      <th class="px-4 py-3 font-medium">Question</th>
+                      <th class="px-4 py-3 font-medium">Site</th>
+                      <th class="px-4 py-3 font-medium">Status</th>
+                      <th class="px-4 py-3 font-medium">Date</th>
+                      <th class="px-4 py-3 font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="questionRows" class="text-sm divide-y divide-border"></tbody>
+                </table>
+              </div>
+              <p id="questionsNoResults" class="hidden px-4 py-10 text-center text-sm text-muted-foreground">No unanswered questions.</p>
+            </div>
+          </section>
+
+          <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
+          <section id="articleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
+              <div class="border-b border-border px-4 py-4">
+                <h2 id="articleModalHeading" class="text-lg font-heading font-semibold">New article</h2>
+                <p id="articleModalSourceNote" class="hidden mt-1 text-sm text-muted-foreground"></p>
+              </div>
+              <div class="space-y-4 p-4">
+                <p id="articleError" class="hidden rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive"></p>
+                <div><label class="mb-2 block text-sm font-medium" for="articleTitle">Title</label><input id="articleTitle" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="e.g. How to create your first advert" /></div>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div><label class="mb-2 block text-sm font-medium" for="articleCategory">Category</label><input id="articleCategory" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="e.g. Adverts" /></div>
+                  <div><label class="mb-2 block text-sm font-medium" for="articleSite">Site</label>
+                    <select id="articleSite" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none">
+                      <option value="">Shared AppCentre</option>
+                      <option value="aitransformation">AI Transformation</option>
+                    </select>
+                  </div>
+                </div>
+                <div><label class="mb-2 block text-sm font-medium" for="articleAnswer">Answer</label><textarea id="articleAnswer" rows="6" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Write the approved answer shown to users"></textarea></div>
+                <div><label class="mb-2 block text-sm font-medium" for="articleKeywords">Keywords (optional)</label><input id="articleKeywords" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Comma-separated, helps matching" /></div>
+                <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                  <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+                  <button type="button" id="saveArticle" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save article</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="previewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
+              <div class="border-b border-border px-4 py-4">
+                <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">As shown to AI Help</p>
+                <h2 id="previewTitle" class="mt-1 text-lg font-heading font-semibold">Article title</h2>
+                <div class="mt-2 flex flex-wrap items-center gap-2">
+                  <span id="previewCategory" class="inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"></span>
+                  <span id="previewSite" class="inline-flex items-center rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"></span>
+                  <span id="previewStatusBadge"></span>
+                </div>
+              </div>
+              <div class="space-y-3 p-4 text-sm">
+                <div class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Answer</p><p id="previewAnswer" class="pt-1 whitespace-pre-wrap">-</p></div>
+                <div id="previewKeywordsWrap" class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Keywords</p><p id="previewKeywords" class="pt-1 text-muted-foreground">-</p></div>
+                <p id="previewUnpublishedNote" class="hidden rounded-lg bg-secondary px-3 py-2 text-xs text-foreground">This article is not Published, so AI Help cannot use it yet.</p>
+              </div>
+              <div class="flex justify-end gap-3 border-t border-border p-4">
+                <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Close</button>
+              </div>
             </div>
           </section>
         </div>
@@ -267,6 +313,7 @@
   </div>
   <script>
     document.title = 'AppCentre Admin Help Knowledge Base';
+    const body = document.body;
 
     const toast = document.getElementById('toast');
     const pageStatus = document.getElementById('pageStatus');
@@ -277,7 +324,319 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
-    document.getElementById('addArticleButton').addEventListener('click', function () { showToast('Article creation is not available in this MVP.'); });
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function formatDate(isoString) {
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    const STATUS_BADGE = {
+      DRAFT: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Draft</span></span>',
+      PUBLISHED: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Published</span></span>',
+      INACTIVE: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"><span class="h-2 w-2 rounded-full bg-muted-foreground" aria-hidden="true"></span><span>Inactive</span></span>',
+    };
+    const QUESTION_STATUS_BADGE = {
+      NEW: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>New</span></span>',
+      REVIEWED: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-muted-foreground"><span class="h-2 w-2 rounded-full bg-muted-foreground" aria-hidden="true"></span><span>Reviewed</span></span>',
+      RESOLVED: '<span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Resolved</span></span>',
+    };
+    function siteLabel(site) {
+      return site ? site.siteName : 'Shared AppCentre';
+    }
+
+    // ---- Modal ----
+    const modalOverlay = document.getElementById('modalOverlay');
+    const articleModal = document.getElementById('articleModal');
+    const previewModal = document.getElementById('previewModal');
+    function openModal(modal) { modalOverlay.classList.remove('hidden'); modal.classList.remove('hidden'); body.classList.add('overflow-hidden'); }
+    function closeModal() {
+      modalOverlay.classList.add('hidden');
+      articleModal.classList.add('hidden');
+      previewModal.classList.add('hidden');
+      body.classList.remove('overflow-hidden');
+      document.getElementById('articleError').classList.add('hidden');
+    }
+    modalOverlay.addEventListener('click', closeModal);
+    document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
+
+    function openPreviewModal(article) {
+      document.getElementById('previewTitle').textContent = article.title;
+      document.getElementById('previewCategory').textContent = article.category;
+      document.getElementById('previewSite').textContent = siteLabel(article.site);
+      document.getElementById('previewStatusBadge').innerHTML = STATUS_BADGE[article.status] || article.status;
+      document.getElementById('previewAnswer').textContent = article.answer;
+      const keywordsWrap = document.getElementById('previewKeywordsWrap');
+      if (article.keywords) {
+        document.getElementById('previewKeywords').textContent = article.keywords;
+        keywordsWrap.classList.remove('hidden');
+      } else {
+        keywordsWrap.classList.add('hidden');
+      }
+      document.getElementById('previewUnpublishedNote').classList.toggle('hidden', article.status === 'PUBLISHED');
+      openModal(previewModal);
+    }
+
+    let editingArticleId = null;
+    let sourceQuestionId = null;
+
+    function openCreateModal(question) {
+      editingArticleId = null;
+      sourceQuestionId = question ? question.id : null;
+      document.getElementById('articleModalHeading').textContent = 'New article';
+      const sourceNote = document.getElementById('articleModalSourceNote');
+      if (question) {
+        sourceNote.textContent = 'Created from an unanswered question. Publishing this article will mark the question Resolved.';
+        sourceNote.classList.remove('hidden');
+      } else {
+        sourceNote.classList.add('hidden');
+      }
+      document.getElementById('articleTitle').value = '';
+      document.getElementById('articleCategory').value = '';
+      document.getElementById('articleSite').value = question && question.site ? question.site.siteKey : '';
+      document.getElementById('articleAnswer').value = question ? 'Question: ' + question.question + '\n\nAnswer: ' : '';
+      document.getElementById('articleKeywords').value = '';
+      openModal(articleModal);
+    }
+
+    function openEditModal(article) {
+      editingArticleId = article.id;
+      sourceQuestionId = null;
+      document.getElementById('articleModalHeading').textContent = 'Edit article';
+      document.getElementById('articleModalSourceNote').classList.add('hidden');
+      document.getElementById('articleTitle').value = article.title;
+      document.getElementById('articleCategory').value = article.category;
+      document.getElementById('articleSite').value = article.site ? article.site.siteKey : '';
+      document.getElementById('articleAnswer').value = article.answer;
+      document.getElementById('articleKeywords').value = article.keywords || '';
+      openModal(articleModal);
+    }
+
+    document.getElementById('addArticleButton').addEventListener('click', function () { openCreateModal(null); });
+
+    document.getElementById('saveArticle').addEventListener('click', async function () {
+      const token = requireToken();
+      if (!token) return;
+      const errorEl = document.getElementById('articleError');
+      errorEl.classList.add('hidden');
+
+      const title = document.getElementById('articleTitle').value.trim();
+      const category = document.getElementById('articleCategory').value.trim();
+      const answer = document.getElementById('articleAnswer').value.trim();
+      const keywords = document.getElementById('articleKeywords').value.trim();
+      const siteKey = document.getElementById('articleSite').value || null;
+      if (!title || !category || !answer) {
+        errorEl.textContent = 'Title, category and answer are required.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const payload = { title, category, answer, keywords, siteKey };
+      if (sourceQuestionId) payload.sourceQuestionId = sourceQuestionId;
+
+      const btn = this;
+      btn.disabled = true;
+      try {
+        const url = editingArticleId ? '/api/knowledge/articles/' + editingArticleId : '/api/knowledge/articles';
+        const response = await fetch(url, {
+          method: editingArticleId ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify(payload),
+        });
+        if (handleUnauthorized(response)) return;
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Failed to save article');
+        closeModal();
+        showToast(editingArticleId ? 'Article updated.' : 'Article created as a draft.');
+        loadArticles();
+        if (sourceQuestionId) loadQuestions();
+      } catch (err) {
+        errorEl.textContent = err.message || 'Could not save article. Please try again.';
+        errorEl.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // ---- Articles ----
+    const articleRows = document.getElementById('articleRows');
+    const articlesNoResults = document.getElementById('articlesNoResults');
+    let articlesById = {};
+
+    const NEXT_STATUS_ACTION = {
+      DRAFT: { label: 'Publish', endpoint: 'publish' },
+      PUBLISHED: { label: 'Deactivate', endpoint: 'deactivate' },
+      INACTIVE: { label: 'Reactivate', endpoint: 'reactivate' },
+    };
+
+    function renderArticles(items) {
+      articlesById = items.reduce(function (map, a) { map[a.id] = a; return map; }, {});
+      articlesNoResults.classList.toggle('hidden', items.length !== 0);
+      articleRows.innerHTML = items.map(function (article) {
+        const nextAction = NEXT_STATUS_ACTION[article.status];
+        return '<tr>'
+          + '<td class="px-4 py-3 font-medium">' + escapeHtml(article.title) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(article.category) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(siteLabel(article.site)) + '</td>'
+          + '<td class="px-4 py-3">' + (STATUS_BADGE[article.status] || article.status) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + formatDate(article.updatedAt) + '</td>'
+          + '<td class="px-4 py-3"><div class="flex flex-wrap gap-2">'
+          + '<button type="button" class="preview-article min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium" data-id="' + article.id + '">Preview</button>'
+          + '<button type="button" class="edit-article min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium" data-id="' + article.id + '">Edit</button>'
+          + (nextAction ? '<button type="button" class="status-article min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium" data-id="' + article.id + '" data-endpoint="' + nextAction.endpoint + '">' + nextAction.label + '</button>' : '')
+          + '</div></td></tr>';
+      }).join('');
+
+      articleRows.querySelectorAll('.preview-article').forEach(function (b) {
+        b.addEventListener('click', function () { openPreviewModal(articlesById[b.dataset.id]); });
+      });
+      articleRows.querySelectorAll('.edit-article').forEach(function (b) {
+        b.addEventListener('click', function () { openEditModal(articlesById[b.dataset.id]); });
+      });
+      articleRows.querySelectorAll('.status-article').forEach(function (b) {
+        b.addEventListener('click', function () { setArticleStatus(b); });
+      });
+    }
+
+    async function setArticleStatus(button) {
+      const token = requireToken();
+      if (!token) return;
+      const article = articlesById[button.dataset.id];
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/knowledge/articles/' + article.id + '/' + button.dataset.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({}),
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to update article');
+        showToast(article.title + ' updated.');
+        loadArticles();
+      } catch (err) {
+        showToast('Could not update article. Please try again.');
+        button.disabled = false;
+      }
+    }
+
+    const articleSearch = document.getElementById('articleSearch');
+    const articleStatusFilter = document.getElementById('articleStatusFilter');
+
+    async function loadArticles() {
+      const token = requireToken();
+      if (!token) return;
+      articleRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="6">Loading articles…</td></tr>';
+      articlesNoResults.classList.add('hidden');
+      try {
+        const params = new URLSearchParams();
+        if (articleSearch.value.trim()) params.set('search', articleSearch.value.trim());
+        if (articleStatusFilter.value) params.set('status', articleStatusFilter.value);
+        const response = await fetch('/api/knowledge/articles?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load articles');
+        const data = await response.json();
+        renderArticles(data.data);
+      } catch (err) {
+        articleRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="6">Could not load articles. Please refresh the page.</td></tr>';
+      }
+    }
+
+    let articleSearchTimer;
+    articleSearch.addEventListener('input', function () {
+      clearTimeout(articleSearchTimer);
+      articleSearchTimer = setTimeout(loadArticles, 300);
+    });
+    articleStatusFilter.addEventListener('change', loadArticles);
+
+    // ---- Unanswered questions ----
+    const questionRows = document.getElementById('questionRows');
+    const questionsNoResults = document.getElementById('questionsNoResults');
+    let questionsById = {};
+
+    function renderQuestions(items) {
+      questionsById = items.reduce(function (map, q) { map[q.id] = q; return map; }, {});
+      questionsNoResults.classList.toggle('hidden', items.length !== 0);
+      questionRows.innerHTML = items.map(function (q) {
+        return '<tr>'
+          + '<td class="px-4 py-3 max-w-md">' + escapeHtml(q.question) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(siteLabel(q.site)) + '</td>'
+          + '<td class="px-4 py-3">' + (QUESTION_STATUS_BADGE[q.status] || q.status) + '</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + formatDate(q.createdAt) + '</td>'
+          + '<td class="px-4 py-3"><div class="flex flex-wrap gap-2">'
+          + (q.status === 'NEW' ? '<button type="button" class="review-question min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium" data-id="' + q.id + '">Mark reviewed</button>' : '')
+          + (q.status !== 'RESOLVED' ? '<button type="button" class="create-article-from-question min-h-11 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-primary-foreground" data-id="' + q.id + '">Create Knowledge Article</button>' : '')
+          + '</div></td></tr>';
+      }).join('');
+
+      questionRows.querySelectorAll('.review-question').forEach(function (b) {
+        b.addEventListener('click', function () { reviewQuestion(b); });
+      });
+      questionRows.querySelectorAll('.create-article-from-question').forEach(function (b) {
+        b.addEventListener('click', function () { openCreateModal(questionsById[b.dataset.id]); });
+      });
+    }
+
+    async function reviewQuestion(button) {
+      const token = requireToken();
+      if (!token) return;
+      button.disabled = true;
+      try {
+        const response = await fetch('/api/knowledge/questions/' + button.dataset.id + '/review', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + token },
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to update question');
+        showToast('Question marked reviewed.');
+        loadQuestions();
+      } catch (err) {
+        showToast('Could not update question. Please try again.');
+        button.disabled = false;
+      }
+    }
+
+    async function loadQuestions() {
+      const token = requireToken();
+      if (!token) return;
+      questionRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="5">Loading questions…</td></tr>';
+      questionsNoResults.classList.add('hidden');
+      try {
+        const response = await fetch('/api/knowledge/questions', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load questions');
+        const data = await response.json();
+        renderQuestions(data.data);
+      } catch (err) {
+        questionRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="5">Could not load unanswered questions. Please refresh the page.</td></tr>';
+      }
+    }
+
+    document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        localStorage.removeItem('appcentre_admin_token');
+        localStorage.removeItem('appcentre_admin');
+      });
+    });
+
+    loadArticles();
+    loadQuestions();
   </script>
 </div>
 </body></html>
