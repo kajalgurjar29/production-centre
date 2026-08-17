@@ -550,7 +550,10 @@
       render();
 
       try {
-        const response = await fetch('/api/payments?pageSize=100', { headers: { Authorization: 'Bearer ' + token } });
+        const paymentSiteSelect = document.getElementById('siteSelect');
+        const paymentParams = new URLSearchParams({ pageSize: '100' });
+        if (paymentSiteSelect && paymentSiteSelect.value) paymentParams.set('siteKey', paymentSiteSelect.value);
+        const response = await fetch('/api/payments?' + paymentParams.toString(), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load payments');
         const data = await response.json();
@@ -994,6 +997,8 @@
     });
 
     loadPayments();
+    const siteSelect = document.getElementById('siteSelect');
+    if (siteSelect) siteSelect.addEventListener('change', loadPayments);
   </script>
 </div>
 </body></html>

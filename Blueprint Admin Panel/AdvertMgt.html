@@ -561,7 +561,10 @@
       state.mode = 'loading';
       render();
       try {
-        const response = await fetch('/api/adverts?pageSize=200', { headers: { Authorization: 'Bearer ' + token } });
+        const advertSiteSelect = document.getElementById('siteSelect');
+        const advertParams = new URLSearchParams({ pageSize: '200' });
+        if (advertSiteSelect && advertSiteSelect.value) advertParams.set('siteKey', advertSiteSelect.value);
+        const response = await fetch('/api/adverts?' + advertParams.toString(), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load adverts');
         const data = await response.json();
@@ -878,6 +881,8 @@
       }
     });
     loadAdverts();
+    const siteSelect = document.getElementById('siteSelect');
+    if (siteSelect) siteSelect.addEventListener('change', loadAdverts);
   </script>
 </div>
 </body></html>

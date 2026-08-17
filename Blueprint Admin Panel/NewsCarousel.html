@@ -208,6 +208,12 @@
                 <input type="hidden" id="slideId" value="" />
                 <div><label class="mb-2 block text-sm font-medium" for="slideTitle">Title</label><input id="slideTitle" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Slide title" /></div>
                 <div><label class="mb-2 block text-sm font-medium" for="slideBody">Body</label><textarea id="slideBody" rows="4" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="Slide body text"></textarea></div>
+                <div><label class="mb-2 block text-sm font-medium" for="slideSite">Site</label>
+                  <select id="slideSite" class="min-h-11 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none">
+                    <option value="">Shared AppCentre</option>
+                    <option value="aitransformation">AI Transformation</option>
+                  </select>
+                </div>
                 <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
                   <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
                   <button type="button" id="confirmAddSlide" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save</button>
@@ -307,7 +313,10 @@
       if (!token) return;
       slideGrid.innerHTML = '<p class="text-sm text-muted-foreground">Loading news items…</p>';
       try {
-        const response = await fetch('/api/news', { headers: { Authorization: 'Bearer ' + token } });
+        const newsSiteSelect = document.getElementById('siteSelect');
+        const newsParams = new URLSearchParams();
+        if (newsSiteSelect && newsSiteSelect.value) newsParams.set('siteKey', newsSiteSelect.value);
+        const response = await fetch('/api/news' + (newsParams.toString() ? '?' + newsParams.toString() : ''), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load news');
         const data = await response.json();
@@ -354,6 +363,7 @@
       document.getElementById('slideId').value = item ? item.id : '';
       document.getElementById('slideTitle').value = item ? item.title : '';
       document.getElementById('slideBody').value = item ? item.body : '';
+      document.getElementById('slideSite').value = item && item.site ? item.site.siteKey : '';
       modalOverlay.classList.remove('hidden'); addSlideModal.classList.remove('hidden'); body.classList.add('overflow-hidden');
     }
     function closeModal() { modalOverlay.classList.add('hidden'); addSlideModal.classList.add('hidden'); body.classList.remove('overflow-hidden'); }
@@ -367,13 +377,14 @@
       const id = document.getElementById('slideId').value;
       const title = document.getElementById('slideTitle').value.trim();
       const bodyText = document.getElementById('slideBody').value.trim();
+      const siteKey = document.getElementById('slideSite').value || null;
       if (!title || !bodyText) return;
 
       try {
         const response = await fetch(id ? '/api/news/' + id : '/api/news', {
           method: id ? 'PUT' : 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-          body: JSON.stringify({ title: title, body: bodyText })
+          body: JSON.stringify({ title: title, body: bodyText, siteKey: siteKey })
         });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to save');
@@ -393,6 +404,8 @@
     });
 
     loadNews();
+    const siteSelect = document.getElementById('siteSelect');
+    if (siteSelect) siteSelect.addEventListener('change', loadNews);
   </script>
 </div>
 </body></html>

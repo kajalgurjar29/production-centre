@@ -1,8 +1,10 @@
 const prisma = require('../config/prisma');
 const ApiError = require('../utils/ApiError');
 const { logAction } = require('../utils/auditLog');
+const { resolveSiteId } = require('../utils/resolveSiteId');
 
-async function listAdverts({ status, search, page = 1, pageSize = 20 }) {
+async function listAdverts({ status, search, siteKey, page = 1, pageSize = 20 }) {
+  const siteId = siteKey ? await resolveSiteId(siteKey) : undefined;
   const where = {
     AND: [
       status ? { status } : {},
@@ -14,6 +16,7 @@ async function listAdverts({ status, search, page = 1, pageSize = 20 }) {
             ],
           }
         : {},
+      siteId !== undefined ? { siteId } : {},
     ],
   };
 

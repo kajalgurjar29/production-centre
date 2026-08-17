@@ -7,7 +7,8 @@ const createNewsSchema = z.object({
   imageUrl: z.string().trim().optional(),
   featured: z.boolean().optional(),
   publishAt: z.string().optional(),
-  siteKey: z.string().trim().optional(),
+  // Omitted/null = Shared AppCentre news, visible on every site.
+  siteKey: z.string().trim().min(1).optional().nullable(),
 });
 
 const updateNewsSchema = createNewsSchema.partial();

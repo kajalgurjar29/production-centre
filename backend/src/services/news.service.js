@@ -3,11 +3,20 @@ const ApiError = require('../utils/ApiError');
 const { logAction } = require('../utils/auditLog');
 const { resolveSiteId } = require('../utils/resolveSiteId');
 
-async function listNews({ status, search }) {
-  const where = {};
-  if (status) where.status = status;
-  if (search) where.title = { contains: search, mode: 'insensitive' };
-  return prisma.news.findMany({ where, orderBy: { createdAt: 'desc' }, include: { site: { select: { siteName: true } } } });
+// With a siteKey given, scope to that site's own news plus Shared (siteId
+// null) - matches what actually appears on that site's public carousel.
+// Without one, the admin list shows everything (same pattern as Knowledge
+// Articles' listArticles).
+async function listNews({ status, search, siteKey }) {
+  const conditions = [];
+  if (status) conditions.push({ status });
+  if (search) conditions.push({ title: { contains: search, mode: 'insensitive' } });
+  if (siteKey) {
+    const siteId = await resolveSiteId(siteKey);
+    conditions.push({ OR: [{ siteId: null }, { siteId }] });
+  }
+  const where = conditions.length ? { AND: conditions } : {};
+  return prisma.news.findMany({ where, orderBy: { createdAt: 'desc' }, include: { site: { select: { siteKey: true, siteName: true } } } });
 }
 
 async function getNewsById(id) {

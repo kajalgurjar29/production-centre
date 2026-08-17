@@ -2,10 +2,11 @@ const asyncHandler = require('../utils/asyncHandler');
 const advertsService = require('../services/adverts.service');
 
 const list = asyncHandler(async (req, res) => {
-  const { status, search, page, pageSize } = req.query;
+  const { status, search, siteKey, page, pageSize } = req.query;
   const result = await advertsService.listAdverts({
     status,
     search,
+    siteKey,
     page: page ? parseInt(page, 10) : undefined,
     pageSize: pageSize ? parseInt(pageSize, 10) : undefined,
   });

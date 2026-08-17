@@ -2,8 +2,8 @@ const asyncHandler = require('../utils/asyncHandler');
 const newsService = require('../services/news.service');
 
 const list = asyncHandler(async (req, res) => {
-  const { status, search } = req.query;
-  const items = await newsService.listNews({ status, search });
+  const { status, search, siteKey } = req.query;
+  const items = await newsService.listNews({ status, search, siteKey });
   res.json({ success: true, data: items });
 });
 

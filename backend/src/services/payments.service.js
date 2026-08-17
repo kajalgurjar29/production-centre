@@ -1,8 +1,15 @@
 const prisma = require('../config/prisma');
 const ApiError = require('../utils/ApiError');
+const { resolveSiteId } = require('../utils/resolveSiteId');
 
-async function listPayments({ status, page = 1, pageSize = 20 }) {
-  const where = status ? { status } : {};
+// Payment has no siteId of its own - it only reaches a site through its
+// Advert relation (same relation-filter approach dashboard.service.js
+// already uses for the same reason).
+async function listPayments({ status, siteKey, page = 1, pageSize = 20 }) {
+  const siteId = siteKey ? await resolveSiteId(siteKey) : undefined;
+  const where = {
+    AND: [status ? { status } : {}, siteId !== undefined ? { advert: { siteId } } : {}],
+  };
 
   const [items, total] = await Promise.all([
     prisma.payment.findMany({

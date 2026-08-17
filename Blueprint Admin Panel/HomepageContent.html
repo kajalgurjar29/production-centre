@@ -292,7 +292,9 @@
       if (!token) return;
       blockList.innerHTML = '<p class="text-sm text-muted-foreground">Loading homepage content…</p>';
       try {
-        const response = await fetch('/api/homepage-content?siteKey=aitransformation', { headers: { Authorization: 'Bearer ' + token } });
+        const homepageSiteSelect = document.getElementById('siteSelect');
+        const homepageSiteKey = (homepageSiteSelect && homepageSiteSelect.value) || 'aitransformation';
+        const response = await fetch('/api/homepage-content?siteKey=' + encodeURIComponent(homepageSiteKey), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load homepage content');
         const data = await response.json();
@@ -332,7 +334,9 @@
         published: document.getElementById('editPublished').checked
       };
       try {
-        const response = await fetch('/api/homepage-content/' + key + '?siteKey=aitransformation', {
+        const editSiteSelect = document.getElementById('siteSelect');
+        const editSiteKey = (editSiteSelect && editSiteSelect.value) || 'aitransformation';
+        const response = await fetch('/api/homepage-content/' + key + '?siteKey=' + encodeURIComponent(editSiteKey), {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
           body: JSON.stringify(payload)
@@ -355,6 +359,8 @@
     });
 
     loadBlocks();
+    const siteSelect = document.getElementById('siteSelect');
+    if (siteSelect) siteSelect.addEventListener('change', loadBlocks);
   </script>
 </div>
 </body></html>

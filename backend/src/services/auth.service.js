@@ -15,6 +15,31 @@ const STATIC_ADMIN = {
 };
 
 async function login(email, password) {
+  // Prefer a real AdminUser row whenever the database is reachable, so
+  // actions taken while logged in as admin@gmail.com attribute correctly
+  // (audit log, password change, etc.) instead of resolving to the
+  // no-such-row STATIC_ADMIN id. The static bypass below only kicks in if
+  // the DB lookup fails outright or no active match is found there.
+  try {
+    const admin = await prisma.adminUser.findUnique({ where: { email } });
+    if (admin && admin.status === 'ACTIVE') {
+      const passwordMatches = await bcrypt.compare(password, admin.passwordHash);
+      if (passwordMatches) {
+        await prisma.adminUser.update({
+          where: { id: admin.id },
+          data: { lastActiveAt: new Date() },
+        });
+        const token = jwt.sign({ sub: admin.id, role: admin.role }, jwtSecret, { expiresIn: jwtExpiresIn });
+        return {
+          token,
+          admin: { id: admin.id, name: admin.name, email: admin.email, role: admin.role },
+        };
+      }
+    }
+  } catch (err) {
+    console.error(`[auth] DB lookup failed during login, falling back to static admin if applicable: ${err.message}`);
+  }
+
   if (email === STATIC_ADMIN.email && password === STATIC_ADMIN.password) {
     const token = jwt.sign({ sub: STATIC_ADMIN.id, role: STATIC_ADMIN.role }, jwtSecret, { expiresIn: jwtExpiresIn });
     return {
@@ -23,27 +48,7 @@ async function login(email, password) {
     };
   }
 
-  const admin = await prisma.adminUser.findUnique({ where: { email } });
-  if (!admin || admin.status !== 'ACTIVE') {
-    throw ApiError.unauthorized('Invalid email or password');
-  }
-
-  const passwordMatches = await bcrypt.compare(password, admin.passwordHash);
-  if (!passwordMatches) {
-    throw ApiError.unauthorized('Invalid email or password');
-  }
-
-  await prisma.adminUser.update({
-    where: { id: admin.id },
-    data: { lastActiveAt: new Date() },
-  });
-
-  const token = jwt.sign({ sub: admin.id, role: admin.role }, jwtSecret, { expiresIn: jwtExpiresIn });
-
-  return {
-    token,
-    admin: { id: admin.id, name: admin.name, email: admin.email, role: admin.role },
-  };
+  throw ApiError.unauthorized('Invalid email or password');
 }
 
 async function getCurrentAdmin(adminId) {
