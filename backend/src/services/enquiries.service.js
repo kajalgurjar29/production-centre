@@ -2,6 +2,26 @@ const prisma = require('../config/prisma');
 const ApiError = require('../utils/ApiError');
 const { logAction } = require('../utils/auditLog');
 const { sendMail } = require('../lib/mailer');
+const { SITE_SOURCES } = require('../constants/siteSources');
+
+// Accepts either the real Site.siteKey slug ("aitransformation") or its
+// human-readable source name ("AI Transformation") and resolves both forms,
+// so callers passing either value filter consistently. Falls back to treating
+// unrecognised input as a literal slug/source pair (best-effort, matches
+// nothing rather than throwing - an unknown site should return an empty list,
+// not break the request).
+function resolveSiteFilter(siteKey) {
+  const normalized = siteKey.trim();
+  const bySlug = SITE_SOURCES[normalized.toLowerCase()];
+  if (bySlug) return { slug: normalized.toLowerCase(), legacySource: bySlug };
+
+  const bySourceName = Object.entries(SITE_SOURCES).find(
+    ([, name]) => name.toLowerCase() === normalized.toLowerCase()
+  );
+  if (bySourceName) return { slug: bySourceName[0], legacySource: bySourceName[1] };
+
+  return { slug: normalized, legacySource: normalized };
+}
 
 function escapeHtml(value) {
   return String(value == null ? '' : value)
@@ -12,11 +32,21 @@ function escapeHtml(value) {
 }
 
 async function listEnquiries({ status, source, siteKey, page = 1, pageSize = 20 }) {
-  const where = {
-    ...(status ? { status } : {}),
-    ...(source ? { source } : {}),
-    ...(siteKey ? { site: { siteKey } } : {}),
-  };
+  const conditions = [];
+  if (status) conditions.push({ status });
+  if (source) conditions.push({ source });
+  if (siteKey) {
+    const resolved = resolveSiteFilter(siteKey);
+    // Primary: enquiries properly linked via the Site relation (siteId set).
+    // Fallback: legacy/orphaned rows (siteId: null) that predate the Site
+    // relation, matched by their original source string instead - this is
+    // what keeps pre-existing enquiries visible under the site filter
+    // without ever needing to touch/backfill the historical data.
+    conditions.push({
+      OR: [{ site: { siteKey: resolved.slug } }, { siteId: null, source: resolved.legacySource }],
+    });
+  }
+  const where = conditions.length ? { AND: conditions } : {};
 
   const [items, total] = await Promise.all([
     prisma.contactEnquiry.findMany({
