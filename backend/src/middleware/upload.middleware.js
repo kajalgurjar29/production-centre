@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
@@ -7,8 +8,14 @@ const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 function storageFor(subfolder) {
+  const destination = path.join(UPLOAD_ROOT, subfolder);
+  // multer's diskStorage never creates its destination folder itself, and an
+  // empty folder isn't guaranteed to exist after a fresh deploy (git doesn't
+  // track empty directories) - create it up front so uploads never fail with
+  // a missing-directory error.
+  fs.mkdirSync(destination, { recursive: true });
   return multer.diskStorage({
-    destination: path.join(UPLOAD_ROOT, subfolder),
+    destination,
     filename: (req, file, cb) => {
       const ext = path.extname(file.originalname).toLowerCase();
       cb(null, `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${ext}`);
