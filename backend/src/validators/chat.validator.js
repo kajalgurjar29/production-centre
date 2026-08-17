@@ -12,6 +12,7 @@ const chatSchema = z.object({
   message: z.string().trim().min(1, 'message is required').max(MAX_MESSAGE_LENGTH),
   history: z.array(historyEntrySchema).optional().default([]),
   sessionId: z.string().max(200).optional(),
+  siteKey: z.string().max(100).optional(),
 });
 
 module.exports = { chatSchema, MAX_HISTORY_MESSAGES };

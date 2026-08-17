@@ -2,6 +2,7 @@ const { Router } = require('express');
 const enquiriesController = require('../controllers/enquiries.controller');
 const { requireAuth } = require('../middleware/auth.middleware');
 const { validateBody } = require('../middleware/validate.middleware');
+const { requirePermission } = require('../constants/permissions');
 const { updateStatusSchema, createEnquirySchema, createEnquiryBodySchema } = require('../validators/enquiries.validator');
 
 const router = Router();
@@ -17,6 +18,6 @@ router.post('/:source', validateBody(createEnquiryBodySchema), enquiriesControll
 router.use(requireAuth);
 
 router.get('/', enquiriesController.list);
-router.patch('/:id/status', validateBody(updateStatusSchema), enquiriesController.updateStatus);
+router.patch('/:id/status', requirePermission('ENQUIRIES_UPDATE_STATUS'), validateBody(updateStatusSchema), enquiriesController.updateStatus);
 
 module.exports = router;

@@ -7,6 +7,8 @@ const createArticleSchema = z.object({
   keywords: z.string().trim().optional(),
   updatedBy: z.string().optional(),
   sourceQuestionId: z.string().optional(),
+  // Omitted/null = Shared AppCentre knowledge, visible to every site.
+  siteKey: z.string().trim().min(1).optional().nullable(),
 });
 
 const updateArticleSchema = z.object({
@@ -15,6 +17,7 @@ const updateArticleSchema = z.object({
   answer: z.string().trim().min(1).optional(),
   keywords: z.string().trim().optional(),
   updatedBy: z.string().optional(),
+  siteKey: z.string().trim().min(1).optional().nullable(),
 });
 
 const setStatusSchema = z.object({

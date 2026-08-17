@@ -246,6 +246,7 @@ model Review {
   details        String?
   country        String?
   city           String?
+  imageUrl       String?
   source         String       @default("AI Transformation")
   likeCount      Int          @default(0)
   reportCount    Int          @default(0)

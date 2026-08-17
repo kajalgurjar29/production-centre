@@ -3,31 +3,35 @@ const ApiError = require('../utils/ApiError');
 const { client, MODEL } = require('../lib/openaiClient');
 const { buildSystemPrompt } = require('../lib/companyKnowledge');
 const { isCoveredByKnowledgeBase } = require('../lib/coverageCheck');
+const { resolveSiteId } = require('../utils/resolveSiteId');
 
-async function getPublishedArticles() {
+// Shared AppCentre knowledge (siteId null) plus the caller's own site only -
+// the LLM never decides which site's knowledge it can see, this query does.
+async function getPublishedArticles(siteId) {
   return prisma.knowledgeArticle.findMany({
-    where: { status: 'PUBLISHED' },
+    where: { status: 'PUBLISHED', OR: [{ siteId: null }, { siteId }] },
     orderBy: { updatedAt: 'desc' },
   });
 }
 
-async function logUnansweredQuestion(question, sessionId) {
+async function logUnansweredQuestion(question, sessionId, siteId) {
   try {
-    await prisma.unansweredQuestion.create({ data: { question, sessionId } });
+    await prisma.unansweredQuestion.create({ data: { question, sessionId, siteId } });
   } catch (err) {
     console.error('Failed to log unanswered question:', err.message);
   }
 }
 
-async function getReply({ message, history, sessionId }) {
+async function getReply({ message, history, sessionId, siteKey }) {
   if (!client) {
     throw new ApiError(500, 'Assistant is not configured correctly.');
   }
 
-  const articles = await getPublishedArticles();
+  const siteId = await resolveSiteId(siteKey);
+  const articles = await getPublishedArticles(siteId);
 
   if (!isCoveredByKnowledgeBase(message, articles)) {
-    await logUnansweredQuestion(message, sessionId || 'anonymous');
+    await logUnansweredQuestion(message, sessionId || 'anonymous', siteId);
   }
 
   let completion;

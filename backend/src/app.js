@@ -22,6 +22,7 @@ if (nodeEnv !== 'test') {
 
 app.use(express.static(path.join(__dirname, '..', '..', 'Blueprint Admin Panel')));
 app.use('/site', express.static(path.join(__dirname, '..', '..', 'AITransformation')));
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use('/api', routes);
 

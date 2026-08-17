@@ -1,5 +1,6 @@
 const prisma = require('../config/prisma');
 const ApiError = require('../utils/ApiError');
+const { logAction } = require('../utils/auditLog');
 
 async function listAdverts({ status, search, page = 1, pageSize = 20 }) {
   const where = {
@@ -42,9 +43,7 @@ async function getAdvertById(id) {
 async function setAdvertStatus(id, status, actorId, reason) {
   await getAdvertById(id);
   const advert = await prisma.advert.update({ where: { id }, data: { status } });
-  await prisma.auditLog.create({
-    data: { action: `Advert status changed to ${status}`, target: advert.reference, reason, actorId },
-  });
+  await logAction({ action: `Advert status changed to ${status}`, target: advert.reference, reason, actorId });
   return advert;
 }
 

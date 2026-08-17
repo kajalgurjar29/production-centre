@@ -1,7 +1,7 @@
 const { z } = require('zod');
 
 const updateStatusSchema = z.object({
-  status: z.enum(['NEW', 'IN_PROGRESS', 'RESOLVED']),
+  status: z.enum(['NEW', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']),
 });
 
 const enquiryFields = {

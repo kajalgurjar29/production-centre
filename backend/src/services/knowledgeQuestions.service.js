@@ -12,7 +12,11 @@ async function listQuestions({ status, search }) {
   if (status) where.status = status;
   if (search) where.question = { contains: search, mode: 'insensitive' };
 
-  return prisma.unansweredQuestion.findMany({ where, orderBy: { createdAt: 'desc' } });
+  return prisma.unansweredQuestion.findMany({
+    where,
+    orderBy: { createdAt: 'desc' },
+    include: { site: { select: { siteKey: true, siteName: true } } },
+  });
 }
 
 async function reviewQuestion(id) {

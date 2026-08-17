@@ -59,4 +59,19 @@ async function getCurrentAdmin(adminId) {
   return admin;
 }
 
-module.exports = { login, getCurrentAdmin };
+async function changePassword(adminId, currentPassword, newPassword) {
+  if (adminId === STATIC_ADMIN.id) {
+    throw ApiError.badRequest('Password change is not available for the built-in admin account');
+  }
+
+  const admin = await prisma.adminUser.findUnique({ where: { id: adminId } });
+  if (!admin) throw ApiError.notFound('Admin account not found');
+
+  const passwordMatches = await bcrypt.compare(currentPassword, admin.passwordHash);
+  if (!passwordMatches) throw ApiError.unauthorized('Current password is incorrect');
+
+  const passwordHash = await bcrypt.hash(newPassword, 10);
+  await prisma.adminUser.update({ where: { id: adminId }, data: { passwordHash } });
+}
+
+module.exports = { login, getCurrentAdmin, changePassword };

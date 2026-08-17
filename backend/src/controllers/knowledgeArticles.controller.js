@@ -2,8 +2,8 @@ const asyncHandler = require('../utils/asyncHandler');
 const articlesService = require('../services/knowledgeArticles.service');
 
 const list = asyncHandler(async (req, res) => {
-  const { status, category, search } = req.query;
-  const articles = await articlesService.listArticles({ status, category, search });
+  const { status, category, search, siteKey } = req.query;
+  const articles = await articlesService.listArticles({ status, category, search, siteKey });
   res.json({ success: true, data: articles });
 });
 
