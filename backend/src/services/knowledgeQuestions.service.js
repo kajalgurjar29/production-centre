@@ -3,7 +3,7 @@ const ApiError = require('../utils/ApiError');
 
 const VALID_STATUSES = ['NEW', 'REVIEWED', 'RESOLVED'];
 
-async function listQuestions({ status, search }) {
+async function listQuestions({ status, search, siteKey }) {
   if (status !== undefined && !VALID_STATUSES.includes(status)) {
     throw ApiError.badRequest(`status must be one of ${VALID_STATUSES.join(', ')}`);
   }
@@ -11,6 +11,9 @@ async function listQuestions({ status, search }) {
   const where = {};
   if (status) where.status = status;
   if (search) where.question = { contains: search, mode: 'insensitive' };
+  // Unlike articles, questions always belong to exactly one originating
+  // site (no "Shared" concept) - a strict relation match is correct here.
+  if (siteKey) where.site = { siteKey };
 
   return prisma.unansweredQuestion.findMany({
     where,

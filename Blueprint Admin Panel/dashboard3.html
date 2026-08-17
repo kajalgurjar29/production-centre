@@ -538,8 +538,10 @@
 
       try {
         const periodValue = PERIOD_MAP[period.value] || '30d';
+        const summaryParams = new URLSearchParams({ period: periodValue });
+        if (siteSelect && siteSelect.value) summaryParams.set('siteKey', siteSelect.value);
         const [summaryRes, auditRes] = await Promise.all([
-          fetch('/api/dashboard/summary?period=' + periodValue, { headers: { Authorization: 'Bearer ' + token } }),
+          fetch('/api/dashboard/summary?' + summaryParams.toString(), { headers: { Authorization: 'Bearer ' + token } }),
           fetch('/api/audit-log?pageSize=5', { headers: { Authorization: 'Bearer ' + token } })
         ]);
 

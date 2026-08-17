@@ -472,6 +472,7 @@
     const reviewSearch = document.getElementById('reviewSearch');
     const statusFilter = document.getElementById('statusFilter');
     const noResults = document.getElementById('noResults');
+    const siteSelect = document.getElementById('siteSelect');
 
     async function loadReviews() {
       const token = requireToken();
@@ -484,6 +485,7 @@
         const params = new URLSearchParams({ pageSize: '100' });
         if (reviewSearch.value.trim()) params.set('search', reviewSearch.value.trim());
         if (statusFilter.value) params.set('status', statusFilter.value);
+        if (siteSelect && siteSelect.value) params.set('siteKey', siteSelect.value);
         const response = await fetch('/api/reviews?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load reviews');
@@ -503,6 +505,7 @@
       searchTimer = setTimeout(loadReviews, 300);
     });
     statusFilter.addEventListener('change', loadReviews);
+    if (siteSelect) siteSelect.addEventListener('change', loadReviews);
 
     document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
       link.addEventListener('click', function () {

@@ -2,8 +2,8 @@ const asyncHandler = require('../utils/asyncHandler');
 const questionsService = require('../services/knowledgeQuestions.service');
 
 const list = asyncHandler(async (req, res) => {
-  const { status, search } = req.query;
-  const questions = await questionsService.listQuestions({ status, search });
+  const { status, search, siteKey } = req.query;
+  const questions = await questionsService.listQuestions({ status, search, siteKey });
   res.json({ success: true, data: questions });
 });
 

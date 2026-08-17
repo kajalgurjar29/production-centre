@@ -538,6 +538,7 @@
 
     const articleSearch = document.getElementById('articleSearch');
     const articleStatusFilter = document.getElementById('articleStatusFilter');
+    const siteSelect = document.getElementById('siteSelect');
 
     async function loadArticles() {
       const token = requireToken();
@@ -548,6 +549,7 @@
         const params = new URLSearchParams();
         if (articleSearch.value.trim()) params.set('search', articleSearch.value.trim());
         if (articleStatusFilter.value) params.set('status', articleStatusFilter.value);
+        if (siteSelect && siteSelect.value) params.set('siteKey', siteSelect.value);
         const response = await fetch('/api/knowledge/articles?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load articles');
@@ -564,6 +566,7 @@
       articleSearchTimer = setTimeout(loadArticles, 300);
     });
     articleStatusFilter.addEventListener('change', loadArticles);
+    if (siteSelect) siteSelect.addEventListener('change', loadArticles);
 
     // ---- Unanswered questions ----
     const questionRows = document.getElementById('questionRows');
@@ -618,7 +621,9 @@
       questionRows.innerHTML = '<tr><td class="px-4 py-3 text-muted-foreground" colspan="5">Loading questions…</td></tr>';
       questionsNoResults.classList.add('hidden');
       try {
-        const response = await fetch('/api/knowledge/questions', { headers: { Authorization: 'Bearer ' + token } });
+        const params = new URLSearchParams();
+        if (siteSelect && siteSelect.value) params.set('siteKey', siteSelect.value);
+        const response = await fetch('/api/knowledge/questions?' + params.toString(), { headers: { Authorization: 'Bearer ' + token } });
         if (handleUnauthorized(response)) return;
         if (!response.ok) throw new Error('Failed to load questions');
         const data = await response.json();
@@ -627,6 +632,7 @@
         questionRows.innerHTML = '<tr><td class="px-4 py-3 text-destructive" colspan="5">Could not load unanswered questions. Please refresh the page.</td></tr>';
       }
     }
+    if (siteSelect) siteSelect.addEventListener('change', loadQuestions);
 
     document.querySelectorAll('a[href="adminlogin.html"]').forEach(function (link) {
       link.addEventListener('click', function () {

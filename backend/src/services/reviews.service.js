@@ -3,15 +3,24 @@ const ApiError = require('../utils/ApiError');
 const { logAction } = require('../utils/auditLog');
 const { resolveSiteId } = require('../utils/resolveSiteId');
 const { SITE_SOURCES } = require('../constants/siteSources');
+const { resolveSiteFilter } = require('../utils/siteFilter');
 
 async function listReviews({ status, search, siteKey, page = 1, pageSize = 20 }) {
-  const where = {
-    AND: [
-      status ? { status } : {},
-      search ? { OR: [{ name: { contains: search, mode: 'insensitive' } }, { details: { contains: search, mode: 'insensitive' } }] } : {},
-      siteKey ? { site: { siteKey } } : {},
-    ],
-  };
+  const conditions = [
+    status ? { status } : {},
+    search ? { OR: [{ name: { contains: search, mode: 'insensitive' } }, { details: { contains: search, mode: 'insensitive' } }] } : {},
+  ];
+  if (siteKey) {
+    const resolved = resolveSiteFilter(siteKey);
+    // Primary: reviews properly linked via the Site relation. Fallback:
+    // legacy/orphaned rows (siteId: null) matched by their original source
+    // string - keeps pre-existing reviews visible under the site filter
+    // without ever needing to touch/backfill the historical data.
+    conditions.push({
+      OR: [{ site: { siteKey: resolved.slug } }, { siteId: null, source: resolved.legacySource }],
+    });
+  }
+  const where = { AND: conditions };
 
   const [items, total] = await Promise.all([
     prisma.review.findMany({
@@ -56,11 +65,16 @@ async function createReview({ name, rating, topic, details, country, city, image
 }
 
 // Public display feed - only ever Approved, and only for the requesting site.
+// Same site-relation + legacy-source fallback as listReviews/the admin list,
+// so an approved review never shows in AppCentre Admin as belonging to a
+// site while staying invisible on that site's actual public page.
 async function listPublicApprovedReviews(siteKey) {
-  const siteId = await resolveSiteId(siteKey);
-  if (!siteId) return [];
+  const resolved = resolveSiteFilter(siteKey);
   return prisma.review.findMany({
-    where: { siteId, status: 'APPROVED' },
+    where: {
+      status: 'APPROVED',
+      OR: [{ site: { siteKey: resolved.slug } }, { siteId: null, source: resolved.legacySource }],
+    },
     orderBy: { createdAt: 'desc' },
     take: 50,
   });

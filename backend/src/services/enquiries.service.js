@@ -2,26 +2,7 @@ const prisma = require('../config/prisma');
 const ApiError = require('../utils/ApiError');
 const { logAction } = require('../utils/auditLog');
 const { sendMail } = require('../lib/mailer');
-const { SITE_SOURCES } = require('../constants/siteSources');
-
-// Accepts either the real Site.siteKey slug ("aitransformation") or its
-// human-readable source name ("AI Transformation") and resolves both forms,
-// so callers passing either value filter consistently. Falls back to treating
-// unrecognised input as a literal slug/source pair (best-effort, matches
-// nothing rather than throwing - an unknown site should return an empty list,
-// not break the request).
-function resolveSiteFilter(siteKey) {
-  const normalized = siteKey.trim();
-  const bySlug = SITE_SOURCES[normalized.toLowerCase()];
-  if (bySlug) return { slug: normalized.toLowerCase(), legacySource: bySlug };
-
-  const bySourceName = Object.entries(SITE_SOURCES).find(
-    ([, name]) => name.toLowerCase() === normalized.toLowerCase()
-  );
-  if (bySourceName) return { slug: bySourceName[0], legacySource: bySourceName[1] };
-
-  return { slug: normalized, legacySource: normalized };
-}
+const { resolveSiteFilter } = require('../utils/siteFilter');
 
 function escapeHtml(value) {
   return String(value == null ? '' : value)
