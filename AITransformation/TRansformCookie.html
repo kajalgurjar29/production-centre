@@ -177,8 +177,8 @@
         <div class="space-y-8 sm:space-y-10">
           <section id="about-this-policy" class="scroll-mt-10 border border-border rounded-xl bg-card text-card-foreground shadow-sm p-5 sm:p-6 lg:p-7 space-y-4 text-base leading-7">
             <h2 class="text-lg sm:text-xl font-heading font-semibold text-foreground">1. About This Policy</h2>
-            <p>Website: <a href="https://www.AITransformationProfessionals.com" class="text-primary hover:underline break-all">www.AITransformationProfessionals.com</a></p>
-            <p>Email: <a href="mailto:Legals@AITransformationProfessionals.com" class="text-primary hover:underline break-all">Legals@AITransformationProfessionals.com</a></p>
+            <p>Website: <a href="https://www.AITP.uk" class="text-primary hover:underline break-all">www.AITP.uk</a></p>
+            <p>Email: <a href="mailto:Info@AITP.uk" class="text-primary hover:underline break-all">Info@AITP.uk</a></p>
             <p>This policy should be read together with our <a href="TransformPrivacy.html" class="text-primary hover:underline">Privacy Policy</a>.</p>
           </section>
 
@@ -249,7 +249,7 @@
           <section id="cookie-enquiries" class="scroll-mt-10 border border-border rounded-xl bg-card text-card-foreground shadow-sm p-5 sm:p-6 lg:p-7 space-y-4 text-base leading-7">
             <h2 class="text-lg sm:text-xl font-heading font-semibold text-foreground">9. Cookie Enquiries</h2>
             <p>Questions about cookies or cookie choices should be sent to:</p>
-            <p><a href="mailto:Legals@AITransformationProfessionals.com" class="text-primary hover:underline break-all">Legals@AITransformationProfessionals.com</a></p>
+            <p><a href="mailto:Info@AITP.uk" class="text-primary hover:underline break-all">Info@AITP.uk</a></p>
           </section>
 
           <section class="border border-border rounded-xl bg-card text-card-foreground shadow-sm p-5 sm:p-6 lg:p-7">
@@ -304,9 +304,9 @@
         <div class="md:col-span-4 space-y-4">
           <h4 class="font-heading font-bold text-sm uppercase tracking-wider">Contact Details</h4>
           <ul class="space-y-3 text-sm text-primary-foreground/80">
-            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITransformationProfessionals.com</span></li>
-            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITransformationProfessionals.com" class="hover:text-primary-foreground transition-colors">Connect@AITransformationProfessionals.com</a></li>
-            <li class="flex items-center gap-2"><iconify-icon icon="lucide:phone" class="text-secondary"></iconify-icon><a href="tel:+447939883637" class="hover:text-primary-foreground transition-colors">+44 7939 88 3637</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:globe" class="text-secondary"></iconify-icon><span>www.AITP.uk</span></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="lucide:mail" class="text-secondary"></iconify-icon><a href="mailto:Connect@AITP.uk" class="hover:text-primary-foreground transition-colors">Connect@AITP.uk</a></li>
+            <li class="flex items-center gap-2"><iconify-icon icon="mdi:whatsapp" class="text-secondary"></iconify-icon><a href="https://wa.me/447822013052" target="_blank" rel="noopener noreferrer" class="hover:text-primary-foreground transition-colors">+44 782 201 3052</a></li>
           </ul>
         </div>
       </div>
@@ -354,21 +354,7 @@
   </script>
 
 
-<a id="ai-help-fab" href="TransformHelp.html" aria-label="Open AI Help Assistant" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 h-14 w-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-opacity duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
-  <iconify-icon icon="lucide:bot" class="text-2xl"></iconify-icon>
-</a>
-<script>
-  (function () {
-    var fab = document.getElementById("ai-help-fab");
-    var footer = document.querySelector("footer");
-    if (!fab || !footer || !("IntersectionObserver" in window)) return;
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        fab.style.opacity = entry.isIntersecting ? "0" : "1";
-        fab.style.pointerEvents = entry.isIntersecting ? "none" : "auto";
-      });
-    });
-    observer.observe(footer);
-  })();
-</script>
-</div></body></html>
+</div>
+<div id="help-widget-root"></div>
+<script src="assets/help-widget.js"></script>
+</body></html>
