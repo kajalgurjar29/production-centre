@@ -132,7 +132,7 @@ const KNOWLEDGE_ARTICLES = [
     title: 'How do I contact you?',
     category: 'Contact & Enquiries',
     keywords: 'how do i contact you, contact details, get in touch',
-    answer: 'You can reach us via the Contact Us page, by emailing Connect@AITransformationProfessionals.com, or calling +44 7939 88 3637.',
+    answer: 'You can reach us via the Contact Us page, by emailing Connect@AITP.uk, or via WhatsApp on +44 782 201 3052.',
   },
   {
     title: 'How do I join the Consultant Network?',

@@ -64,6 +64,20 @@ async function createReview({ name, rating, topic, details, country, city, image
   });
 }
 
+// Public actions on an approved review - only ever act on APPROVED rows so a
+// visitor can't probe the existence/status of pending or hidden reviews.
+async function likeReview(id) {
+  const review = await prisma.review.findUnique({ where: { id } });
+  if (!review || review.status !== 'APPROVED') throw ApiError.notFound('Review not found');
+  return prisma.review.update({ where: { id }, data: { likeCount: { increment: 1 } } });
+}
+
+async function reportReview(id) {
+  const review = await prisma.review.findUnique({ where: { id } });
+  if (!review || review.status !== 'APPROVED') throw ApiError.notFound('Review not found');
+  return prisma.review.update({ where: { id }, data: { reportCount: { increment: 1 } } });
+}
+
 // Public display feed - only ever Approved, and only for the requesting site.
 // Same site-relation + legacy-source fallback as listReviews/the admin list,
 // so an approved review never shows in AppCentre Admin as belonging to a
@@ -80,4 +94,4 @@ async function listPublicApprovedReviews(siteKey) {
   });
 }
 
-module.exports = { listReviews, removeReview, setReviewStatus, createReview, listPublicApprovedReviews };
+module.exports = { listReviews, removeReview, setReviewStatus, createReview, listPublicApprovedReviews, likeReview, reportReview };

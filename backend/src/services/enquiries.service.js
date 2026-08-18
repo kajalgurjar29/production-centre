@@ -79,21 +79,47 @@ async function createEnquiry({ title, firstName, lastName, name, email, country,
     },
   });
 
+  // Site-branded From when the site has its own sender identity configured
+  // (spec §11 - e.g. notifications@healthcentreapp.com); falls back to the
+  // mailer's global default From otherwise.
+  const from = site && site.senderName && site.senderEmail ? `${site.senderName} <${site.senderEmail}>` : undefined;
+  const reference = `ENQ-${enquiry.sequenceNumber}`;
+
   // A mail failure must never fail the enquiry submission itself - the
   // enquiry is already saved and manageable from AppCentre Admin regardless.
   if (site && site.supportEmail) {
-    const notificationSubject = `New enquiry ENQ-${enquiry.sequenceNumber} — ${site.siteName}`;
+    const notificationSubject = `New enquiry ${reference} — ${site.siteName}`;
     try {
       await sendMail({
         to: site.supportEmail,
         replyTo: email,
+        from,
         subject: notificationSubject,
         text: `New enquiry from ${resolvedName} (${email})\nEnquiry type: ${enquiryType || '-'}\n\n${message}`,
         html: `<p>New enquiry from <strong>${escapeHtml(resolvedName)}</strong> (${escapeHtml(email)})</p><p>Enquiry type: ${escapeHtml(enquiryType || '-')}</p><p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`,
       });
     } catch (err) {
-      console.error(`[enquiries] Failed to send notification for ENQ-${enquiry.sequenceNumber}: ${err.message}`);
+      console.error(`[enquiries] Failed to send notification for ${reference}: ${err.message}`);
       console.log(`[enquiries] Would have sent to ${site.supportEmail} (Reply-To: ${email})\nSubject: ${notificationSubject}\n${message}`);
+    }
+  }
+
+  // Acknowledgement to the enquirer (spec §5, Email 1) - Reply-To routes any
+  // reply straight to the human support mailbox, not back into AppCentre.
+  if (site && site.autoReplyEnabled) {
+    const ackSubject = `We have received your ${site.siteName} enquiry [${reference}]`;
+    try {
+      await sendMail({
+        to: email,
+        replyTo: site.supportEmail,
+        from,
+        subject: ackSubject,
+        text: `Hi ${resolvedName},\n\nThank you for contacting ${site.siteName}. We have received your enquiry (reference ${reference}) and will get back to you shortly.\n\nYour message:\n${message}`,
+        html: `<p>Hi ${escapeHtml(resolvedName)},</p><p>Thank you for contacting <strong>${escapeHtml(site.siteName)}</strong>. We have received your enquiry (reference <strong>${escapeHtml(reference)}</strong>) and will get back to you shortly.</p><p>Your message:</p><p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`,
+      });
+    } catch (err) {
+      console.error(`[enquiries] Failed to send acknowledgement for ${reference}: ${err.message}`);
+      console.log(`[enquiries] Would have sent acknowledgement to ${email}\nSubject: ${ackSubject}`);
     }
   }
 

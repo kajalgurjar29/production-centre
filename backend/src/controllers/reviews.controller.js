@@ -41,4 +41,14 @@ const listPublic = asyncHandler(async (req, res) => {
   res.json({ success: true, data: { items } });
 });
 
-module.exports = { list, remove, updateStatus, create, listPublic };
+const like = asyncHandler(async (req, res) => {
+  const review = await reviewsService.likeReview(req.params.id);
+  res.json({ success: true, data: { id: review.id, likeCount: review.likeCount } });
+});
+
+const report = asyncHandler(async (req, res) => {
+  const review = await reviewsService.reportReview(req.params.id);
+  res.json({ success: true, data: { id: review.id, reportCount: review.reportCount } });
+});
+
+module.exports = { list, remove, updateStatus, create, listPublic, like, report };

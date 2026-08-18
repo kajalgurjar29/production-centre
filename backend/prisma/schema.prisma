@@ -59,6 +59,12 @@ enum EnquiryStatus {
   CLOSED
 }
 
+enum AiLeadStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
 enum ArticleStatus {
   DRAFT
   PUBLISHED
@@ -161,6 +167,11 @@ model Site {
   siteName              String
   supportEmail          String
   logoUrl               String?
+  approvedDomain        String?
+  senderName            String?
+  senderEmail           String?
+  autoReplyEnabled      Boolean  @default(true)
+  active                Boolean  @default(true)
   contactEnabled        Boolean  @default(true)
   reviewsEnabled        Boolean  @default(true)
   aiHelpEnabled         Boolean  @default(true)
@@ -173,6 +184,7 @@ model Site {
   adverts             Advert[]
   reviews             Review[]
   enquiries           ContactEnquiry[]
+  aiAssistantLeads    AiAssistantLead[]
   knowledgeArticles   KnowledgeArticle[]
   unansweredQuestions UnansweredQuestion[]
   news                News[]
@@ -280,6 +292,22 @@ model ContactEnquiry {
   site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
 
   @@map("appcentre_contact_enquiries")
+}
+
+model AiAssistantLead {
+  id             String       @id @default(cuid())
+  sequenceNumber Int          @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String?
+  sessionId      String?
+  status         AiLeadStatus @default(NEW)
+  createdAt      DateTime     @default(now())
+
+  siteId String?
+  site   Site?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
+
+  @@map("appcentre_ai_assistant_leads")
 }
 
 model AuditLog {

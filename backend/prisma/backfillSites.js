@@ -13,13 +13,21 @@ const KNOWN_SOURCE_NAME = 'AI Transformation';
 const SITE_SEED = {
   siteKey: 'aitransformation',
   siteName: 'AI Transformation',
-  supportEmail: process.env.AITRANSFORMATION_SUPPORT_EMAIL || 'support@aitransformationprofessionals.com',
+  supportEmail: process.env.AITRANSFORMATION_SUPPORT_EMAIL || 'Connect@AITP.uk',
+  approvedDomain: process.env.AITRANSFORMATION_APPROVED_DOMAIN || 'aitp.uk',
+  senderName: process.env.AITRANSFORMATION_SENDER_NAME || 'AI Transformation Professionals',
+  senderEmail: process.env.AITRANSFORMATION_SENDER_EMAIL || 'notifications@aitp.uk',
+  autoReplyEnabled: true,
+  active: true,
 };
 
 async function main() {
+  // update: re-applies the seed values on every run (not just create) so the
+  // backfill doubles as a config refresh - matches how it's invoked (a
+  // deliberate, explicit script run), not something that fires unattended.
   const site = await prisma.site.upsert({
     where: { siteKey: SITE_SEED.siteKey },
-    update: {},
+    update: SITE_SEED,
     create: SITE_SEED,
   });
   console.log(`Site ready: ${site.siteKey} (${site.id})`);
