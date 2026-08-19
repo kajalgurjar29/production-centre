@@ -626,7 +626,7 @@
           <h2 class="text-3xl font-heading font-bold text-primary tracking-tight">Reviews and Professional Feedback</h2>
           <p class="mt-4 text-base text-muted-foreground leading-relaxed">Read feedback from training participants, workshop attendees, readers and consulting clients.</p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div id="homepage-reviews-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="bg-card rounded-2xl border border-border p-6 shadow-sm">
             <div class="flex items-start justify-between gap-4 mb-4">
               <div>
@@ -668,6 +668,48 @@
       </div>
     </div>
   </section>
+  <script>
+    (function () {
+      function escapeHtml(value) {
+        return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+      function starsMarkup(rating) {
+        var markup = '';
+        for (var i = 0; i < 5; i++) {
+          markup += '<iconify-icon icon="lucide:star" class="text-base ' + (i < rating ? 'fill-current' : 'opacity-30') + '"></iconify-icon>';
+        }
+        return markup;
+      }
+      function reviewCardMarkup(review) {
+        var subtitle = review.topic || '';
+        return '' +
+          '<div class="bg-card rounded-2xl border border-border p-6 shadow-sm">' +
+            '<div class="flex items-start justify-between gap-4 mb-4">' +
+              '<div>' +
+                '<p class="text-xs font-semibold uppercase tracking-wider text-secondary">Review</p>' +
+                '<h3 class="text-lg font-heading font-bold text-primary mt-2">' + escapeHtml(review.name) + '</h3>' +
+                (subtitle ? '<p class="text-sm text-muted-foreground mt-1">' + escapeHtml(subtitle) + '</p>' : '') +
+              '</div>' +
+              '<div class="flex items-center gap-1 shrink-0 text-amber-500">' + starsMarkup(review.rating || 0) + '</div>' +
+            '</div>' +
+            '<p class="text-sm text-foreground leading-relaxed">' + escapeHtml(review.details || '') + '</p>' +
+          '</div>';
+      }
+      fetch('/api/reviews/site/aitransformation')
+        .then(function (response) { return response.ok ? response.json() : null; })
+        .then(function (data) {
+          var items = data && data.data && Array.isArray(data.data.items) ? data.data.items : [];
+          var latestTwo = items.slice(0, 2);
+          if (!latestTwo.length) return;
+          var grid = document.getElementById('homepage-reviews-grid');
+          if (!grid) return;
+          grid.innerHTML = latestTwo.map(reviewCardMarkup).join('');
+        })
+        .catch(function () {});
+    })();
+  </script>
 
   <section class="py-20 bg-gradient-to-br from-primary via-primary to-tertiary text-primary-foreground">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
