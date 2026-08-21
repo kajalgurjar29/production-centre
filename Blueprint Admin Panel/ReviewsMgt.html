@@ -54,6 +54,9 @@
       .whitespace-pre-wrap { white-space: pre-wrap; }
       #reviewImageLightbox { background-color: rgba(0, 0, 0, 0.85); }
       #reviewImageLightbox img { max-width: 70vw; max-height: 65vh; width: auto; height: auto; }
+      #viewImageWrap { width: fit-content; max-width: 100%; }
+      #viewImageButton { width: 96px; height: 96px; overflow: hidden; border-radius: 0.5rem; }
+      #viewImage { display: block; width: 96px; height: 96px; object-fit: cover; }
       @media (min-width: 640px) {
         .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
@@ -285,7 +288,7 @@
                 <div id="viewImageWrap" class="hidden rounded-xl bg-muted p-3">
                   <p class="text-xs uppercase tracking-wide text-muted-foreground">Submitted image</p>
                   <button id="viewImageButton" type="button" class="mt-2 block cursor-zoom-in text-left" aria-label="Open submitted review photo">
-                    <img id="viewImage" src="" alt="Submitted review photo" class="max-h-64 rounded-lg border border-border object-contain" />
+                    <img id="viewImage" src="" alt="Submitted review photo" class="rounded-lg border border-border" />
                   </button>
                 </div>
               </div>
