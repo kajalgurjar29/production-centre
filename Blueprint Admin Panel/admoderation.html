@@ -213,19 +213,19 @@
                   <p class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Advert moderation record</p>
                   <div class="mt-2 flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
                     <div>
-                      <h1 id="advertTitleHeader" class="text-2xl font-heading font-bold">Garden Studio</h1>
-                      <p id="advertReferenceHeader" class="mt-1 text-sm text-muted-foreground">AC-2048</p>
+                      <h1 id="advertTitleHeader" class="text-2xl font-heading font-bold">Loading advert…</h1>
+                      <p id="advertReferenceHeader" class="mt-1 text-sm text-muted-foreground">—</p>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                      <span id="statusBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-secondary px-3 py-1 text-xs font-medium text-foreground">Pending Review</span>
-                      <span id="paymentBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium text-foreground">Paid</span>
+                      <span id="statusBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-secondary px-3 py-1 text-xs font-medium text-foreground">—</span>
+                      <span id="paymentBadgeHeader" class="inline-flex min-h-8 items-center rounded-lg bg-muted px-3 py-1 text-xs font-medium text-foreground">—</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div id="liveRegion" class="sr-only" aria-live="polite">Viewing advert Garden Studio in Pending Review status.</div>
+            <div id="liveRegion" class="sr-only" aria-live="polite">Loading advert record.</div>
 
             <div id="loadingState" class="hidden grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.95fr)]">
               <div class="space-y-6">
@@ -351,11 +351,7 @@
                       <p class="mt-1 text-sm text-muted-foreground">Recent moderation and system updates</p>
                     </div>
                   </div>
-                  <div id="historyList" class="mt-4 space-y-3 text-sm">
-                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">10 July 2026, 09:12</p><p class="mt-1 text-muted-foreground">Draft to Pending Review · Alex Morgan</p><p class="mt-1 text-muted-foreground">Reason: Submitted after payment confirmation</p></div>
-                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">10 July 2026, 09:05</p><p class="mt-1 text-muted-foreground">Payment Required to Paid · System</p><p class="mt-1 text-muted-foreground">Reason: Payment provider confirmed successful transaction</p></div>
-                    <div class="rounded-xl border border-border bg-background p-3"><p class="font-medium">08 July 2026, 16:41</p><p class="mt-1 text-muted-foreground">Created to Draft · Daniel Moore</p><p class="mt-1 text-muted-foreground">Reason: Advert started in draft before checkout</p></div>
-                  </div>
+                  <div id="historyList" class="mt-4 space-y-3 text-sm"></div>
                 </section>
               </div>
             </div>
@@ -475,30 +471,87 @@
     document.title = 'AppCentre Admin Advert Details';
 
     const body = document.body;
-    const advert = {
-      title: 'Garden Studio',
-      reference: 'AC-2048',
-      description: 'Premium local garden studio installation advert with a clear call to action, service coverage details and booking messaging for homeowners.',
-      type: 'Banner',
-      placement: 'Homepage banner',
-      sponsored: true,
-      advertiser: 'Daniel Moore',
-      email: 'daniel.moore@appcentre.local',
-      country: 'United Kingdom',
-      region: 'Greater Manchester',
-      city: 'Manchester',
-      submitted: '10 July 2026, 09:12',
-      start: '14 July 2026',
-      end: '14 October 2026',
-      duration: '92 days',
-      paymentStatus: 'Paid',
-      amount: '£180.00',
-      currency: 'GBP',
-      provider: 'Stripe',
-      transaction: 'PAY-2048-7781',
-      paymentDate: '10 July 2026, 09:05'
-    };
+    const advertId = new URLSearchParams(window.location.search).get('id');
 
+    const STATUS_LABEL = {
+      DRAFT: 'Draft',
+      PAYMENT_REQUIRED: 'Payment Required',
+      PENDING_REVIEW: 'Pending Review',
+      AMENDMENTS_REQUIRED: 'Amendments Required',
+      APPROVED: 'Approved',
+      ACTIVE: 'Active',
+      PAUSED: 'Paused',
+      EXPIRED: 'Expired',
+      REMOVED: 'Removed',
+    };
+    const PAYMENT_LABEL = { PENDING: 'Payment Required', PAID: 'Paid', FAILED: 'Failed', REFUNDED: 'Refunded' };
+
+    function formatDate(isoString) {
+      if (!isoString) return '—';
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+    function formatDateOnly(isoString) {
+      if (!isoString) return '—';
+      return new Date(isoString).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
+    function formatDuration(startDate, endDate, durationDays) {
+      if (startDate && endDate) {
+        const days = Math.round((new Date(endDate) - new Date(startDate)) / 86400000);
+        return days + ' days';
+      }
+      return durationDays ? durationDays + ' days' : '—';
+    }
+    function formatAmount(amount, currency) {
+      if (amount == null) return '—';
+      return Number(amount).toLocaleString('en-GB', { style: 'currency', currency: currency || 'GBP' });
+    }
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    // Maps the raw Advert record from GET /api/adverts/:id onto the same
+    // shape applyStatus() already renders - the moderation actions and
+    // status transitions below are unchanged, only the data source is real.
+    function mapAdvert(a) {
+      const latestPayment = (a.payments || []).slice().sort(function (x, y) {
+        return new Date(y.createdAt) - new Date(x.createdAt);
+      })[0];
+      return {
+        title: a.title,
+        reference: a.reference,
+        description: a.description || 'No description provided.',
+        type: a.type,
+        placement: a.placement,
+        sponsored: !!a.sponsored,
+        advertiser: a.advertiser ? a.advertiser.name : '—',
+        email: a.advertiser ? a.advertiser.email : '—',
+        country: a.country || '—',
+        region: a.region || '—',
+        city: a.city || '—',
+        submitted: formatDate(a.createdAt),
+        start: formatDateOnly(a.startDate),
+        end: formatDateOnly(a.endDate),
+        duration: formatDuration(a.startDate, a.endDate, a.durationDays),
+        paymentStatus: PAYMENT_LABEL[a.paymentStatus] || a.paymentStatus,
+        amount: latestPayment ? formatAmount(latestPayment.amount, latestPayment.currency) : '—',
+        currency: latestPayment ? latestPayment.currency : '—',
+        provider: latestPayment ? latestPayment.provider : '—',
+        transaction: latestPayment ? latestPayment.transactionRef : '—',
+        paymentDate: latestPayment ? formatDate(latestPayment.paidAt || latestPayment.createdAt) : '—',
+      };
+    }
+
+    let advert = null;
     let currentStatus = 'Pending Review';
     let pauseMode = 'Pause advert';
 
@@ -563,11 +616,38 @@
       return 'bg-muted text-foreground';
     }
 
-    function prependHistory(previousStatus, newStatus, actor, reason) {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'rounded-xl border border-border bg-background p-3';
-      wrapper.innerHTML = '<p class="font-medium">Now</p><p class="mt-1 text-muted-foreground">' + previousStatus + ' to ' + newStatus + ' · ' + actor + '</p><p class="mt-1 text-muted-foreground">Reason: ' + reason + '</p>';
-      historyList.prepend(wrapper);
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function renderHistory(entries) {
+      if (!entries.length) {
+        historyList.innerHTML = '<p class="text-sm text-muted-foreground">No moderation history yet.</p>';
+        return;
+      }
+      historyList.innerHTML = entries.map(function (entry) {
+        return '<div class="rounded-xl border border-border bg-background p-3">'
+          + '<p class="font-medium">' + escapeHtml(formatDate(entry.createdAt)) + '</p>'
+          + '<p class="mt-1 text-muted-foreground">' + escapeHtml(entry.action) + ' · ' + escapeHtml(entry.actor ? entry.actor.name : 'System') + '</p>'
+          + (entry.reason ? '<p class="mt-1 text-muted-foreground">Reason: ' + escapeHtml(entry.reason) + '</p>' : '')
+          + '</div>';
+      }).join('');
+    }
+
+    async function loadHistory() {
+      const token = requireToken();
+      if (!token || !advertId) return;
+      try {
+        const response = await fetch('/api/adverts/' + advertId + '/history', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load history');
+        const data = await response.json();
+        renderHistory(data.data);
+      } catch (err) {
+        historyList.innerHTML = '<p class="text-sm text-destructive">Could not load advert history.</p>';
+      }
     }
 
     function applyStatus(status) {
@@ -679,16 +759,37 @@
       openModal('noteModal');
     });
 
-    document.getElementById('confirmApprove').addEventListener('click', function() {
-      const previous = currentStatus;
+    async function patchAdvertStatus(status, reason) {
+      const token = requireToken();
+      if (!token) return false;
+      try {
+        const response = await fetch('/api/adverts/' + advertId + '/status', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ status: status, reason: reason || undefined }),
+        });
+        if (handleUnauthorized(response)) return false;
+        if (!response.ok) throw new Error('Failed to update status');
+        return true;
+      } catch (err) {
+        showToast('Could not update this advert. Please try again.');
+        return false;
+      }
+    }
+
+    document.getElementById('confirmApprove').addEventListener('click', async function() {
+      const note = document.getElementById('approveNote').value.trim();
+      const ok = await patchAdvertStatus('ACTIVE', note || 'Advert approved for activation on the configured start date.');
+      if (!ok) return;
       applyStatus('Active');
-      prependHistory(previous, 'Approved', 'Alex Morgan', 'Advert approved for activation on the configured start date.');
+      loadHistory();
+      document.getElementById('approveNote').value = '';
       closeAllModals();
       showToast('Advert approved successfully.');
       liveRegion.textContent = 'Advert approved. The advertiser will be notified and activation will follow the configured start date.';
     });
 
-    document.getElementById('confirmAmend').addEventListener('click', function() {
+    document.getElementById('confirmAmend').addEventListener('click', async function() {
       const reason = document.getElementById('amendReason').value;
       const instructions = document.getElementById('amendInstructions').value.trim();
       const validation = document.getElementById('amendValidation');
@@ -698,9 +799,10 @@
         return;
       }
       validation.classList.add('hidden');
-      const previous = currentStatus;
+      const ok = await patchAdvertStatus('AMENDMENTS_REQUIRED', reason + ': ' + instructions);
+      if (!ok) return;
       applyStatus('Amendments Required');
-      prependHistory(previous, 'Amendments Required', 'Alex Morgan', reason + ': ' + instructions);
+      loadHistory();
       closeAllModals();
       document.getElementById('amendReason').value = '';
       document.getElementById('amendInstructions').value = '';
@@ -709,23 +811,41 @@
       liveRegion.textContent = 'Amendment request sent to the advertiser.';
     });
 
-    document.getElementById('confirmPause').addEventListener('click', function() {
-      const previous = currentStatus;
-      const nextStatus = pauseMode === 'Pause advert' ? 'Paused' : 'Active';
-      applyStatus(nextStatus);
-      prependHistory(previous, nextStatus, 'Alex Morgan', pauseMode === 'Pause advert' ? 'Advert paused by administrator.' : 'Advert resumed by administrator.');
+    document.getElementById('confirmPause').addEventListener('click', async function() {
+      const note = document.getElementById('pauseNote').value.trim();
+      const nextStatus = pauseMode === 'Pause advert' ? 'PAUSED' : 'ACTIVE';
+      const nextLabel = pauseMode === 'Pause advert' ? 'Paused' : 'Active';
+      const defaultReason = pauseMode === 'Pause advert' ? 'Advert paused by administrator.' : 'Advert resumed by administrator.';
+      const ok = await patchAdvertStatus(nextStatus, note || defaultReason);
+      if (!ok) return;
+      applyStatus(nextLabel);
+      loadHistory();
       closeAllModals();
       document.getElementById('pauseNote').value = '';
       showToast(pauseMode === 'Pause advert' ? 'Advert paused successfully.' : 'Advert resumed successfully.');
       liveRegion.textContent = pauseMode === 'Pause advert' ? 'Advert paused successfully.' : 'Advert resumed successfully.';
     });
 
-    document.getElementById('saveNote').addEventListener('click', function() {
+    document.getElementById('saveNote').addEventListener('click', async function() {
+      const token = requireToken();
+      if (!token) return;
       const note = document.getElementById('internalAdminNote').value.trim();
       if (note) {
-        prependHistory(currentStatus, currentStatus, 'Alex Morgan', 'Internal note added: ' + note);
-        showToast('Internal note saved.');
-        liveRegion.textContent = 'Internal note saved.';
+        try {
+          const response = await fetch('/api/adverts/' + advertId + '/notes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+            body: JSON.stringify({ note: note }),
+          });
+          if (handleUnauthorized(response)) return;
+          if (!response.ok) throw new Error('Failed to save note');
+          loadHistory();
+          showToast('Internal note saved.');
+          liveRegion.textContent = 'Internal note saved.';
+        } catch (err) {
+          showToast('Could not save the note. Please try again.');
+          return;
+        }
       }
       document.getElementById('internalAdminNote').value = '';
       closeAllModals();
@@ -739,11 +859,7 @@
 
     modalOverlay.addEventListener('click', closeAllModals);
     document.getElementById('retryButton').addEventListener('click', function() {
-      loadingState.classList.add('hidden');
-      errorState.classList.add('hidden');
-      missingState.classList.add('hidden');
-      mainLayout.classList.remove('hidden');
-      liveRegion.textContent = 'Advert information reloaded.';
+      loadAdvert();
     });
 
     document.addEventListener('keydown', function (event) {
@@ -752,7 +868,44 @@
       }
     });
 
-    applyStatus('Pending Review');
+    function showState(state) {
+      loadingState.classList.add('hidden');
+      errorState.classList.add('hidden');
+      missingState.classList.add('hidden');
+      mainLayout.classList.add('hidden');
+      if (state === 'loading') loadingState.classList.remove('hidden');
+      if (state === 'error') errorState.classList.remove('hidden');
+      if (state === 'missing') missingState.classList.remove('hidden');
+      if (state === 'ready') mainLayout.classList.remove('hidden');
+    }
+
+    async function loadAdvert() {
+      const token = requireToken();
+      if (!token) return;
+      if (!advertId) {
+        showState('missing');
+        return;
+      }
+      showState('loading');
+      try {
+        const response = await fetch('/api/adverts/' + advertId, { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (response.status === 404) {
+          showState('missing');
+          return;
+        }
+        if (!response.ok) throw new Error('Failed to load advert');
+        const data = await response.json();
+        advert = mapAdvert(data.data);
+        showState('ready');
+        applyStatus(STATUS_LABEL[data.data.status] || data.data.status);
+        loadHistory();
+      } catch (err) {
+        showState('error');
+      }
+    }
+
+    loadAdvert();
   </script>
 </div>
 </body></html>

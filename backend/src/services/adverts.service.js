@@ -50,4 +50,18 @@ async function setAdvertStatus(id, status, actorId, reason) {
   return advert;
 }
 
-module.exports = { listAdverts, getAdvertById, setAdvertStatus };
+async function getAdvertHistory(id) {
+  const advert = await getAdvertById(id);
+  return prisma.auditLog.findMany({
+    where: { target: advert.reference },
+    orderBy: { createdAt: 'desc' },
+    include: { actor: { select: { name: true } } },
+  });
+}
+
+async function addAdvertNote(id, note, actorId) {
+  const advert = await getAdvertById(id);
+  await logAction({ action: 'Internal note added', target: advert.reference, reason: note, actorId });
+}
+
+module.exports = { listAdverts, getAdvertById, setAdvertStatus, getAdvertHistory, addAdvertNote };

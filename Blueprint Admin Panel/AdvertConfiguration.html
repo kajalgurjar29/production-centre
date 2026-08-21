@@ -213,32 +213,7 @@
                     <th class="px-4 py-3 font-medium">Actions</th>
                   </tr>
                 </thead>
-                <tbody class="text-sm divide-y divide-border">
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Banner</td>
-                    <td class="px-4 py-3">£45.00</td>
-                    <td class="px-4 py-3">30 days</td>
-                    <td class="px-4 py-3 text-muted-foreground">Homepage banner</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Enabled</span></span></td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Sponsored Listing</td>
-                    <td class="px-4 py-3">£25.00</td>
-                    <td class="px-4 py-3">30 days</td>
-                    <td class="px-4 py-3 text-muted-foreground">Category listings</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-tertiary"><span class="h-2 w-2 rounded-full bg-tertiary" aria-hidden="true"></span><span>Enabled</span></span></td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-3 font-medium">Featured Placement</td>
-                    <td class="px-4 py-3">£75.00</td>
-                    <td class="px-4 py-3">14 days</td>
-                    <td class="px-4 py-3 text-muted-foreground">Homepage and category</td>
-                    <td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium text-foreground"><span class="h-2 w-2 rounded-full bg-foreground" aria-hidden="true"></span><span>Disabled</span></span></td>
-                    <td class="px-4 py-3"><button type="button" class="min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>
-                  </tr>
-                </tbody>
+                <tbody id="advertTypeRows" class="text-sm divide-y divide-border"></tbody>
               </table>
             </div>
           </section>
@@ -247,11 +222,33 @@
     </div>
   </div>
 
+  <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
+  <section id="typeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="w-full max-w-lg rounded-xl border border-border bg-card shadow-lg">
+      <div class="border-b border-border px-4 py-4"><h2 id="typeModalTitle" class="text-lg font-heading font-semibold">Add advert type</h2></div>
+      <div class="space-y-4 p-4">
+        <input type="hidden" id="typeId" value="" />
+        <div><label class="mb-2 block text-sm font-medium" for="typeName">Advert type name</label><input id="typeName" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="e.g. Banner" /></div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div><label class="mb-2 block text-sm font-medium" for="typePrice">Price (£)</label><input id="typePrice" type="number" min="0" step="0.01" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="45.00" /></div>
+          <div><label class="mb-2 block text-sm font-medium" for="typeDuration">Duration (days)</label><input id="typeDuration" type="number" min="1" step="1" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="30" /></div>
+        </div>
+        <div><label class="mb-2 block text-sm font-medium" for="typePlacement">Placement</label><input id="typePlacement" type="text" class="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none" placeholder="e.g. Homepage banner" /></div>
+        <label class="flex items-center gap-2 text-sm font-medium"><input id="typeEnabled" type="checkbox" class="h-4 w-4" checked /> Enabled</label>
+        <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" data-close-modal class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium">Cancel</button>
+          <button type="button" id="confirmSaveType" class="min-h-11 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-primary-foreground">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div id="toast" class="hidden fixed bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm rounded-xl border border-border bg-card p-4 shadow-lg">
     <p id="toastText" class="text-sm font-medium">Changes saved successfully.</p>
   </div>
   <script>
     document.title = 'AppCentre Admin Advert Configuration';
+    const body = document.body;
 
     const toast = document.getElementById('toast');
     const pageStatus = document.getElementById('pageStatus');
@@ -262,7 +259,122 @@
       setTimeout(function () { toast.classList.add('hidden'); }, 2500);
     }
 
-    document.getElementById('addTypeButton').addEventListener('click', function () { showToast('Advert type creation is not available in this MVP.'); });
+    function escapeHtml(value) {
+      const div = document.createElement('div');
+      div.textContent = value == null ? '' : String(value);
+      return div.innerHTML;
+    }
+
+    function requireToken() {
+      const token = localStorage.getItem('appcentre_admin_token');
+      if (!token) window.location.href = 'adminlogin.html';
+      return token;
+    }
+
+    function handleUnauthorized(response) {
+      if (response.status !== 401) return false;
+      localStorage.removeItem('appcentre_admin_token');
+      localStorage.removeItem('appcentre_admin');
+      window.location.href = 'adminlogin.html';
+      return true;
+    }
+
+    function formatPrice(value) {
+      return '£' + Number(value).toFixed(2);
+    }
+
+    let advertTypes = [];
+    const advertTypeRows = document.getElementById('advertTypeRows');
+
+    function renderTypes() {
+      if (!advertTypes.length) {
+        advertTypeRows.innerHTML = '<tr><td colspan="6" class="px-4 py-6 text-center text-sm text-muted-foreground">No advert types configured yet.</td></tr>';
+        return;
+      }
+      advertTypeRows.innerHTML = advertTypes.map(function (type, i) {
+        const statusTone = type.enabled ? 'text-tertiary' : 'text-foreground';
+        const statusDot = type.enabled ? 'bg-tertiary' : 'bg-foreground';
+        const statusLabel = type.enabled ? 'Enabled' : 'Disabled';
+        return '<tr>'
+          + '<td class="px-4 py-3 font-medium">' + escapeHtml(type.name) + '</td>'
+          + '<td class="px-4 py-3">' + formatPrice(type.price) + '</td>'
+          + '<td class="px-4 py-3">' + escapeHtml(type.durationDays) + ' days</td>'
+          + '<td class="px-4 py-3 text-muted-foreground">' + escapeHtml(type.placement) + '</td>'
+          + '<td class="px-4 py-3"><span class="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-1 text-xs font-medium ' + statusTone + '"><span class="h-2 w-2 rounded-full ' + statusDot + '" aria-hidden="true"></span><span>' + statusLabel + '</span></span></td>'
+          + '<td class="px-4 py-3"><button type="button" data-edit="' + i + '" class="edit-type-button min-h-11 rounded-lg border border-border bg-background px-3 py-2 text-xs font-medium">Edit</button></td>'
+          + '</tr>';
+      }).join('');
+
+      advertTypeRows.querySelectorAll('.edit-type-button').forEach(function (b) {
+        b.addEventListener('click', function () { openModal(advertTypes[parseInt(b.getAttribute('data-edit'), 10)]); });
+      });
+    }
+
+    async function loadAdvertTypes() {
+      const token = requireToken();
+      if (!token) return;
+      advertTypeRows.innerHTML = '<tr><td colspan="6" class="px-4 py-6 text-center text-sm text-muted-foreground">Loading advert types…</td></tr>';
+      try {
+        const response = await fetch('/api/advert-types', { headers: { Authorization: 'Bearer ' + token } });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to load advert types');
+        const data = await response.json();
+        advertTypes = data.data;
+        renderTypes();
+        if (pageStatus) pageStatus.textContent = advertTypes.length + ' advert type' + (advertTypes.length === 1 ? '' : 's') + ' loaded.';
+      } catch (err) {
+        advertTypeRows.innerHTML = '<tr><td colspan="6" class="px-4 py-6 text-center text-sm text-destructive">Could not load advert types. Please refresh the page.</td></tr>';
+      }
+    }
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const typeModal = document.getElementById('typeModal');
+    function openModal(type) {
+      document.getElementById('typeModalTitle').textContent = type ? 'Edit advert type' : 'Add advert type';
+      document.getElementById('typeId').value = type ? type.id : '';
+      document.getElementById('typeName').value = type ? type.name : '';
+      document.getElementById('typePrice').value = type ? type.price : '';
+      document.getElementById('typeDuration').value = type ? type.durationDays : '';
+      document.getElementById('typePlacement').value = type ? type.placement : '';
+      document.getElementById('typeEnabled').checked = type ? !!type.enabled : true;
+      modalOverlay.classList.remove('hidden'); typeModal.classList.remove('hidden'); body.classList.add('overflow-hidden');
+    }
+    function closeModal() { modalOverlay.classList.add('hidden'); typeModal.classList.add('hidden'); body.classList.remove('overflow-hidden'); }
+    document.getElementById('addTypeButton').addEventListener('click', function () { openModal(null); });
+    modalOverlay.addEventListener('click', closeModal);
+    document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModal); });
+
+    document.getElementById('confirmSaveType').addEventListener('click', async function () {
+      const token = requireToken();
+      if (!token) return;
+      const id = document.getElementById('typeId').value;
+      const name = document.getElementById('typeName').value.trim();
+      const price = parseFloat(document.getElementById('typePrice').value);
+      const durationDays = parseInt(document.getElementById('typeDuration').value, 10);
+      const placement = document.getElementById('typePlacement').value.trim();
+      const enabled = document.getElementById('typeEnabled').checked;
+      if (!name || !placement || Number.isNaN(price) || Number.isNaN(durationDays)) {
+        showToast('Please fill in every field before saving.');
+        return;
+      }
+
+      try {
+        const response = await fetch(id ? '/api/advert-types/' + id : '/api/advert-types', {
+          method: id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          body: JSON.stringify({ name: name, price: price, durationDays: durationDays, placement: placement, enabled: enabled })
+        });
+        if (handleUnauthorized(response)) return;
+        if (!response.ok) throw new Error('Failed to save');
+        closeModal();
+        showToast('Advert type "' + name + '" saved.');
+        loadAdvertTypes();
+      } catch (err) {
+        showToast('Could not save advert type. Please try again.');
+      }
+    });
+
+    loadAdvertTypes();
   </script>
 </div>
 </body></html>

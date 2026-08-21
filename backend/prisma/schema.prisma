@@ -233,6 +233,19 @@ model Advert {
   @@map("appcentre_adverts")
 }
 
+model AdvertType {
+  id           String   @id @default(cuid())
+  name         String
+  price        Decimal  @db.Decimal(10, 2)
+  durationDays Int
+  placement    String
+  enabled      Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("appcentre_advert_types")
+}
+
 model Payment {
   id              String        @id @default(cuid())
   transactionRef  String        @unique

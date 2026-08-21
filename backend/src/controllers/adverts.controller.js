@@ -24,4 +24,14 @@ const updateStatus = asyncHandler(async (req, res) => {
   res.json({ success: true, data: advert });
 });
 
-module.exports = { list, getById, updateStatus };
+const history = asyncHandler(async (req, res) => {
+  const entries = await advertsService.getAdvertHistory(req.params.id);
+  res.json({ success: true, data: entries });
+});
+
+const addNote = asyncHandler(async (req, res) => {
+  await advertsService.addAdvertNote(req.params.id, req.body.note, req.admin.id);
+  res.status(201).json({ success: true, data: null });
+});
+
+module.exports = { list, getById, updateStatus, history, addNote };

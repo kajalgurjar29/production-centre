@@ -8,4 +8,8 @@ const updateStatusSchema = z.object({
   reason: z.string().optional(),
 });
 
-module.exports = { updateStatusSchema };
+const addNoteSchema = z.object({
+  note: z.string().trim().min(1, 'note is required'),
+});
+
+module.exports = { updateStatusSchema, addNoteSchema };
