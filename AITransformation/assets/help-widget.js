@@ -37,7 +37,13 @@
     // visibility:hidden removes it from paint entirely regardless of that;
     // the visibility transition is delayed on the way out so the slide
     // animation still plays, but applied immediately on the way in.
-    + '#help-widget-panel{position:fixed;top:0;right:0;height:100vh;width:100vw;max-width:100vw;z-index:61;'
+    // height:100vh first as a fallback for browsers without dvh support,
+    // then overridden by height:100dvh - iOS Safari's 100vh is sized as if
+    // the address bar/bottom toolbar were fully collapsed, so a fixed-height
+    // panel using it renders taller than what's actually visible and pushes
+    // the message input (the last item in the flex column) off-screen below
+    // the real, on-screen viewport. dvh tracks the actual visible area.
+    + '#help-widget-panel{position:fixed;top:0;right:0;height:100vh;height:100dvh;width:100vw;max-width:100vw;z-index:61;'
     + 'background:var(--background,#fff);display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(15,23,42,.18);overflow:hidden;'
     + 'transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;color:var(--foreground);font-family:inherit;}'
     + '#help-widget-panel.is-open{transform:translateX(0);visibility:visible;transition:transform .25s ease;}'
@@ -129,7 +135,6 @@
   var precallForm = document.getElementById('help-widget-precall-form');
   var precallCancelBtn = document.getElementById('help-widget-precall-cancel');
   var firstNameInput = document.getElementById('help-widget-firstname');
-  var lastNameInput = document.getElementById('help-widget-lastname');
   var precallEmailInput = document.getElementById('help-widget-precall-email');
   var chatBody = document.getElementById('help-widget-chatbody');
   if (!backdrop || !panel || !messagesEl || !form || !input) return;
@@ -494,19 +499,14 @@
   function validatePrecallForm() {
     var valid = true;
     var firstName = firstNameInput.value.trim();
-    var lastName = lastNameInput.value.trim();
     var email = precallEmailInput.value.trim();
     var firstNameError = document.getElementById('help-widget-firstname-error');
-    var lastNameError = document.getElementById('help-widget-lastname-error');
     var emailError = document.getElementById('help-widget-precall-email-error');
 
     setFieldError(firstNameInput, firstNameError, !firstName);
     if (!firstName) valid = false;
 
-    setFieldError(lastNameInput, lastNameError, !lastName);
-    if (!lastName) valid = false;
-
-    var emailInvalid = Boolean(email) && !EMAIL_PATTERN.test(email);
+    var emailInvalid = !email || !EMAIL_PATTERN.test(email);
     setFieldError(precallEmailInput, emailError, emailInvalid);
     if (emailInvalid) valid = false;
 
@@ -522,7 +522,6 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         firstName: visitor.firstName,
-        lastName: visitor.lastName,
         email: visitor.email || undefined,
         sessionId: getSessionId(),
         siteKey: 'aitransformation',
@@ -536,7 +535,6 @@
       if (!validatePrecallForm()) return;
       var visitor = {
         firstName: firstNameInput.value.trim(),
-        lastName: lastNameInput.value.trim(),
         email: precallEmailInput.value.trim(),
       };
       setStoredVisitor(visitor);

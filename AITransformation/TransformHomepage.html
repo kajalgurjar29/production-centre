@@ -29,7 +29,7 @@
         --card-foreground: #0F172A;
         --destructive: #EF4444;
         --border: #E5E7EB;
-        --input: #E5E7EB;
+        --input: #64748B;
         --ring: #2E9BF0;
         --radius: 1rem;
         --font-sans: Inter, sans-serif;
@@ -1112,7 +1112,7 @@
     </div>
   </div>
 
-  <button id="go-to-top" type="button" aria-label="Go to top" class="hidden fixed bottom-6 right-4 sm:right-6 z-50 min-h-11 px-4 sm:px-5 rounded-full bg-secondary text-secondary-foreground shadow-lg border border-border transition-all duration-300 items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring">
+  <button id="go-to-top" type="button" aria-label="Go to top" class="hidden fixed bottom-24 right-4 sm:right-6 z-50 min-h-11 px-4 sm:px-5 rounded-full bg-secondary text-secondary-foreground shadow-lg border border-border transition-all duration-300 items-center gap-2 focus:outline-none focus:ring-2 focus:ring-ring">
     <iconify-icon icon="lucide:arrow-up" class="text-lg"></iconify-icon>
     <span class="hidden sm:inline font-semibold text-sm whitespace-nowrap">Go to top</span>
     <span class="sm:hidden sr-only">Go to top</span>
@@ -1175,7 +1175,6 @@
 
       function setupGoToTop() {
         var button = document.getElementById('go-to-top');
-        var footer = document.querySelector('footer');
         if (!button) return;
 
         var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1185,14 +1184,6 @@
           var shouldShow = scrollY > 400;
           button.classList.toggle('hidden', !shouldShow);
           button.classList.toggle('inline-flex', shouldShow);
-
-          if (!footer) return;
-          var footerRect = footer.getBoundingClientRect();
-          var footerVisible = footerRect.top < window.innerHeight;
-          button.classList.toggle('bottom-6', !footerVisible);
-          button.classList.toggle('bottom-24', footerVisible);
-          button.classList.toggle('sm:bottom-6', !footerVisible);
-          button.classList.toggle('sm:bottom-28', footerVisible);
         }
 
         button.addEventListener('click', function() {

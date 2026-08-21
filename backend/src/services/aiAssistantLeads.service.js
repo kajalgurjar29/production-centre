@@ -31,17 +31,17 @@ async function setLeadStatus(id, status, actorId) {
   const lead = await prisma.aiAssistantLead.findUnique({ where: { id } });
   if (!lead) throw ApiError.notFound('Lead not found');
   const updated = await prisma.aiAssistantLead.update({ where: { id }, data: { status } });
-  await logAction({ action: `AI Assistant lead status changed to ${status}`, target: `LEAD-${lead.sequenceNumber} (${lead.firstName} ${lead.lastName})`, actorId });
+  await logAction({ action: `AI Assistant lead status changed to ${status}`, target: `LEAD-${lead.sequenceNumber} (${[lead.firstName, lead.lastName].filter(Boolean).join(' ')})`, actorId });
   return updated;
 }
 
 // Public, unauthenticated write (called from the pre-chat form) - a
 // best-effort siteId resolution, same as the chat endpoint's own siteKey
 // handling, since capturing the lead matters more than a strict site match.
-async function createLead({ firstName, lastName, email, sessionId, siteKey }) {
+async function createLead({ firstName, email, sessionId, siteKey }) {
   const siteId = siteKey ? await resolveSiteId(siteKey) : null;
   return prisma.aiAssistantLead.create({
-    data: { firstName, lastName, email, sessionId, siteId },
+    data: { firstName, lastName: '', email, sessionId, siteId },
   });
 }
 

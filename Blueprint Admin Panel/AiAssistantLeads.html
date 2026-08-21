@@ -240,7 +240,6 @@
               <div class="space-y-4 p-4 text-sm">
                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">First name</p><p id="detailFirstName" class="pt-1 font-medium">-</p></div>
-                  <div class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Last name</p><p id="detailLastName" class="pt-1 font-medium">-</p></div>
                   <div class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Email</p><p id="detailEmail" class="pt-1 font-medium">-</p></div>
                   <div class="rounded-lg bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Received</p><p id="detailReceived" class="pt-1 font-medium">-</p></div>
                 </div>
@@ -364,7 +363,6 @@
       document.getElementById('detailSite').textContent = siteName(lead);
       document.getElementById('detailStatusBadge').innerHTML = statusBadgeHtml(lead.status);
       document.getElementById('detailFirstName').textContent = lead.firstName;
-      document.getElementById('detailLastName').textContent = lead.lastName;
       document.getElementById('detailEmail').textContent = lead.email || '-';
       document.getElementById('detailReceived').textContent = formatDateTime(lead.createdAt);
 

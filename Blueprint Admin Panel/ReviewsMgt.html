@@ -44,6 +44,17 @@
           calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
           var(--shadow-color, rgba(15, 23, 42, 0.12));
       }
+      /* app.css is a precompiled, static Tailwind bundle - these utility
+         classes are used in markup but were never in the build's content
+         scan, so the compiled file has no rule for them. Patched by hand. */
+      .max-h-\[85vh\] { max-height: 85vh; }
+      .max-h-64 { max-height: 16rem; }
+      .min-h-0 { min-height: 0; }
+      .object-contain { object-fit: contain; }
+      .whitespace-pre-wrap { white-space: pre-wrap; }
+      @media (min-width: 640px) {
+        .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
     </style>
   </head>
   <body>
@@ -252,15 +263,15 @@
 
           <div id="modalOverlay" class="hidden fixed inset-0 z-50 bg-foreground/50"></div>
           <section id="viewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div class="w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-xl border border-border bg-card shadow-lg">
-              <div class="flex items-start justify-between border-b border-border px-4 py-4">
+            <div class="w-full max-w-lg max-h-[85vh] flex flex-col rounded-xl border border-border bg-card shadow-lg">
+              <div class="shrink-0 flex items-start justify-between border-b border-border px-4 py-4">
                 <div>
                   <h2 id="viewReference" class="text-lg font-heading font-semibold">REV-0</h2>
                   <p id="viewSite" class="mt-1 text-sm text-muted-foreground">Site</p>
                 </div>
                 <span id="viewStatusBadge"></span>
               </div>
-              <div class="space-y-3 p-4 text-sm">
+              <div class="flex-1 min-h-0 overflow-y-auto space-y-3 p-4 text-sm">
                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Reviewer</p><p id="viewReviewer" class="pt-1 font-medium">-</p></div>
                   <div class="rounded-xl bg-muted p-3"><p class="text-xs uppercase tracking-wide text-muted-foreground">Rating</p><div id="viewStars" class="flex items-center gap-1 pt-1 text-amber-400"></div></div>
@@ -274,7 +285,7 @@
                   <img id="viewImage" src="" alt="Submitted review photo" class="mt-2 max-h-64 rounded-lg border border-border object-contain" />
                 </div>
               </div>
-              <div class="flex flex-wrap items-center gap-2 border-t border-border p-4">
+              <div class="shrink-0 flex flex-wrap items-center gap-2 border-t border-border p-4">
                 <button type="button" id="viewApprove" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-tertiary">Approve</button>
                 <button type="button" id="viewReject" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-destructive">Reject</button>
                 <button type="button" id="viewHide" class="min-h-11 rounded-lg border border-border bg-background px-4 py-3 text-sm font-medium text-muted-foreground">Hide</button>
