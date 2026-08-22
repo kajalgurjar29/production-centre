@@ -152,20 +152,27 @@ const KNOWLEDGE_ARTICLES = [
   },
 ];
 
-// Runs on every server start (see server.js). Only inserts when the table is
-// completely empty, so it's a no-op after the first successful run and never
-// overwrites or duplicates articles someone has since edited via the admin
-// panel. Kept separate from prisma/seed.js because that script also creates
-// demo users/adverts/reviews - fine for local dev, not something that should
-// ever run automatically against a production database.
+// Runs on every server start (see server.js). Inserts only the starter
+// articles whose title isn't already present, so it's safe to run against a
+// database that already has real content (whether from an earlier partial
+// seed or articles someone has since added via the admin panel) - existing
+// rows are never touched or duplicated. Kept separate from prisma/seed.js
+// because that script also creates demo users/adverts/reviews - fine for
+// local dev, not something that should ever run automatically against a
+// production database.
 async function ensureKnowledgeBaseSeeded(prisma) {
-  const existingArticles = await prisma.knowledgeArticle.count();
-  if (existingArticles > 0) return;
+  const existingTitles = new Set((await prisma.knowledgeArticle.findMany({ select: { title: true } })).map((a) => a.title));
+
+  const missing = KNOWLEDGE_ARTICLES.filter((a) => !existingTitles.has(a.title));
+  if (missing.length === 0) {
+    console.log('Knowledge base already contains all starter articles.');
+    return;
+  }
 
   await prisma.knowledgeArticle.createMany({
-    data: KNOWLEDGE_ARTICLES.map((a) => ({ ...a, status: 'PUBLISHED', updatedBy: 'Seed Script' })),
+    data: missing.map((a) => ({ ...a, status: 'PUBLISHED', updatedBy: 'Seed Script' })),
   });
-  console.log(`Knowledge base was empty - seeded ${KNOWLEDGE_ARTICLES.length} starter articles.`);
+  console.log(`Knowledge base seeded ${missing.length} missing starter articles.`);
 }
 
 module.exports = { KNOWLEDGE_ARTICLES, ensureKnowledgeBaseSeeded };
