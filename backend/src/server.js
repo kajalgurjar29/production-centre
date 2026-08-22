@@ -1,6 +1,11 @@
 const app = require('./app');
 const { port } = require('./config/env');
 const prisma = require('./config/prisma');
+const { ensureKnowledgeBaseSeeded } = require('./lib/knowledgeBaseSeed');
+
+ensureKnowledgeBaseSeeded(prisma).catch((err) => {
+  console.error('Failed to seed knowledge base:', err);
+});
 
 const server = app.listen(port, () => {
   console.log(`AppCentre API listening on http://localhost:${port}`);
