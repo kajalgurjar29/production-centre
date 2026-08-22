@@ -20,18 +20,33 @@
   // Website selector: persist the choice across page loads (each admin page
   // reinjects this header from scratch, so without this the selector would
   // silently reset to "AI Transformation" every time you navigate).
+  //
+  // There are two <select> instances in the markup - #siteSelect (desktop,
+  // inline in the header row) and #siteSelectMobile (its own full-width row,
+  // lg:hidden) - because a single element can't be both without one context
+  // squeezing into a layout it doesn't fit. #siteSelect stays the one and
+  // only value every page's own inline script reads (see e.g.
+  // ReviewsMgt.html's `document.getElementById('siteSelect').value`), so
+  // whichever select the user actually touches, its value is mirrored onto
+  // #siteSelect before saving/dispatching - the mobile select never needs to
+  // be read directly anywhere else.
   var SITE_STORAGE_KEY = 'appcentre_selected_site';
   var siteSelect = document.getElementById('siteSelect');
+  var siteSelectMobile = document.getElementById('siteSelectMobile');
+  var siteSelects = [siteSelect, siteSelectMobile].filter(Boolean);
   if (siteSelect) {
     var savedSite = localStorage.getItem(SITE_STORAGE_KEY);
     if (savedSite && Array.prototype.some.call(siteSelect.options, function (opt) { return opt.value === savedSite; })) {
-      siteSelect.value = savedSite;
+      siteSelects.forEach(function (el) { el.value = savedSite; });
     } else {
       localStorage.setItem(SITE_STORAGE_KEY, siteSelect.value);
     }
-    siteSelect.addEventListener('change', function () {
-      localStorage.setItem(SITE_STORAGE_KEY, siteSelect.value);
-      window.dispatchEvent(new CustomEvent('appcentre:site-changed', { detail: { site: siteSelect.value } }));
+    siteSelects.forEach(function (el) {
+      el.addEventListener('change', function () {
+        siteSelects.forEach(function (other) { other.value = el.value; });
+        localStorage.setItem(SITE_STORAGE_KEY, siteSelect.value);
+        window.dispatchEvent(new CustomEvent('appcentre:site-changed', { detail: { site: siteSelect.value } }));
+      });
     });
   }
 
@@ -70,8 +85,6 @@
   var notificationPanel = document.getElementById('notificationPanel');
   var profileButton = document.getElementById('profileButton');
   var profilePanel = document.getElementById('profilePanel');
-  var mobileSearchButton = document.getElementById('mobileSearchButton');
-  var mobileSearchPanel = document.getElementById('mobileSearchPanel');
 
   function applySidebarState(collapsed) {
     if (!desktopAside || !sidebarToggle) return;
@@ -124,12 +137,6 @@
     }
   }
 
-  function closeMobileSearch() {
-    if (!mobileSearchButton || !mobileSearchPanel) return;
-    mobileSearchButton.setAttribute('aria-expanded', 'false');
-    mobileSearchPanel.classList.add('hidden');
-  }
-
   if (menuButton) {
     menuButton.addEventListener('click', function () {
       var isOpen = menuButton.getAttribute('aria-expanded') === 'true';
@@ -153,18 +160,6 @@
   if (notificationPanel) notificationPanel.addEventListener('click', function (event) { event.stopPropagation(); });
   if (profilePanel) profilePanel.addEventListener('click', function (event) { event.stopPropagation(); });
 
-  if (mobileSearchButton) {
-    mobileSearchButton.addEventListener('click', function () {
-      var isOpen = mobileSearchButton.getAttribute('aria-expanded') === 'true';
-      if (isOpen) {
-        closeMobileSearch();
-      } else {
-        mobileSearchButton.setAttribute('aria-expanded', 'true');
-        mobileSearchPanel.classList.remove('hidden');
-      }
-    });
-  }
-
   document.addEventListener('click', function (event) {
     if (notificationPanel && notificationButton && !notificationPanel.contains(event.target) && !notificationButton.contains(event.target)) {
       closePanel(notificationButton, notificationPanel);
@@ -178,7 +173,6 @@
     if (event.key === 'Escape') {
       closePanel(notificationButton, notificationPanel);
       closePanel(profileButton, profilePanel);
-      closeMobileSearch();
       closeDrawer();
     }
   });
