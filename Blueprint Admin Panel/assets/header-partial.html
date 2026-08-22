@@ -30,15 +30,12 @@
             </div>
           </div>
           <div class="ml-auto flex items-center gap-2">
-            <button id="mobileSearchButton" type="button" aria-label="Open search" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background lg:hidden">
-              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            </button>
             <div class="relative">
               <button id="notificationButton" type="button" aria-label="Open notifications" aria-expanded="false" class="flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-border bg-background relative">
                 <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/><path d="M10 17a2 2 0 0 0 4 0"/></svg>
                 <span class="absolute right-2 top-2 inline-flex h-2.5 w-2.5 rounded-full bg-destructive" aria-hidden="true"></span>
               </button>
-              <div id="notificationPanel" class="hidden absolute right-0 top-full mt-2 w-[20rem] max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
+              <div id="notificationPanel" class="hidden fixed right-4 top-20 z-40 w-80 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-4 shadow-md">
                 <div class="flex items-center justify-between border-b border-border pb-3">
                   <h2 class="text-sm font-heading font-semibold">Notifications</h2>
                   <button type="button" class="min-h-11 text-sm font-medium text-primary">Mark all as read</button>
@@ -61,7 +58,7 @@
                 </div>
                 <svg viewBox="0 0 24 24" class="hidden h-4 w-4 text-muted-foreground lg:block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               </button>
-              <div id="profilePanel" class="hidden absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
+              <div id="profilePanel" class="hidden fixed right-4 top-20 z-40 w-56 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-2 shadow-md">
                 <a href="MyProfile.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">My Profile</a>
                 <a href="SystemSettings.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm hover:bg-muted">Security Settings</a>
                 <a href="adminlogin.html" class="flex min-h-11 items-center rounded-lg px-3 py-3 text-sm text-destructive hover:bg-muted">Log out</a>
@@ -69,10 +66,15 @@
             </div>
           </div>
         </div>
-        <div id="mobileSearchPanel" class="hidden border-t border-border px-4 py-3 lg:hidden">
-          <label for="mobileSearch" class="sr-only">Search users, adverts, payments or enquiries</label>
-          <div class="flex items-center gap-3 rounded-xl border border-input bg-background px-4 py-3">
-            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="mobileSearch" type="search" placeholder="Search users, adverts, payments or enquiries" class="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
+        <div class="border-t border-border px-4 py-3 lg:hidden">
+          <label for="siteSelectMobile" class="sr-only">Website</label>
+          <div class="flex items-center gap-2 rounded-xl border border-input bg-background px-4 py-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9Z"/></svg>
+            <select id="siteSelectMobile" class="w-full bg-transparent text-sm outline-none">
+              <option value="">All Sites</option>
+              <option value="aitransformation" selected>AI Transformation</option>
+              <option value="travel-harmony">Travel Harmony</option>
+              <option value="trust-centre">Trust Centre</option>
+            </select>
           </div>
         </div>
